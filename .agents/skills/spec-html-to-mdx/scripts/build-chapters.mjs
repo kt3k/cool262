@@ -213,6 +213,61 @@ function applyXrefSubst(html) {
   })
 }
 
+// Build a map of nonterminal LHS → rendered production HTML by scanning every
+// canonical <emu-grammar type="definition"> block (excluding `example` ones,
+// which are illustrative snippets in the notational-conventions chapter, not
+// the real grammar). Each block may pack multiple productions separated by
+// blank lines; split them so a prodref resolves to just its own production.
+const grammarDefs = new Map()
+{
+  const grammarRe = /<emu-grammar([^>]*?)>([\s\S]*?)<\/emu-grammar>/g
+  let gm
+  while ((gm = grammarRe.exec(src)) !== null) {
+    const attrs = gm[1]
+    if (!/\btype="definition"/.test(attrs)) continue
+    if (/\bexample\b/.test(attrs)) continue
+    const inner = gm[2]
+    // Split into productions on blank lines; trim each chunk of surrounding
+    // blank lines while preserving the indentation of content lines.
+    const chunks = inner.split(/\n[ \t]*\n/)
+    for (const raw of chunks) {
+      // Drop leading comment lines (ecmarkup-format pragmas like
+      // "// emu-format ignore") that sit between blank-line separators and
+      // the actual LHS, so we don't misread them as the production head.
+      const chunk = raw
+        .replace(/^(?:[ \t]*\n|[ \t]*\/\/[^\n]*\n)+/, '')
+        .replace(/\n+[ \t]*$/, '')
+      if (!chunk.trim()) continue
+      const firstLine = chunk.split('\n')[0]
+      const lhsMatch = firstLine.match(/^\s*([A-Za-z][A-Za-z0-9_]*)(?:\s*\[[^\]]*\])?\s*::*/)
+      if (!lhsMatch) continue
+      const lhs = lhsMatch[1]
+      const lines = chunk.split('\n')
+      const indents = lines.filter((l) => l.trim() !== '').map((l) => l.match(/^[ \t]*/)[0].length)
+      const minIndent = indents.length ? Math.min(...indents) : 0
+      const dedented = lines.map((l) => l.slice(minIndent)).join('\n')
+      // Longest production wins when multiple definitions exist (the canonical
+      // one tends to list more alternatives).
+      const existing = grammarDefs.get(lhs)
+      if (!existing || dedented.length > existing.length) {
+        grammarDefs.set(lhs, dedented)
+      }
+    }
+  }
+}
+
+// Replace empty <emu-prodref name="X"></emu-prodref> with its production text
+// wrapped in <pre> so line breaks and indentation survive raw-HTML embedding.
+function applyProdrefSubst(html) {
+  return html.replace(/<emu-prodref([^>]*?)>\s*<\/emu-prodref>/g, (full, attrs) => {
+    const m = attrs.match(/\bname="([^"]+)"/)
+    if (!m) return full
+    const def = grammarDefs.get(m[1])
+    if (def === undefined) return full
+    return `<pre class="emu-prod">${def}</pre>`
+  })
+}
+
 fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
 fs.rmSync(LIB_DIR, { recursive: true, force: true })
 fs.mkdirSync(CONTENT_DIR, { recursive: true })
@@ -222,7 +277,7 @@ const meta = {}
 let totalBytes = 0
 built.forEach((c) => {
   const { slug, pageSlug, chapterNum, tree } = c
-  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(v)])
+  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(applyProdrefSubst(v))])
   const sectionsObj = Object.fromEntries(sections)
 
   const componentSrc =
