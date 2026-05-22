@@ -1,5 +1,277 @@
-import Content from '../lib/spec/global-object'
+import { Sec } from '../lib/spec/global-object'
 
-# The Global Object
+# 19 The Global Object
 
-<Content />
+<Sec id="" />
+
+## 19.1 Value Properties of the Global Object
+
+### 19.1.1 globalThis
+
+<Sec id="1.1" />
+
+### 19.1.2 Infinity
+
+<Sec id="1.2" />
+
+### 19.1.3 NaN
+
+<Sec id="1.3" />
+
+### 19.1.4 undefined
+
+<Sec id="1.4" />
+
+## 19.2 Function Properties of the Global Object
+
+### 19.2.1 eval ( _source_ )
+
+<Sec id="2.1" />
+
+#### 19.2.1.1 PerformEval ( _source_: an ECMAScript language value, _strictCaller_: a Boolean, _direct_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="2.1.1" />
+
+#### 19.2.1.2 HostEnsureCanCompileStrings ( _calleeRealm_: a Realm Record, _parameterStrings_: a List of Strings, _bodyString_: a String, _direct_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="2.1.2" />
+
+#### 19.2.1.3 EvalDeclarationInstantiation ( _body_: a |ScriptBody| Parse Node, _varEnv_: an Environment Record, _lexEnv_: a Declarative Environment Record, _privateEnv_: a PrivateEnvironment Record or *null*, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="2.1.3" />
+
+### 19.2.2 isFinite ( _number_ )
+
+<Sec id="2.2" />
+
+### 19.2.3 isNaN ( _number_ )
+
+<Sec id="2.3" />
+
+### 19.2.4 parseFloat ( _string_ )
+
+<Sec id="2.4" />
+
+### 19.2.5 parseInt ( _string_, _radix_ )
+
+<Sec id="2.5" />
+
+### 19.2.6 URI Handling Functions
+
+<Sec id="2.6" />
+
+#### 19.2.6.1 decodeURI ( _encodedURI_ )
+
+<Sec id="2.6.1" />
+
+#### 19.2.6.2 decodeURIComponent ( _encodedURIComponent_ )
+
+<Sec id="2.6.2" />
+
+#### 19.2.6.3 encodeURI ( _uri_ )
+
+<Sec id="2.6.3" />
+
+#### 19.2.6.4 encodeURIComponent ( _uriComponent_ )
+
+<Sec id="2.6.4" />
+
+#### 19.2.6.5 Encode ( _string_: a String, _extraUnescaped_: a String, ): either a normal completion containing a String or a throw completion
+
+<Sec id="2.6.5" />
+
+#### 19.2.6.6 Decode ( _string_: a String, _preserveEscapeSet_: a String, ): either a normal completion containing a String or a throw completion
+
+<Sec id="2.6.6" />
+
+#### 19.2.6.7 ParseHexOctet ( _string_: a String, _position_: a non-negative integer, ): either a non-negative integer or a non-empty List of *SyntaxError* objects
+
+<Sec id="2.6.7" />
+
+## 19.3 Constructor Properties of the Global Object
+
+### 19.3.1 AggregateError ( . . . )
+
+<Sec id="3.1" />
+
+### 19.3.2 Array ( . . . )
+
+<Sec id="3.2" />
+
+### 19.3.3 ArrayBuffer ( . . . )
+
+<Sec id="3.3" />
+
+### 19.3.4 BigInt ( . . . )
+
+<Sec id="3.4" />
+
+### 19.3.5 BigInt64Array ( . . . )
+
+<Sec id="3.5" />
+
+### 19.3.6 BigUint64Array ( . . . )
+
+<Sec id="3.6" />
+
+### 19.3.7 Boolean ( . . . )
+
+<Sec id="3.7" />
+
+### 19.3.8 DataView ( . . . )
+
+<Sec id="3.8" />
+
+### 19.3.9 Date ( . . . )
+
+<Sec id="3.9" />
+
+### 19.3.10 Error ( . . . )
+
+<Sec id="3.10" />
+
+### 19.3.11 EvalError ( . . . )
+
+<Sec id="3.11" />
+
+### 19.3.12 FinalizationRegistry ( . . . )
+
+<Sec id="3.12" />
+
+### 19.3.13 Float16Array ( . . . )
+
+<Sec id="3.13" />
+
+### 19.3.14 Float32Array ( . . . )
+
+<Sec id="3.14" />
+
+### 19.3.15 Float64Array ( . . . )
+
+<Sec id="3.15" />
+
+### 19.3.16 Function ( . . . )
+
+<Sec id="3.16" />
+
+### 19.3.17 Int8Array ( . . . )
+
+<Sec id="3.17" />
+
+### 19.3.18 Int16Array ( . . . )
+
+<Sec id="3.18" />
+
+### 19.3.19 Int32Array ( . . . )
+
+<Sec id="3.19" />
+
+### 19.3.20 Iterator ( . . . )
+
+<Sec id="3.20" />
+
+### 19.3.21 Map ( . . . )
+
+<Sec id="3.21" />
+
+### 19.3.22 Number ( . . . )
+
+<Sec id="3.22" />
+
+### 19.3.23 Object ( . . . )
+
+<Sec id="3.23" />
+
+### 19.3.24 Promise ( . . . )
+
+<Sec id="3.24" />
+
+### 19.3.25 Proxy ( . . . )
+
+<Sec id="3.25" />
+
+### 19.3.26 RangeError ( . . . )
+
+<Sec id="3.26" />
+
+### 19.3.27 ReferenceError ( . . . )
+
+<Sec id="3.27" />
+
+### 19.3.28 RegExp ( . . . )
+
+<Sec id="3.28" />
+
+### 19.3.29 Set ( . . . )
+
+<Sec id="3.29" />
+
+### 19.3.30 SharedArrayBuffer ( . . . )
+
+<Sec id="3.30" />
+
+### 19.3.31 String ( . . . )
+
+<Sec id="3.31" />
+
+### 19.3.32 Symbol ( . . . )
+
+<Sec id="3.32" />
+
+### 19.3.33 SyntaxError ( . . . )
+
+<Sec id="3.33" />
+
+### 19.3.34 TypeError ( . . . )
+
+<Sec id="3.34" />
+
+### 19.3.35 Uint8Array ( . . . )
+
+<Sec id="3.35" />
+
+### 19.3.36 Uint8ClampedArray ( . . . )
+
+<Sec id="3.36" />
+
+### 19.3.37 Uint16Array ( . . . )
+
+<Sec id="3.37" />
+
+### 19.3.38 Uint32Array ( . . . )
+
+<Sec id="3.38" />
+
+### 19.3.39 URIError ( . . . )
+
+<Sec id="3.39" />
+
+### 19.3.40 WeakMap ( . . . )
+
+<Sec id="3.40" />
+
+### 19.3.41 WeakRef ( . . . )
+
+<Sec id="3.41" />
+
+### 19.3.42 WeakSet ( . . . )
+
+<Sec id="3.42" />
+
+## 19.4 Other Properties of the Global Object
+
+### 19.4.1 Atomics
+
+<Sec id="4.1" />
+
+### 19.4.2 JSON
+
+<Sec id="4.2" />
+
+### 19.4.3 Math
+
+<Sec id="4.3" />
+
+### 19.4.4 Reflect
+
+<Sec id="4.4" />

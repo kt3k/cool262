@@ -1,5 +1,407 @@
-import Content from '../lib/spec/executable-code-and-execution-contexts'
+import { Sec } from '../lib/spec/executable-code-and-execution-contexts'
 
-# Executable Code and Execution Contexts
+# 9 Executable Code and Execution Contexts
 
-<Content />
+## 9.1 Environment Records
+
+<Sec id="1" />
+
+### 9.1.1 The Environment Record Type Hierarchy
+
+<Sec id="1.1" />
+
+#### 9.1.1.1 Declarative Environment Records
+
+<Sec id="1.1.1" />
+
+##### 9.1.1.1.1 HasBinding ( _name_: a String, ): a normal completion containing a Boolean
+
+<Sec id="1.1.1.1" />
+
+##### 9.1.1.1.2 CreateMutableBinding ( _name_: a String, _deletable_: a Boolean, ): a normal completion containing ~unused~
+
+<Sec id="1.1.1.2" />
+
+##### 9.1.1.1.3 CreateImmutableBinding ( _name_: a String, _strict_: a Boolean, ): a normal completion containing ~unused~
+
+<Sec id="1.1.1.3" />
+
+##### 9.1.1.1.4 InitializeBinding ( _name_: a String, _value_: an ECMAScript language value, ): a normal completion containing ~unused~
+
+<Sec id="1.1.1.4" />
+
+##### 9.1.1.1.5 SetMutableBinding ( _name_: a String, _value_: an ECMAScript language value, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.1.5" />
+
+##### 9.1.1.1.6 GetBindingValue ( _name_: a String, _strict_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="1.1.1.6" />
+
+##### 9.1.1.1.7 DeleteBinding ( _name_: a String, ): a normal completion containing a Boolean
+
+<Sec id="1.1.1.7" />
+
+##### 9.1.1.1.8 HasThisBinding ( ): *false*
+
+<Sec id="1.1.1.8" />
+
+##### 9.1.1.1.9 GetThisBinding ( )
+
+<Sec id="1.1.1.9" />
+
+##### 9.1.1.1.10 HasSuperBinding ( ): *false*
+
+<Sec id="1.1.1.10" />
+
+##### 9.1.1.1.11 WithBaseObject ( ): *undefined*
+
+<Sec id="1.1.1.11" />
+
+#### 9.1.1.2 Object Environment Records
+
+<Sec id="1.1.2" />
+
+##### 9.1.1.2.1 HasBinding ( _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.2.1" />
+
+##### 9.1.1.2.2 CreateMutableBinding ( _name_: a String, _deletable_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.2.2" />
+
+##### 9.1.1.2.3 CreateImmutableBinding ( _name_, _strict_ )
+
+<Sec id="1.1.2.3" />
+
+##### 9.1.1.2.4 InitializeBinding ( _name_: a String, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.2.4" />
+
+##### 9.1.1.2.5 SetMutableBinding ( _name_: a String, _value_: an ECMAScript language value, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.2.5" />
+
+##### 9.1.1.2.6 GetBindingValue ( _name_: a String, _strict_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="1.1.2.6" />
+
+##### 9.1.1.2.7 DeleteBinding ( _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.2.7" />
+
+##### 9.1.1.2.8 HasThisBinding ( ): *false*
+
+<Sec id="1.1.2.8" />
+
+##### 9.1.1.2.9 GetThisBinding ( )
+
+<Sec id="1.1.2.9" />
+
+##### 9.1.1.2.10 HasSuperBinding ( ): *false*
+
+<Sec id="1.1.2.10" />
+
+##### 9.1.1.2.11 WithBaseObject ( ): an Object or *undefined*
+
+<Sec id="1.1.2.11" />
+
+#### 9.1.1.3 Function Environment Records
+
+<Sec id="1.1.3" />
+
+##### 9.1.1.3.1 BindThisValue ( _envRec_: a Function Environment Record, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.3.1" />
+
+##### 9.1.1.3.2 HasThisBinding ( ): a Boolean
+
+<Sec id="1.1.3.2" />
+
+##### 9.1.1.3.3 GetThisBinding ( ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="1.1.3.3" />
+
+##### 9.1.1.3.4 HasSuperBinding ( ): a Boolean
+
+<Sec id="1.1.3.4" />
+
+##### 9.1.1.3.5 GetSuperBase ( _envRec_: a Function Environment Record, ): an Object, *null*, or *undefined*
+
+<Sec id="1.1.3.5" />
+
+#### 9.1.1.4 Global Environment Records
+
+<Sec id="1.1.4" />
+
+##### 9.1.1.4.1 HasBinding ( _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.4.1" />
+
+##### 9.1.1.4.2 CreateMutableBinding ( _name_: a String, _deletable_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.2" />
+
+##### 9.1.1.4.3 CreateImmutableBinding ( _name_: a String, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.3" />
+
+##### 9.1.1.4.4 InitializeBinding ( _name_: a String, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.4" />
+
+##### 9.1.1.4.5 SetMutableBinding ( _name_: a String, _value_: an ECMAScript language value, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.5" />
+
+##### 9.1.1.4.6 GetBindingValue ( _name_: a String, _strict_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="1.1.4.6" />
+
+##### 9.1.1.4.7 DeleteBinding ( _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.4.7" />
+
+##### 9.1.1.4.8 HasThisBinding ( ): *true*
+
+<Sec id="1.1.4.8" />
+
+##### 9.1.1.4.9 GetThisBinding ( ): a normal completion containing an Object
+
+<Sec id="1.1.4.9" />
+
+##### 9.1.1.4.10 HasSuperBinding ( ): *false*
+
+<Sec id="1.1.4.10" />
+
+##### 9.1.1.4.11 WithBaseObject ( ): *undefined*
+
+<Sec id="1.1.4.11" />
+
+##### 9.1.1.4.12 HasLexicalDeclaration ( _envRec_: a Global Environment Record, _name_: a String, ): a Boolean
+
+<Sec id="1.1.4.12" />
+
+##### 9.1.1.4.13 HasRestrictedGlobalProperty ( _envRec_: a Global Environment Record, _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.4.13" />
+
+##### 9.1.1.4.14 CanDeclareGlobalVar ( _envRec_: a Global Environment Record, _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.4.14" />
+
+##### 9.1.1.4.15 CanDeclareGlobalFunction ( _envRec_: a Global Environment Record, _name_: a String, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="1.1.4.15" />
+
+##### 9.1.1.4.16 CreateGlobalVarBinding ( _envRec_: a Global Environment Record, _name_: a String, _deletable_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.16" />
+
+##### 9.1.1.4.17 CreateGlobalFunctionBinding ( _envRec_: a Global Environment Record, _name_: a String, _value_: an ECMAScript function object, _deletable_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="1.1.4.17" />
+
+#### 9.1.1.5 Module Environment Records
+
+<Sec id="1.1.5" />
+
+##### 9.1.1.5.1 GetBindingValue ( _name_: a String, _strict_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="1.1.5.1" />
+
+##### 9.1.1.5.2 DeleteBinding ( _name_ )
+
+<Sec id="1.1.5.2" />
+
+##### 9.1.1.5.3 HasThisBinding ( ): *true*
+
+<Sec id="1.1.5.3" />
+
+##### 9.1.1.5.4 GetThisBinding ( ): a normal completion containing *undefined*
+
+<Sec id="1.1.5.4" />
+
+##### 9.1.1.5.5 CreateImportBinding ( _envRec_: a Module Environment Record, _name_: a String, _targetModule_: a Module Record, _targetName_: a String, ): ~unused~
+
+<Sec id="1.1.5.5" />
+
+### 9.1.2 Environment Record Operations
+
+<Sec id="1.2" />
+
+#### 9.1.2.1 GetIdentifierReference ( _env_: an Environment Record or *null*, _name_: a String, _strict_: a Boolean, ): either a normal completion containing a Reference Record or a throw completion
+
+<Sec id="1.2.1" />
+
+#### 9.1.2.2 NewDeclarativeEnvironment ( _outerEnv_: an Environment Record or *null*, ): a Declarative Environment Record
+
+<Sec id="1.2.2" />
+
+#### 9.1.2.3 NewObjectEnvironment ( _obj_: an Object, _isWithEnvironment_: a Boolean, _outerEnv_: an Environment Record or *null*, ): an Object Environment Record
+
+<Sec id="1.2.3" />
+
+#### 9.1.2.4 NewFunctionEnvironment ( _func_: an ECMAScript function object, _newTarget_: an Object or *undefined*, ): a Function Environment Record
+
+<Sec id="1.2.4" />
+
+#### 9.1.2.5 NewGlobalEnvironment ( _obj_: an Object, _thisValue_: an Object, ): a Global Environment Record
+
+<Sec id="1.2.5" />
+
+#### 9.1.2.6 NewModuleEnvironment ( _outerEnv_: a Global Environment Record, ): a Module Environment Record
+
+<Sec id="1.2.6" />
+
+## 9.2 PrivateEnvironment Records
+
+<Sec id="2" />
+
+### 9.2.1 PrivateEnvironment Record Operations
+
+<Sec id="2.1" />
+
+#### 9.2.1.1 NewPrivateEnvironment ( _outerPrivateEnv_: a PrivateEnvironment Record or *null*, ): a PrivateEnvironment Record
+
+<Sec id="2.1.1" />
+
+#### 9.2.1.2 ResolvePrivateIdentifier ( _privateEnv_: a PrivateEnvironment Record, _identifier_: a String, ): a Private Name
+
+<Sec id="2.1.2" />
+
+## 9.3 Realms
+
+<Sec id="3" />
+
+### 9.3.1 InitializeHostDefinedRealm ( ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="3.1" />
+
+### 9.3.2 CreateIntrinsics ( _realmRec_: a Realm Record, ): ~unused~
+
+<Sec id="3.2" />
+
+### 9.3.3 SetDefaultGlobalBindings ( _realmRec_: a Realm Record, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="3.3" />
+
+## 9.4 Execution Contexts
+
+<Sec id="4" />
+
+### 9.4.1 GetActiveScriptOrModule ( ): a Script Record, a Module Record, or *null*
+
+<Sec id="4.1" />
+
+### 9.4.2 ResolveBinding ( _name_: a String, optional _env_: an Environment Record or *undefined*, ): either a normal completion containing a Reference Record or a throw completion
+
+<Sec id="4.2" />
+
+### 9.4.3 GetThisEnvironment ( ): an Environment Record
+
+<Sec id="4.3" />
+
+### 9.4.4 ResolveThisBinding ( ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="4.4" />
+
+### 9.4.5 GetNewTarget ( ): an Object or *undefined*
+
+<Sec id="4.5" />
+
+### 9.4.6 GetGlobalObject ( ): an Object
+
+<Sec id="4.6" />
+
+### 9.4.7 RunSuspendedContext ( _context_: an execution context, _completionRecord_: a Completion Record, ): either a normal completion containing either an ECMAScript language value or ~unused~, or an abrupt completion
+
+<Sec id="4.7" />
+
+## 9.5 Jobs and Host Operations to Enqueue Jobs
+
+<Sec id="5" />
+
+### 9.5.1 JobCallback Records
+
+<Sec id="5.1" />
+
+### 9.5.2 HostMakeJobCallback ( _callback_: a function object, ): a JobCallback Record
+
+<Sec id="5.2" />
+
+### 9.5.3 HostCallJobCallback ( _jobCallback_: a JobCallback Record, _value_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="5.3" />
+
+### 9.5.4 HostEnqueueGenericJob ( _job_: a Job Abstract Closure, _realm_: a Realm Record, ): ~unused~
+
+<Sec id="5.4" />
+
+### 9.5.5 HostEnqueuePromiseJob ( _job_: a Job Abstract Closure, _realm_: a Realm Record or *null*, ): ~unused~
+
+<Sec id="5.5" />
+
+### 9.5.6 HostEnqueueTimeoutJob ( _timeoutJob_: a Job Abstract Closure, _realm_: a Realm Record, _milliseconds_: a non-negative finite Number, ): ~unused~
+
+<Sec id="5.6" />
+
+## 9.6 Agents
+
+<Sec id="6" />
+
+### 9.6.1 AgentSignifier ( ): an agent signifier
+
+<Sec id="6.1" />
+
+### 9.6.2 AgentCanSuspend ( ): a Boolean
+
+<Sec id="6.2" />
+
+### 9.6.3 IncrementModuleAsyncEvaluationCount ( ): a non-negative integer
+
+<Sec id="6.3" />
+
+## 9.7 Agent Clusters
+
+<Sec id="7" />
+
+## 9.8 Forward Progress
+
+<Sec id="8" />
+
+## 9.9 Processing Model of WeakRef and FinalizationRegistry Targets
+
+### 9.9.1 Objectives
+
+<Sec id="9.1" />
+
+### 9.9.2 Liveness
+
+<Sec id="9.2" />
+
+### 9.9.3 Execution
+
+<Sec id="9.3" />
+
+### 9.9.4 Host Hooks
+
+#### 9.9.4.1 HostEnqueueFinalizationRegistryCleanupJob ( _finalizationRegistry_: a FinalizationRegistry, ): ~unused~
+
+<Sec id="9.4.1" />
+
+## 9.10 ClearKeptObjects ( ): ~unused~
+
+<Sec id="10" />
+
+## 9.11 AddToKeptObjects ( _value_: an Object or a Symbol, ): ~unused~
+
+<Sec id="11" />
+
+## 9.12 CleanupFinalizationRegistry ( _finalizationRegistry_: a FinalizationRegistry, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="12" />
+
+## 9.13 CanBeHeldWeakly ( _v_: an ECMAScript language value, ): a Boolean
+
+<Sec id="13" />

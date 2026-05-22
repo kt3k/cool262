@@ -1,5 +1,505 @@
-import Content from '../lib/spec/ecmascript-language-expressions'
+import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
-# ECMAScript Language: Expressions
+# 13 ECMAScript Language: Expressions
 
-<Content />
+## 13.1 Identifiers
+
+<Sec id="1" />
+
+### 13.1.1 Static Semantics: Early Errors
+
+<Sec id="1.1" />
+
+### 13.1.2 Static Semantics: StringValue ( ): a String
+
+<Sec id="1.2" />
+
+### 13.1.3 Runtime Semantics: Evaluation
+
+<Sec id="1.3" />
+
+## 13.2 Primary Expression
+
+<Sec id="2" />
+
+### 13.2.1 The `this` Keyword
+
+#### 13.2.1.1 Runtime Semantics: Evaluation
+
+<Sec id="2.1.1" />
+
+### 13.2.2 Identifier Reference
+
+<Sec id="2.2" />
+
+### 13.2.3 Literals
+
+<Sec id="2.3" />
+
+#### 13.2.3.1 Runtime Semantics: Evaluation
+
+<Sec id="2.3.1" />
+
+### 13.2.4 Array Initializer
+
+<Sec id="2.4" />
+
+#### 13.2.4.1 Runtime Semantics: ArrayAccumulation ( _array_: an Array, _nextIndex_: an integer, ): either a normal completion containing an integer or an abrupt completion
+
+<Sec id="2.4.1" />
+
+#### 13.2.4.2 Runtime Semantics: Evaluation
+
+<Sec id="2.4.2" />
+
+### 13.2.5 Object Initializer
+
+<Sec id="2.5" />
+
+#### 13.2.5.1 Static Semantics: Early Errors
+
+<Sec id="2.5.1" />
+
+#### 13.2.5.2 Static Semantics: IsComputedPropertyKey ( ): a Boolean
+
+<Sec id="2.5.2" />
+
+#### 13.2.5.3 Static Semantics: PropertyDefinitionNodes ( ): a List of Parse Nodes
+
+<Sec id="2.5.3" />
+
+#### 13.2.5.4 Static Semantics: PropertyNameList ( ): a List of Strings
+
+<Sec id="2.5.4" />
+
+#### 13.2.5.5 Runtime Semantics: Evaluation
+
+<Sec id="2.5.5" />
+
+#### 13.2.5.6 Runtime Semantics: PropertyDefinitionEvaluation ( _object_: an Object, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="2.5.6" />
+
+### 13.2.6 Function Defining Expressions
+
+<Sec id="2.6" />
+
+### 13.2.7 Regular Expression Literals
+
+<Sec id="2.7" />
+
+#### 13.2.7.1 Static Semantics: Early Errors
+
+<Sec id="2.7.1" />
+
+#### 13.2.7.2 Static Semantics: IsValidRegularExpressionLiteral ( _literal_: a |RegularExpressionLiteral| Parse Node, ): a Boolean
+
+<Sec id="2.7.2" />
+
+#### 13.2.7.3 Runtime Semantics: Evaluation
+
+<Sec id="2.7.3" />
+
+### 13.2.8 Template Literals
+
+<Sec id="2.8" />
+
+#### 13.2.8.1 Static Semantics: Early Errors
+
+<Sec id="2.8.1" />
+
+#### 13.2.8.2 Static Semantics: TemplateStrings ( _raw_: a Boolean, ): a List of either Strings or *undefined*
+
+<Sec id="2.8.2" />
+
+#### 13.2.8.3 Static Semantics: TemplateString ( _templateToken_: a |NoSubstitutionTemplate| Parse Node, a |TemplateHead| Parse Node, a |TemplateMiddle| Parse Node, or a |TemplateTail| Parse Node, _raw_: a Boolean, ): a String or *undefined*
+
+<Sec id="2.8.3" />
+
+#### 13.2.8.4 GetTemplateObject ( _templateLiteral_: a Parse Node, ): an Array
+
+<Sec id="2.8.4" />
+
+#### 13.2.8.5 Runtime Semantics: SubstitutionEvaluation ( ): either a normal completion containing a List of ECMAScript language values or an abrupt completion
+
+<Sec id="2.8.5" />
+
+#### 13.2.8.6 Runtime Semantics: Evaluation
+
+<Sec id="2.8.6" />
+
+### 13.2.9 The Grouping Operator
+
+#### 13.2.9.1 Static Semantics: Early Errors
+
+<Sec id="2.9.1" />
+
+#### 13.2.9.2 Runtime Semantics: Evaluation
+
+<Sec id="2.9.2" />
+
+## 13.3 Left-Hand-Side Expressions
+
+<Sec id="3" />
+
+### 13.3.1 Static Semantics
+
+#### 13.3.1.1 Static Semantics: Early Errors
+
+<Sec id="3.1.1" />
+
+### 13.3.2 Property Accessors
+
+<Sec id="3.2" />
+
+#### 13.3.2.1 Runtime Semantics: Evaluation
+
+<Sec id="3.2.1" />
+
+### 13.3.3 EvaluatePropertyAccessWithExpressionKey ( _baseValue_: an ECMAScript language value, _expression_: an |Expression| Parse Node, _strict_: a Boolean, ): either a normal completion containing a Reference Record or an abrupt completion
+
+<Sec id="3.3" />
+
+### 13.3.4 EvaluatePropertyAccessWithIdentifierKey ( _baseValue_: an ECMAScript language value, _identifierName_: an |IdentifierName| Parse Node, _strict_: a Boolean, ): a Reference Record
+
+<Sec id="3.4" />
+
+### 13.3.5 The `new` Operator
+
+#### 13.3.5.1 Runtime Semantics: Evaluation
+
+<Sec id="3.5.1" />
+
+##### 13.3.5.1.1 EvaluateNew ( _constructExpr_: a |NewExpression| Parse Node or a |MemberExpression| Parse Node, _arguments_: ~empty~ or an |Arguments| Parse Node, ): either a normal completion containing an Object or an abrupt completion
+
+<Sec id="3.5.1.1" />
+
+### 13.3.6 Function Calls
+
+#### 13.3.6.1 Runtime Semantics: Evaluation
+
+<Sec id="3.6.1" />
+
+#### 13.3.6.2 EvaluateCall ( _func_: an ECMAScript language value, _ref_: an ECMAScript language value or a Reference Record, _arguments_: a Parse Node, _tailPosition_: a Boolean, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="3.6.2" />
+
+### 13.3.7 The `super` Keyword
+
+#### 13.3.7.1 Runtime Semantics: Evaluation
+
+<Sec id="3.7.1" />
+
+#### 13.3.7.2 GetSuperConstructor ( ): an Object or *null*
+
+<Sec id="3.7.2" />
+
+#### 13.3.7.3 MakeSuperPropertyReference ( _actualThis_: an ECMAScript language value, _propertyKey_: an ECMAScript language value, _strict_: a Boolean, ): a Super Reference Record
+
+<Sec id="3.7.3" />
+
+### 13.3.8 Argument Lists
+
+<Sec id="3.8" />
+
+#### 13.3.8.1 Runtime Semantics: ArgumentListEvaluation ( ): either a normal completion containing a List of ECMAScript language values or an abrupt completion
+
+<Sec id="3.8.1" />
+
+### 13.3.9 Optional Chains
+
+<Sec id="3.9" />
+
+#### 13.3.9.1 Runtime Semantics: Evaluation
+
+<Sec id="3.9.1" />
+
+#### 13.3.9.2 Runtime Semantics: ChainEvaluation ( _baseValue_: an ECMAScript language value, _baseReference_: an ECMAScript language value or a Reference Record, ): either a normal completion containing either an ECMAScript language value or a Reference Record, or an abrupt completion
+
+<Sec id="3.9.2" />
+
+### 13.3.10 Import Calls
+
+#### 13.3.10.1 Runtime Semantics: Evaluation
+
+<Sec id="3.10.1" />
+
+#### 13.3.10.2 EvaluateImportCall ( _specifierExpression_: a Parse Node, optional _optionsExpression_: a Parse Node, ): either a normal completion containing a Promise or an abrupt completion
+
+<Sec id="3.10.2" />
+
+#### 13.3.10.3 ContinueDynamicImport ( _promiseCapability_: a PromiseCapability Record, _moduleCompletion_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+
+<Sec id="3.10.3" />
+
+### 13.3.11 Tagged Templates
+
+<Sec id="3.11" />
+
+#### 13.3.11.1 Runtime Semantics: Evaluation
+
+<Sec id="3.11.1" />
+
+### 13.3.12 Meta Properties
+
+#### 13.3.12.1 Runtime Semantics: Evaluation
+
+<Sec id="3.12.1" />
+
+##### 13.3.12.1.1 HostGetImportMetaProperties ( _moduleRecord_: a Module Record, ): a List of Records with fields [[Key]] (a property key) and [[Value]] (an ECMAScript language value)
+
+<Sec id="3.12.1.1" />
+
+##### 13.3.12.1.2 HostFinalizeImportMeta ( _importMeta_: an Object, _moduleRecord_: a Module Record, ): ~unused~
+
+<Sec id="3.12.1.2" />
+
+## 13.4 Update Expressions
+
+<Sec id="4" />
+
+### 13.4.1 Static Semantics: Early Errors
+
+<Sec id="4.1" />
+
+### 13.4.2 Postfix Increment Operator
+
+#### 13.4.2.1 Runtime Semantics: Evaluation
+
+<Sec id="4.2.1" />
+
+### 13.4.3 Postfix Decrement Operator
+
+#### 13.4.3.1 Runtime Semantics: Evaluation
+
+<Sec id="4.3.1" />
+
+### 13.4.4 Prefix Increment Operator
+
+#### 13.4.4.1 Runtime Semantics: Evaluation
+
+<Sec id="4.4.1" />
+
+### 13.4.5 Prefix Decrement Operator
+
+#### 13.4.5.1 Runtime Semantics: Evaluation
+
+<Sec id="4.5.1" />
+
+## 13.5 Unary Operators
+
+<Sec id="5" />
+
+### 13.5.1 The `delete` Operator
+
+#### 13.5.1.1 Static Semantics: Early Errors
+
+<Sec id="5.1.1" />
+
+#### 13.5.1.2 Runtime Semantics: Evaluation
+
+<Sec id="5.1.2" />
+
+### 13.5.2 The `void` Operator
+
+#### 13.5.2.1 Runtime Semantics: Evaluation
+
+<Sec id="5.2.1" />
+
+### 13.5.3 The `typeof` Operator
+
+#### 13.5.3.1 Runtime Semantics: Evaluation
+
+<Sec id="5.3.1" />
+
+### 13.5.4 Unary `+` Operator
+
+<Sec id="5.4" />
+
+#### 13.5.4.1 Runtime Semantics: Evaluation
+
+<Sec id="5.4.1" />
+
+### 13.5.5 Unary `-` Operator
+
+<Sec id="5.5" />
+
+#### 13.5.5.1 Runtime Semantics: Evaluation
+
+<Sec id="5.5.1" />
+
+### 13.5.6 Bitwise NOT Operator ( `~` )
+
+#### 13.5.6.1 Runtime Semantics: Evaluation
+
+<Sec id="5.6.1" />
+
+### 13.5.7 Logical NOT Operator ( `!` )
+
+#### 13.5.7.1 Runtime Semantics: Evaluation
+
+<Sec id="5.7.1" />
+
+## 13.6 Exponentiation Operator
+
+<Sec id="6" />
+
+### 13.6.1 Runtime Semantics: Evaluation
+
+<Sec id="6.1" />
+
+## 13.7 Multiplicative Operators
+
+<Sec id="7" />
+
+### 13.7.1 Runtime Semantics: Evaluation
+
+<Sec id="7.1" />
+
+## 13.8 Additive Operators
+
+<Sec id="8" />
+
+### 13.8.1 The Addition Operator ( `+` )
+
+<Sec id="8.1" />
+
+#### 13.8.1.1 Runtime Semantics: Evaluation
+
+<Sec id="8.1.1" />
+
+### 13.8.2 The Subtraction Operator ( `-` )
+
+<Sec id="8.2" />
+
+#### 13.8.2.1 Runtime Semantics: Evaluation
+
+<Sec id="8.2.1" />
+
+## 13.9 Bitwise Shift Operators
+
+<Sec id="9" />
+
+### 13.9.1 The Left Shift Operator ( `&lt;&lt;` )
+
+<Sec id="9.1" />
+
+#### 13.9.1.1 Runtime Semantics: Evaluation
+
+<Sec id="9.1.1" />
+
+### 13.9.2 The Signed Right Shift Operator ( `>>` )
+
+<Sec id="9.2" />
+
+#### 13.9.2.1 Runtime Semantics: Evaluation
+
+<Sec id="9.2.1" />
+
+### 13.9.3 The Unsigned Right Shift Operator ( `>>>` )
+
+<Sec id="9.3" />
+
+#### 13.9.3.1 Runtime Semantics: Evaluation
+
+<Sec id="9.3.1" />
+
+## 13.10 Relational Operators
+
+<Sec id="10" />
+
+### 13.10.1 Runtime Semantics: Evaluation
+
+<Sec id="10.1" />
+
+### 13.10.2 InstanceofOperator ( _value_: an ECMAScript language value, _target_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="10.2" />
+
+## 13.11 Equality Operators
+
+<Sec id="11" />
+
+### 13.11.1 Runtime Semantics: Evaluation
+
+<Sec id="11.1" />
+
+## 13.12 Binary Bitwise Operators
+
+<Sec id="12" />
+
+### 13.12.1 Runtime Semantics: Evaluation
+
+<Sec id="12.1" />
+
+## 13.13 Binary Logical Operators
+
+<Sec id="13" />
+
+### 13.13.1 Runtime Semantics: Evaluation
+
+<Sec id="13.1" />
+
+## 13.14 Conditional Operator ( `? :` )
+
+<Sec id="14" />
+
+### 13.14.1 Runtime Semantics: Evaluation
+
+<Sec id="14.1" />
+
+## 13.15 Assignment Operators
+
+<Sec id="15" />
+
+### 13.15.1 Static Semantics: Early Errors
+
+<Sec id="15.1" />
+
+### 13.15.2 Runtime Semantics: Evaluation
+
+<Sec id="15.2" />
+
+### 13.15.3 ApplyStringOrNumericBinaryOperator ( _lVal_: an ECMAScript language value, _opText_: `**`, `*`, `/`, `%`, `+`, `-`, `&lt;&lt;`, `&gt;&gt;`, `&gt;&gt;&gt;`, `&amp;`, `^`, or `|`, _rVal_: an ECMAScript language value, ): either a normal completion containing either a String, a BigInt, or a Number, or a throw completion
+
+<Sec id="15.3" />
+
+### 13.15.4 EvaluateStringOrNumericBinaryExpression ( _leftOperand_: a Parse Node, _opText_: `**`, `*`, `/`, `%`, `+`, `-`, `&lt;&lt;`, `&gt;&gt;`, `&gt;&gt;&gt;`, `&amp;`, `^`, or `|`, _rightOperand_: a Parse Node, ): either a normal completion containing either a String, a BigInt, or a Number, or an abrupt completion
+
+<Sec id="15.4" />
+
+### 13.15.5 Destructuring Assignment
+
+<Sec id="15.5" />
+
+#### 13.15.5.1 Static Semantics: Early Errors
+
+<Sec id="15.5.1" />
+
+#### 13.15.5.2 Runtime Semantics: DestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="15.5.2" />
+
+#### 13.15.5.3 Runtime Semantics: PropertyDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, ): either a normal completion containing a List of property keys or an abrupt completion
+
+<Sec id="15.5.3" />
+
+#### 13.15.5.4 Runtime Semantics: RestDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, _excludedNames_: a List of property keys, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="15.5.4" />
+
+#### 13.15.5.5 Runtime Semantics: IteratorDestructuringAssignmentEvaluation ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="15.5.5" />
+
+#### 13.15.5.6 Runtime Semantics: KeyedDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, _propertyName_: a property key, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="15.5.6" />
+
+## 13.16 Comma Operator ( `,` )
+
+<Sec id="16" />
+
+### 13.16.1 Runtime Semantics: Evaluation
+
+<Sec id="16.1" />

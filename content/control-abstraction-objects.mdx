@@ -1,5 +1,669 @@
-import Content from '../lib/spec/control-abstraction-objects'
+import { Sec } from '../lib/spec/control-abstraction-objects'
 
-# Control Abstraction Objects
+# 27 Control Abstraction Objects
 
-<Content />
+## 27.1 Iteration
+
+### 27.1.1 Common Iteration Interfaces
+
+<Sec id="1.1" />
+
+#### 27.1.1.1 The Iterable Interface
+
+<Sec id="1.1.1" />
+
+#### 27.1.1.2 The Iterator Interface
+
+<Sec id="1.1.2" />
+
+#### 27.1.1.3 The Async Iterable Interface
+
+<Sec id="1.1.3" />
+
+#### 27.1.1.4 The Async Iterator Interface
+
+<Sec id="1.1.4" />
+
+#### 27.1.1.5 The IteratorResult Interface
+
+<Sec id="1.1.5" />
+
+### 27.1.2 Iterator Helper Objects
+
+<Sec id="1.2" />
+
+#### 27.1.2.1 The %IteratorHelperPrototype% Object
+
+<Sec id="1.2.1" />
+
+##### 27.1.2.1.1 %IteratorHelperPrototype%.next ( )
+
+<Sec id="1.2.1.1" />
+
+##### 27.1.2.1.2 %IteratorHelperPrototype%.return ( )
+
+<Sec id="1.2.1.2" />
+
+##### 27.1.2.1.3 %IteratorHelperPrototype% [ %Symbol.toStringTag% ]
+
+<Sec id="1.2.1.3" />
+
+### 27.1.3 Iterator Objects
+
+#### 27.1.3.1 The Iterator Constructor
+
+<Sec id="1.3.1" />
+
+##### 27.1.3.1.1 Iterator ( )
+
+<Sec id="1.3.1.1" />
+
+#### 27.1.3.2 Properties of the Iterator Constructor
+
+<Sec id="1.3.2" />
+
+##### 27.1.3.2.1 Iterator.concat ( ..._items_ )
+
+<Sec id="1.3.2.1" />
+
+##### 27.1.3.2.2 Iterator.from ( _obj_ )
+
+<Sec id="1.3.2.2" />
+
+###### 27.1.3.2.2.1 The %WrapForValidIteratorPrototype% Object
+
+<Sec id="1.3.2.2.1" />
+
+###### 27.1.3.2.2.1.1 %WrapForValidIteratorPrototype%.next ( )
+
+<Sec id="1.3.2.2.1.1" />
+
+###### 27.1.3.2.2.1.2 %WrapForValidIteratorPrototype%.return ( )
+
+<Sec id="1.3.2.2.1.2" />
+
+##### 27.1.3.2.3 Iterator.prototype
+
+<Sec id="1.3.2.3" />
+
+#### 27.1.3.3 Properties of the Iterator Prototype Object
+
+<Sec id="1.3.3" />
+
+##### 27.1.3.3.1 Iterator.prototype.constructor
+
+<Sec id="1.3.3.1" />
+
+###### 27.1.3.3.1.1 get Iterator.prototype.constructor
+
+<Sec id="1.3.3.1.1" />
+
+###### 27.1.3.3.1.2 set Iterator.prototype.constructor
+
+<Sec id="1.3.3.1.2" />
+
+##### 27.1.3.3.2 Iterator.prototype.drop ( _limit_ )
+
+<Sec id="1.3.3.2" />
+
+##### 27.1.3.3.3 Iterator.prototype.every ( _predicate_ )
+
+<Sec id="1.3.3.3" />
+
+##### 27.1.3.3.4 Iterator.prototype.filter ( _predicate_ )
+
+<Sec id="1.3.3.4" />
+
+##### 27.1.3.3.5 Iterator.prototype.find ( _predicate_ )
+
+<Sec id="1.3.3.5" />
+
+##### 27.1.3.3.6 Iterator.prototype.flatMap ( _mapper_ )
+
+<Sec id="1.3.3.6" />
+
+##### 27.1.3.3.7 Iterator.prototype.forEach ( _procedure_ )
+
+<Sec id="1.3.3.7" />
+
+##### 27.1.3.3.8 Iterator.prototype.map ( _mapper_ )
+
+<Sec id="1.3.3.8" />
+
+##### 27.1.3.3.9 Iterator.prototype.reduce ( _reducer_ [ , _initialValue_ ] )
+
+<Sec id="1.3.3.9" />
+
+##### 27.1.3.3.10 Iterator.prototype.some ( _predicate_ )
+
+<Sec id="1.3.3.10" />
+
+##### 27.1.3.3.11 Iterator.prototype.take ( _limit_ )
+
+<Sec id="1.3.3.11" />
+
+##### 27.1.3.3.12 Iterator.prototype.toArray ( )
+
+<Sec id="1.3.3.12" />
+
+##### 27.1.3.3.13 Iterator.prototype [ %Symbol.iterator% ] ( )
+
+<Sec id="1.3.3.13" />
+
+##### 27.1.3.3.14 Iterator.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="1.3.3.14" />
+
+###### 27.1.3.3.14.1 get Iterator.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="1.3.3.14.1" />
+
+###### 27.1.3.3.14.2 set Iterator.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="1.3.3.14.2" />
+
+### 27.1.4 The %AsyncIteratorPrototype% Object
+
+<Sec id="1.4" />
+
+#### 27.1.4.1 %AsyncIteratorPrototype% [ %Symbol.asyncIterator% ] ( )
+
+<Sec id="1.4.1" />
+
+### 27.1.5 Async-from-Sync Iterator Objects
+
+<Sec id="1.5" />
+
+#### 27.1.5.1 CreateAsyncFromSyncIterator ( _syncIteratorRecord_: an Iterator Record, ): an Iterator Record
+
+<Sec id="1.5.1" />
+
+#### 27.1.5.2 The %AsyncFromSyncIteratorPrototype% Object
+
+<Sec id="1.5.2" />
+
+##### 27.1.5.2.1 %AsyncFromSyncIteratorPrototype%.next ( [ _value_ ] )
+
+<Sec id="1.5.2.1" />
+
+##### 27.1.5.2.2 %AsyncFromSyncIteratorPrototype%.return ( [ _value_ ] )
+
+<Sec id="1.5.2.2" />
+
+##### 27.1.5.2.3 %AsyncFromSyncIteratorPrototype%.throw ( [ _value_ ] )
+
+<Sec id="1.5.2.3" />
+
+#### 27.1.5.3 Properties of Async-from-Sync Iterator Instances
+
+<Sec id="1.5.3" />
+
+#### 27.1.5.4 AsyncFromSyncIteratorContinuation ( _result_: an Object, _promiseCapability_: a PromiseCapability Record for an intrinsic %Promise%, _syncIteratorRecord_: an Iterator Record, _closeOnRejection_: a Boolean, ): a Promise
+
+<Sec id="1.5.4" />
+
+## 27.2 Promise Objects
+
+<Sec id="2" />
+
+### 27.2.1 Promise Abstract Operations
+
+#### 27.2.1.1 PromiseCapability Records
+
+<Sec id="2.1.1" />
+
+##### 27.2.1.1.1 IfAbruptRejectPromise ( _value_, _capability_ )
+
+<Sec id="2.1.1.1" />
+
+#### 27.2.1.2 PromiseReaction Records
+
+<Sec id="2.1.2" />
+
+#### 27.2.1.3 CreateResolvingFunctions ( _toResolve_: a Promise, ): a Record with fields [[Resolve]] (a function object) and [[Reject]] (a function object)
+
+<Sec id="2.1.3" />
+
+#### 27.2.1.4 FulfillPromise ( _promise_: a Promise, _value_: an ECMAScript language value, ): ~unused~
+
+<Sec id="2.1.4" />
+
+#### 27.2.1.5 NewPromiseCapability ( _constructor_: an ECMAScript language value, ): either a normal completion containing a PromiseCapability Record or a throw completion
+
+<Sec id="2.1.5" />
+
+#### 27.2.1.6 IsPromise ( _value_: an ECMAScript language value, ): a Boolean
+
+<Sec id="2.1.6" />
+
+#### 27.2.1.7 RejectPromise ( _promise_: a Promise, _reason_: an ECMAScript language value, ): ~unused~
+
+<Sec id="2.1.7" />
+
+#### 27.2.1.8 TriggerPromiseReactions ( _reactions_: a List of PromiseReaction Records, _argument_: an ECMAScript language value, ): ~unused~
+
+<Sec id="2.1.8" />
+
+#### 27.2.1.9 HostPromiseRejectionTracker ( _promise_: a Promise, _operation_: *"reject"* or *"handle"*, ): ~unused~
+
+<Sec id="2.1.9" />
+
+### 27.2.2 Promise Jobs
+
+#### 27.2.2.1 NewPromiseReactionJob ( _reaction_: a PromiseReaction Record, _argument_: an ECMAScript language value, ): a Record with fields [[Job]] (a Job Abstract Closure) and [[Realm]] (a Realm Record or *null*)
+
+<Sec id="2.2.1" />
+
+#### 27.2.2.2 NewPromiseResolveThenableJob ( _promiseToResolve_: a Promise, _thenable_: an Object, _then_: a JobCallback Record, ): a Record with fields [[Job]] (a Job Abstract Closure) and [[Realm]] (a Realm Record)
+
+<Sec id="2.2.2" />
+
+### 27.2.3 The Promise Constructor
+
+<Sec id="2.3" />
+
+#### 27.2.3.1 Promise ( _executor_ )
+
+<Sec id="2.3.1" />
+
+### 27.2.4 Properties of the Promise Constructor
+
+<Sec id="2.4" />
+
+#### 27.2.4.1 Promise.all ( _iterable_ )
+
+<Sec id="2.4.1" />
+
+##### 27.2.4.1.1 GetPromiseResolve ( _promiseConstructor_: a constructor, ): either a normal completion containing a function object or a throw completion
+
+<Sec id="2.4.1.1" />
+
+##### 27.2.4.1.2 PerformPromiseAll ( _iteratorRecord_: an Iterator Record, _constructor_: a constructor, _resultCapability_: a PromiseCapability Record, _promiseResolve_: a function object, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="2.4.1.2" />
+
+#### 27.2.4.2 Promise.allSettled ( _iterable_ )
+
+<Sec id="2.4.2" />
+
+##### 27.2.4.2.1 PerformPromiseAllSettled ( _iteratorRecord_: an Iterator Record, _constructor_: a constructor, _resultCapability_: a PromiseCapability Record, _promiseResolve_: a function object, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="2.4.2.1" />
+
+#### 27.2.4.3 Promise.any ( _iterable_ )
+
+<Sec id="2.4.3" />
+
+##### 27.2.4.3.1 PerformPromiseAny ( _iteratorRecord_: an Iterator Record, _constructor_: a constructor, _resultCapability_: a PromiseCapability Record, _promiseResolve_: a function object, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="2.4.3.1" />
+
+#### 27.2.4.4 Promise.prototype
+
+<Sec id="2.4.4" />
+
+#### 27.2.4.5 Promise.race ( _iterable_ )
+
+<Sec id="2.4.5" />
+
+##### 27.2.4.5.1 PerformPromiseRace ( _iteratorRecord_: an Iterator Record, _constructor_: a constructor, _resultCapability_: a PromiseCapability Record, _promiseResolve_: a function object, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="2.4.5.1" />
+
+#### 27.2.4.6 Promise.reject ( _reason_ )
+
+<Sec id="2.4.6" />
+
+#### 27.2.4.7 Promise.resolve ( _resolution_ )
+
+<Sec id="2.4.7" />
+
+##### 27.2.4.7.1 PromiseResolve ( _constructor_: an Object, _resolution_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="2.4.7.1" />
+
+#### 27.2.4.8 Promise.try ( _callback_, ..._args_ )
+
+<Sec id="2.4.8" />
+
+#### 27.2.4.9 Promise.withResolvers ( )
+
+<Sec id="2.4.9" />
+
+#### 27.2.4.10 get Promise [ %Symbol.species% ]
+
+<Sec id="2.4.10" />
+
+### 27.2.5 Properties of the Promise Prototype Object
+
+<Sec id="2.5" />
+
+#### 27.2.5.1 Promise.prototype.catch ( _onRejected_ )
+
+<Sec id="2.5.1" />
+
+#### 27.2.5.2 Promise.prototype.constructor
+
+<Sec id="2.5.2" />
+
+#### 27.2.5.3 Promise.prototype.finally ( _onFinally_ )
+
+<Sec id="2.5.3" />
+
+#### 27.2.5.4 Promise.prototype.then ( _onFulfilled_, _onRejected_ )
+
+<Sec id="2.5.4" />
+
+##### 27.2.5.4.1 PerformPromiseThen ( _promise_: a Promise, _onFulfilled_: an ECMAScript language value, _onRejected_: an ECMAScript language value, optional _resultCapability_: a PromiseCapability Record, ): an Object or *undefined*
+
+<Sec id="2.5.4.1" />
+
+#### 27.2.5.5 Promise.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="2.5.5" />
+
+### 27.2.6 Properties of Promise Instances
+
+<Sec id="2.6" />
+
+## 27.3 GeneratorFunction Objects
+
+<Sec id="3" />
+
+### 27.3.1 The GeneratorFunction Constructor
+
+<Sec id="3.1" />
+
+#### 27.3.1.1 GeneratorFunction ( ..._parameterArgs_, _bodyArg_ )
+
+<Sec id="3.1.1" />
+
+### 27.3.2 Properties of the GeneratorFunction Constructor
+
+<Sec id="3.2" />
+
+#### 27.3.2.1 GeneratorFunction.prototype
+
+<Sec id="3.2.1" />
+
+### 27.3.3 Properties of the GeneratorFunction Prototype Object
+
+<Sec id="3.3" />
+
+#### 27.3.3.1 GeneratorFunction.prototype.constructor
+
+<Sec id="3.3.1" />
+
+#### 27.3.3.2 GeneratorFunction.prototype.prototype
+
+<Sec id="3.3.2" />
+
+#### 27.3.3.3 GeneratorFunction.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="3.3.3" />
+
+### 27.3.4 GeneratorFunction Instances
+
+<Sec id="3.4" />
+
+#### 27.3.4.1 length
+
+<Sec id="3.4.1" />
+
+#### 27.3.4.2 name
+
+<Sec id="3.4.2" />
+
+#### 27.3.4.3 prototype
+
+<Sec id="3.4.3" />
+
+## 27.4 AsyncGeneratorFunction Objects
+
+<Sec id="4" />
+
+### 27.4.1 The AsyncGeneratorFunction Constructor
+
+<Sec id="4.1" />
+
+#### 27.4.1.1 AsyncGeneratorFunction ( ..._parameterArgs_, _bodyArg_ )
+
+<Sec id="4.1.1" />
+
+### 27.4.2 Properties of the AsyncGeneratorFunction Constructor
+
+<Sec id="4.2" />
+
+#### 27.4.2.1 AsyncGeneratorFunction.prototype
+
+<Sec id="4.2.1" />
+
+### 27.4.3 Properties of the AsyncGeneratorFunction Prototype Object
+
+<Sec id="4.3" />
+
+#### 27.4.3.1 AsyncGeneratorFunction.prototype.constructor
+
+<Sec id="4.3.1" />
+
+#### 27.4.3.2 AsyncGeneratorFunction.prototype.prototype
+
+<Sec id="4.3.2" />
+
+#### 27.4.3.3 AsyncGeneratorFunction.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="4.3.3" />
+
+### 27.4.4 AsyncGeneratorFunction Instances
+
+<Sec id="4.4" />
+
+#### 27.4.4.1 length
+
+<Sec id="4.4.1" />
+
+#### 27.4.4.2 name
+
+<Sec id="4.4.2" />
+
+#### 27.4.4.3 prototype
+
+<Sec id="4.4.3" />
+
+## 27.5 Generator Objects
+
+<Sec id="5" />
+
+### 27.5.1 The %GeneratorPrototype% Object
+
+<Sec id="5.1" />
+
+#### 27.5.1.1 %GeneratorPrototype%.constructor
+
+<Sec id="5.1.1" />
+
+#### 27.5.1.2 %GeneratorPrototype%.next ( _value_ )
+
+<Sec id="5.1.2" />
+
+#### 27.5.1.3 %GeneratorPrototype%.return ( _value_ )
+
+<Sec id="5.1.3" />
+
+#### 27.5.1.4 %GeneratorPrototype%.throw ( _exception_ )
+
+<Sec id="5.1.4" />
+
+#### 27.5.1.5 %GeneratorPrototype% [ %Symbol.toStringTag% ]
+
+<Sec id="5.1.5" />
+
+### 27.5.2 Properties of Generator Instances
+
+<Sec id="5.2" />
+
+### 27.5.3 Generator Abstract Operations
+
+#### 27.5.3.1 GeneratorStart ( _generator_: a Generator, _generatorBody_: a |FunctionBody| Parse Node or an Abstract Closure with no parameters, ): ~unused~
+
+<Sec id="5.3.1" />
+
+#### 27.5.3.2 GeneratorValidate ( _generator_: an ECMAScript language value, _generatorBrand_: a String or ~empty~, ): either a normal completion containing one of ~suspended-start~, ~suspended-yield~, or ~completed~, or a throw completion
+
+<Sec id="5.3.2" />
+
+#### 27.5.3.3 GeneratorResume ( _generator_: an ECMAScript language value, _value_: an ECMAScript language value or ~empty~, _generatorBrand_: a String or ~empty~, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="5.3.3" />
+
+#### 27.5.3.4 GeneratorResumeAbrupt ( _generator_: an ECMAScript language value, _abruptCompletion_: a return completion or a throw completion, _generatorBrand_: a String or ~empty~, ): either a normal completion containing an ECMAScript language value or a throw completion
+
+<Sec id="5.3.4" />
+
+#### 27.5.3.5 GetGeneratorKind ( ): ~non-generator~, ~sync~, or ~async~
+
+<Sec id="5.3.5" />
+
+#### 27.5.3.6 GeneratorYield ( _iteratorResult_: an Object that conforms to the IteratorResult interface, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="5.3.6" />
+
+#### 27.5.3.7 Yield ( _value_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="5.3.7" />
+
+#### 27.5.3.8 CreateIteratorFromClosure ( _closure_: an Abstract Closure with no parameters, _generatorBrand_: a String or ~empty~, _generatorPrototype_: an Object, optional _extraSlots_: a List of names of internal slots, ): a Generator
+
+<Sec id="5.3.8" />
+
+## 27.6 AsyncGenerator Objects
+
+<Sec id="6" />
+
+### 27.6.1 The %AsyncGeneratorPrototype% Object
+
+<Sec id="6.1" />
+
+#### 27.6.1.1 %AsyncGeneratorPrototype%.constructor
+
+<Sec id="6.1.1" />
+
+#### 27.6.1.2 %AsyncGeneratorPrototype%.next ( _value_ )
+
+<Sec id="6.1.2" />
+
+#### 27.6.1.3 %AsyncGeneratorPrototype%.return ( _value_ )
+
+<Sec id="6.1.3" />
+
+#### 27.6.1.4 %AsyncGeneratorPrototype%.throw ( _exception_ )
+
+<Sec id="6.1.4" />
+
+#### 27.6.1.5 %AsyncGeneratorPrototype% [ %Symbol.toStringTag% ]
+
+<Sec id="6.1.5" />
+
+### 27.6.2 Properties of AsyncGenerator Instances
+
+<Sec id="6.2" />
+
+### 27.6.3 AsyncGenerator Abstract Operations
+
+#### 27.6.3.1 AsyncGeneratorRequest Records
+
+<Sec id="6.3.1" />
+
+#### 27.6.3.2 AsyncGeneratorStart ( _generator_: an AsyncGenerator, _generatorBody_: a |FunctionBody| Parse Node or an Abstract Closure with no parameters, ): ~unused~
+
+<Sec id="6.3.2" />
+
+#### 27.6.3.3 AsyncGeneratorValidate ( _generator_: an ECMAScript language value, _generatorBrand_: a String or ~empty~, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="6.3.3" />
+
+#### 27.6.3.4 AsyncGeneratorEnqueue ( _generator_: an AsyncGenerator, _completion_: a Completion Record, _promiseCapability_: a PromiseCapability Record, ): ~unused~
+
+<Sec id="6.3.4" />
+
+#### 27.6.3.5 AsyncGeneratorCompleteStep ( _generator_: an AsyncGenerator, _completion_: a Completion Record, _done_: a Boolean, optional _realm_: a Realm Record, ): ~unused~
+
+<Sec id="6.3.5" />
+
+#### 27.6.3.6 AsyncGeneratorResume ( _generator_: an AsyncGenerator, _completion_: a Completion Record, ): ~unused~
+
+<Sec id="6.3.6" />
+
+#### 27.6.3.7 AsyncGeneratorUnwrapYieldResumption ( _resumptionValue_: a Completion Record, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="6.3.7" />
+
+#### 27.6.3.8 AsyncGeneratorYield ( _value_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="6.3.8" />
+
+#### 27.6.3.9 AsyncGeneratorAwaitReturn ( _generator_: an AsyncGenerator, ): ~unused~
+
+<Sec id="6.3.9" />
+
+#### 27.6.3.10 AsyncGeneratorDrainQueue ( _generator_: an AsyncGenerator, ): ~unused~
+
+<Sec id="6.3.10" />
+
+## 27.7 AsyncFunction Objects
+
+<Sec id="7" />
+
+### 27.7.1 The AsyncFunction Constructor
+
+<Sec id="7.1" />
+
+#### 27.7.1.1 AsyncFunction ( ..._parameterArgs_, _bodyArg_ )
+
+<Sec id="7.1.1" />
+
+### 27.7.2 Properties of the AsyncFunction Constructor
+
+<Sec id="7.2" />
+
+#### 27.7.2.1 AsyncFunction.prototype
+
+<Sec id="7.2.1" />
+
+### 27.7.3 Properties of the AsyncFunction Prototype Object
+
+<Sec id="7.3" />
+
+#### 27.7.3.1 AsyncFunction.prototype.constructor
+
+<Sec id="7.3.1" />
+
+#### 27.7.3.2 AsyncFunction.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="7.3.2" />
+
+### 27.7.4 AsyncFunction Instances
+
+<Sec id="7.4" />
+
+#### 27.7.4.1 length
+
+<Sec id="7.4.1" />
+
+#### 27.7.4.2 name
+
+<Sec id="7.4.2" />
+
+### 27.7.5 Async Functions Abstract Operations
+
+#### 27.7.5.1 AsyncFunctionStart ( _promiseCapability_: a PromiseCapability Record, _asyncFunctionBody_: a |FunctionBody| Parse Node, an |ExpressionBody| Parse Node, or an Abstract Closure with no parameters, ): ~unused~
+
+<Sec id="7.5.1" />
+
+#### 27.7.5.2 AsyncBlockStart ( _promiseCapability_: a PromiseCapability Record, _asyncBody_: a Parse Node or an Abstract Closure with no parameters, _asyncContext_: an execution context, ): ~unused~
+
+<Sec id="7.5.2" />
+
+#### 27.7.5.3 Await ( _value_: an ECMAScript language value, ): either a normal completion containing either an ECMAScript language value or ~empty~, or a throw completion
+
+<Sec id="7.5.3" />

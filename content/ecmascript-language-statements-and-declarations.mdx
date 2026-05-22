@@ -1,5 +1,327 @@
-import Content from '../lib/spec/ecmascript-language-statements-and-declarations'
+import { Sec } from '../lib/spec/ecmascript-language-statements-and-declarations'
 
-# ECMAScript Language: Statements and Declarations
+# 14 ECMAScript Language: Statements and Declarations
 
-<Content />
+<Sec id="" />
+
+## 14.1 Statement Semantics
+
+### 14.1.1 Runtime Semantics: Evaluation
+
+<Sec id="1.1" />
+
+## 14.2 Block
+
+<Sec id="2" />
+
+### 14.2.1 Static Semantics: Early Errors
+
+<Sec id="2.1" />
+
+### 14.2.2 Runtime Semantics: Evaluation
+
+<Sec id="2.2" />
+
+### 14.2.3 BlockDeclarationInstantiation ( _code_: a Parse Node, _env_: a Declarative Environment Record, ): ~unused~
+
+<Sec id="2.3" />
+
+## 14.3 Declarations and the Variable Statement
+
+### 14.3.1 Let and Const Declarations
+
+<Sec id="3.1" />
+
+#### 14.3.1.1 Static Semantics: Early Errors
+
+<Sec id="3.1.1" />
+
+#### 14.3.1.2 Runtime Semantics: Evaluation
+
+<Sec id="3.1.2" />
+
+### 14.3.2 Variable Statement
+
+<Sec id="3.2" />
+
+#### 14.3.2.1 Runtime Semantics: Evaluation
+
+<Sec id="3.2.1" />
+
+### 14.3.3 Destructuring Binding Patterns
+
+<Sec id="3.3" />
+
+#### 14.3.3.1 Runtime Semantics: PropertyBindingInitialization ( _value_: an ECMAScript language value, _environment_: an Environment Record or *undefined*, ): either a normal completion containing a List of property keys or an abrupt completion
+
+<Sec id="3.3.1" />
+
+#### 14.3.3.2 Runtime Semantics: RestBindingInitialization ( _value_: an ECMAScript language value, _environment_: an Environment Record or *undefined*, _excludedNames_: a List of property keys, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="3.3.2" />
+
+#### 14.3.3.3 Runtime Semantics: KeyedBindingInitialization ( _value_: an ECMAScript language value, _environment_: an Environment Record or *undefined*, _propertyName_: a property key, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="3.3.3" />
+
+## 14.4 Empty Statement
+
+<Sec id="4" />
+
+### 14.4.1 Runtime Semantics: Evaluation
+
+<Sec id="4.1" />
+
+## 14.5 Expression Statement
+
+<Sec id="5" />
+
+### 14.5.1 Runtime Semantics: Evaluation
+
+<Sec id="5.1" />
+
+## 14.6 The `if` Statement
+
+<Sec id="6" />
+
+### 14.6.1 Static Semantics: Early Errors
+
+<Sec id="6.1" />
+
+### 14.6.2 Runtime Semantics: Evaluation
+
+<Sec id="6.2" />
+
+## 14.7 Iteration Statements
+
+<Sec id="7" />
+
+### 14.7.1 Semantics
+
+#### 14.7.1.1 LoopContinues ( _completion_: a Completion Record, _labelSet_: a List of Strings, ): a Boolean
+
+<Sec id="7.1.1" />
+
+#### 14.7.1.2 Runtime Semantics: LoopEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.1.2" />
+
+### 14.7.2 The `do`-`while` Statement
+
+<Sec id="7.2" />
+
+#### 14.7.2.1 Static Semantics: Early Errors
+
+<Sec id="7.2.1" />
+
+#### 14.7.2.2 Runtime Semantics: DoWhileLoopEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.2.2" />
+
+### 14.7.3 The `while` Statement
+
+<Sec id="7.3" />
+
+#### 14.7.3.1 Static Semantics: Early Errors
+
+<Sec id="7.3.1" />
+
+#### 14.7.3.2 Runtime Semantics: WhileLoopEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.3.2" />
+
+### 14.7.4 The `for` Statement
+
+<Sec id="7.4" />
+
+#### 14.7.4.1 Static Semantics: Early Errors
+
+<Sec id="7.4.1" />
+
+#### 14.7.4.2 Runtime Semantics: ForLoopEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.4.2" />
+
+#### 14.7.4.3 ForBodyEvaluation ( _test_: an |Expression| Parse Node or ~empty~, _increment_: an |Expression| Parse Node or ~empty~, _stmt_: a |Statement| Parse Node, _perIterationBindings_: a List of Strings, _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.4.3" />
+
+#### 14.7.4.4 CreatePerIterationEnvironment ( _perIterationBindings_: a List of Strings, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="7.4.4" />
+
+### 14.7.5 The `for`-`in`, `for`-`of`, and `for`-`await`-`of` Statements
+
+<Sec id="7.5" />
+
+#### 14.7.5.1 Static Semantics: Early Errors
+
+<Sec id="7.5.1" />
+
+#### 14.7.5.2 Static Semantics: IsDestructuring ( ): a Boolean
+
+<Sec id="7.5.2" />
+
+#### 14.7.5.3 Runtime Semantics: ForDeclarationBindingInitialization ( _value_: an ECMAScript language value, _environment_: an Environment Record, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="7.5.3" />
+
+#### 14.7.5.4 Runtime Semantics: ForDeclarationBindingInstantiation ( _environment_: a Declarative Environment Record, ): ~unused~
+
+<Sec id="7.5.4" />
+
+#### 14.7.5.5 Runtime Semantics: ForInOfLoopEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.5.5" />
+
+#### 14.7.5.6 ForIn/OfHeadEvaluation ( _uninitializedBoundNames_: a List of Strings, _expr_: an |Expression| Parse Node or an |AssignmentExpression| Parse Node, _iterationKind_: ~enumerate~, ~iterate~, or ~async-iterate~, ): either a normal completion containing an Iterator Record or an abrupt completion
+
+<Sec id="7.5.6" />
+
+#### 14.7.5.7 ForIn/OfBodyEvaluation ( _lhs_: a Parse Node, _stmt_: a |Statement| Parse Node, _iteratorRecord_: an Iterator Record, _iterationKind_: ~enumerate~ or ~iterate~, _lhsKind_: ~assignment~, ~var-binding~, or ~lexical-binding~, _labelSet_: a List of Strings, optional _iteratorKind_: ~sync~ or ~async~, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="7.5.7" />
+
+#### 14.7.5.8 Runtime Semantics: Evaluation
+
+<Sec id="7.5.8" />
+
+#### 14.7.5.9 EnumerateObjectProperties ( _obj_: an Object, ): an iterator object
+
+<Sec id="7.5.9" />
+
+#### 14.7.5.10 For-In Iterator Objects
+
+<Sec id="7.5.10" />
+
+##### 14.7.5.10.1 CreateForInIterator ( _object_: an Object, ): a For-In Iterator
+
+<Sec id="7.5.10.1" />
+
+##### 14.7.5.10.2 The %ForInIteratorPrototype% Object
+
+<Sec id="7.5.10.2" />
+
+###### 14.7.5.10.2.1 %ForInIteratorPrototype%.next ( )
+
+<Sec id="7.5.10.2.1" />
+
+##### 14.7.5.10.3 Properties of For-In Iterator Instances
+
+<Sec id="7.5.10.3" />
+
+## 14.8 The `continue` Statement
+
+<Sec id="8" />
+
+### 14.8.1 Static Semantics: Early Errors
+
+<Sec id="8.1" />
+
+### 14.8.2 Runtime Semantics: Evaluation
+
+<Sec id="8.2" />
+
+## 14.9 The `break` Statement
+
+<Sec id="9" />
+
+### 14.9.1 Static Semantics: Early Errors
+
+<Sec id="9.1" />
+
+### 14.9.2 Runtime Semantics: Evaluation
+
+<Sec id="9.2" />
+
+## 14.10 The `return` Statement
+
+<Sec id="10" />
+
+### 14.10.1 Runtime Semantics: Evaluation
+
+<Sec id="10.1" />
+
+## 14.11 The `with` Statement
+
+<Sec id="11" />
+
+### 14.11.1 Static Semantics: Early Errors
+
+<Sec id="11.1" />
+
+### 14.11.2 Runtime Semantics: Evaluation
+
+<Sec id="11.2" />
+
+## 14.12 The `switch` Statement
+
+<Sec id="12" />
+
+### 14.12.1 Static Semantics: Early Errors
+
+<Sec id="12.1" />
+
+### 14.12.2 Runtime Semantics: CaseBlockEvaluation ( _input_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="12.2" />
+
+### 14.12.3 CaseClauseIsSelected ( _constructor_: a |CaseClause| Parse Node, _input_: an ECMAScript language value, ): either a normal completion containing a Boolean or an abrupt completion
+
+<Sec id="12.3" />
+
+### 14.12.4 Runtime Semantics: Evaluation
+
+<Sec id="12.4" />
+
+## 14.13 Labelled Statements
+
+<Sec id="13" />
+
+### 14.13.1 Static Semantics: Early Errors
+
+<Sec id="13.1" />
+
+### 14.13.2 Static Semantics: IsLabelledFunction ( _stmt_: a |Statement| Parse Node, ): a Boolean
+
+<Sec id="13.2" />
+
+### 14.13.3 Runtime Semantics: Evaluation
+
+<Sec id="13.3" />
+
+### 14.13.4 Runtime Semantics: LabelledEvaluation ( _labelSet_: a List of Strings, ): either a normal completion containing either an ECMAScript language value or ~empty~, or an abrupt completion
+
+<Sec id="13.4" />
+
+## 14.14 The `throw` Statement
+
+<Sec id="14" />
+
+### 14.14.1 Runtime Semantics: Evaluation
+
+<Sec id="14.1" />
+
+## 14.15 The `try` Statement
+
+<Sec id="15" />
+
+### 14.15.1 Static Semantics: Early Errors
+
+<Sec id="15.1" />
+
+### 14.15.2 Runtime Semantics: CatchClauseEvaluation ( _thrownValue_: an ECMAScript language value, ): either a normal completion containing either an ECMAScript language value or ~empty~, or an abrupt completion
+
+<Sec id="15.2" />
+
+### 14.15.3 Runtime Semantics: Evaluation
+
+<Sec id="15.3" />
+
+## 14.16 The `debugger` Statement
+
+<Sec id="16" />
+
+### 14.16.1 Runtime Semantics: Evaluation
+
+<Sec id="16.1" />

@@ -1,5 +1,583 @@
-import Content from '../lib/spec/fundamental-objects'
+import { Sec } from '../lib/spec/fundamental-objects'
 
-# Fundamental Objects
+# 20 Fundamental Objects
 
-<Content />
+## 20.1 Object Objects
+
+### 20.1.1 The Object Constructor
+
+<Sec id="1.1" />
+
+#### 20.1.1.1 Object ( _value_ )
+
+<Sec id="1.1.1" />
+
+### 20.1.2 Properties of the Object Constructor
+
+<Sec id="1.2" />
+
+#### 20.1.2.1 Object.assign ( _target_, ..._sources_ )
+
+<Sec id="1.2.1" />
+
+#### 20.1.2.2 Object.create ( _proto_, _properties_ )
+
+<Sec id="1.2.2" />
+
+#### 20.1.2.3 Object.defineProperties ( _obj_, _properties_ )
+
+<Sec id="1.2.3" />
+
+##### 20.1.2.3.1 ObjectDefineProperties ( _obj_: an Object, _properties_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="1.2.3.1" />
+
+#### 20.1.2.4 Object.defineProperty ( _obj_, _propertyKey_, _attributes_ )
+
+<Sec id="1.2.4" />
+
+#### 20.1.2.5 Object.entries ( _obj_ )
+
+<Sec id="1.2.5" />
+
+#### 20.1.2.6 Object.freeze ( _obj_ )
+
+<Sec id="1.2.6" />
+
+#### 20.1.2.7 Object.fromEntries ( _iterable_ )
+
+<Sec id="1.2.7" />
+
+#### 20.1.2.8 Object.getOwnPropertyDescriptor ( _obj_, _propertyKey_ )
+
+<Sec id="1.2.8" />
+
+#### 20.1.2.9 Object.getOwnPropertyDescriptors ( _obj_ )
+
+<Sec id="1.2.9" />
+
+#### 20.1.2.10 Object.getOwnPropertyNames ( _obj_ )
+
+<Sec id="1.2.10" />
+
+#### 20.1.2.11 Object.getOwnPropertySymbols ( _obj_ )
+
+<Sec id="1.2.11" />
+
+##### 20.1.2.11.1 GetOwnPropertyKeys ( _value_: an ECMAScript language value, _type_: ~string~ or ~symbol~, ): either a normal completion containing a List of property keys or a throw completion
+
+<Sec id="1.2.11.1" />
+
+#### 20.1.2.12 Object.getPrototypeOf ( _obj_ )
+
+<Sec id="1.2.12" />
+
+#### 20.1.2.13 Object.groupBy ( _items_, _callback_ )
+
+<Sec id="1.2.13" />
+
+#### 20.1.2.14 Object.hasOwn ( _obj_, _propertyKey_ )
+
+<Sec id="1.2.14" />
+
+#### 20.1.2.15 Object.is ( _value1_, _value2_ )
+
+<Sec id="1.2.15" />
+
+#### 20.1.2.16 Object.isExtensible ( _obj_ )
+
+<Sec id="1.2.16" />
+
+#### 20.1.2.17 Object.isFrozen ( _obj_ )
+
+<Sec id="1.2.17" />
+
+#### 20.1.2.18 Object.isSealed ( _obj_ )
+
+<Sec id="1.2.18" />
+
+#### 20.1.2.19 Object.keys ( _obj_ )
+
+<Sec id="1.2.19" />
+
+#### 20.1.2.20 Object.preventExtensions ( _obj_ )
+
+<Sec id="1.2.20" />
+
+#### 20.1.2.21 Object.prototype
+
+<Sec id="1.2.21" />
+
+#### 20.1.2.22 Object.seal ( _obj_ )
+
+<Sec id="1.2.22" />
+
+#### 20.1.2.23 Object.setPrototypeOf ( _obj_, _proto_ )
+
+<Sec id="1.2.23" />
+
+#### 20.1.2.24 Object.values ( _obj_ )
+
+<Sec id="1.2.24" />
+
+### 20.1.3 Properties of the Object Prototype Object
+
+<Sec id="1.3" />
+
+#### 20.1.3.1 Object.prototype.constructor
+
+<Sec id="1.3.1" />
+
+#### 20.1.3.2 Object.prototype.hasOwnProperty ( _value_ )
+
+<Sec id="1.3.2" />
+
+#### 20.1.3.3 Object.prototype.isPrototypeOf ( _value_ )
+
+<Sec id="1.3.3" />
+
+#### 20.1.3.4 Object.prototype.propertyIsEnumerable ( _value_ )
+
+<Sec id="1.3.4" />
+
+#### 20.1.3.5 Object.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
+
+<Sec id="1.3.5" />
+
+#### 20.1.3.6 Object.prototype.toString ( )
+
+<Sec id="1.3.6" />
+
+#### 20.1.3.7 Object.prototype.valueOf ( )
+
+<Sec id="1.3.7" />
+
+#### 20.1.3.8 Object.prototype.__proto__
+
+<Sec id="1.3.8" />
+
+##### 20.1.3.8.1 get Object.prototype.__proto__
+
+<Sec id="1.3.8.1" />
+
+##### 20.1.3.8.2 set Object.prototype.__proto__
+
+<Sec id="1.3.8.2" />
+
+#### 20.1.3.9 Legacy Object.prototype Accessor Methods
+
+##### 20.1.3.9.1 Object.prototype.__defineGetter__ ( _propertyKey_, _getter_ )
+
+<Sec id="1.3.9.1" />
+
+##### 20.1.3.9.2 Object.prototype.__defineSetter__ ( _propertyKey_, _setter_ )
+
+<Sec id="1.3.9.2" />
+
+##### 20.1.3.9.3 Object.prototype.__lookupGetter__ ( _propertyKey_ )
+
+<Sec id="1.3.9.3" />
+
+##### 20.1.3.9.4 Object.prototype.__lookupSetter__ ( _propertyKey_ )
+
+<Sec id="1.3.9.4" />
+
+### 20.1.4 Properties of Object Instances
+
+<Sec id="1.4" />
+
+## 20.2 Function Objects
+
+### 20.2.1 The Function Constructor
+
+<Sec id="2.1" />
+
+#### 20.2.1.1 Function ( ..._parameterArgs_, _bodyArg_ )
+
+<Sec id="2.1.1" />
+
+##### 20.2.1.1.1 CreateDynamicFunction ( _constructor_: a constructor, _newTarget_: a constructor or *undefined*, _kind_: ~normal~, ~generator~, ~async~, or ~async-generator~, _parameterArgs_: a List of ECMAScript language values, _bodyArg_: an ECMAScript language value, ): either a normal completion containing an ECMAScript function object or a throw completion
+
+<Sec id="2.1.1.1" />
+
+### 20.2.2 Properties of the Function Constructor
+
+<Sec id="2.2" />
+
+#### 20.2.2.1 Function.prototype
+
+<Sec id="2.2.1" />
+
+### 20.2.3 Properties of the Function Prototype Object
+
+<Sec id="2.3" />
+
+#### 20.2.3.1 Function.prototype.apply ( _thisArg_, _argArray_ )
+
+<Sec id="2.3.1" />
+
+#### 20.2.3.2 Function.prototype.bind ( _thisArg_, ..._args_ )
+
+<Sec id="2.3.2" />
+
+#### 20.2.3.3 Function.prototype.call ( _thisArg_, ..._args_ )
+
+<Sec id="2.3.3" />
+
+#### 20.2.3.4 Function.prototype.constructor
+
+<Sec id="2.3.4" />
+
+#### 20.2.3.5 Function.prototype.toString ( )
+
+<Sec id="2.3.5" />
+
+#### 20.2.3.6 Function.prototype [ %Symbol.hasInstance% ] ( _value_ )
+
+<Sec id="2.3.6" />
+
+### 20.2.4 Function Instances
+
+<Sec id="2.4" />
+
+#### 20.2.4.1 length
+
+<Sec id="2.4.1" />
+
+#### 20.2.4.2 name
+
+<Sec id="2.4.2" />
+
+#### 20.2.4.3 prototype
+
+<Sec id="2.4.3" />
+
+### 20.2.5 HostHasSourceTextAvailable ( _func_: a function object, ): a Boolean
+
+<Sec id="2.5" />
+
+## 20.3 Boolean Objects
+
+### 20.3.1 The Boolean Constructor
+
+<Sec id="3.1" />
+
+#### 20.3.1.1 Boolean ( _value_ )
+
+<Sec id="3.1.1" />
+
+### 20.3.2 Properties of the Boolean Constructor
+
+<Sec id="3.2" />
+
+#### 20.3.2.1 Boolean.prototype
+
+<Sec id="3.2.1" />
+
+### 20.3.3 Properties of the Boolean Prototype Object
+
+<Sec id="3.3" />
+
+#### 20.3.3.1 Boolean.prototype.constructor
+
+<Sec id="3.3.1" />
+
+#### 20.3.3.2 Boolean.prototype.toString ( )
+
+<Sec id="3.3.2" />
+
+#### 20.3.3.3 Boolean.prototype.valueOf ( )
+
+<Sec id="3.3.3" />
+
+##### 20.3.3.3.1 ThisBooleanValue ( _value_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+
+<Sec id="3.3.3.1" />
+
+### 20.3.4 Properties of Boolean Instances
+
+<Sec id="3.4" />
+
+## 20.4 Symbol Objects
+
+### 20.4.1 The Symbol Constructor
+
+<Sec id="4.1" />
+
+#### 20.4.1.1 Symbol ( [ _description_ ] )
+
+<Sec id="4.1.1" />
+
+### 20.4.2 Properties of the Symbol Constructor
+
+<Sec id="4.2" />
+
+#### 20.4.2.1 Symbol.asyncIterator
+
+<Sec id="4.2.1" />
+
+#### 20.4.2.2 Symbol.for ( _key_ )
+
+<Sec id="4.2.2" />
+
+#### 20.4.2.3 Symbol.hasInstance
+
+<Sec id="4.2.3" />
+
+#### 20.4.2.4 Symbol.isConcatSpreadable
+
+<Sec id="4.2.4" />
+
+#### 20.4.2.5 Symbol.iterator
+
+<Sec id="4.2.5" />
+
+#### 20.4.2.6 Symbol.keyFor ( _sym_ )
+
+<Sec id="4.2.6" />
+
+#### 20.4.2.7 Symbol.match
+
+<Sec id="4.2.7" />
+
+#### 20.4.2.8 Symbol.matchAll
+
+<Sec id="4.2.8" />
+
+#### 20.4.2.9 Symbol.prototype
+
+<Sec id="4.2.9" />
+
+#### 20.4.2.10 Symbol.replace
+
+<Sec id="4.2.10" />
+
+#### 20.4.2.11 Symbol.search
+
+<Sec id="4.2.11" />
+
+#### 20.4.2.12 Symbol.species
+
+<Sec id="4.2.12" />
+
+#### 20.4.2.13 Symbol.split
+
+<Sec id="4.2.13" />
+
+#### 20.4.2.14 Symbol.toPrimitive
+
+<Sec id="4.2.14" />
+
+#### 20.4.2.15 Symbol.toStringTag
+
+<Sec id="4.2.15" />
+
+#### 20.4.2.16 Symbol.unscopables
+
+<Sec id="4.2.16" />
+
+### 20.4.3 Properties of the Symbol Prototype Object
+
+<Sec id="4.3" />
+
+#### 20.4.3.1 Symbol.prototype.constructor
+
+<Sec id="4.3.1" />
+
+#### 20.4.3.2 get Symbol.prototype.description
+
+<Sec id="4.3.2" />
+
+#### 20.4.3.3 Symbol.prototype.toString ( )
+
+<Sec id="4.3.3" />
+
+##### 20.4.3.3.1 SymbolDescriptiveString ( _sym_: a Symbol, ): a String
+
+<Sec id="4.3.3.1" />
+
+#### 20.4.3.4 Symbol.prototype.valueOf ( )
+
+<Sec id="4.3.4" />
+
+##### 20.4.3.4.1 ThisSymbolValue ( _value_: an ECMAScript language value, ): either a normal completion containing a Symbol or a throw completion
+
+<Sec id="4.3.4.1" />
+
+#### 20.4.3.5 Symbol.prototype [ %Symbol.toPrimitive% ] ( _hint_ )
+
+<Sec id="4.3.5" />
+
+#### 20.4.3.6 Symbol.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="4.3.6" />
+
+### 20.4.4 Properties of Symbol Instances
+
+<Sec id="4.4" />
+
+### 20.4.5 Abstract Operations for Symbols
+
+#### 20.4.5.1 KeyForSymbol ( _sym_: a Symbol, ): a String or *undefined*
+
+<Sec id="4.5.1" />
+
+## 20.5 Error Objects
+
+<Sec id="5" />
+
+### 20.5.1 The Error Constructor
+
+<Sec id="5.1" />
+
+#### 20.5.1.1 Error ( _message_ [ , _options_ ] )
+
+<Sec id="5.1.1" />
+
+### 20.5.2 Properties of the Error Constructor
+
+<Sec id="5.2" />
+
+#### 20.5.2.1 Error.isError ( _arg_ )
+
+<Sec id="5.2.1" />
+
+#### 20.5.2.2 Error.prototype
+
+<Sec id="5.2.2" />
+
+### 20.5.3 Properties of the Error Prototype Object
+
+<Sec id="5.3" />
+
+#### 20.5.3.1 Error.prototype.constructor
+
+<Sec id="5.3.1" />
+
+#### 20.5.3.2 Error.prototype.message
+
+<Sec id="5.3.2" />
+
+#### 20.5.3.3 Error.prototype.name
+
+<Sec id="5.3.3" />
+
+#### 20.5.3.4 Error.prototype.toString ( )
+
+<Sec id="5.3.4" />
+
+### 20.5.4 Properties of Error Instances
+
+<Sec id="5.4" />
+
+### 20.5.5 Native Error Types Used in This Standard
+
+<Sec id="5.5" />
+
+#### 20.5.5.1 EvalError
+
+<Sec id="5.5.1" />
+
+#### 20.5.5.2 RangeError
+
+<Sec id="5.5.2" />
+
+#### 20.5.5.3 ReferenceError
+
+<Sec id="5.5.3" />
+
+#### 20.5.5.4 SyntaxError
+
+<Sec id="5.5.4" />
+
+#### 20.5.5.5 TypeError
+
+<Sec id="5.5.5" />
+
+#### 20.5.5.6 URIError
+
+<Sec id="5.5.6" />
+
+### 20.5.6 _NativeError_ Object Structure
+
+<Sec id="5.6" />
+
+#### 20.5.6.1 The _NativeError_ Constructors
+
+<Sec id="5.6.1" />
+
+##### 20.5.6.1.1 _NativeError_ ( _message_ [ , _options_ ] )
+
+<Sec id="5.6.1.1" />
+
+#### 20.5.6.2 Properties of the _NativeError_ Constructors
+
+<Sec id="5.6.2" />
+
+##### 20.5.6.2.1 _NativeError_.prototype
+
+<Sec id="5.6.2.1" />
+
+#### 20.5.6.3 Properties of the _NativeError_ Prototype Objects
+
+<Sec id="5.6.3" />
+
+##### 20.5.6.3.1 _NativeError_.prototype.constructor
+
+<Sec id="5.6.3.1" />
+
+##### 20.5.6.3.2 _NativeError_.prototype.message
+
+<Sec id="5.6.3.2" />
+
+##### 20.5.6.3.3 _NativeError_.prototype.name
+
+<Sec id="5.6.3.3" />
+
+#### 20.5.6.4 Properties of _NativeError_ Instances
+
+<Sec id="5.6.4" />
+
+### 20.5.7 AggregateError Objects
+
+#### 20.5.7.1 The AggregateError Constructor
+
+<Sec id="5.7.1" />
+
+##### 20.5.7.1.1 AggregateError ( _errors_, _message_ [ , _options_ ] )
+
+<Sec id="5.7.1.1" />
+
+#### 20.5.7.2 Properties of the AggregateError Constructor
+
+<Sec id="5.7.2" />
+
+##### 20.5.7.2.1 AggregateError.prototype
+
+<Sec id="5.7.2.1" />
+
+#### 20.5.7.3 Properties of the AggregateError Prototype Object
+
+<Sec id="5.7.3" />
+
+##### 20.5.7.3.1 AggregateError.prototype.constructor
+
+<Sec id="5.7.3.1" />
+
+##### 20.5.7.3.2 AggregateError.prototype.message
+
+<Sec id="5.7.3.2" />
+
+##### 20.5.7.3.3 AggregateError.prototype.name
+
+<Sec id="5.7.3.3" />
+
+#### 20.5.7.4 Properties of AggregateError Instances
+
+<Sec id="5.7.4" />
+
+### 20.5.8 Abstract Operations for Error Objects
+
+#### 20.5.8.1 InstallErrorCause ( _obj_: an Object, _options_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+
+<Sec id="5.8.1" />

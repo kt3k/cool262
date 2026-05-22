@@ -48,6 +48,128 @@ for (let i = 0; i < starts.length; i++) {
   chapters.push({ id, title, inner, kind: s.tag })
 }
 
+// Locate the first nested section opener (<emu-clause or <emu-annex) at or
+// after `from`. Returns { idx, tag } or null. Skips matches that are inside
+// attribute values by requiring the next char to terminate the tag name.
+function findNextSection(html, from) {
+  let i = from
+  while (i < html.length) {
+    const a = html.indexOf('<emu-clause', i)
+    const b = html.indexOf('<emu-annex', i)
+    const idx = a === -1 ? b : b === -1 ? a : Math.min(a, b)
+    if (idx === -1) return null
+    const tag = (a !== -1 && idx === a) ? 'emu-clause' : 'emu-annex'
+    const next = html.charCodeAt(idx + 1 + tag.length)
+    // Valid tag boundary: whitespace or '>'
+    if (next === 0x20 || next === 0x09 || next === 0x0A || next === 0x0D || next === 0x3E) {
+      return { idx, tag }
+    }
+    i = idx + 1
+  }
+  return null
+}
+
+// Recursively split inner HTML into a tree of nested <emu-clause>/<emu-annex>
+// subsections. Returns { pre, children: [{ id, title, tree }] } where `pre`
+// is the HTML before the first nested section.
+function parseTree(html) {
+  const children = []
+  let pre = ''
+  let i = 0
+  while (i < html.length) {
+    const found = findNextSection(html, i)
+    if (!found) {
+      const rest = html.slice(i)
+      if (children.length === 0) pre += rest
+      else if (rest.trim() !== '') children[children.length - 1].tree.pre += rest
+      break
+    }
+    const { idx: openIdx, tag } = found
+    const openClose = `</${tag}>`
+    const openEnd = html.indexOf('>', openIdx)
+    if (openEnd === -1) throw new Error(`Malformed <${tag}>`)
+    const openTag = html.slice(openIdx, openEnd + 1)
+    let depth = 1
+    let j = openEnd + 1
+    let innerEnd = -1
+    while (depth > 0) {
+      const nextOpenInfo = findNextSection(html, j)
+      const nextClose = html.indexOf(openClose, j)
+      if (nextClose === -1) throw new Error(`Unclosed <${tag}>`)
+      const sameTagOpen = nextOpenInfo && nextOpenInfo.tag === tag ? nextOpenInfo.idx : -1
+      if (sameTagOpen !== -1 && sameTagOpen < nextClose) {
+        depth++
+        j = sameTagOpen + tag.length + 1
+      } else {
+        depth--
+        if (depth === 0) {
+          innerEnd = nextClose
+          j = nextClose + openClose.length
+          break
+        }
+        j = nextClose + openClose.length
+      }
+    }
+    const innerStart = openEnd + 1
+    const innerHtml = html.slice(innerStart, innerEnd)
+    const attrs = openTag.slice(tag.length + 1, -1)
+    const idMatch = attrs.match(/\bid="([^"]+)"/)
+    const id = idMatch ? idMatch[1] : ''
+    const titleMatch = innerHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)
+    const titleHtml = titleMatch ? titleMatch[1] : id
+    const title = titleHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+    const innerStripped = titleMatch
+      ? (innerHtml.slice(0, titleMatch.index) + innerHtml.slice(titleMatch.index + titleMatch[0].length)).replace(/^\s+/, '')
+      : innerHtml
+    const preText = html.slice(i, openIdx)
+    if (children.length === 0) pre += preText
+    else if (preText.trim() !== '') children[children.length - 1].tree.pre += preText
+    children.push({ id, title, tree: parseTree(innerStripped) })
+    i = j
+  }
+  return { pre, children }
+}
+
+// Walk the tree and collect [secPath, html] entries.
+function flattenTree(tree, prefix = '') {
+  const sections = [[prefix, tree.pre]]
+  tree.children.forEach((child, idx) => {
+    const newPrefix = prefix === '' ? String(idx + 1) : `${prefix}.${idx + 1}`
+    sections.push(...flattenTree(child.tree, newPrefix))
+  })
+  return sections
+}
+
+// A=0, B=1, ..., Z=25, AA=26, AB=27, ...
+function annexLabel(n) {
+  let s = ''
+  let x = n
+  while (true) {
+    s = String.fromCharCode(65 + (x % 26)) + s
+    x = Math.floor(x / 26) - 1
+    if (x < 0) break
+  }
+  return s
+}
+
+// Emit MDX lines: <Sec id=... /> for the current node, then heading + recurse for each child.
+function renderMdxTree(tree, chapterPrefix, secPath, depth) {
+  const lines = []
+  if (tree.pre.trim() !== '') {
+    lines.push(`<Sec id=${JSON.stringify(secPath)} />`)
+    lines.push('')
+  }
+  tree.children.forEach((child, idx) => {
+    const childSecPath = secPath === '' ? String(idx + 1) : `${secPath}.${idx + 1}`
+    const childNum = chapterPrefix === '' ? childSecPath : `${chapterPrefix}.${childSecPath}`
+    const hashes = '#'.repeat(Math.min(depth, 6))
+    lines.push(`${hashes} ${childNum} ${child.title}`)
+    lines.push('')
+    lines.push(...renderMdxTree(child.tree, chapterPrefix, childSecPath, depth + 1))
+  })
+  return lines
+}
+
 fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
 fs.rmSync(LIB_DIR, { recursive: true, force: true })
 fs.mkdirSync(CONTENT_DIR, { recursive: true })
@@ -55,34 +177,59 @@ fs.mkdirSync(LIB_DIR, { recursive: true })
 
 const meta = {}
 let totalBytes = 0
+let clauseIdx = 0
+let annexIdx = 0
 chapters.forEach((c, i) => {
   const slug = c.id.replace(/^sec-/, '')
   // Serve the spec's Introduction at the site root (/) via index.mdx.
   const pageSlug = c.kind === 'emu-intro' ? 'index' : slug
-  const num = String(i).padStart(2, '0')
 
-  const componentName = 'Chapter' + slug.replace(/[^a-zA-Z0-9]/g, '_')
+  let chapterNum = ''
+  if (c.kind === 'emu-clause') {
+    clauseIdx++
+    chapterNum = String(clauseIdx)
+  } else if (c.kind === 'emu-annex') {
+    chapterNum = annexLabel(annexIdx++)
+  }
+
+  const tree = parseTree(c.inner)
+  const sections = flattenTree(tree)
+  const sectionsObj = Object.fromEntries(sections)
+
   const componentSrc =
     `// Generated from ecma262/spec.html — do not edit by hand.\n` +
-    `const html = ${JSON.stringify(c.inner)};\n` +
-    `export default function ${componentName}() {\n` +
+    `const sections = ${JSON.stringify(sectionsObj)};\n` +
+    `export function Sec({ id }) {\n` +
+    `  const html = sections[id] ?? '';\n` +
     `  return <div className="ecma-spec" dangerouslySetInnerHTML={{ __html: html }} />;\n` +
     `}\n`
   fs.writeFileSync(path.join(LIB_DIR, `${slug}.jsx`), componentSrc)
   totalBytes += componentSrc.length
 
-  const mdx =
-    `import Content from '../lib/spec/${slug}'\n\n` +
-    `# ${c.title}\n\n` +
-    `<Content />\n`
+  let chapterHeading
+  if (c.kind === 'emu-intro') {
+    chapterHeading = `# ${c.title}`
+  } else if (c.kind === 'emu-annex') {
+    chapterHeading = `# Annex ${chapterNum} ${c.title}`
+  } else {
+    chapterHeading = `# ${chapterNum} ${c.title}`
+  }
+
+  const mdxLines = [
+    `import { Sec } from '../lib/spec/${slug}'`,
+    '',
+    chapterHeading,
+    '',
+    ...renderMdxTree(tree, chapterNum, '', 2),
+  ]
+  const mdx = mdxLines.join('\n').replace(/\n{3,}/g, '\n\n').replace(/\n*$/, '\n')
   fs.writeFileSync(path.join(CONTENT_DIR, `${pageSlug}.mdx`), mdx)
 
-  // Prefix display title with a number for clarity in the sidebar.
   const display = c.kind === 'emu-intro'
     ? c.title
     : c.kind === 'emu-annex'
-      ? `Annex: ${c.title}`
-      : `${i}. ${c.title}`
+      ? `Annex ${chapterNum}: ${c.title}`
+      : `${chapterNum}. ${c.title}`
   meta[pageSlug] = display
 })
 

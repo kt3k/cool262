@@ -1,5 +1,387 @@
-import Content from '../lib/spec/keyed-collections'
+import { Sec } from '../lib/spec/keyed-collections'
 
-# Keyed Collections
+# 24 Keyed Collections
 
-<Content />
+## 24.1 Map Objects
+
+<Sec id="1" />
+
+### 24.1.1 The Map Constructor
+
+<Sec id="1.1" />
+
+#### 24.1.1.1 Map ( [ _iterable_ ] )
+
+<Sec id="1.1.1" />
+
+#### 24.1.1.2 AddEntriesFromIterable ( _target_: an Object, _iterable_: an ECMAScript language value, but not *undefined* or *null*, _adder_: a function object, ): either a normal completion containing an Object or a throw completion
+
+<Sec id="1.1.2" />
+
+### 24.1.2 Properties of the Map Constructor
+
+<Sec id="1.2" />
+
+#### 24.1.2.1 Map.groupBy ( _items_, _callback_ )
+
+<Sec id="1.2.1" />
+
+#### 24.1.2.2 Map.prototype
+
+<Sec id="1.2.2" />
+
+#### 24.1.2.3 get Map [ %Symbol.species% ]
+
+<Sec id="1.2.3" />
+
+### 24.1.3 Properties of the Map Prototype Object
+
+<Sec id="1.3" />
+
+#### 24.1.3.1 Map.prototype.clear ( )
+
+<Sec id="1.3.1" />
+
+#### 24.1.3.2 Map.prototype.constructor
+
+<Sec id="1.3.2" />
+
+#### 24.1.3.3 Map.prototype.delete ( _key_ )
+
+<Sec id="1.3.3" />
+
+#### 24.1.3.4 Map.prototype.entries ( )
+
+<Sec id="1.3.4" />
+
+#### 24.1.3.5 Map.prototype.forEach ( _callback_ [ , _thisArg_ ] )
+
+<Sec id="1.3.5" />
+
+#### 24.1.3.6 Map.prototype.get ( _key_ )
+
+<Sec id="1.3.6" />
+
+#### 24.1.3.7 Map.prototype.getOrInsert ( _key_, _value_ )
+
+<Sec id="1.3.7" />
+
+#### 24.1.3.8 Map.prototype.getOrInsertComputed ( _key_, _callback_ )
+
+<Sec id="1.3.8" />
+
+#### 24.1.3.9 Map.prototype.has ( _key_ )
+
+<Sec id="1.3.9" />
+
+#### 24.1.3.10 Map.prototype.keys ( )
+
+<Sec id="1.3.10" />
+
+#### 24.1.3.11 Map.prototype.set ( _key_, _value_ )
+
+<Sec id="1.3.11" />
+
+#### 24.1.3.12 get Map.prototype.size
+
+<Sec id="1.3.12" />
+
+#### 24.1.3.13 Map.prototype.values ( )
+
+<Sec id="1.3.13" />
+
+#### 24.1.3.14 Map.prototype [ %Symbol.iterator% ] ( )
+
+<Sec id="1.3.14" />
+
+#### 24.1.3.15 Map.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="1.3.15" />
+
+### 24.1.4 Properties of Map Instances
+
+<Sec id="1.4" />
+
+### 24.1.5 Map Iterator Objects
+
+<Sec id="1.5" />
+
+#### 24.1.5.1 CreateMapIterator ( _map_: an ECMAScript language value, _kind_: ~key+value~, ~key~, or ~value~, ): either a normal completion containing a Generator or a throw completion
+
+<Sec id="1.5.1" />
+
+#### 24.1.5.2 The %MapIteratorPrototype% Object
+
+<Sec id="1.5.2" />
+
+##### 24.1.5.2.1 %MapIteratorPrototype%.next ( )
+
+<Sec id="1.5.2.1" />
+
+##### 24.1.5.2.2 %MapIteratorPrototype% [ %Symbol.toStringTag% ]
+
+<Sec id="1.5.2.2" />
+
+## 24.2 Set Objects
+
+<Sec id="2" />
+
+### 24.2.1 Abstract Operations For Set Objects
+
+#### 24.2.1.1 Set Records
+
+<Sec id="2.1.1" />
+
+#### 24.2.1.2 GetSetRecord ( _obj_: an ECMAScript language value, ): either a normal completion containing a Set Record or a throw completion
+
+<Sec id="2.1.2" />
+
+#### 24.2.1.3 SetDataHas ( _setData_: a List of either ECMAScript language values or ~empty~, _value_: an ECMAScript language value, ): a Boolean
+
+<Sec id="2.1.3" />
+
+#### 24.2.1.4 SetDataIndex ( _setData_: a List of either ECMAScript language values or ~empty~, _value_: an ECMAScript language value, ): a non-negative integer or ~not-found~
+
+<Sec id="2.1.4" />
+
+#### 24.2.1.5 SetDataSize ( _setData_: a List of either ECMAScript language values or ~empty~, ): a non-negative integer
+
+<Sec id="2.1.5" />
+
+### 24.2.2 The Set Constructor
+
+<Sec id="2.2" />
+
+#### 24.2.2.1 Set ( [ _iterable_ ] )
+
+<Sec id="2.2.1" />
+
+### 24.2.3 Properties of the Set Constructor
+
+<Sec id="2.3" />
+
+#### 24.2.3.1 Set.prototype
+
+<Sec id="2.3.1" />
+
+#### 24.2.3.2 get Set [ %Symbol.species% ]
+
+<Sec id="2.3.2" />
+
+### 24.2.4 Properties of the Set Prototype Object
+
+<Sec id="2.4" />
+
+#### 24.2.4.1 Set.prototype.add ( _value_ )
+
+<Sec id="2.4.1" />
+
+#### 24.2.4.2 Set.prototype.clear ( )
+
+<Sec id="2.4.2" />
+
+#### 24.2.4.3 Set.prototype.constructor
+
+<Sec id="2.4.3" />
+
+#### 24.2.4.4 Set.prototype.delete ( _value_ )
+
+<Sec id="2.4.4" />
+
+#### 24.2.4.5 Set.prototype.difference ( _other_ )
+
+<Sec id="2.4.5" />
+
+#### 24.2.4.6 Set.prototype.entries ( )
+
+<Sec id="2.4.6" />
+
+#### 24.2.4.7 Set.prototype.forEach ( _callback_ [ , _thisArg_ ] )
+
+<Sec id="2.4.7" />
+
+#### 24.2.4.8 Set.prototype.has ( _value_ )
+
+<Sec id="2.4.8" />
+
+#### 24.2.4.9 Set.prototype.intersection ( _other_ )
+
+<Sec id="2.4.9" />
+
+#### 24.2.4.10 Set.prototype.isDisjointFrom ( _other_ )
+
+<Sec id="2.4.10" />
+
+#### 24.2.4.11 Set.prototype.isSubsetOf ( _other_ )
+
+<Sec id="2.4.11" />
+
+#### 24.2.4.12 Set.prototype.isSupersetOf ( _other_ )
+
+<Sec id="2.4.12" />
+
+#### 24.2.4.13 Set.prototype.keys ( )
+
+<Sec id="2.4.13" />
+
+#### 24.2.4.14 get Set.prototype.size
+
+<Sec id="2.4.14" />
+
+#### 24.2.4.15 Set.prototype.symmetricDifference ( _other_ )
+
+<Sec id="2.4.15" />
+
+#### 24.2.4.16 Set.prototype.union ( _other_ )
+
+<Sec id="2.4.16" />
+
+#### 24.2.4.17 Set.prototype.values ( )
+
+<Sec id="2.4.17" />
+
+#### 24.2.4.18 Set.prototype [ %Symbol.iterator% ] ( )
+
+<Sec id="2.4.18" />
+
+#### 24.2.4.19 Set.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="2.4.19" />
+
+### 24.2.5 Properties of Set Instances
+
+<Sec id="2.5" />
+
+### 24.2.6 Set Iterator Objects
+
+<Sec id="2.6" />
+
+#### 24.2.6.1 CreateSetIterator ( _set_: an ECMAScript language value, _kind_: ~key+value~ or ~value~, ): either a normal completion containing a Generator or a throw completion
+
+<Sec id="2.6.1" />
+
+#### 24.2.6.2 The %SetIteratorPrototype% Object
+
+<Sec id="2.6.2" />
+
+##### 24.2.6.2.1 %SetIteratorPrototype%.next ( )
+
+<Sec id="2.6.2.1" />
+
+##### 24.2.6.2.2 %SetIteratorPrototype% [ %Symbol.toStringTag% ]
+
+<Sec id="2.6.2.2" />
+
+## 24.3 WeakMap Objects
+
+<Sec id="3" />
+
+### 24.3.1 The WeakMap Constructor
+
+<Sec id="3.1" />
+
+#### 24.3.1.1 WeakMap ( [ _iterable_ ] )
+
+<Sec id="3.1.1" />
+
+### 24.3.2 Properties of the WeakMap Constructor
+
+<Sec id="3.2" />
+
+#### 24.3.2.1 WeakMap.prototype
+
+<Sec id="3.2.1" />
+
+### 24.3.3 Properties of the WeakMap Prototype Object
+
+<Sec id="3.3" />
+
+#### 24.3.3.1 WeakMap.prototype.constructor
+
+<Sec id="3.3.1" />
+
+#### 24.3.3.2 WeakMap.prototype.delete ( _key_ )
+
+<Sec id="3.3.2" />
+
+#### 24.3.3.3 WeakMap.prototype.get ( _key_ )
+
+<Sec id="3.3.3" />
+
+#### 24.3.3.4 WeakMap.prototype.getOrInsert ( _key_, _value_ )
+
+<Sec id="3.3.4" />
+
+#### 24.3.3.5 WeakMap.prototype.getOrInsertComputed ( _key_, _callback_ )
+
+<Sec id="3.3.5" />
+
+#### 24.3.3.6 WeakMap.prototype.has ( _key_ )
+
+<Sec id="3.3.6" />
+
+#### 24.3.3.7 WeakMap.prototype.set ( _key_, _value_ )
+
+<Sec id="3.3.7" />
+
+#### 24.3.3.8 WeakMap.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="3.3.8" />
+
+### 24.3.4 Properties of WeakMap Instances
+
+<Sec id="3.4" />
+
+## 24.4 WeakSet Objects
+
+<Sec id="4" />
+
+### 24.4.1 The WeakSet Constructor
+
+<Sec id="4.1" />
+
+#### 24.4.1.1 WeakSet ( [ _iterable_ ] )
+
+<Sec id="4.1.1" />
+
+### 24.4.2 Properties of the WeakSet Constructor
+
+<Sec id="4.2" />
+
+#### 24.4.2.1 WeakSet.prototype
+
+<Sec id="4.2.1" />
+
+### 24.4.3 Properties of the WeakSet Prototype Object
+
+<Sec id="4.3" />
+
+#### 24.4.3.1 WeakSet.prototype.add ( _value_ )
+
+<Sec id="4.3.1" />
+
+#### 24.4.3.2 WeakSet.prototype.constructor
+
+<Sec id="4.3.2" />
+
+#### 24.4.3.3 WeakSet.prototype.delete ( _value_ )
+
+<Sec id="4.3.3" />
+
+#### 24.4.3.4 WeakSet.prototype.has ( _value_ )
+
+<Sec id="4.3.4" />
+
+#### 24.4.3.5 WeakSet.prototype [ %Symbol.toStringTag% ]
+
+<Sec id="4.3.5" />
+
+### 24.4.4 Properties of WeakSet Instances
+
+<Sec id="4.4" />
+
+## 24.5 Abstract Operations for Keyed Collections
+
+### 24.5.1 CanonicalizeKeyedCollectionKey ( _key_: an ECMAScript language value, ): an ECMAScript language value
+
+<Sec id="5.1" />

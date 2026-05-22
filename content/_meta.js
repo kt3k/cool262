@@ -29,12 +29,12 @@ export default {
   "control-abstraction-objects": "27. Control Abstraction Objects",
   "reflection": "28. Reflection",
   "memory-model": "29. Memory Model",
-  "grammar-summary": "Annex: Grammar Summary",
-  "additional-ecmascript-features-for-web-browsers": "Annex: Additional ECMAScript Features for Web Browsers",
-  "strict-mode-of-ecmascript": "Annex: The Strict Mode of ECMAScript",
-  "host-layering-points": "Annex: Host Layering Points",
-  "corrections-and-clarifications-in-ecmascript-2015-with-possible-compatibility-impact": "Annex: Corrections and Clarifications in ECMAScript 2015 with Possible Compatibility Impact",
-  "additions-and-changes-that-introduce-incompatibilities-with-prior-editions": "Annex: Additions and Changes That Introduce Incompatibilities with Prior Editions",
-  "bibliography": "Annex: Bibliography",
-  "colophon": "Annex: Colophon"
+  "grammar-summary": "Annex A: Grammar Summary",
+  "additional-ecmascript-features-for-web-browsers": "Annex B: Additional ECMAScript Features for Web Browsers",
+  "strict-mode-of-ecmascript": "Annex C: The Strict Mode of ECMAScript",
+  "host-layering-points": "Annex D: Host Layering Points",
+  "corrections-and-clarifications-in-ecmascript-2015-with-possible-compatibility-impact": "Annex E: Corrections and Clarifications in ECMAScript 2015 with Possible Compatibility Impact",
+  "additions-and-changes-that-introduce-incompatibilities-with-prior-editions": "Annex F: Additions and Changes That Introduce Incompatibilities with Prior Editions",
+  "bibliography": "Annex G: Bibliography",
+  "colophon": "Annex H: Colophon"
 }

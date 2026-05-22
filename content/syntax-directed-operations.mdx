@@ -1,5 +1,129 @@
-import Content from '../lib/spec/syntax-directed-operations'
+import { Sec } from '../lib/spec/syntax-directed-operations'
 
-# Syntax-Directed Operations
+# 8 Syntax-Directed Operations
 
-<Content />
+<Sec id="" />
+
+## 8.1 Runtime Semantics: Evaluation ( ): a Completion Record
+
+<Sec id="1" />
+
+## 8.2 Scope Analysis
+
+### 8.2.1 Static Semantics: BoundNames ( ): a List of Strings
+
+<Sec id="2.1" />
+
+### 8.2.2 Static Semantics: DeclarationPart ( ): a Parse Node
+
+<Sec id="2.2" />
+
+### 8.2.3 Static Semantics: IsConstantDeclaration ( ): a Boolean
+
+<Sec id="2.3" />
+
+### 8.2.4 Static Semantics: LexicallyDeclaredNames ( ): a List of Strings
+
+<Sec id="2.4" />
+
+### 8.2.5 Static Semantics: LexicallyScopedDeclarations ( ): a List of Parse Nodes
+
+<Sec id="2.5" />
+
+### 8.2.6 Static Semantics: VarDeclaredNames ( ): a List of Strings
+
+<Sec id="2.6" />
+
+### 8.2.7 Static Semantics: VarScopedDeclarations ( ): a List of Parse Nodes
+
+<Sec id="2.7" />
+
+### 8.2.8 Static Semantics: TopLevelLexicallyDeclaredNames ( ): a List of Strings
+
+<Sec id="2.8" />
+
+### 8.2.9 Static Semantics: TopLevelLexicallyScopedDeclarations ( ): a List of Parse Nodes
+
+<Sec id="2.9" />
+
+### 8.2.10 Static Semantics: TopLevelVarDeclaredNames ( ): a List of Strings
+
+<Sec id="2.10" />
+
+### 8.2.11 Static Semantics: TopLevelVarScopedDeclarations ( ): a List of Parse Nodes
+
+<Sec id="2.11" />
+
+## 8.3 Labels
+
+### 8.3.1 Static Semantics: ContainsDuplicateLabels ( _labelSet_: a List of Strings, ): a Boolean
+
+<Sec id="3.1" />
+
+### 8.3.2 Static Semantics: ContainsUndefinedBreakTarget ( _labelSet_: a List of Strings, ): a Boolean
+
+<Sec id="3.2" />
+
+### 8.3.3 Static Semantics: ContainsUndefinedContinueTarget ( _iterationSet_: a List of Strings, _labelSet_: a List of Strings, ): a Boolean
+
+<Sec id="3.3" />
+
+## 8.4 Function Name Inference
+
+### 8.4.1 Static Semantics: HasName ( ): a Boolean
+
+<Sec id="4.1" />
+
+### 8.4.2 Static Semantics: IsFunctionDefinition ( ): a Boolean
+
+<Sec id="4.2" />
+
+### 8.4.3 Static Semantics: IsAnonymousFunctionDefinition ( _expr_: an |AssignmentExpression| Parse Node, an |Initializer| Parse Node, or an |Expression| Parse Node, ): a Boolean
+
+<Sec id="4.3" />
+
+### 8.4.4 Static Semantics: IsIdentifierRef ( ): a Boolean
+
+<Sec id="4.4" />
+
+### 8.4.5 Runtime Semantics: NamedEvaluation ( _name_: a property key or a Private Name, ): either a normal completion containing a function object or an abrupt completion
+
+<Sec id="4.5" />
+
+## 8.5 Contains
+
+### 8.5.1 Static Semantics: Contains ( _symbol_: a grammar symbol, ): a Boolean
+
+<Sec id="5.1" />
+
+### 8.5.2 Static Semantics: ComputedPropertyContains ( _symbol_: a grammar symbol, ): a Boolean
+
+<Sec id="5.2" />
+
+## 8.6 Miscellaneous
+
+<Sec id="6" />
+
+### 8.6.1 Runtime Semantics: InstantiateFunctionObject ( _env_: an Environment Record, _privateEnv_: a PrivateEnvironment Record or *null*, ): an ECMAScript function object
+
+<Sec id="6.1" />
+
+### 8.6.2 Runtime Semantics: BindingInitialization ( _value_: an ECMAScript language value, _environment_: an Environment Record or *undefined*, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="6.2" />
+
+#### 8.6.2.1 InitializeBoundName ( _name_: a String, _value_: an ECMAScript language value, _environment_: an Environment Record or *undefined*, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="6.2.1" />
+
+### 8.6.3 Runtime Semantics: IteratorBindingInitialization ( _iteratorRecord_: an Iterator Record, _environment_: an Environment Record or *undefined*, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="6.3" />
+
+### 8.6.4 Static Semantics: AssignmentTargetType ( ): ~simple~, ~web-compat~, or ~invalid~
+
+<Sec id="6.4" />
+
+### 8.6.5 Static Semantics: PropName ( ): a String or ~empty~
+
+<Sec id="6.5" />

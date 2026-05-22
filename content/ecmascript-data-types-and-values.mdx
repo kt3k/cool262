@@ -1,5 +1,381 @@
-import Content from '../lib/spec/ecmascript-data-types-and-values'
+import { Sec } from '../lib/spec/ecmascript-data-types-and-values'
 
-# ECMAScript Data Types and Values
+# 6 ECMAScript Data Types and Values
 
-<Content />
+<Sec id="" />
+
+## 6.1 ECMAScript Language Types
+
+<Sec id="1" />
+
+### 6.1.1 The Undefined Type
+
+<Sec id="1.1" />
+
+### 6.1.2 The Null Type
+
+<Sec id="1.2" />
+
+### 6.1.3 The Boolean Type
+
+<Sec id="1.3" />
+
+### 6.1.4 The String Type
+
+<Sec id="1.4" />
+
+#### 6.1.4.1 StringIndexOf ( _string_: a String, _searchValue_: a String, _fromIndex_: a non-negative integer, ): a non-negative integer or ~not-found~
+
+<Sec id="1.4.1" />
+
+#### 6.1.4.2 StringLastIndexOf ( _string_: a String, _searchValue_: a String, _fromIndex_: a non-negative integer, ): a non-negative integer or ~not-found~
+
+<Sec id="1.4.2" />
+
+### 6.1.5 The Symbol Type
+
+<Sec id="1.5" />
+
+#### 6.1.5.1 Well-Known Symbols
+
+<Sec id="1.5.1" />
+
+### 6.1.6 Numeric Types
+
+<Sec id="1.6" />
+
+#### 6.1.6.1 The Number Type
+
+<Sec id="1.6.1" />
+
+##### 6.1.6.1.1 Number::unaryMinus ( _x_: a Number, ): a Number
+
+<Sec id="1.6.1.1" />
+
+##### 6.1.6.1.2 Number::bitwiseNOT ( _x_: a Number, ): an integral Number
+
+<Sec id="1.6.1.2" />
+
+##### 6.1.6.1.3 Number::exponentiate ( _base_: a Number, _exponent_: a Number, ): a Number
+
+<Sec id="1.6.1.3" />
+
+##### 6.1.6.1.4 Number::multiply ( _x_: a Number, _y_: a Number, ): a Number
+
+<Sec id="1.6.1.4" />
+
+##### 6.1.6.1.5 Number::divide ( _x_: a Number, _y_: a Number, ): a Number
+
+<Sec id="1.6.1.5" />
+
+##### 6.1.6.1.6 Number::remainder ( _n_: a Number, _d_: a Number, ): a Number
+
+<Sec id="1.6.1.6" />
+
+##### 6.1.6.1.7 Number::add ( _x_: a Number, _y_: a Number, ): a Number
+
+<Sec id="1.6.1.7" />
+
+##### 6.1.6.1.8 Number::subtract ( _x_: a Number, _y_: a Number, ): a Number
+
+<Sec id="1.6.1.8" />
+
+##### 6.1.6.1.9 Number::leftShift ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.9" />
+
+##### 6.1.6.1.10 Number::signedRightShift ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.10" />
+
+##### 6.1.6.1.11 Number::unsignedRightShift ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.11" />
+
+##### 6.1.6.1.12 Number::lessThan ( _x_: a Number, _y_: a Number, ): a Boolean or *undefined*
+
+<Sec id="1.6.1.12" />
+
+##### 6.1.6.1.13 Number::equal ( _x_: a Number, _y_: a Number, ): a Boolean
+
+<Sec id="1.6.1.13" />
+
+##### 6.1.6.1.14 Number::sameValue ( _x_: a Number, _y_: a Number, ): a Boolean
+
+<Sec id="1.6.1.14" />
+
+##### 6.1.6.1.15 Number::sameValueZero ( _x_: a Number, _y_: a Number, ): a Boolean
+
+<Sec id="1.6.1.15" />
+
+##### 6.1.6.1.16 NumberBitwiseOp ( _op_: `&amp;`, `^`, or `|`, _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.16" />
+
+##### 6.1.6.1.17 Number::bitwiseAND ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.17" />
+
+##### 6.1.6.1.18 Number::bitwiseXOR ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.18" />
+
+##### 6.1.6.1.19 Number::bitwiseOR ( _x_: a Number, _y_: a Number, ): an integral Number
+
+<Sec id="1.6.1.19" />
+
+##### 6.1.6.1.20 Number::toString ( _x_: a Number, _radix_: an integer in the inclusive interval from 2 to 36, ): a String
+
+<Sec id="1.6.1.20" />
+
+#### 6.1.6.2 The BigInt Type
+
+<Sec id="1.6.2" />
+
+##### 6.1.6.2.1 BigInt::unaryMinus ( _x_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.1" />
+
+##### 6.1.6.2.2 BigInt::bitwiseNOT ( _x_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.2" />
+
+##### 6.1.6.2.3 BigInt::exponentiate ( _base_: a BigInt, _exponent_: a BigInt, ): either a normal completion containing a BigInt or a throw completion
+
+<Sec id="1.6.2.3" />
+
+##### 6.1.6.2.4 BigInt::multiply ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.4" />
+
+##### 6.1.6.2.5 BigInt::divide ( _x_: a BigInt, _y_: a BigInt, ): either a normal completion containing a BigInt or a throw completion
+
+<Sec id="1.6.2.5" />
+
+##### 6.1.6.2.6 BigInt::remainder ( _n_: a BigInt, _d_: a BigInt, ): either a normal completion containing a BigInt or a throw completion
+
+<Sec id="1.6.2.6" />
+
+##### 6.1.6.2.7 BigInt::add ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.7" />
+
+##### 6.1.6.2.8 BigInt::subtract ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.8" />
+
+##### 6.1.6.2.9 BigInt::leftShift ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.9" />
+
+##### 6.1.6.2.10 BigInt::signedRightShift ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.10" />
+
+##### 6.1.6.2.11 BigInt::unsignedRightShift ( _x_: a BigInt, _y_: a BigInt, ): a throw completion
+
+<Sec id="1.6.2.11" />
+
+##### 6.1.6.2.12 BigInt::lessThan ( _x_: a BigInt, _y_: a BigInt, ): a Boolean
+
+<Sec id="1.6.2.12" />
+
+##### 6.1.6.2.13 BigInt::equal ( _x_: a BigInt, _y_: a BigInt, ): a Boolean
+
+<Sec id="1.6.2.13" />
+
+##### 6.1.6.2.14 BinaryAnd ( _x_: 0 or 1, _y_: 0 or 1, ): 0 or 1
+
+<Sec id="1.6.2.14" />
+
+##### 6.1.6.2.15 BinaryOr ( _x_: 0 or 1, _y_: 0 or 1, ): 0 or 1
+
+<Sec id="1.6.2.15" />
+
+##### 6.1.6.2.16 BinaryXor ( _x_: 0 or 1, _y_: 0 or 1, ): 0 or 1
+
+<Sec id="1.6.2.16" />
+
+##### 6.1.6.2.17 BigIntBitwiseOp ( _op_: `&amp;`, `^`, or `|`, _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.17" />
+
+##### 6.1.6.2.18 BigInt::bitwiseAND ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.18" />
+
+##### 6.1.6.2.19 BigInt::bitwiseXOR ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.19" />
+
+##### 6.1.6.2.20 BigInt::bitwiseOR ( _x_: a BigInt, _y_: a BigInt, ): a BigInt
+
+<Sec id="1.6.2.20" />
+
+##### 6.1.6.2.21 BigInt::toString ( _x_: a BigInt, _radix_: an integer in the inclusive interval from 2 to 36, ): a String
+
+<Sec id="1.6.2.21" />
+
+### 6.1.7 The Object Type
+
+<Sec id="1.7" />
+
+#### 6.1.7.1 Property Attributes
+
+<Sec id="1.7.1" />
+
+#### 6.1.7.2 Object Internal Methods and Internal Slots
+
+<Sec id="1.7.2" />
+
+#### 6.1.7.3 Invariants of the Essential Internal Methods
+
+<Sec id="1.7.3" />
+
+#### 6.1.7.4 Well-Known Intrinsic Objects
+
+<Sec id="1.7.4" />
+
+## 6.2 ECMAScript Specification Types
+
+<Sec id="2" />
+
+### 6.2.1 The Enum Specification Type
+
+<Sec id="2.1" />
+
+### 6.2.2 The List and Record Specification Types
+
+<Sec id="2.2" />
+
+### 6.2.3 The Set and Relation Specification Types
+
+<Sec id="2.3" />
+
+### 6.2.4 The Completion Record Specification Type
+
+<Sec id="2.4" />
+
+#### 6.2.4.1 NormalCompletion ( _value_: any value except a Completion Record, ): a normal completion
+
+<Sec id="2.4.1" />
+
+#### 6.2.4.2 ThrowCompletion ( _value_: an ECMAScript language value, ): a throw completion
+
+<Sec id="2.4.2" />
+
+#### 6.2.4.3 ReturnCompletion ( _value_: an ECMAScript language value, ): a return completion
+
+<Sec id="2.4.3" />
+
+#### 6.2.4.4 UpdateEmpty ( _completionRecord_: a Completion Record, _value_: any value except a Completion Record, ): a Completion Record
+
+<Sec id="2.4.4" />
+
+### 6.2.5 The Reference Record Specification Type
+
+<Sec id="2.5" />
+
+#### 6.2.5.1 IsPropertyReference ( _referenceRecord_: a Reference Record, ): a Boolean
+
+<Sec id="2.5.1" />
+
+#### 6.2.5.2 IsUnresolvableReference ( _referenceRecord_: a Reference Record, ): a Boolean
+
+<Sec id="2.5.2" />
+
+#### 6.2.5.3 IsSuperReference ( _referenceRecord_: a Reference Record, ): a Boolean
+
+<Sec id="2.5.3" />
+
+#### 6.2.5.4 IsPrivateReference ( _referenceRecord_: a Reference Record, ): a Boolean
+
+<Sec id="2.5.4" />
+
+#### 6.2.5.5 GetValue ( _referenceRecord_: a Reference Record or an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+
+<Sec id="2.5.5" />
+
+#### 6.2.5.6 PutValue ( _referenceRecord_: a Reference Record or an ECMAScript language value, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="2.5.6" />
+
+#### 6.2.5.7 GetThisValue ( _referenceRecord_: a Reference Record, ): an ECMAScript language value
+
+<Sec id="2.5.7" />
+
+#### 6.2.5.8 InitializeReferencedBinding ( _referenceRecord_: a Reference Record, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or an abrupt completion
+
+<Sec id="2.5.8" />
+
+#### 6.2.5.9 MakePrivateReference ( _baseValue_: an ECMAScript language value, _privateIdentifier_: a String, ): a Reference Record
+
+<Sec id="2.5.9" />
+
+### 6.2.6 The Property Descriptor Specification Type
+
+<Sec id="2.6" />
+
+#### 6.2.6.1 IsAccessorDescriptor ( _desc_: a Property Descriptor, ): a Boolean
+
+<Sec id="2.6.1" />
+
+#### 6.2.6.2 IsDataDescriptor ( _desc_: a Property Descriptor, ): a Boolean
+
+<Sec id="2.6.2" />
+
+#### 6.2.6.3 IsGenericDescriptor ( _desc_: a Property Descriptor, ): a Boolean
+
+<Sec id="2.6.3" />
+
+#### 6.2.6.4 FromPropertyDescriptor ( _desc_: a Property Descriptor or *undefined*, ): an Object or *undefined*
+
+<Sec id="2.6.4" />
+
+#### 6.2.6.5 ToPropertyDescriptor ( _obj_: an ECMAScript language value, ): either a normal completion containing a Property Descriptor or a throw completion
+
+<Sec id="2.6.5" />
+
+#### 6.2.6.6 CompletePropertyDescriptor ( _desc_: a Property Descriptor, ): ~unused~
+
+<Sec id="2.6.6" />
+
+### 6.2.7 The Environment Record Specification Type
+
+<Sec id="2.7" />
+
+### 6.2.8 The Abstract Closure Specification Type
+
+<Sec id="2.8" />
+
+### 6.2.9 Data Blocks
+
+<Sec id="2.9" />
+
+#### 6.2.9.1 CreateByteDataBlock ( _size_: a non-negative integer, ): either a normal completion containing a Data Block or a throw completion
+
+<Sec id="2.9.1" />
+
+#### 6.2.9.2 CreateSharedByteDataBlock ( _size_: a non-negative integer, ): either a normal completion containing a Shared Data Block or a throw completion
+
+<Sec id="2.9.2" />
+
+#### 6.2.9.3 CopyDataBlockBytes ( _toBlock_: a Data Block or a Shared Data Block, _toIndex_: a non-negative integer, _fromBlock_: a Data Block or a Shared Data Block, _fromIndex_: a non-negative integer, _count_: a non-negative integer, ): ~unused~
+
+<Sec id="2.9.3" />
+
+### 6.2.10 The PrivateElement Specification Type
+
+<Sec id="2.10" />
+
+### 6.2.11 The ClassFieldDefinition Record Specification Type
+
+<Sec id="2.11" />
+
+### 6.2.12 Private Names
+
+<Sec id="2.12" />
+
+### 6.2.13 The ClassStaticBlockDefinition Record Specification Type
+
+<Sec id="2.13" />
