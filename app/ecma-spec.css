@@ -1,0 +1,33 @@
+/* Styles for spec content rendered via lib/spec/<chapter>.jsx (Sec component
+   wraps everything in <div class="ecma-spec">). */
+
+.ecma-spec emu-alg {
+  display: block;
+}
+
+/* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
+   with depth, instead of the browser default of decimal at every level. */
+.ecma-spec emu-alg ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol {
+  list-style-type: lower-alpha;
+}
+.ecma-spec emu-alg ol ol ol {
+  list-style-type: lower-roman;
+}
+.ecma-spec emu-alg ol ol ol ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol {
+  list-style-type: lower-roman;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}

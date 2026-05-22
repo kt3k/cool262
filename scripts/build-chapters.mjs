@@ -276,6 +276,95 @@ function dedent(text) {
   return lines.map((l) => l.slice(minIndent)).join('\n')
 }
 
+// Parse <emu-alg> body (Markdown-style "1." numbered + "*" bulleted lists
+// with 2-space indent per nesting level) into real nested <ol>/<ul> HTML, so
+// the browser renders proper hierarchical step numbering.
+function parseAlg(inner) {
+  const lines = inner.split('\n')
+  // The first bullet line establishes baseline indent (level 0).
+  let baseIndent = -1
+  for (const l of lines) {
+    const t = l.trimStart()
+    if (/^1\.\s/.test(t) || /^\*\s/.test(t)) {
+      baseIndent = l.length - t.length
+      break
+    }
+  }
+  if (baseIndent === -1) return null
+
+  const items = []
+  let i = 0
+  while (i < lines.length) {
+    const l = lines[i]
+    const t = l.trimStart()
+    const olM = /^1\.\s+(.*)$/.exec(t)
+    const ulM = /^\*\s+(.*)$/.exec(t)
+    if (!olM && !ulM) {
+      i++
+      continue
+    }
+    const indent = l.length - t.length
+    const depth = Math.max(0, Math.floor((indent - baseIndent) / 2))
+    const type = olM ? 'ol' : 'ul'
+    let text = (olM ? olM[1] : ulM[1]).replace(/^(?:\[[^\]]+\]\s*)+/, '')
+    // Continuation lines: any non-bullet line at deeper indent belongs to this
+    // item (commonly embedded <figure>/<table> blocks).
+    let j = i + 1
+    while (j < lines.length) {
+      const nt = lines[j].trimStart()
+      if (nt === '') { text += '\n'; j++; continue }
+      const nIndent = lines[j].length - nt.length
+      if (nIndent <= indent) break
+      if (/^1\.\s/.test(nt) || /^\*\s/.test(nt)) break
+      text += '\n' + lines[j]
+      j++
+    }
+    items.push({ depth, type, text: text.replace(/\s+$/, '') })
+    i = j
+  }
+  if (!items.length) return null
+
+  // Build a tree: stack[d] is the parent node at depth d.
+  const root = { children: [] }
+  const stack = [root]
+  for (const it of items) {
+    while (stack.length > it.depth + 1) stack.pop()
+    while (stack.length < it.depth + 1) {
+      const parent = stack[stack.length - 1]
+      if (!parent.children.length) {
+        parent.children.push({ type: it.type, text: '', children: [] })
+      }
+      stack.push(parent.children[parent.children.length - 1])
+    }
+    stack[stack.length - 1].children.push({ type: it.type, text: it.text, children: [] })
+  }
+
+  // Serialize: group consecutive same-type siblings into a single <ol>/<ul>.
+  function serialize(nodes) {
+    let html = ''
+    let k = 0
+    while (k < nodes.length) {
+      const t = nodes[k].type
+      const group = []
+      while (k < nodes.length && nodes[k].type === t) {
+        group.push(nodes[k])
+        k++
+      }
+      html += `<${t}>` + group.map((n) => `<li>${n.text}${serialize(n.children)}</li>`).join('') + `</${t}>`
+    }
+    return html
+  }
+  return serialize(root.children)
+}
+
+function applyAlgSubst(html) {
+  return html.replace(/<emu-alg([^>]*?)>([\s\S]*?)<\/emu-alg>/g, (full, attrs, inner) => {
+    const list = parseAlg(inner)
+    if (list === null) return full
+    return `<emu-alg${attrs}>${list}</emu-alg>`
+  })
+}
+
 // Render <emu-grammar> blocks as monospace so the BNF-style line breaks and
 // indentation survive. The same tag is used both inline (mid-paragraph "MV of
 // <emu-grammar>DecimalDigit :: `0`</emu-grammar>") and as a block-level
@@ -306,7 +395,10 @@ const meta = {}
 let totalBytes = 0
 built.forEach((c) => {
   const { slug, pageSlug, chapterNum, tree } = c
-  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(applyProdrefSubst(applyGrammarSubst(v)))])
+  const sections = flattenTree(tree).map(([k, v]) => [
+    k,
+    applyXrefSubst(applyProdrefSubst(applyGrammarSubst(applyAlgSubst(v)))),
+  ])
   const sectionsObj = Object.fromEntries(sections)
 
   const componentSrc =
