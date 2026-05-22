@@ -5,8 +5,10 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 const SPEC_FILE = path.join(ROOT, 'ecma262/spec.html')
-const CONTENT_DIR = path.join(ROOT, 'content/spec')
+const SPEC_IMG_DIR = path.join(ROOT, 'ecma262/img')
+const CONTENT_DIR = path.join(ROOT, 'content')
 const LIB_DIR = path.join(ROOT, 'lib/spec')
+const PUBLIC_IMG_DIR = path.join(ROOT, 'public/img')
 
 const src = fs.readFileSync(SPEC_FILE, 'utf8')
 
@@ -55,6 +57,8 @@ const meta = {}
 let totalBytes = 0
 chapters.forEach((c, i) => {
   const slug = c.id.replace(/^sec-/, '')
+  // Serve the spec's Introduction at the site root (/) via index.mdx.
+  const pageSlug = c.kind === 'emu-intro' ? 'index' : slug
   const num = String(i).padStart(2, '0')
 
   const componentName = 'Chapter' + slug.replace(/[^a-zA-Z0-9]/g, '_')
@@ -68,10 +72,10 @@ chapters.forEach((c, i) => {
   totalBytes += componentSrc.length
 
   const mdx =
-    `import Content from '../../lib/spec/${slug}'\n\n` +
+    `import Content from '../lib/spec/${slug}'\n\n` +
     `# ${c.title}\n\n` +
     `<Content />\n`
-  fs.writeFileSync(path.join(CONTENT_DIR, `${slug}.mdx`), mdx)
+  fs.writeFileSync(path.join(CONTENT_DIR, `${pageSlug}.mdx`), mdx)
 
   // Prefix display title with a number for clarity in the sidebar.
   const display = c.kind === 'emu-intro'
@@ -79,7 +83,7 @@ chapters.forEach((c, i) => {
     : c.kind === 'emu-annex'
       ? `Annex: ${c.title}`
       : `${i}. ${c.title}`
-  meta[slug] = display
+  meta[pageSlug] = display
 })
 
 fs.writeFileSync(
@@ -87,4 +91,15 @@ fs.writeFileSync(
   `export default ${JSON.stringify(meta, null, 2)}\n`
 )
 
-console.log(`Generated ${chapters.length} chapters (${(totalBytes / 1024 / 1024).toFixed(2)} MB of JSX)`)
+// Mirror spec images to public/ so the spec HTML's <img src="img/..."> resolves.
+fs.rmSync(PUBLIC_IMG_DIR, { recursive: true, force: true })
+fs.mkdirSync(PUBLIC_IMG_DIR, { recursive: true })
+let imgCount = 0
+for (const name of fs.readdirSync(SPEC_IMG_DIR)) {
+  if (/\.(svg|png|jpe?g|gif|webp|ico)$/i.test(name)) {
+    fs.copyFileSync(path.join(SPEC_IMG_DIR, name), path.join(PUBLIC_IMG_DIR, name))
+    imgCount++
+  }
+}
+
+console.log(`Generated ${chapters.length} chapters (${(totalBytes / 1024 / 1024).toFixed(2)} MB of JSX), ${imgCount} images`)

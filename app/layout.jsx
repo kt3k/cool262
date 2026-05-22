@@ -13,7 +13,7 @@ const footer = <Footer>MIT {new Date().getFullYear()} © cool262.</Footer>
 
 export default async function RootLayout({ children }) {
   return (
-    <html lang="ja" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
         <Layout
