@@ -170,20 +170,24 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
   return lines
 }
 
-fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
-fs.rmSync(LIB_DIR, { recursive: true, force: true })
-fs.mkdirSync(CONTENT_DIR, { recursive: true })
-fs.mkdirSync(LIB_DIR, { recursive: true })
+// Walk a tree and register every nested clause id → {number, slug} so we can
+// resolve <emu-xref href="#id"> back to its rendered section number ("14.7.2").
+function registerSectionIds(tree, chapPrefix, chapSlug, into) {
+  tree.children.forEach((child, idx) => {
+    const childPrefix = chapPrefix === '' ? String(idx + 1) : `${chapPrefix}.${idx + 1}`
+    if (child.id) into.set(child.id, { number: childPrefix, slug: chapSlug })
+    registerSectionIds(child.tree, childPrefix, chapSlug, into)
+  })
+}
 
-const meta = {}
-let totalBytes = 0
+// Pass 1: build chapter trees and a global id → section map, so cross-chapter
+// xrefs can be resolved before any file is written.
 let clauseIdx = 0
 let annexIdx = 0
-chapters.forEach((c, i) => {
+const idToSection = new Map()
+const built = chapters.map((c) => {
   const slug = c.id.replace(/^sec-/, '')
-  // Serve the spec's Introduction at the site root (/) via index.mdx.
   const pageSlug = c.kind === 'emu-intro' ? 'index' : slug
-
   let chapterNum = ''
   if (c.kind === 'emu-clause') {
     clauseIdx++
@@ -191,9 +195,34 @@ chapters.forEach((c, i) => {
   } else if (c.kind === 'emu-annex') {
     chapterNum = annexLabel(annexIdx++)
   }
-
   const tree = parseTree(c.inner)
-  const sections = flattenTree(tree)
+  idToSection.set(c.id, { number: chapterNum, slug: pageSlug })
+  registerSectionIds(tree, chapterNum, pageSlug, idToSection)
+  return { ...c, slug, pageSlug, chapterNum, tree }
+})
+
+// Empty <emu-xref href="#id"></emu-xref> is filled in by ecmarkup at build
+// time. Resolve it ourselves to the target's section number; fall back to the
+// bare id so unresolved refs stay visible instead of vanishing.
+function applyXrefSubst(html) {
+  return html.replace(/<emu-xref([^>]*?)>\s*<\/emu-xref>/g, (full, attrs) => {
+    const m = attrs.match(/\bhref="#([^"]+)"/)
+    if (!m) return full
+    const s = idToSection.get(m[1])
+    return s ? s.number : m[1]
+  })
+}
+
+fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
+fs.rmSync(LIB_DIR, { recursive: true, force: true })
+fs.mkdirSync(CONTENT_DIR, { recursive: true })
+fs.mkdirSync(LIB_DIR, { recursive: true })
+
+const meta = {}
+let totalBytes = 0
+built.forEach((c) => {
+  const { slug, pageSlug, chapterNum, tree } = c
+  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(v)])
   const sectionsObj = Object.fromEntries(sections)
 
   const componentSrc =
