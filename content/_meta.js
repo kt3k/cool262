@@ -1,3 +1,4 @@
 export default {
-  index: 'はじめに'
+  index: 'はじめに',
+  spec: 'ECMA-262 仕様'
 }

@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build:chapters": "node scripts/build-chapters.mjs",
+    "postinstall": "node scripts/patch-nextra-theme.mjs"
   },
   "dependencies": {
     "next": "^16.2.6",
