@@ -268,6 +268,35 @@ function applyProdrefSubst(html) {
   })
 }
 
+// Strip a common leading indent from every non-blank line in `text`.
+function dedent(text) {
+  const lines = text.split('\n')
+  const indents = lines.filter((l) => l.trim() !== '').map((l) => l.match(/^[ \t]*/)[0].length)
+  const minIndent = indents.length ? Math.min(...indents) : 0
+  return lines.map((l) => l.slice(minIndent)).join('\n')
+}
+
+// Render <emu-grammar> blocks as monospace so the BNF-style line breaks and
+// indentation survive. The same tag is used both inline (mid-paragraph "MV of
+// <emu-grammar>DecimalDigit :: `0`</emu-grammar>") and as a block-level
+// production definition; tell them apart by looking at what precedes the
+// opening tag on its line — if it's only whitespace, render as <pre>,
+// otherwise as inline <code> so paragraph flow isn't broken.
+function applyGrammarSubst(html) {
+  return html.replace(
+    /<emu-grammar([^>]*?)>([\s\S]*?)<\/emu-grammar>/g,
+    (full, _attrs, inner, offset, source) => {
+      const lineStart = source.lastIndexOf('\n', offset - 1) + 1
+      const isBlock = source.slice(lineStart, offset).trim() === ''
+      const trimmed = inner.replace(/^\s*\n/, '').replace(/\n\s*$/, '')
+      if (isBlock) {
+        return `<pre class="emu-grammar">${dedent(trimmed)}</pre>`
+      }
+      return `<code class="emu-grammar">${trimmed.trim()}</code>`
+    },
+  )
+}
+
 fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
 fs.rmSync(LIB_DIR, { recursive: true, force: true })
 fs.mkdirSync(CONTENT_DIR, { recursive: true })
@@ -277,7 +306,7 @@ const meta = {}
 let totalBytes = 0
 built.forEach((c) => {
   const { slug, pageSlug, chapterNum, tree } = c
-  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(applyProdrefSubst(v))])
+  const sections = flattenTree(tree).map(([k, v]) => [k, applyXrefSubst(applyProdrefSubst(applyGrammarSubst(v)))])
   const sectionsObj = Object.fromEntries(sections)
 
   const componentSrc =
