@@ -1,755 +1,755 @@
 import { Sec } from '../lib/spec/numbers-and-dates'
 
-# 21 Numbers and Dates
+# <a id="sec-numbers-and-dates" /> 21 Numbers and Dates
 
-## 21.1 Number Objects
+## <a id="sec-number-objects" /> 21.1 Number Objects
 
-### 21.1.1 The Number Constructor
+### <a id="sec-number-constructor" /> 21.1.1 The Number Constructor
 
 <Sec id="1.1" />
 
-#### 21.1.1.1 Number ( _value_ )
+#### <a id="sec-number-constructor-number-value" /> 21.1.1.1 Number ( _value_ )
 
 <Sec id="1.1.1" />
 
-### 21.1.2 Properties of the Number Constructor
+### <a id="sec-properties-of-the-number-constructor" /> 21.1.2 Properties of the Number Constructor
 
 <Sec id="1.2" />
 
-#### 21.1.2.1 Number.EPSILON
+#### <a id="sec-number.epsilon" /> 21.1.2.1 Number.EPSILON
 
 <Sec id="1.2.1" />
 
-#### 21.1.2.2 Number.isFinite ( _number_ )
+#### <a id="sec-number.isfinite" /> 21.1.2.2 Number.isFinite ( _number_ )
 
 <Sec id="1.2.2" />
 
-#### 21.1.2.3 Number.isInteger ( _number_ )
+#### <a id="sec-number.isinteger" /> 21.1.2.3 Number.isInteger ( _number_ )
 
 <Sec id="1.2.3" />
 
-#### 21.1.2.4 Number.isNaN ( _number_ )
+#### <a id="sec-number.isnan" /> 21.1.2.4 Number.isNaN ( _number_ )
 
 <Sec id="1.2.4" />
 
-#### 21.1.2.5 Number.isSafeInteger ( _number_ )
+#### <a id="sec-number.issafeinteger" /> 21.1.2.5 Number.isSafeInteger ( _number_ )
 
 <Sec id="1.2.5" />
 
-#### 21.1.2.6 Number.MAX_SAFE_INTEGER
+#### <a id="sec-number.max_safe_integer" /> 21.1.2.6 Number.MAX_SAFE_INTEGER
 
 <Sec id="1.2.6" />
 
-#### 21.1.2.7 Number.MAX_VALUE
+#### <a id="sec-number.max_value" /> 21.1.2.7 Number.MAX_VALUE
 
 <Sec id="1.2.7" />
 
-#### 21.1.2.8 Number.MIN_SAFE_INTEGER
+#### <a id="sec-number.min_safe_integer" /> 21.1.2.8 Number.MIN_SAFE_INTEGER
 
 <Sec id="1.2.8" />
 
-#### 21.1.2.9 Number.MIN_VALUE
+#### <a id="sec-number.min_value" /> 21.1.2.9 Number.MIN_VALUE
 
 <Sec id="1.2.9" />
 
-#### 21.1.2.10 Number.NaN
+#### <a id="sec-number.nan" /> 21.1.2.10 Number.NaN
 
 <Sec id="1.2.10" />
 
-#### 21.1.2.11 Number.NEGATIVE_INFINITY
+#### <a id="sec-number.negative_infinity" /> 21.1.2.11 Number.NEGATIVE_INFINITY
 
 <Sec id="1.2.11" />
 
-#### 21.1.2.12 Number.parseFloat ( _string_ )
+#### <a id="sec-number.parsefloat" /> 21.1.2.12 Number.parseFloat ( _string_ )
 
 <Sec id="1.2.12" />
 
-#### 21.1.2.13 Number.parseInt ( _string_, _radix_ )
+#### <a id="sec-number.parseint" /> 21.1.2.13 Number.parseInt ( _string_, _radix_ )
 
 <Sec id="1.2.13" />
 
-#### 21.1.2.14 Number.POSITIVE_INFINITY
+#### <a id="sec-number.positive_infinity" /> 21.1.2.14 Number.POSITIVE_INFINITY
 
 <Sec id="1.2.14" />
 
-#### 21.1.2.15 Number.prototype
+#### <a id="sec-number.prototype" /> 21.1.2.15 Number.prototype
 
 <Sec id="1.2.15" />
 
-### 21.1.3 Properties of the Number Prototype Object
+### <a id="sec-properties-of-the-number-prototype-object" /> 21.1.3 Properties of the Number Prototype Object
 
 <Sec id="1.3" />
 
-#### 21.1.3.1 Number.prototype.constructor
+#### <a id="sec-number.prototype.constructor" /> 21.1.3.1 Number.prototype.constructor
 
 <Sec id="1.3.1" />
 
-#### 21.1.3.2 Number.prototype.toExponential ( _fractionDigits_ )
+#### <a id="sec-number.prototype.toexponential" /> 21.1.3.2 Number.prototype.toExponential ( _fractionDigits_ )
 
 <Sec id="1.3.2" />
 
-#### 21.1.3.3 Number.prototype.toFixed ( _fractionDigits_ )
+#### <a id="sec-number.prototype.tofixed" /> 21.1.3.3 Number.prototype.toFixed ( _fractionDigits_ )
 
 <Sec id="1.3.3" />
 
-#### 21.1.3.4 Number.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <a id="sec-number.prototype.tolocalestring" /> 21.1.3.4 Number.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="1.3.4" />
 
-#### 21.1.3.5 Number.prototype.toPrecision ( _precision_ )
+#### <a id="sec-number.prototype.toprecision" /> 21.1.3.5 Number.prototype.toPrecision ( _precision_ )
 
 <Sec id="1.3.5" />
 
-#### 21.1.3.6 Number.prototype.toString ( [ _radix_ ] )
+#### <a id="sec-number.prototype.tostring" /> 21.1.3.6 Number.prototype.toString ( [ _radix_ ] )
 
 <Sec id="1.3.6" />
 
-#### 21.1.3.7 Number.prototype.valueOf ( )
+#### <a id="sec-number.prototype.valueof" /> 21.1.3.7 Number.prototype.valueOf ( )
 
 <Sec id="1.3.7" />
 
-##### 21.1.3.7.1 ThisNumberValue ( _value_: an ECMAScript language value, ): either a normal completion containing a Number or a throw completion
+##### <a id="sec-thisnumbervalue" /> 21.1.3.7.1 ThisNumberValue ( _value_: an ECMAScript language value, ): either a normal completion containing a Number or a throw completion
 
 <Sec id="1.3.7.1" />
 
-### 21.1.4 Properties of Number Instances
+### <a id="sec-properties-of-number-instances" /> 21.1.4 Properties of Number Instances
 
 <Sec id="1.4" />
 
-## 21.2 BigInt Objects
+## <a id="sec-bigint-objects" /> 21.2 BigInt Objects
 
-### 21.2.1 The BigInt Constructor
+### <a id="sec-bigint-constructor" /> 21.2.1 The BigInt Constructor
 
 <Sec id="2.1" />
 
-#### 21.2.1.1 BigInt ( _value_ )
+#### <a id="sec-bigint-constructor-number-value" /> 21.2.1.1 BigInt ( _value_ )
 
 <Sec id="2.1.1" />
 
-##### 21.2.1.1.1 NumberToBigInt ( _number_: a Number, ): either a normal completion containing a BigInt or a throw completion
+##### <a id="sec-numbertobigint" /> 21.2.1.1.1 NumberToBigInt ( _number_: a Number, ): either a normal completion containing a BigInt or a throw completion
 
 <Sec id="2.1.1.1" />
 
-### 21.2.2 Properties of the BigInt Constructor
+### <a id="sec-properties-of-the-bigint-constructor" /> 21.2.2 Properties of the BigInt Constructor
 
 <Sec id="2.2" />
 
-#### 21.2.2.1 BigInt.asIntN ( _bits_, _bigint_ )
+#### <a id="sec-bigint.asintn" /> 21.2.2.1 BigInt.asIntN ( _bits_, _bigint_ )
 
 <Sec id="2.2.1" />
 
-#### 21.2.2.2 BigInt.asUintN ( _bits_, _bigint_ )
+#### <a id="sec-bigint.asuintn" /> 21.2.2.2 BigInt.asUintN ( _bits_, _bigint_ )
 
 <Sec id="2.2.2" />
 
-#### 21.2.2.3 BigInt.prototype
+#### <a id="sec-bigint.prototype" /> 21.2.2.3 BigInt.prototype
 
 <Sec id="2.2.3" />
 
-### 21.2.3 Properties of the BigInt Prototype Object
+### <a id="sec-properties-of-the-bigint-prototype-object" /> 21.2.3 Properties of the BigInt Prototype Object
 
 <Sec id="2.3" />
 
-#### 21.2.3.1 BigInt.prototype.constructor
+#### <a id="sec-bigint.prototype.constructor" /> 21.2.3.1 BigInt.prototype.constructor
 
 <Sec id="2.3.1" />
 
-#### 21.2.3.2 BigInt.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <a id="sec-bigint.prototype.tolocalestring" /> 21.2.3.2 BigInt.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="2.3.2" />
 
-#### 21.2.3.3 BigInt.prototype.toString ( [ _radix_ ] )
+#### <a id="sec-bigint.prototype.tostring" /> 21.2.3.3 BigInt.prototype.toString ( [ _radix_ ] )
 
 <Sec id="2.3.3" />
 
-#### 21.2.3.4 BigInt.prototype.valueOf ( )
+#### <a id="sec-bigint.prototype.valueof" /> 21.2.3.4 BigInt.prototype.valueOf ( )
 
 <Sec id="2.3.4" />
 
-##### 21.2.3.4.1 ThisBigIntValue ( _value_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
+##### <a id="sec-thisbigintvalue" /> 21.2.3.4.1 ThisBigIntValue ( _value_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
 
 <Sec id="2.3.4.1" />
 
-#### 21.2.3.5 BigInt.prototype [ %Symbol.toStringTag% ]
+#### <a id="sec-bigint.prototype-%symbol.tostringtag%" /> 21.2.3.5 BigInt.prototype [ %Symbol.toStringTag% ]
 
 <Sec id="2.3.5" />
 
-### 21.2.4 Properties of BigInt Instances
+### <a id="sec-properties-of-bigint-instances" /> 21.2.4 Properties of BigInt Instances
 
 <Sec id="2.4" />
 
-## 21.3 The Math Object
+## <a id="sec-math-object" /> 21.3 The Math Object
 
 <Sec id="3" />
 
-### 21.3.1 Value Properties of the Math Object
+### <a id="sec-value-properties-of-the-math-object" /> 21.3.1 Value Properties of the Math Object
 
-#### 21.3.1.1 Math.E
+#### <a id="sec-math.e" /> 21.3.1.1 Math.E
 
 <Sec id="3.1.1" />
 
-#### 21.3.1.2 Math.LN10
+#### <a id="sec-math.ln10" /> 21.3.1.2 Math.LN10
 
 <Sec id="3.1.2" />
 
-#### 21.3.1.3 Math.LN2
+#### <a id="sec-math.ln2" /> 21.3.1.3 Math.LN2
 
 <Sec id="3.1.3" />
 
-#### 21.3.1.4 Math.LOG10E
+#### <a id="sec-math.log10e" /> 21.3.1.4 Math.LOG10E
 
 <Sec id="3.1.4" />
 
-#### 21.3.1.5 Math.LOG2E
+#### <a id="sec-math.log2e" /> 21.3.1.5 Math.LOG2E
 
 <Sec id="3.1.5" />
 
-#### 21.3.1.6 Math.PI
+#### <a id="sec-math.pi" /> 21.3.1.6 Math.PI
 
 <Sec id="3.1.6" />
 
-#### 21.3.1.7 Math.SQRT1_2
+#### <a id="sec-math.sqrt1_2" /> 21.3.1.7 Math.SQRT1_2
 
 <Sec id="3.1.7" />
 
-#### 21.3.1.8 Math.SQRT2
+#### <a id="sec-math.sqrt2" /> 21.3.1.8 Math.SQRT2
 
 <Sec id="3.1.8" />
 
-#### 21.3.1.9 Math [ %Symbol.toStringTag% ]
+#### <a id="sec-math-%symbol.tostringtag%" /> 21.3.1.9 Math [ %Symbol.toStringTag% ]
 
 <Sec id="3.1.9" />
 
-### 21.3.2 Function Properties of the Math Object
+### <a id="sec-function-properties-of-the-math-object" /> 21.3.2 Function Properties of the Math Object
 
 <Sec id="3.2" />
 
-#### 21.3.2.1 Math.abs ( _x_ )
+#### <a id="sec-math.abs" /> 21.3.2.1 Math.abs ( _x_ )
 
 <Sec id="3.2.1" />
 
-#### 21.3.2.2 Math.acos ( _x_ )
+#### <a id="sec-math.acos" /> 21.3.2.2 Math.acos ( _x_ )
 
 <Sec id="3.2.2" />
 
-#### 21.3.2.3 Math.acosh ( _x_ )
+#### <a id="sec-math.acosh" /> 21.3.2.3 Math.acosh ( _x_ )
 
 <Sec id="3.2.3" />
 
-#### 21.3.2.4 Math.asin ( _x_ )
+#### <a id="sec-math.asin" /> 21.3.2.4 Math.asin ( _x_ )
 
 <Sec id="3.2.4" />
 
-#### 21.3.2.5 Math.asinh ( _x_ )
+#### <a id="sec-math.asinh" /> 21.3.2.5 Math.asinh ( _x_ )
 
 <Sec id="3.2.5" />
 
-#### 21.3.2.6 Math.atan ( _x_ )
+#### <a id="sec-math.atan" /> 21.3.2.6 Math.atan ( _x_ )
 
 <Sec id="3.2.6" />
 
-#### 21.3.2.7 Math.atanh ( _x_ )
+#### <a id="sec-math.atanh" /> 21.3.2.7 Math.atanh ( _x_ )
 
 <Sec id="3.2.7" />
 
-#### 21.3.2.8 Math.atan2 ( _y_, _x_ )
+#### <a id="sec-math.atan2" /> 21.3.2.8 Math.atan2 ( _y_, _x_ )
 
 <Sec id="3.2.8" />
 
-#### 21.3.2.9 Math.cbrt ( _x_ )
+#### <a id="sec-math.cbrt" /> 21.3.2.9 Math.cbrt ( _x_ )
 
 <Sec id="3.2.9" />
 
-#### 21.3.2.10 Math.ceil ( _x_ )
+#### <a id="sec-math.ceil" /> 21.3.2.10 Math.ceil ( _x_ )
 
 <Sec id="3.2.10" />
 
-#### 21.3.2.11 Math.clz32 ( _x_ )
+#### <a id="sec-math.clz32" /> 21.3.2.11 Math.clz32 ( _x_ )
 
 <Sec id="3.2.11" />
 
-#### 21.3.2.12 Math.cos ( _x_ )
+#### <a id="sec-math.cos" /> 21.3.2.12 Math.cos ( _x_ )
 
 <Sec id="3.2.12" />
 
-#### 21.3.2.13 Math.cosh ( _x_ )
+#### <a id="sec-math.cosh" /> 21.3.2.13 Math.cosh ( _x_ )
 
 <Sec id="3.2.13" />
 
-#### 21.3.2.14 Math.exp ( _x_ )
+#### <a id="sec-math.exp" /> 21.3.2.14 Math.exp ( _x_ )
 
 <Sec id="3.2.14" />
 
-#### 21.3.2.15 Math.expm1 ( _x_ )
+#### <a id="sec-math.expm1" /> 21.3.2.15 Math.expm1 ( _x_ )
 
 <Sec id="3.2.15" />
 
-#### 21.3.2.16 Math.floor ( _x_ )
+#### <a id="sec-math.floor" /> 21.3.2.16 Math.floor ( _x_ )
 
 <Sec id="3.2.16" />
 
-#### 21.3.2.17 Math.fround ( _x_ )
+#### <a id="sec-math.fround" /> 21.3.2.17 Math.fround ( _x_ )
 
 <Sec id="3.2.17" />
 
-#### 21.3.2.18 Math.f16round ( _x_ )
+#### <a id="sec-math.f16round" /> 21.3.2.18 Math.f16round ( _x_ )
 
 <Sec id="3.2.18" />
 
-#### 21.3.2.19 Math.hypot ( ..._args_ )
+#### <a id="sec-math.hypot" /> 21.3.2.19 Math.hypot ( ..._args_ )
 
 <Sec id="3.2.19" />
 
-#### 21.3.2.20 Math.imul ( _x_, _y_ )
+#### <a id="sec-math.imul" /> 21.3.2.20 Math.imul ( _x_, _y_ )
 
 <Sec id="3.2.20" />
 
-#### 21.3.2.21 Math.log ( _x_ )
+#### <a id="sec-math.log" /> 21.3.2.21 Math.log ( _x_ )
 
 <Sec id="3.2.21" />
 
-#### 21.3.2.22 Math.log1p ( _x_ )
+#### <a id="sec-math.log1p" /> 21.3.2.22 Math.log1p ( _x_ )
 
 <Sec id="3.2.22" />
 
-#### 21.3.2.23 Math.log10 ( _x_ )
+#### <a id="sec-math.log10" /> 21.3.2.23 Math.log10 ( _x_ )
 
 <Sec id="3.2.23" />
 
-#### 21.3.2.24 Math.log2 ( _x_ )
+#### <a id="sec-math.log2" /> 21.3.2.24 Math.log2 ( _x_ )
 
 <Sec id="3.2.24" />
 
-#### 21.3.2.25 Math.max ( ..._args_ )
+#### <a id="sec-math.max" /> 21.3.2.25 Math.max ( ..._args_ )
 
 <Sec id="3.2.25" />
 
-#### 21.3.2.26 Math.min ( ..._args_ )
+#### <a id="sec-math.min" /> 21.3.2.26 Math.min ( ..._args_ )
 
 <Sec id="3.2.26" />
 
-#### 21.3.2.27 Math.pow ( _base_, _exponent_ )
+#### <a id="sec-math.pow" /> 21.3.2.27 Math.pow ( _base_, _exponent_ )
 
 <Sec id="3.2.27" />
 
-#### 21.3.2.28 Math.random ( )
+#### <a id="sec-math.random" /> 21.3.2.28 Math.random ( )
 
 <Sec id="3.2.28" />
 
-#### 21.3.2.29 Math.round ( _x_ )
+#### <a id="sec-math.round" /> 21.3.2.29 Math.round ( _x_ )
 
 <Sec id="3.2.29" />
 
-#### 21.3.2.30 Math.sign ( _x_ )
+#### <a id="sec-math.sign" /> 21.3.2.30 Math.sign ( _x_ )
 
 <Sec id="3.2.30" />
 
-#### 21.3.2.31 Math.sin ( _x_ )
+#### <a id="sec-math.sin" /> 21.3.2.31 Math.sin ( _x_ )
 
 <Sec id="3.2.31" />
 
-#### 21.3.2.32 Math.sinh ( _x_ )
+#### <a id="sec-math.sinh" /> 21.3.2.32 Math.sinh ( _x_ )
 
 <Sec id="3.2.32" />
 
-#### 21.3.2.33 Math.sqrt ( _x_ )
+#### <a id="sec-math.sqrt" /> 21.3.2.33 Math.sqrt ( _x_ )
 
 <Sec id="3.2.33" />
 
-#### 21.3.2.34 Math.sumPrecise ( _items_ )
+#### <a id="sec-math.sumprecise" /> 21.3.2.34 Math.sumPrecise ( _items_ )
 
 <Sec id="3.2.34" />
 
-#### 21.3.2.35 Math.tan ( _x_ )
+#### <a id="sec-math.tan" /> 21.3.2.35 Math.tan ( _x_ )
 
 <Sec id="3.2.35" />
 
-#### 21.3.2.36 Math.tanh ( _x_ )
+#### <a id="sec-math.tanh" /> 21.3.2.36 Math.tanh ( _x_ )
 
 <Sec id="3.2.36" />
 
-#### 21.3.2.37 Math.trunc ( _x_ )
+#### <a id="sec-math.trunc" /> 21.3.2.37 Math.trunc ( _x_ )
 
 <Sec id="3.2.37" />
 
-## 21.4 Date Objects
+## <a id="sec-date-objects" /> 21.4 Date Objects
 
-### 21.4.1 Overview of Date Objects and Definitions of Abstract Operations
+### <a id="sec-overview-of-date-objects-and-definitions-of-abstract-operations" /> 21.4.1 Overview of Date Objects and Definitions of Abstract Operations
 
 <Sec id="4.1" />
 
-#### 21.4.1.1 Time Values and Time Range
+#### <a id="sec-time-values-and-time-range" /> 21.4.1.1 Time Values and Time Range
 
 <Sec id="4.1.1" />
 
-#### 21.4.1.2 Time-related Constants
+#### <a id="sec-time-related-constants" /> 21.4.1.2 Time-related Constants
 
 <Sec id="4.1.2" />
 
-#### 21.4.1.3 Day ( _t_: a finite time value, ): an integral Number
+#### <a id="sec-day" /> 21.4.1.3 Day ( _t_: a finite time value, ): an integral Number
 
 <Sec id="4.1.3" />
 
-#### 21.4.1.4 TimeWithinDay ( _t_: a finite time value, ): an integral Number in the interval from *+0*𝔽 (inclusive) to msPerDay (exclusive)
+#### <a id="sec-timewithinday" /> 21.4.1.4 TimeWithinDay ( _t_: a finite time value, ): an integral Number in the interval from *+0*𝔽 (inclusive) to msPerDay (exclusive)
 
 <Sec id="4.1.4" />
 
-#### 21.4.1.5 DaysInYear ( _y_: an integral Number, ): *365*𝔽 or *366*𝔽
+#### <a id="sec-daysinyear" /> 21.4.1.5 DaysInYear ( _y_: an integral Number, ): *365*𝔽 or *366*𝔽
 
 <Sec id="4.1.5" />
 
-#### 21.4.1.6 DayFromYear ( _y_: an integral Number, ): an integral Number
+#### <a id="sec-dayfromyear" /> 21.4.1.6 DayFromYear ( _y_: an integral Number, ): an integral Number
 
 <Sec id="4.1.6" />
 
-#### 21.4.1.7 TimeFromYear ( _y_: an integral Number, ): a time value
+#### <a id="sec-timefromyear" /> 21.4.1.7 TimeFromYear ( _y_: an integral Number, ): a time value
 
 <Sec id="4.1.7" />
 
-#### 21.4.1.8 YearFromTime ( _t_: a finite time value, ): an integral Number
+#### <a id="sec-yearfromtime" /> 21.4.1.8 YearFromTime ( _t_: a finite time value, ): an integral Number
 
 <Sec id="4.1.8" />
 
-#### 21.4.1.9 DayWithinYear ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *365*𝔽
+#### <a id="sec-daywithinyear" /> 21.4.1.9 DayWithinYear ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *365*𝔽
 
 <Sec id="4.1.9" />
 
-#### 21.4.1.10 InLeapYear ( _t_: a finite time value, ): *+0*𝔽 or *1*𝔽
+#### <a id="sec-inleapyear" /> 21.4.1.10 InLeapYear ( _t_: a finite time value, ): *+0*𝔽 or *1*𝔽
 
 <Sec id="4.1.10" />
 
-#### 21.4.1.11 MonthFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *11*𝔽
+#### <a id="sec-monthfromtime" /> 21.4.1.11 MonthFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *11*𝔽
 
 <Sec id="4.1.11" />
 
-#### 21.4.1.12 DateFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *1*𝔽 to *31*𝔽
+#### <a id="sec-datefromtime" /> 21.4.1.12 DateFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *1*𝔽 to *31*𝔽
 
 <Sec id="4.1.12" />
 
-#### 21.4.1.13 WeekDay ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *6*𝔽
+#### <a id="sec-weekday" /> 21.4.1.13 WeekDay ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *6*𝔽
 
 <Sec id="4.1.13" />
 
-#### 21.4.1.14 HourFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *23*𝔽
+#### <a id="sec-hourfromtime" /> 21.4.1.14 HourFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *23*𝔽
 
 <Sec id="4.1.14" />
 
-#### 21.4.1.15 MinFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *59*𝔽
+#### <a id="sec-minfromtime" /> 21.4.1.15 MinFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *59*𝔽
 
 <Sec id="4.1.15" />
 
-#### 21.4.1.16 SecFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *59*𝔽
+#### <a id="sec-secfromtime" /> 21.4.1.16 SecFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *59*𝔽
 
 <Sec id="4.1.16" />
 
-#### 21.4.1.17 msFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *999*𝔽
+#### <a id="sec-msfromtime" /> 21.4.1.17 msFromTime ( _t_: a finite time value, ): an integral Number in the inclusive interval from *+0*𝔽 to *999*𝔽
 
 <Sec id="4.1.17" />
 
-#### 21.4.1.18 GetUTCEpochNanoseconds ( _year_: an integer, _month_: an integer in the inclusive interval from 1 to 12, _day_: an integer in the inclusive interval from 1 to 31, _hour_: an integer in the inclusive interval from 0 to 23, _minute_: an integer in the inclusive interval from 0 to 59, _second_: an integer in the inclusive interval from 0 to 59, _millisecond_: an integer in the inclusive interval from 0 to 999, _microsecond_: an integer in the inclusive interval from 0 to 999, _nanosecond_: an integer in the inclusive interval from 0 to 999, ): a BigInt
+#### <a id="sec-getutcepochnanoseconds" /> 21.4.1.18 GetUTCEpochNanoseconds ( _year_: an integer, _month_: an integer in the inclusive interval from 1 to 12, _day_: an integer in the inclusive interval from 1 to 31, _hour_: an integer in the inclusive interval from 0 to 23, _minute_: an integer in the inclusive interval from 0 to 59, _second_: an integer in the inclusive interval from 0 to 59, _millisecond_: an integer in the inclusive interval from 0 to 999, _microsecond_: an integer in the inclusive interval from 0 to 999, _nanosecond_: an integer in the inclusive interval from 0 to 999, ): a BigInt
 
 <Sec id="4.1.18" />
 
-#### 21.4.1.19 Time Zone Identifiers
+#### <a id="sec-time-zone-identifiers" /> 21.4.1.19 Time Zone Identifiers
 
 <Sec id="4.1.19" />
 
-#### 21.4.1.20 GetNamedTimeZoneEpochNanoseconds ( _timeZoneIdentifier_: a String, _year_: an integer, _month_: an integer in the inclusive interval from 1 to 12, _day_: an integer in the inclusive interval from 1 to 31, _hour_: an integer in the inclusive interval from 0 to 23, _minute_: an integer in the inclusive interval from 0 to 59, _second_: an integer in the inclusive interval from 0 to 59, _millisecond_: an integer in the inclusive interval from 0 to 999, _microsecond_: an integer in the inclusive interval from 0 to 999, _nanosecond_: an integer in the inclusive interval from 0 to 999, ): a List of BigInts
+#### <a id="sec-getnamedtimezoneepochnanoseconds" /> 21.4.1.20 GetNamedTimeZoneEpochNanoseconds ( _timeZoneIdentifier_: a String, _year_: an integer, _month_: an integer in the inclusive interval from 1 to 12, _day_: an integer in the inclusive interval from 1 to 31, _hour_: an integer in the inclusive interval from 0 to 23, _minute_: an integer in the inclusive interval from 0 to 59, _second_: an integer in the inclusive interval from 0 to 59, _millisecond_: an integer in the inclusive interval from 0 to 999, _microsecond_: an integer in the inclusive interval from 0 to 999, _nanosecond_: an integer in the inclusive interval from 0 to 999, ): a List of BigInts
 
 <Sec id="4.1.20" />
 
-#### 21.4.1.21 GetNamedTimeZoneOffsetNanoseconds ( _timeZoneIdentifier_: a String, _epochNanoseconds_: a BigInt, ): an integer
+#### <a id="sec-getnamedtimezoneoffsetnanoseconds" /> 21.4.1.21 GetNamedTimeZoneOffsetNanoseconds ( _timeZoneIdentifier_: a String, _epochNanoseconds_: a BigInt, ): an integer
 
 <Sec id="4.1.21" />
 
-#### 21.4.1.22 Time Zone Identifier Record
+#### <a id="sec-time-zone-identifier-record" /> 21.4.1.22 Time Zone Identifier Record
 
 <Sec id="4.1.22" />
 
-#### 21.4.1.23 AvailableNamedTimeZoneIdentifiers ( ): a List of Time Zone Identifier Records
+#### <a id="sec-availablenamedtimezoneidentifiers" /> 21.4.1.23 AvailableNamedTimeZoneIdentifiers ( ): a List of Time Zone Identifier Records
 
 <Sec id="4.1.23" />
 
-#### 21.4.1.24 SystemTimeZoneIdentifier ( ): a String
+#### <a id="sec-systemtimezoneidentifier" /> 21.4.1.24 SystemTimeZoneIdentifier ( ): a String
 
 <Sec id="4.1.24" />
 
-#### 21.4.1.25 LocalTime ( _t_: a finite time value, ): an integral Number
+#### <a id="sec-localtime" /> 21.4.1.25 LocalTime ( _t_: a finite time value, ): an integral Number
 
 <Sec id="4.1.25" />
 
-#### 21.4.1.26 UTC ( _t_: a Number, ): a time value
+#### <a id="sec-utc-t" /> 21.4.1.26 UTC ( _t_: a Number, ): a time value
 
 <Sec id="4.1.26" />
 
-#### 21.4.1.27 MakeTime ( _hour_: a Number, _min_: a Number, _sec_: a Number, _ms_: a Number, ): a Number
+#### <a id="sec-maketime" /> 21.4.1.27 MakeTime ( _hour_: a Number, _min_: a Number, _sec_: a Number, _ms_: a Number, ): a Number
 
 <Sec id="4.1.27" />
 
-#### 21.4.1.28 MakeDay ( _year_: a Number, _month_: a Number, _date_: a Number, ): a finite Number or *NaN*
+#### <a id="sec-makeday" /> 21.4.1.28 MakeDay ( _year_: a Number, _month_: a Number, _date_: a Number, ): a finite Number or *NaN*
 
 <Sec id="4.1.28" />
 
-#### 21.4.1.29 MakeDate ( _day_: a Number, _time_: a Number, ): a finite Number or *NaN*
+#### <a id="sec-makedate" /> 21.4.1.29 MakeDate ( _day_: a Number, _time_: a Number, ): a finite Number or *NaN*
 
 <Sec id="4.1.29" />
 
-#### 21.4.1.30 MakeFullYear ( _year_: a Number, ): an integral Number or *NaN*
+#### <a id="sec-makefullyear" /> 21.4.1.30 MakeFullYear ( _year_: a Number, ): an integral Number or *NaN*
 
 <Sec id="4.1.30" />
 
-#### 21.4.1.31 TimeClip ( _time_: a Number, ): a time value
+#### <a id="sec-timeclip" /> 21.4.1.31 TimeClip ( _time_: a Number, ): a time value
 
 <Sec id="4.1.31" />
 
-#### 21.4.1.32 Date Time String Format
+#### <a id="sec-date-time-string-format" /> 21.4.1.32 Date Time String Format
 
 <Sec id="4.1.32" />
 
-##### 21.4.1.32.1 Expanded Years
+##### <a id="sec-expanded-years" /> 21.4.1.32.1 Expanded Years
 
 <Sec id="4.1.32.1" />
 
-#### 21.4.1.33 Time Zone Offset String Format
+#### <a id="sec-time-zone-offset-strings" /> 21.4.1.33 Time Zone Offset String Format
 
 <Sec id="4.1.33" />
 
-##### 21.4.1.33.1 IsTimeZoneOffsetString ( _offsetString_: a String, ): a Boolean
+##### <a id="sec-istimezoneoffsetstring" /> 21.4.1.33.1 IsTimeZoneOffsetString ( _offsetString_: a String, ): a Boolean
 
 <Sec id="4.1.33.1" />
 
-##### 21.4.1.33.2 ParseTimeZoneOffsetString ( _offsetString_: a String, ): an integer
+##### <a id="sec-parsetimezoneoffsetstring" /> 21.4.1.33.2 ParseTimeZoneOffsetString ( _offsetString_: a String, ): an integer
 
 <Sec id="4.1.33.2" />
 
-### 21.4.2 The Date Constructor
+### <a id="sec-date-constructor" /> 21.4.2 The Date Constructor
 
 <Sec id="4.2" />
 
-#### 21.4.2.1 Date ( ..._values_ )
+#### <a id="sec-date" /> 21.4.2.1 Date ( ..._values_ )
 
 <Sec id="4.2.1" />
 
-### 21.4.3 Properties of the Date Constructor
+### <a id="sec-properties-of-the-date-constructor" /> 21.4.3 Properties of the Date Constructor
 
 <Sec id="4.3" />
 
-#### 21.4.3.1 Date.now ( )
+#### <a id="sec-date.now" /> 21.4.3.1 Date.now ( )
 
 <Sec id="4.3.1" />
 
-#### 21.4.3.2 Date.parse ( _string_ )
+#### <a id="sec-date.parse" /> 21.4.3.2 Date.parse ( _string_ )
 
 <Sec id="4.3.2" />
 
-#### 21.4.3.3 Date.prototype
+#### <a id="sec-date.prototype" /> 21.4.3.3 Date.prototype
 
 <Sec id="4.3.3" />
 
-#### 21.4.3.4 Date.UTC ( _year_ [ , _month_ [ , _date_ [ , _hours_ [ , _minutes_ [ , _seconds_ [ , _ms_ ] ] ] ] ] ] )
+#### <a id="sec-date.utc" /> 21.4.3.4 Date.UTC ( _year_ [ , _month_ [ , _date_ [ , _hours_ [ , _minutes_ [ , _seconds_ [ , _ms_ ] ] ] ] ] ] )
 
 <Sec id="4.3.4" />
 
-### 21.4.4 Properties of the Date Prototype Object
+### <a id="sec-properties-of-the-date-prototype-object" /> 21.4.4 Properties of the Date Prototype Object
 
 <Sec id="4.4" />
 
-#### 21.4.4.1 Date.prototype.constructor
+#### <a id="sec-date.prototype.constructor" /> 21.4.4.1 Date.prototype.constructor
 
 <Sec id="4.4.1" />
 
-#### 21.4.4.2 Date.prototype.getDate ( )
+#### <a id="sec-date.prototype.getdate" /> 21.4.4.2 Date.prototype.getDate ( )
 
 <Sec id="4.4.2" />
 
-#### 21.4.4.3 Date.prototype.getDay ( )
+#### <a id="sec-date.prototype.getday" /> 21.4.4.3 Date.prototype.getDay ( )
 
 <Sec id="4.4.3" />
 
-#### 21.4.4.4 Date.prototype.getFullYear ( )
+#### <a id="sec-date.prototype.getfullyear" /> 21.4.4.4 Date.prototype.getFullYear ( )
 
 <Sec id="4.4.4" />
 
-#### 21.4.4.5 Date.prototype.getHours ( )
+#### <a id="sec-date.prototype.gethours" /> 21.4.4.5 Date.prototype.getHours ( )
 
 <Sec id="4.4.5" />
 
-#### 21.4.4.6 Date.prototype.getMilliseconds ( )
+#### <a id="sec-date.prototype.getmilliseconds" /> 21.4.4.6 Date.prototype.getMilliseconds ( )
 
 <Sec id="4.4.6" />
 
-#### 21.4.4.7 Date.prototype.getMinutes ( )
+#### <a id="sec-date.prototype.getminutes" /> 21.4.4.7 Date.prototype.getMinutes ( )
 
 <Sec id="4.4.7" />
 
-#### 21.4.4.8 Date.prototype.getMonth ( )
+#### <a id="sec-date.prototype.getmonth" /> 21.4.4.8 Date.prototype.getMonth ( )
 
 <Sec id="4.4.8" />
 
-#### 21.4.4.9 Date.prototype.getSeconds ( )
+#### <a id="sec-date.prototype.getseconds" /> 21.4.4.9 Date.prototype.getSeconds ( )
 
 <Sec id="4.4.9" />
 
-#### 21.4.4.10 Date.prototype.getTime ( )
+#### <a id="sec-date.prototype.gettime" /> 21.4.4.10 Date.prototype.getTime ( )
 
 <Sec id="4.4.10" />
 
-#### 21.4.4.11 Date.prototype.getTimezoneOffset ( )
+#### <a id="sec-date.prototype.gettimezoneoffset" /> 21.4.4.11 Date.prototype.getTimezoneOffset ( )
 
 <Sec id="4.4.11" />
 
-#### 21.4.4.12 Date.prototype.getUTCDate ( )
+#### <a id="sec-date.prototype.getutcdate" /> 21.4.4.12 Date.prototype.getUTCDate ( )
 
 <Sec id="4.4.12" />
 
-#### 21.4.4.13 Date.prototype.getUTCDay ( )
+#### <a id="sec-date.prototype.getutcday" /> 21.4.4.13 Date.prototype.getUTCDay ( )
 
 <Sec id="4.4.13" />
 
-#### 21.4.4.14 Date.prototype.getUTCFullYear ( )
+#### <a id="sec-date.prototype.getutcfullyear" /> 21.4.4.14 Date.prototype.getUTCFullYear ( )
 
 <Sec id="4.4.14" />
 
-#### 21.4.4.15 Date.prototype.getUTCHours ( )
+#### <a id="sec-date.prototype.getutchours" /> 21.4.4.15 Date.prototype.getUTCHours ( )
 
 <Sec id="4.4.15" />
 
-#### 21.4.4.16 Date.prototype.getUTCMilliseconds ( )
+#### <a id="sec-date.prototype.getutcmilliseconds" /> 21.4.4.16 Date.prototype.getUTCMilliseconds ( )
 
 <Sec id="4.4.16" />
 
-#### 21.4.4.17 Date.prototype.getUTCMinutes ( )
+#### <a id="sec-date.prototype.getutcminutes" /> 21.4.4.17 Date.prototype.getUTCMinutes ( )
 
 <Sec id="4.4.17" />
 
-#### 21.4.4.18 Date.prototype.getUTCMonth ( )
+#### <a id="sec-date.prototype.getutcmonth" /> 21.4.4.18 Date.prototype.getUTCMonth ( )
 
 <Sec id="4.4.18" />
 
-#### 21.4.4.19 Date.prototype.getUTCSeconds ( )
+#### <a id="sec-date.prototype.getutcseconds" /> 21.4.4.19 Date.prototype.getUTCSeconds ( )
 
 <Sec id="4.4.19" />
 
-#### 21.4.4.20 Date.prototype.setDate ( _date_ )
+#### <a id="sec-date.prototype.setdate" /> 21.4.4.20 Date.prototype.setDate ( _date_ )
 
 <Sec id="4.4.20" />
 
-#### 21.4.4.21 Date.prototype.setFullYear ( _year_ [ , _month_ [ , _date_ ] ] )
+#### <a id="sec-date.prototype.setfullyear" /> 21.4.4.21 Date.prototype.setFullYear ( _year_ [ , _month_ [ , _date_ ] ] )
 
 <Sec id="4.4.21" />
 
-#### 21.4.4.22 Date.prototype.setHours ( _hour_ [ , _min_ [ , _sec_ [ , _ms_ ] ] ] )
+#### <a id="sec-date.prototype.sethours" /> 21.4.4.22 Date.prototype.setHours ( _hour_ [ , _min_ [ , _sec_ [ , _ms_ ] ] ] )
 
 <Sec id="4.4.22" />
 
-#### 21.4.4.23 Date.prototype.setMilliseconds ( _ms_ )
+#### <a id="sec-date.prototype.setmilliseconds" /> 21.4.4.23 Date.prototype.setMilliseconds ( _ms_ )
 
 <Sec id="4.4.23" />
 
-#### 21.4.4.24 Date.prototype.setMinutes ( _min_ [ , _sec_ [ , _ms_ ] ] )
+#### <a id="sec-date.prototype.setminutes" /> 21.4.4.24 Date.prototype.setMinutes ( _min_ [ , _sec_ [ , _ms_ ] ] )
 
 <Sec id="4.4.24" />
 
-#### 21.4.4.25 Date.prototype.setMonth ( _month_ [ , _date_ ] )
+#### <a id="sec-date.prototype.setmonth" /> 21.4.4.25 Date.prototype.setMonth ( _month_ [ , _date_ ] )
 
 <Sec id="4.4.25" />
 
-#### 21.4.4.26 Date.prototype.setSeconds ( _sec_ [ , _ms_ ] )
+#### <a id="sec-date.prototype.setseconds" /> 21.4.4.26 Date.prototype.setSeconds ( _sec_ [ , _ms_ ] )
 
 <Sec id="4.4.26" />
 
-#### 21.4.4.27 Date.prototype.setTime ( _time_ )
+#### <a id="sec-date.prototype.settime" /> 21.4.4.27 Date.prototype.setTime ( _time_ )
 
 <Sec id="4.4.27" />
 
-#### 21.4.4.28 Date.prototype.setUTCDate ( _date_ )
+#### <a id="sec-date.prototype.setutcdate" /> 21.4.4.28 Date.prototype.setUTCDate ( _date_ )
 
 <Sec id="4.4.28" />
 
-#### 21.4.4.29 Date.prototype.setUTCFullYear ( _year_ [ , _month_ [ , _date_ ] ] )
+#### <a id="sec-date.prototype.setutcfullyear" /> 21.4.4.29 Date.prototype.setUTCFullYear ( _year_ [ , _month_ [ , _date_ ] ] )
 
 <Sec id="4.4.29" />
 
-#### 21.4.4.30 Date.prototype.setUTCHours ( _hour_ [ , _min_ [ , _sec_ [ , _ms_ ] ] ] )
+#### <a id="sec-date.prototype.setutchours" /> 21.4.4.30 Date.prototype.setUTCHours ( _hour_ [ , _min_ [ , _sec_ [ , _ms_ ] ] ] )
 
 <Sec id="4.4.30" />
 
-#### 21.4.4.31 Date.prototype.setUTCMilliseconds ( _ms_ )
+#### <a id="sec-date.prototype.setutcmilliseconds" /> 21.4.4.31 Date.prototype.setUTCMilliseconds ( _ms_ )
 
 <Sec id="4.4.31" />
 
-#### 21.4.4.32 Date.prototype.setUTCMinutes ( _min_ [ , _sec_ [ , _ms_ ] ] )
+#### <a id="sec-date.prototype.setutcminutes" /> 21.4.4.32 Date.prototype.setUTCMinutes ( _min_ [ , _sec_ [ , _ms_ ] ] )
 
 <Sec id="4.4.32" />
 
-#### 21.4.4.33 Date.prototype.setUTCMonth ( _month_ [ , _date_ ] )
+#### <a id="sec-date.prototype.setutcmonth" /> 21.4.4.33 Date.prototype.setUTCMonth ( _month_ [ , _date_ ] )
 
 <Sec id="4.4.33" />
 
-#### 21.4.4.34 Date.prototype.setUTCSeconds ( _sec_ [ , _ms_ ] )
+#### <a id="sec-date.prototype.setutcseconds" /> 21.4.4.34 Date.prototype.setUTCSeconds ( _sec_ [ , _ms_ ] )
 
 <Sec id="4.4.34" />
 
-#### 21.4.4.35 Date.prototype.toDateString ( )
+#### <a id="sec-date.prototype.todatestring" /> 21.4.4.35 Date.prototype.toDateString ( )
 
 <Sec id="4.4.35" />
 
-#### 21.4.4.36 Date.prototype.toISOString ( )
+#### <a id="sec-date.prototype.toisostring" /> 21.4.4.36 Date.prototype.toISOString ( )
 
 <Sec id="4.4.36" />
 
-#### 21.4.4.37 Date.prototype.toJSON ( _key_ )
+#### <a id="sec-date.prototype.tojson" /> 21.4.4.37 Date.prototype.toJSON ( _key_ )
 
 <Sec id="4.4.37" />
 
-#### 21.4.4.38 Date.prototype.toLocaleDateString ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <a id="sec-date.prototype.tolocaledatestring" /> 21.4.4.38 Date.prototype.toLocaleDateString ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="4.4.38" />
 
-#### 21.4.4.39 Date.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <a id="sec-date.prototype.tolocalestring" /> 21.4.4.39 Date.prototype.toLocaleString ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="4.4.39" />
 
-#### 21.4.4.40 Date.prototype.toLocaleTimeString ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <a id="sec-date.prototype.tolocaletimestring" /> 21.4.4.40 Date.prototype.toLocaleTimeString ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="4.4.40" />
 
-#### 21.4.4.41 Date.prototype.toString ( )
+#### <a id="sec-date.prototype.tostring" /> 21.4.4.41 Date.prototype.toString ( )
 
 <Sec id="4.4.41" />
 
-##### 21.4.4.41.1 TimeString ( _tv_: a Number, but not *NaN*, ): a String
+##### <a id="sec-timestring" /> 21.4.4.41.1 TimeString ( _tv_: a Number, but not *NaN*, ): a String
 
 <Sec id="4.4.41.1" />
 
-##### 21.4.4.41.2 DateString ( _tv_: a Number, but not *NaN*, ): a String
+##### <a id="sec-datestring" /> 21.4.4.41.2 DateString ( _tv_: a Number, but not *NaN*, ): a String
 
 <Sec id="4.4.41.2" />
 
-##### 21.4.4.41.3 TimeZoneString ( _tv_: an integral Number, ): a String
+##### <a id="sec-timezoneestring" /> 21.4.4.41.3 TimeZoneString ( _tv_: an integral Number, ): a String
 
 <Sec id="4.4.41.3" />
 
-##### 21.4.4.41.4 ToDateString ( _tv_: an integral Number or *NaN*, ): a String
+##### <a id="sec-todatestring" /> 21.4.4.41.4 ToDateString ( _tv_: an integral Number or *NaN*, ): a String
 
 <Sec id="4.4.41.4" />
 
-#### 21.4.4.42 Date.prototype.toTimeString ( )
+#### <a id="sec-date.prototype.totimestring" /> 21.4.4.42 Date.prototype.toTimeString ( )
 
 <Sec id="4.4.42" />
 
-#### 21.4.4.43 Date.prototype.toUTCString ( )
+#### <a id="sec-date.prototype.toutcstring" /> 21.4.4.43 Date.prototype.toUTCString ( )
 
 <Sec id="4.4.43" />
 
-#### 21.4.4.44 Date.prototype.valueOf ( )
+#### <a id="sec-date.prototype.valueof" /> 21.4.4.44 Date.prototype.valueOf ( )
 
 <Sec id="4.4.44" />
 
-#### 21.4.4.45 Date.prototype [ %Symbol.toPrimitive% ] ( _hint_ )
+#### <a id="sec-date.prototype-%symbol.toprimitive%" /> 21.4.4.45 Date.prototype [ %Symbol.toPrimitive% ] ( _hint_ )
 
 <Sec id="4.4.45" />
 
-### 21.4.5 Properties of Date Instances
+### <a id="sec-properties-of-date-instances" /> 21.4.5 Properties of Date Instances
 
 <Sec id="4.5" />

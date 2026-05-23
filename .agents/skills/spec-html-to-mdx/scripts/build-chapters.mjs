@@ -163,7 +163,12 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
     const childSecPath = secPath === '' ? String(idx + 1) : `${secPath}.${idx + 1}`
     const childNum = chapterPrefix === '' ? childSecPath : `${chapterPrefix}.${childSecPath}`
     const hashes = '#'.repeat(Math.min(depth, 6))
-    lines.push(`${hashes} ${childNum} ${child.title}`)
+    // Inline anchor before the heading text so #<spec-id> resolves to the
+    // start of the heading after navigation. Auto-slugged heading ids (from
+    // the heading text) don't match the spec's "sec-..." ids, so we provide
+    // them ourselves.
+    const anchor = child.id ? `<a id="${child.id}" /> ` : ''
+    lines.push(`${hashes} ${anchor}${childNum} ${child.title}`)
     lines.push('')
     lines.push(...renderMdxTree(child.tree, chapterPrefix, childSecPath, depth + 1))
   })
@@ -201,16 +206,34 @@ const built = chapters.map((c) => {
   return { ...c, slug, pageSlug, chapterNum, tree }
 })
 
-// Empty <emu-xref href="#id"></emu-xref> is filled in by ecmarkup at build
-// time. Resolve it ourselves to the target's section number; fall back to the
-// bare id so unresolved refs stay visible instead of vanishing.
+// emu-intro lives at /, all other chapters at /<slug>. Helper used by xref
+// substitution so links survive routing.
+function pathFor(slug) {
+  return slug === 'index' ? '' : `/${slug}`
+}
+
+// <emu-xref href="#id"> is ecmarkup's cross-reference tag. Two source forms:
+//   <emu-xref href="#id"></emu-xref>       — empty, ecmarkup injects "14.7.2"
+//   <emu-xref href="#id">link text</emu-xref> — author-supplied text
+// We rewrite both to <a href="/<slug>#<id>">…</a>. Anchors `id="<id>"` are
+// emitted on chapter/section headings in MDX (see renderMdxTree below) so
+// the targets exist.
 function applyXrefSubst(html) {
-  return html.replace(/<emu-xref([^>]*?)>\s*<\/emu-xref>/g, (full, attrs) => {
+  html = html.replace(/<emu-xref([^>]*?)>\s*<\/emu-xref>/g, (full, attrs) => {
     const m = attrs.match(/\bhref="#([^"]+)"/)
     if (!m) return full
     const s = idToSection.get(m[1])
-    return s ? s.number : m[1]
+    if (!s) return m[1]
+    return `<a href="${pathFor(s.slug)}#${m[1]}">${s.number}</a>`
   })
+  html = html.replace(/<emu-xref([^>]*?)>([\s\S]+?)<\/emu-xref>/g, (full, attrs, inner) => {
+    const m = attrs.match(/\bhref="#([^"]+)"/)
+    if (!m) return full
+    const s = idToSection.get(m[1])
+    if (!s) return inner
+    return `<a href="${pathFor(s.slug)}#${m[1]}">${inner}</a>`
+  })
+  return html
 }
 
 // Build a map of nonterminal LHS → rendered production HTML by scanning every
@@ -462,13 +485,14 @@ built.forEach((c) => {
   fs.writeFileSync(path.join(LIB_DIR, `${slug}.jsx`), componentSrc)
   totalBytes += componentSrc.length
 
+  const chapterAnchor = `<a id="${c.id}" /> `
   let chapterHeading
   if (c.kind === 'emu-intro') {
-    chapterHeading = `# ${c.title}`
+    chapterHeading = `# ${chapterAnchor}${c.title}`
   } else if (c.kind === 'emu-annex') {
-    chapterHeading = `# Annex ${chapterNum} ${c.title}`
+    chapterHeading = `# ${chapterAnchor}Annex ${chapterNum} ${c.title}`
   } else {
-    chapterHeading = `# ${chapterNum} ${c.title}`
+    chapterHeading = `# ${chapterAnchor}${chapterNum} ${c.title}`
   }
 
   const mdxLines = [

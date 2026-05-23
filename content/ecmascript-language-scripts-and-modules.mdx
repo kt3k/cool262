@@ -1,277 +1,277 @@
 import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
-# 16 ECMAScript Language: Scripts and Modules
+# <a id="sec-ecmascript-language-scripts-and-modules" /> 16 ECMAScript Language: Scripts and Modules
 
-## 16.1 Scripts
+## <a id="sec-scripts" /> 16.1 Scripts
 
 <Sec id="1" />
 
-### 16.1.1 Static Semantics: Early Errors
+### <a id="sec-scripts-static-semantics-early-errors" /> 16.1.1 Static Semantics: Early Errors
 
 <Sec id="1.1" />
 
-### 16.1.2 Static Semantics: ScriptIsStrict ( ): a Boolean
+### <a id="sec-scriptisstrict" /> 16.1.2 Static Semantics: ScriptIsStrict ( ): a Boolean
 
 <Sec id="1.2" />
 
-### 16.1.3 Runtime Semantics: Evaluation
+### <a id="sec-script-semantics-runtime-semantics-evaluation" /> 16.1.3 Runtime Semantics: Evaluation
 
 <Sec id="1.3" />
 
-### 16.1.4 Script Records
+### <a id="sec-script-records" /> 16.1.4 Script Records
 
 <Sec id="1.4" />
 
-### 16.1.5 ParseScript ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Script Record or a non-empty List of *SyntaxError* objects
+### <a id="sec-parse-script" /> 16.1.5 ParseScript ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Script Record or a non-empty List of *SyntaxError* objects
 
 <Sec id="1.5" />
 
-### 16.1.6 ScriptEvaluation ( _scriptRecord_: a Script Record, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+### <a id="sec-runtime-semantics-scriptevaluation" /> 16.1.6 ScriptEvaluation ( _scriptRecord_: a Script Record, ): either a normal completion containing an ECMAScript language value or an abrupt completion
 
 <Sec id="1.6" />
 
-### 16.1.7 GlobalDeclarationInstantiation ( _script_: a |Script| Parse Node, _env_: a Global Environment Record, ): either a normal completion containing ~unused~ or a throw completion
+### <a id="sec-globaldeclarationinstantiation" /> 16.1.7 GlobalDeclarationInstantiation ( _script_: a |Script| Parse Node, _env_: a Global Environment Record, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="1.7" />
 
-## 16.2 Modules
+## <a id="sec-modules" /> 16.2 Modules
 
 <Sec id="2" />
 
-### 16.2.1 Module Semantics
+### <a id="sec-module-semantics" /> 16.2.1 Module Semantics
 
-#### 16.2.1.1 Static Semantics: Early Errors
+#### <a id="sec-module-semantics-static-semantics-early-errors" /> 16.2.1.1 Static Semantics: Early Errors
 
 <Sec id="2.1.1" />
 
-#### 16.2.1.2 Static Semantics: ImportedLocalNames ( _importEntries_: a List of ImportEntry Records, ): a List of Strings
+#### <a id="sec-importedlocalnames" /> 16.2.1.2 Static Semantics: ImportedLocalNames ( _importEntries_: a List of ImportEntry Records, ): a List of Strings
 
 <Sec id="2.1.2" />
 
-#### 16.2.1.3 ModuleRequest Records
+#### <a id="sec-modulerequest-record" /> 16.2.1.3 ModuleRequest Records
 
 <Sec id="2.1.3" />
 
-##### 16.2.1.3.1 ModuleRequestsEqual ( _left_: a ModuleRequest Record or a LoadedModuleRequest Record, _right_: a ModuleRequest Record or a LoadedModuleRequest Record, ): a Boolean
+##### <a id="sec-ModuleRequestsEqual" /> 16.2.1.3.1 ModuleRequestsEqual ( _left_: a ModuleRequest Record or a LoadedModuleRequest Record, _right_: a ModuleRequest Record or a LoadedModuleRequest Record, ): a Boolean
 
 <Sec id="2.1.3.1" />
 
-#### 16.2.1.4 Static Semantics: ModuleRequests ( ): a List of ModuleRequest Records
+#### <a id="sec-static-semantics-modulerequests" /> 16.2.1.4 Static Semantics: ModuleRequests ( ): a List of ModuleRequest Records
 
 <Sec id="2.1.4" />
 
-#### 16.2.1.5 Abstract Module Records
+#### <a id="sec-abstract-module-records" /> 16.2.1.5 Abstract Module Records
 
 <Sec id="2.1.5" />
 
-##### 16.2.1.5.1 EvaluateModuleSync ( _module_: a Module Record, ): either a normal completion containing ~unused~ or a throw completion
+##### <a id="sec-EvaluateModuleSync" /> 16.2.1.5.1 EvaluateModuleSync ( _module_: a Module Record, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.1.5.1" />
 
-#### 16.2.1.6 Cyclic Module Records
+#### <a id="sec-cyclic-module-records" /> 16.2.1.6 Cyclic Module Records
 
 <Sec id="2.1.6" />
 
-##### 16.2.1.6.1 Implementation of Module Record Abstract Methods
+##### <a id="sec-cyclic-module-record-module-record-methods" /> 16.2.1.6.1 Implementation of Module Record Abstract Methods
 
 <Sec id="2.1.6.1" />
 
-###### 16.2.1.6.1.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
+###### <a id="sec-LoadRequestedModules" /> 16.2.1.6.1.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
 
 <Sec id="2.1.6.1.1" />
 
-###### 16.2.1.6.1.1.1 InnerModuleLoading ( _state_: a GraphLoadingState Record, _module_: a Module Record, ): ~unused~
+###### <a id="sec-InnerModuleLoading" /> 16.2.1.6.1.1.1 InnerModuleLoading ( _state_: a GraphLoadingState Record, _module_: a Module Record, ): ~unused~
 
 <Sec id="2.1.6.1.1.1" />
 
-###### 16.2.1.6.1.1.2 ContinueModuleLoading ( _state_: a GraphLoadingState Record, _moduleCompletion_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+###### <a id="sec-ContinueModuleLoading" /> 16.2.1.6.1.1.2 ContinueModuleLoading ( _state_: a GraphLoadingState Record, _moduleCompletion_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
 
 <Sec id="2.1.6.1.1.2" />
 
-###### 16.2.1.6.1.2 Link ( ): either a normal completion containing ~unused~ or a throw completion
+###### <a id="sec-moduledeclarationlinking" /> 16.2.1.6.1.2 Link ( ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.1.6.1.2" />
 
-###### 16.2.1.6.1.2.1 InnerModuleLinking ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
+###### <a id="sec-InnerModuleLinking" /> 16.2.1.6.1.2.1 InnerModuleLinking ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="2.1.6.1.2.1" />
 
-###### 16.2.1.6.1.3 Evaluate ( ): a Promise
+###### <a id="sec-moduleevaluation" /> 16.2.1.6.1.3 Evaluate ( ): a Promise
 
 <Sec id="2.1.6.1.3" />
 
-###### 16.2.1.6.1.3.1 InnerModuleEvaluation ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
+###### <a id="sec-innermoduleevaluation" /> 16.2.1.6.1.3.1 InnerModuleEvaluation ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="2.1.6.1.3.1" />
 
-###### 16.2.1.6.1.3.2 ExecuteAsyncModule ( _module_: a Cyclic Module Record, ): ~unused~
+###### <a id="sec-execute-async-module" /> 16.2.1.6.1.3.2 ExecuteAsyncModule ( _module_: a Cyclic Module Record, ): ~unused~
 
 <Sec id="2.1.6.1.3.2" />
 
-###### 16.2.1.6.1.3.3 GatherAvailableAncestors ( _module_: a Cyclic Module Record, _execList_: a List of Cyclic Module Records, ): ~unused~
+###### <a id="sec-gather-available-ancestors" /> 16.2.1.6.1.3.3 GatherAvailableAncestors ( _module_: a Cyclic Module Record, _execList_: a List of Cyclic Module Records, ): ~unused~
 
 <Sec id="2.1.6.1.3.3" />
 
-###### 16.2.1.6.1.3.4 AsyncModuleExecutionFulfilled ( _module_: a Cyclic Module Record, ): ~unused~
+###### <a id="sec-async-module-execution-fulfilled" /> 16.2.1.6.1.3.4 AsyncModuleExecutionFulfilled ( _module_: a Cyclic Module Record, ): ~unused~
 
 <Sec id="2.1.6.1.3.4" />
 
-###### 16.2.1.6.1.3.5 AsyncModuleExecutionRejected ( _module_: a Cyclic Module Record, _error_: an ECMAScript language value, ): ~unused~
+###### <a id="sec-async-module-execution-rejected" /> 16.2.1.6.1.3.5 AsyncModuleExecutionRejected ( _module_: a Cyclic Module Record, _error_: an ECMAScript language value, ): ~unused~
 
 <Sec id="2.1.6.1.3.5" />
 
-##### 16.2.1.6.2 Example Cyclic Module Record Graphs
+##### <a id="sec-example-cyclic-module-record-graphs" /> 16.2.1.6.2 Example Cyclic Module Record Graphs
 
 <Sec id="2.1.6.2" />
 
-#### 16.2.1.7 Source Text Module Records
+#### <a id="sec-source-text-module-records" /> 16.2.1.7 Source Text Module Records
 
 <Sec id="2.1.7" />
 
-##### 16.2.1.7.1 ParseModule ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Source Text Module Record or a non-empty List of *SyntaxError* objects
+##### <a id="sec-parsemodule" /> 16.2.1.7.1 ParseModule ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Source Text Module Record or a non-empty List of *SyntaxError* objects
 
 <Sec id="2.1.7.1" />
 
-##### 16.2.1.7.2 Implementation of Module Record Abstract Methods
+##### <a id="sec-source-text-module-record-module-record-methods" /> 16.2.1.7.2 Implementation of Module Record Abstract Methods
 
 <Sec id="2.1.7.2" />
 
-###### 16.2.1.7.2.1 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
+###### <a id="sec-getexportednames" /> 16.2.1.7.2.1 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
 
 <Sec id="2.1.7.2.1" />
 
-###### 16.2.1.7.2.2 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
+###### <a id="sec-resolveexport" /> 16.2.1.7.2.2 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
 
 <Sec id="2.1.7.2.2" />
 
-##### 16.2.1.7.3 Implementation of Cyclic Module Record Abstract Methods
+##### <a id="sec-source-text-module-record-cyclic-module-record-methods" /> 16.2.1.7.3 Implementation of Cyclic Module Record Abstract Methods
 
 <Sec id="2.1.7.3" />
 
-###### 16.2.1.7.3.1 InitializeEnvironment ( ): either a normal completion containing ~unused~ or a throw completion
+###### <a id="sec-source-text-module-record-initialize-environment" /> 16.2.1.7.3.1 InitializeEnvironment ( ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.1.7.3.1" />
 
-###### 16.2.1.7.3.2 ExecuteModule ( optional _capability_: a PromiseCapability Record, ): either a normal completion containing ~unused~ or a throw completion
+###### <a id="sec-source-text-module-record-execute-module" /> 16.2.1.7.3.2 ExecuteModule ( optional _capability_: a PromiseCapability Record, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.1.7.3.2" />
 
-#### 16.2.1.8 Synthetic Module Records
+#### <a id="sec-synthetic-module-records" /> 16.2.1.8 Synthetic Module Records
 
 <Sec id="2.1.8" />
 
-##### 16.2.1.8.1 CreateDefaultExportSyntheticModule ( _defaultExport_: an ECMAScript language value, ): a Synthetic Module Record
+##### <a id="sec-create-default-export-synthetic-module" /> 16.2.1.8.1 CreateDefaultExportSyntheticModule ( _defaultExport_: an ECMAScript language value, ): a Synthetic Module Record
 
 <Sec id="2.1.8.1" />
 
-##### 16.2.1.8.2 ParseJSONModule ( _source_: a String, ): either a normal completion containing a Synthetic Module Record, or a throw completion
+##### <a id="sec-parse-json-module" /> 16.2.1.8.2 ParseJSONModule ( _source_: a String, ): either a normal completion containing a Synthetic Module Record, or a throw completion
 
 <Sec id="2.1.8.2" />
 
-##### 16.2.1.8.3 SetSyntheticModuleExport ( _module_: a Synthetic Module Record, _exportName_: a String, _exportValue_: an ECMAScript language value, ): ~unused~
+##### <a id="sec-setsyntheticmoduleexport" /> 16.2.1.8.3 SetSyntheticModuleExport ( _module_: a Synthetic Module Record, _exportName_: a String, _exportValue_: an ECMAScript language value, ): ~unused~
 
 <Sec id="2.1.8.3" />
 
-##### 16.2.1.8.4 Implementation of Module Record Abstract Methods
+##### <a id="sec-smr-module-record-methods" /> 16.2.1.8.4 Implementation of Module Record Abstract Methods
 
 <Sec id="2.1.8.4" />
 
-###### 16.2.1.8.4.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
+###### <a id="sec-smr-LoadRequestedModules" /> 16.2.1.8.4.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
 
 <Sec id="2.1.8.4.1" />
 
-###### 16.2.1.8.4.2 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
+###### <a id="sec-smr-getexportednames" /> 16.2.1.8.4.2 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
 
 <Sec id="2.1.8.4.2" />
 
-###### 16.2.1.8.4.3 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
+###### <a id="sec-smr-resolveexport" /> 16.2.1.8.4.3 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
 
 <Sec id="2.1.8.4.3" />
 
-###### 16.2.1.8.4.4 Link ( ): a normal completion containing ~unused~
+###### <a id="sec-smr-Link" /> 16.2.1.8.4.4 Link ( ): a normal completion containing ~unused~
 
 <Sec id="2.1.8.4.4" />
 
-###### 16.2.1.8.4.5 Evaluate ( ): a Promise
+###### <a id="sec-smr-Evaluate" /> 16.2.1.8.4.5 Evaluate ( ): a Promise
 
 <Sec id="2.1.8.4.5" />
 
-#### 16.2.1.9 GetImportedModule ( _referrer_: a Cyclic Module Record, _request_: a ModuleRequest Record, ): a Module Record
+#### <a id="sec-GetImportedModule" /> 16.2.1.9 GetImportedModule ( _referrer_: a Cyclic Module Record, _request_: a ModuleRequest Record, ): a Module Record
 
 <Sec id="2.1.9" />
 
-#### 16.2.1.10 HostLoadImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _hostDefined_: anything, _payload_: a GraphLoadingState Record or a PromiseCapability Record, ): ~unused~
+#### <a id="sec-HostLoadImportedModule" /> 16.2.1.10 HostLoadImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _hostDefined_: anything, _payload_: a GraphLoadingState Record or a PromiseCapability Record, ): ~unused~
 
 <Sec id="2.1.10" />
 
-#### 16.2.1.11 FinishLoadingImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _payload_: a GraphLoadingState Record or a PromiseCapability Record, _result_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+#### <a id="sec-FinishLoadingImportedModule" /> 16.2.1.11 FinishLoadingImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _payload_: a GraphLoadingState Record or a PromiseCapability Record, _result_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
 
 <Sec id="2.1.11" />
 
-#### 16.2.1.12 AllImportAttributesSupported ( _attributes_: a List of ImportAttribute Records, ): a Boolean
+#### <a id="sec-AllImportAttributesSupported" /> 16.2.1.12 AllImportAttributesSupported ( _attributes_: a List of ImportAttribute Records, ): a Boolean
 
 <Sec id="2.1.12" />
 
-##### 16.2.1.12.1 HostGetSupportedImportAttributes ( ): a List of Strings
+##### <a id="sec-hostgetsupportedimportattributes" /> 16.2.1.12.1 HostGetSupportedImportAttributes ( ): a List of Strings
 
 <Sec id="2.1.12.1" />
 
-#### 16.2.1.13 GetModuleNamespace ( _module_: an instance of a concrete subclass of Module Record, ): a Module Namespace Object
+#### <a id="sec-getmodulenamespace" /> 16.2.1.13 GetModuleNamespace ( _module_: an instance of a concrete subclass of Module Record, ): a Module Namespace Object
 
 <Sec id="2.1.13" />
 
-#### 16.2.1.14 Runtime Semantics: Evaluation
+#### <a id="sec-module-semantics-runtime-semantics-evaluation" /> 16.2.1.14 Runtime Semantics: Evaluation
 
 <Sec id="2.1.14" />
 
-### 16.2.2 Imports
+### <a id="sec-imports" /> 16.2.2 Imports
 
 <Sec id="2.2" />
 
-#### 16.2.2.1 Static Semantics: Early Errors
+#### <a id="sec-imports-static-semantics-early-errors" /> 16.2.2.1 Static Semantics: Early Errors
 
 <Sec id="2.2.1" />
 
-#### 16.2.2.2 Static Semantics: ImportEntries ( ): a List of ImportEntry Records
+#### <a id="sec-static-semantics-importentries" /> 16.2.2.2 Static Semantics: ImportEntries ( ): a List of ImportEntry Records
 
 <Sec id="2.2.2" />
 
-#### 16.2.2.3 Static Semantics: ImportEntriesForModule ( _module_: a ModuleRequest Record, ): a List of ImportEntry Records
+#### <a id="sec-static-semantics-importentriesformodule" /> 16.2.2.3 Static Semantics: ImportEntriesForModule ( _module_: a ModuleRequest Record, ): a List of ImportEntry Records
 
 <Sec id="2.2.3" />
 
-#### 16.2.2.4 Static Semantics: WithClauseToAttributes ( ): a List of ImportAttribute Records
+#### <a id="sec-withclausetoattributes" /> 16.2.2.4 Static Semantics: WithClauseToAttributes ( ): a List of ImportAttribute Records
 
 <Sec id="2.2.4" />
 
-### 16.2.3 Exports
+### <a id="sec-exports" /> 16.2.3 Exports
 
 <Sec id="2.3" />
 
-#### 16.2.3.1 Static Semantics: Early Errors
+#### <a id="sec-exports-static-semantics-early-errors" /> 16.2.3.1 Static Semantics: Early Errors
 
 <Sec id="2.3.1" />
 
-#### 16.2.3.2 Static Semantics: ExportedBindings ( ): a List of Strings
+#### <a id="sec-static-semantics-exportedbindings" /> 16.2.3.2 Static Semantics: ExportedBindings ( ): a List of Strings
 
 <Sec id="2.3.2" />
 
-#### 16.2.3.3 Static Semantics: ExportedNames ( ): a List of Strings
+#### <a id="sec-static-semantics-exportednames" /> 16.2.3.3 Static Semantics: ExportedNames ( ): a List of Strings
 
 <Sec id="2.3.3" />
 
-#### 16.2.3.4 Static Semantics: ExportEntries ( ): a List of ExportEntry Records
+#### <a id="sec-static-semantics-exportentries" /> 16.2.3.4 Static Semantics: ExportEntries ( ): a List of ExportEntry Records
 
 <Sec id="2.3.4" />
 
-#### 16.2.3.5 Static Semantics: ExportEntriesForModule ( _module_: a ModuleRequest Record or *null*, ): a List of ExportEntry Records
+#### <a id="sec-static-semantics-exportentriesformodule" /> 16.2.3.5 Static Semantics: ExportEntriesForModule ( _module_: a ModuleRequest Record or *null*, ): a List of ExportEntry Records
 
 <Sec id="2.3.5" />
 
-#### 16.2.3.6 Static Semantics: ReferencedBindings ( ): a List of Parse Nodes
+#### <a id="sec-static-semantics-referencedbindings" /> 16.2.3.6 Static Semantics: ReferencedBindings ( ): a List of Parse Nodes
 
 <Sec id="2.3.6" />
 
-#### 16.2.3.7 Runtime Semantics: Evaluation
+#### <a id="sec-exports-runtime-semantics-evaluation" /> 16.2.3.7 Runtime Semantics: Evaluation
 
 <Sec id="2.3.7" />
