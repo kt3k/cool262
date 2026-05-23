@@ -1,523 +1,523 @@
 import { Sec } from '../lib/spec/ordinary-and-exotic-objects-behaviours'
 
-# <a id="sec-ordinary-and-exotic-objects-behaviours" /> 10 Ordinary and Exotic Objects Behaviours
+# <span id="sec-ordinary-and-exotic-objects-behaviours" /> 10 Ordinary and Exotic Objects Behaviours
 
-## <a id="sec-ordinary-object-internal-methods-and-internal-slots" /> 10.1 Ordinary Object Internal Methods and Internal Slots
+## <span id="sec-ordinary-object-internal-methods-and-internal-slots" /> 10.1 Ordinary Object Internal Methods and Internal Slots
 
 <Sec id="1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-getprototypeof" /> 10.1.1 [[GetPrototypeOf]] ( ): a normal completion containing either an Object or *null*
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-getprototypeof" /> 10.1.1 [[GetPrototypeOf]] ( ): a normal completion containing either an Object or *null*
 
 <Sec id="1.1" />
 
-#### <a id="sec-ordinarygetprototypeof" /> 10.1.1.1 OrdinaryGetPrototypeOf ( _obj_: an Object, ): an Object or *null*
+#### <span id="sec-ordinarygetprototypeof" /> 10.1.1.1 OrdinaryGetPrototypeOf ( _obj_: an Object, ): an Object or *null*
 
 <Sec id="1.1.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-setprototypeof-v" /> 10.1.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): a normal completion containing a Boolean
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-setprototypeof-v" /> 10.1.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): a normal completion containing a Boolean
 
 <Sec id="1.2" />
 
-#### <a id="sec-ordinarysetprototypeof" /> 10.1.2.1 OrdinarySetPrototypeOf ( _obj_: an Object, _proto_: an Object or *null*, ): a Boolean
+#### <span id="sec-ordinarysetprototypeof" /> 10.1.2.1 OrdinarySetPrototypeOf ( _obj_: an Object, _proto_: an Object or *null*, ): a Boolean
 
 <Sec id="1.2.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-isextensible" /> 10.1.3 [[IsExtensible]] ( ): a normal completion containing a Boolean
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-isextensible" /> 10.1.3 [[IsExtensible]] ( ): a normal completion containing a Boolean
 
 <Sec id="1.3" />
 
-#### <a id="sec-ordinaryisextensible" /> 10.1.3.1 OrdinaryIsExtensible ( _obj_: an Object, ): a Boolean
+#### <span id="sec-ordinaryisextensible" /> 10.1.3.1 OrdinaryIsExtensible ( _obj_: an Object, ): a Boolean
 
 <Sec id="1.3.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-preventextensions" /> 10.1.4 [[PreventExtensions]] ( ): a normal completion containing *true*
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-preventextensions" /> 10.1.4 [[PreventExtensions]] ( ): a normal completion containing *true*
 
 <Sec id="1.4" />
 
-#### <a id="sec-ordinarypreventextensions" /> 10.1.4.1 OrdinaryPreventExtensions ( _obj_: an Object, ): *true*
+#### <span id="sec-ordinarypreventextensions" /> 10.1.4.1 OrdinaryPreventExtensions ( _obj_: an Object, ): *true*
 
 <Sec id="1.4.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-getownproperty-p" /> 10.1.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-getownproperty-p" /> 10.1.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
 
 <Sec id="1.5" />
 
-#### <a id="sec-ordinarygetownproperty" /> 10.1.5.1 OrdinaryGetOwnProperty ( _obj_: an Object, _propertyKey_: a property key, ): a Property Descriptor or *undefined*
+#### <span id="sec-ordinarygetownproperty" /> 10.1.5.1 OrdinaryGetOwnProperty ( _obj_: an Object, _propertyKey_: a property key, ): a Property Descriptor or *undefined*
 
 <Sec id="1.5.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-defineownproperty-p-desc" /> 10.1.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-defineownproperty-p-desc" /> 10.1.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.6" />
 
-#### <a id="sec-ordinarydefineownproperty" /> 10.1.6.1 OrdinaryDefineOwnProperty ( _obj_: an Object, _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-ordinarydefineownproperty" /> 10.1.6.1 OrdinaryDefineOwnProperty ( _obj_: an Object, _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.6.1" />
 
-#### <a id="sec-iscompatiblepropertydescriptor" /> 10.1.6.2 IsCompatiblePropertyDescriptor ( _extensible_: a Boolean, _desc_: a Property Descriptor, _current_: a Property Descriptor or *undefined*, ): a Boolean
+#### <span id="sec-iscompatiblepropertydescriptor" /> 10.1.6.2 IsCompatiblePropertyDescriptor ( _extensible_: a Boolean, _desc_: a Property Descriptor, _current_: a Property Descriptor or *undefined*, ): a Boolean
 
 <Sec id="1.6.2" />
 
-#### <a id="sec-validateandapplypropertydescriptor" /> 10.1.6.3 ValidateAndApplyPropertyDescriptor ( _obj_: an Object or *undefined*, _propertyKey_: a property key, _extensible_: a Boolean, _desc_: a Property Descriptor, _current_: a Property Descriptor or *undefined*, ): a Boolean
+#### <span id="sec-validateandapplypropertydescriptor" /> 10.1.6.3 ValidateAndApplyPropertyDescriptor ( _obj_: an Object or *undefined*, _propertyKey_: a property key, _extensible_: a Boolean, _desc_: a Property Descriptor, _current_: a Property Descriptor or *undefined*, ): a Boolean
 
 <Sec id="1.6.3" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-hasproperty-p" /> 10.1.7 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-hasproperty-p" /> 10.1.7 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.7" />
 
-#### <a id="sec-ordinaryhasproperty" /> 10.1.7.1 OrdinaryHasProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-ordinaryhasproperty" /> 10.1.7.1 OrdinaryHasProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.7.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-get-p-receiver" /> 10.1.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-get-p-receiver" /> 10.1.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="1.8" />
 
-#### <a id="sec-ordinaryget" /> 10.1.8.1 OrdinaryGet ( _obj_: an Object, _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-ordinaryget" /> 10.1.8.1 OrdinaryGet ( _obj_: an Object, _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="1.8.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-set-p-v-receiver" /> 10.1.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-set-p-v-receiver" /> 10.1.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.9" />
 
-#### <a id="sec-ordinaryset" /> 10.1.9.1 OrdinarySet ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-ordinaryset" /> 10.1.9.1 OrdinarySet ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.9.1" />
 
-#### <a id="sec-ordinarysetwithowndescriptor" /> 10.1.9.2 OrdinarySetWithOwnDescriptor ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, _ownDesc_: a Property Descriptor or *undefined*, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-ordinarysetwithowndescriptor" /> 10.1.9.2 OrdinarySetWithOwnDescriptor ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, _ownDesc_: a Property Descriptor or *undefined*, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.9.2" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-delete-p" /> 10.1.10 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-delete-p" /> 10.1.10 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.10" />
 
-#### <a id="sec-ordinarydelete" /> 10.1.10.1 OrdinaryDelete ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-ordinarydelete" /> 10.1.10.1 OrdinaryDelete ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="1.10.1" />
 
-### <a id="sec-ordinary-object-internal-methods-and-internal-slots-ownpropertykeys" /> 10.1.11 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
+### <span id="sec-ordinary-object-internal-methods-and-internal-slots-ownpropertykeys" /> 10.1.11 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
 
 <Sec id="1.11" />
 
-#### <a id="sec-ordinaryownpropertykeys" /> 10.1.11.1 OrdinaryOwnPropertyKeys ( _obj_: an Object, ): a List of property keys
+#### <span id="sec-ordinaryownpropertykeys" /> 10.1.11.1 OrdinaryOwnPropertyKeys ( _obj_: an Object, ): a List of property keys
 
 <Sec id="1.11.1" />
 
-### <a id="sec-ordinaryobjectcreate" /> 10.1.12 OrdinaryObjectCreate ( _proto_: an Object or *null*, optional _additionalInternalSlotsList_: a List of names of internal slots, ): an Object
+### <span id="sec-ordinaryobjectcreate" /> 10.1.12 OrdinaryObjectCreate ( _proto_: an Object or *null*, optional _additionalInternalSlotsList_: a List of names of internal slots, ): an Object
 
 <Sec id="1.12" />
 
-### <a id="sec-ordinarycreatefromconstructor" /> 10.1.13 OrdinaryCreateFromConstructor ( _constructor_: a function object, _intrinsicDefaultProto_: a String, optional _internalSlotsList_: a List of names of internal slots, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-ordinarycreatefromconstructor" /> 10.1.13 OrdinaryCreateFromConstructor ( _constructor_: a function object, _intrinsicDefaultProto_: a String, optional _internalSlotsList_: a List of names of internal slots, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="1.13" />
 
-### <a id="sec-getprototypefromconstructor" /> 10.1.14 GetPrototypeFromConstructor ( _constructor_: a function object, _intrinsicDefaultProto_: a String, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-getprototypefromconstructor" /> 10.1.14 GetPrototypeFromConstructor ( _constructor_: a function object, _intrinsicDefaultProto_: a String, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="1.14" />
 
-### <a id="sec-requireinternalslot" /> 10.1.15 RequireInternalSlot ( _obj_: an ECMAScript language value, _internalSlot_: an internal slot name, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-requireinternalslot" /> 10.1.15 RequireInternalSlot ( _obj_: an ECMAScript language value, _internalSlot_: an internal slot name, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="1.15" />
 
-## <a id="sec-ecmascript-function-objects" /> 10.2 ECMAScript Function Objects
+## <span id="sec-ecmascript-function-objects" /> 10.2 ECMAScript Function Objects
 
 <Sec id="2" />
 
-### <a id="sec-ecmascript-function-objects-call-thisargument-argumentslist" /> 10.2.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-ecmascript-function-objects-call-thisargument-argumentslist" /> 10.2.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="2.1" />
 
-#### <a id="sec-prepareforordinarycall" /> 10.2.1.1 PrepareForOrdinaryCall ( _func_: an ECMAScript function object, _newTarget_: an Object or *undefined*, ): an execution context
+#### <span id="sec-prepareforordinarycall" /> 10.2.1.1 PrepareForOrdinaryCall ( _func_: an ECMAScript function object, _newTarget_: an Object or *undefined*, ): an execution context
 
 <Sec id="2.1.1" />
 
-#### <a id="sec-ordinarycallbindthis" /> 10.2.1.2 OrdinaryCallBindThis ( _func_: an ECMAScript function object, _calleeContext_: an execution context, _thisArgument_: an ECMAScript language value, ): ~unused~
+#### <span id="sec-ordinarycallbindthis" /> 10.2.1.2 OrdinaryCallBindThis ( _func_: an ECMAScript function object, _calleeContext_: an execution context, _thisArgument_: an ECMAScript language value, ): ~unused~
 
 <Sec id="2.1.2" />
 
-#### <a id="sec-runtime-semantics-evaluatebody" /> 10.2.1.3 Runtime Semantics: EvaluateBody ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): a return completion or a throw completion
+#### <span id="sec-runtime-semantics-evaluatebody" /> 10.2.1.3 Runtime Semantics: EvaluateBody ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): a return completion or a throw completion
 
 <Sec id="2.1.3" />
 
-#### <a id="sec-ordinarycallevaluatebody" /> 10.2.1.4 OrdinaryCallEvaluateBody ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): a return completion or a throw completion
+#### <span id="sec-ordinarycallevaluatebody" /> 10.2.1.4 OrdinaryCallEvaluateBody ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): a return completion or a throw completion
 
 <Sec id="2.1.4" />
 
-### <a id="sec-ecmascript-function-objects-construct-argumentslist-newtarget" /> 10.2.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-ecmascript-function-objects-construct-argumentslist-newtarget" /> 10.2.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="2.2" />
 
-### <a id="sec-ordinaryfunctioncreate" /> 10.2.3 OrdinaryFunctionCreate ( _functionPrototype_: an Object, _sourceText_: a sequence of Unicode code points, _parameterList_: a Parse Node, _body_: a Parse Node, _thisMode_: ~lexical-this~ or ~non-lexical-this~, _env_: an Environment Record, _privateEnv_: a PrivateEnvironment Record or *null*, ): an ECMAScript function object
+### <span id="sec-ordinaryfunctioncreate" /> 10.2.3 OrdinaryFunctionCreate ( _functionPrototype_: an Object, _sourceText_: a sequence of Unicode code points, _parameterList_: a Parse Node, _body_: a Parse Node, _thisMode_: ~lexical-this~ or ~non-lexical-this~, _env_: an Environment Record, _privateEnv_: a PrivateEnvironment Record or *null*, ): an ECMAScript function object
 
 <Sec id="2.3" />
 
-### <a id="sec-addrestrictedfunctionproperties" /> 10.2.4 AddRestrictedFunctionProperties ( _func_: a function object, _realm_: a Realm Record, ): ~unused~
+### <span id="sec-addrestrictedfunctionproperties" /> 10.2.4 AddRestrictedFunctionProperties ( _func_: a function object, _realm_: a Realm Record, ): ~unused~
 
 <Sec id="2.4" />
 
-#### <a id="sec-%throwtypeerror%" /> 10.2.4.1 %ThrowTypeError% ( )
+#### <span id="sec-%throwtypeerror%" /> 10.2.4.1 %ThrowTypeError% ( )
 
 <Sec id="2.4.1" />
 
-### <a id="sec-makeconstructor" /> 10.2.5 MakeConstructor ( _func_: an ECMAScript function object or a built-in function object, optional _writablePrototype_: a Boolean, optional _prototype_: an Object, ): ~unused~
+### <span id="sec-makeconstructor" /> 10.2.5 MakeConstructor ( _func_: an ECMAScript function object or a built-in function object, optional _writablePrototype_: a Boolean, optional _prototype_: an Object, ): ~unused~
 
 <Sec id="2.5" />
 
-### <a id="sec-makeclassconstructor" /> 10.2.6 MakeClassConstructor ( _func_: an ECMAScript function object, ): ~unused~
+### <span id="sec-makeclassconstructor" /> 10.2.6 MakeClassConstructor ( _func_: an ECMAScript function object, ): ~unused~
 
 <Sec id="2.6" />
 
-### <a id="sec-makemethod" /> 10.2.7 MakeMethod ( _func_: an ECMAScript function object, _homeObject_: an Object, ): ~unused~
+### <span id="sec-makemethod" /> 10.2.7 MakeMethod ( _func_: an ECMAScript function object, _homeObject_: an Object, ): ~unused~
 
 <Sec id="2.7" />
 
-### <a id="sec-definemethodproperty" /> 10.2.8 DefineMethodProperty ( _homeObject_: an Object, _key_: a property key or Private Name, _closure_: a function object, _enumerable_: a Boolean, ): either a normal completion containing either a PrivateElement or ~unused~, or an abrupt completion
+### <span id="sec-definemethodproperty" /> 10.2.8 DefineMethodProperty ( _homeObject_: an Object, _key_: a property key or Private Name, _closure_: a function object, _enumerable_: a Boolean, ): either a normal completion containing either a PrivateElement or ~unused~, or an abrupt completion
 
 <Sec id="2.8" />
 
-### <a id="sec-setfunctionname" /> 10.2.9 SetFunctionName ( _func_: a function object, _name_: a property key or Private Name, optional _prefix_: a String, ): ~unused~
+### <span id="sec-setfunctionname" /> 10.2.9 SetFunctionName ( _func_: a function object, _name_: a property key or Private Name, optional _prefix_: a String, ): ~unused~
 
 <Sec id="2.9" />
 
-### <a id="sec-setfunctionlength" /> 10.2.10 SetFunctionLength ( _func_: a function object, _length_: a non-negative integer or +&infin;, ): ~unused~
+### <span id="sec-setfunctionlength" /> 10.2.10 SetFunctionLength ( _func_: a function object, _length_: a non-negative integer or +&infin;, ): ~unused~
 
 <Sec id="2.10" />
 
-### <a id="sec-functiondeclarationinstantiation" /> 10.2.11 FunctionDeclarationInstantiation ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-functiondeclarationinstantiation" /> 10.2.11 FunctionDeclarationInstantiation ( _func_: an ECMAScript function object, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.11" />
 
-## <a id="sec-built-in-function-objects" /> 10.3 Built-in Function Objects
+## <span id="sec-built-in-function-objects" /> 10.3 Built-in Function Objects
 
 <Sec id="3" />
 
-### <a id="sec-built-in-function-objects-call-thisargument-argumentslist" /> 10.3.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-built-in-function-objects-call-thisargument-argumentslist" /> 10.3.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.1" />
 
-### <a id="sec-built-in-function-objects-construct-argumentslist-newtarget" /> 10.3.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-built-in-function-objects-construct-argumentslist-newtarget" /> 10.3.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="3.2" />
 
-### <a id="sec-builtincallorconstruct" /> 10.3.3 BuiltinCallOrConstruct ( _func_: a built-in function object, _thisArgument_: an ECMAScript language value or ~uninitialized~, _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor or *undefined*, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-builtincallorconstruct" /> 10.3.3 BuiltinCallOrConstruct ( _func_: a built-in function object, _thisArgument_: an ECMAScript language value or ~uninitialized~, _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor or *undefined*, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.3" />
 
-### <a id="sec-createbuiltinfunction" /> 10.3.4 CreateBuiltinFunction ( _behaviour_: an Abstract Closure, a set of algorithm steps, or some other definition of a function's behaviour provided in this specification, _length_: a non-negative integer or +&infin;, _name_: a property key or a Private Name, _additionalInternalSlotsList_: a List of names of internal slots, optional _realm_: a Realm Record, optional _prototype_: an Object or *null*, optional _prefix_: a String, optional _async_: a Boolean, ): a built-in function object
+### <span id="sec-createbuiltinfunction" /> 10.3.4 CreateBuiltinFunction ( _behaviour_: an Abstract Closure, a set of algorithm steps, or some other definition of a function's behaviour provided in this specification, _length_: a non-negative integer or +&infin;, _name_: a property key or a Private Name, _additionalInternalSlotsList_: a List of names of internal slots, optional _realm_: a Realm Record, optional _prototype_: an Object or *null*, optional _prefix_: a String, optional _async_: a Boolean, ): a built-in function object
 
 <Sec id="3.4" />
 
-## <a id="sec-built-in-exotic-object-internal-methods-and-slots" /> 10.4 Built-in Exotic Object Internal Methods and Slots
+## <span id="sec-built-in-exotic-object-internal-methods-and-slots" /> 10.4 Built-in Exotic Object Internal Methods and Slots
 
 <Sec id="4" />
 
-### <a id="sec-bound-function-exotic-objects" /> 10.4.1 Bound Function Exotic Objects
+### <span id="sec-bound-function-exotic-objects" /> 10.4.1 Bound Function Exotic Objects
 
 <Sec id="4.1" />
 
-#### <a id="sec-bound-function-exotic-objects-call-thisargument-argumentslist" /> 10.4.1.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-bound-function-exotic-objects-call-thisargument-argumentslist" /> 10.4.1.1 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="4.1.1" />
 
-#### <a id="sec-bound-function-exotic-objects-construct-argumentslist-newtarget" /> 10.4.1.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+#### <span id="sec-bound-function-exotic-objects-construct-argumentslist-newtarget" /> 10.4.1.2 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="4.1.2" />
 
-#### <a id="sec-boundfunctioncreate" /> 10.4.1.3 BoundFunctionCreate ( _targetFunction_: a function object, _boundThis_: an ECMAScript language value, _boundArgs_: a List of ECMAScript language values, ): either a normal completion containing a function object or a throw completion
+#### <span id="sec-boundfunctioncreate" /> 10.4.1.3 BoundFunctionCreate ( _targetFunction_: a function object, _boundThis_: an ECMAScript language value, _boundArgs_: a List of ECMAScript language values, ): either a normal completion containing a function object or a throw completion
 
 <Sec id="4.1.3" />
 
-### <a id="sec-array-exotic-objects" /> 10.4.2 Array Exotic Objects
+### <span id="sec-array-exotic-objects" /> 10.4.2 Array Exotic Objects
 
 <Sec id="4.2" />
 
-#### <a id="sec-array-exotic-objects-defineownproperty-p-desc" /> 10.4.2.1 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-array-exotic-objects-defineownproperty-p-desc" /> 10.4.2.1 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.2.1" />
 
-#### <a id="sec-arraycreate" /> 10.4.2.2 ArrayCreate ( _length_: a non-negative integer, optional _proto_: an Object, ): either a normal completion containing an Array exotic object or a throw completion
+#### <span id="sec-arraycreate" /> 10.4.2.2 ArrayCreate ( _length_: a non-negative integer, optional _proto_: an Object, ): either a normal completion containing an Array exotic object or a throw completion
 
 <Sec id="4.2.2" />
 
-#### <a id="sec-arrayspeciescreate" /> 10.4.2.3 ArraySpeciesCreate ( _originalArray_: an Object, _length_: a non-negative integer, ): either a normal completion containing an Object or a throw completion
+#### <span id="sec-arrayspeciescreate" /> 10.4.2.3 ArraySpeciesCreate ( _originalArray_: an Object, _length_: a non-negative integer, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="4.2.3" />
 
-#### <a id="sec-arraysetlength" /> 10.4.2.4 ArraySetLength ( _array_: an Array, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-arraysetlength" /> 10.4.2.4 ArraySetLength ( _array_: an Array, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.2.4" />
 
-### <a id="sec-string-exotic-objects" /> 10.4.3 String Exotic Objects
+### <span id="sec-string-exotic-objects" /> 10.4.3 String Exotic Objects
 
 <Sec id="4.3" />
 
-#### <a id="sec-string-exotic-objects-getownproperty-p" /> 10.4.3.1 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
+#### <span id="sec-string-exotic-objects-getownproperty-p" /> 10.4.3.1 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
 
 <Sec id="4.3.1" />
 
-#### <a id="sec-string-exotic-objects-defineownproperty-p-desc" /> 10.4.3.2 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): a normal completion containing a Boolean
+#### <span id="sec-string-exotic-objects-defineownproperty-p-desc" /> 10.4.3.2 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): a normal completion containing a Boolean
 
 <Sec id="4.3.2" />
 
-#### <a id="sec-string-exotic-objects-ownpropertykeys" /> 10.4.3.3 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
+#### <span id="sec-string-exotic-objects-ownpropertykeys" /> 10.4.3.3 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
 
 <Sec id="4.3.3" />
 
-#### <a id="sec-stringcreate" /> 10.4.3.4 StringCreate ( _value_: a String, _prototype_: an Object, ): a String exotic object
+#### <span id="sec-stringcreate" /> 10.4.3.4 StringCreate ( _value_: a String, _prototype_: an Object, ): a String exotic object
 
 <Sec id="4.3.4" />
 
-#### <a id="sec-stringgetownproperty" /> 10.4.3.5 StringGetOwnProperty ( _str_: an Object that has a [[StringData]] internal slot, _propertyKey_: a property key, ): a Property Descriptor or *undefined*
+#### <span id="sec-stringgetownproperty" /> 10.4.3.5 StringGetOwnProperty ( _str_: an Object that has a [[StringData]] internal slot, _propertyKey_: a property key, ): a Property Descriptor or *undefined*
 
 <Sec id="4.3.5" />
 
-### <a id="sec-arguments-exotic-objects" /> 10.4.4 Arguments Exotic Objects
+### <span id="sec-arguments-exotic-objects" /> 10.4.4 Arguments Exotic Objects
 
 <Sec id="4.4" />
 
-#### <a id="sec-arguments-exotic-objects-getownproperty-p" /> 10.4.4.1 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
+#### <span id="sec-arguments-exotic-objects-getownproperty-p" /> 10.4.4.1 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
 
 <Sec id="4.4.1" />
 
-#### <a id="sec-arguments-exotic-objects-defineownproperty-p-desc" /> 10.4.4.2 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): a normal completion containing a Boolean
+#### <span id="sec-arguments-exotic-objects-defineownproperty-p-desc" /> 10.4.4.2 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): a normal completion containing a Boolean
 
 <Sec id="4.4.2" />
 
-#### <a id="sec-arguments-exotic-objects-get-p-receiver" /> 10.4.4.3 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-arguments-exotic-objects-get-p-receiver" /> 10.4.4.3 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="4.4.3" />
 
-#### <a id="sec-arguments-exotic-objects-set-p-v-receiver" /> 10.4.4.4 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-arguments-exotic-objects-set-p-v-receiver" /> 10.4.4.4 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.4.4" />
 
-#### <a id="sec-arguments-exotic-objects-delete-p" /> 10.4.4.5 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-arguments-exotic-objects-delete-p" /> 10.4.4.5 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.4.5" />
 
-#### <a id="sec-createunmappedargumentsobject" /> 10.4.4.6 CreateUnmappedArgumentsObject ( _argumentsList_: a List of ECMAScript language values, ): an ordinary object
+#### <span id="sec-createunmappedargumentsobject" /> 10.4.4.6 CreateUnmappedArgumentsObject ( _argumentsList_: a List of ECMAScript language values, ): an ordinary object
 
 <Sec id="4.4.6" />
 
-#### <a id="sec-createmappedargumentsobject" /> 10.4.4.7 CreateMappedArgumentsObject ( _func_: an ECMAScript function object, _formals_: a Parse Node, _argumentsList_: a List of ECMAScript language values, _env_: an Environment Record, ): an arguments exotic object
+#### <span id="sec-createmappedargumentsobject" /> 10.4.4.7 CreateMappedArgumentsObject ( _func_: an ECMAScript function object, _formals_: a Parse Node, _argumentsList_: a List of ECMAScript language values, _env_: an Environment Record, ): an arguments exotic object
 
 <Sec id="4.4.7" />
 
-##### <a id="sec-makearggetter" /> 10.4.4.7.1 MakeArgGetter ( _name_: a String, _env_: an Environment Record, ): a function object
+##### <span id="sec-makearggetter" /> 10.4.4.7.1 MakeArgGetter ( _name_: a String, _env_: an Environment Record, ): a function object
 
 <Sec id="4.4.7.1" />
 
-##### <a id="sec-makeargsetter" /> 10.4.4.7.2 MakeArgSetter ( _name_: a String, _env_: an Environment Record, ): a function object
+##### <span id="sec-makeargsetter" /> 10.4.4.7.2 MakeArgSetter ( _name_: a String, _env_: an Environment Record, ): a function object
 
 <Sec id="4.4.7.2" />
 
-### <a id="sec-typedarray-exotic-objects" /> 10.4.5 TypedArray Exotic Objects
+### <span id="sec-typedarray-exotic-objects" /> 10.4.5 TypedArray Exotic Objects
 
 <Sec id="4.5" />
 
-#### <a id="sec-typedarray-preventextensions" /> 10.4.5.1 [[PreventExtensions]] ( ): a normal completion containing a Boolean
+#### <span id="sec-typedarray-preventextensions" /> 10.4.5.1 [[PreventExtensions]] ( ): a normal completion containing a Boolean
 
 <Sec id="4.5.1" />
 
-#### <a id="sec-typedarray-getownproperty" /> 10.4.5.2 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
+#### <span id="sec-typedarray-getownproperty" /> 10.4.5.2 [[GetOwnProperty]] ( _propertyKey_: a property key, ): a normal completion containing either a Property Descriptor or *undefined*
 
 <Sec id="4.5.2" />
 
-#### <a id="sec-typedarray-hasproperty" /> 10.4.5.3 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-typedarray-hasproperty" /> 10.4.5.3 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.5.3" />
 
-#### <a id="sec-typedarray-defineownproperty" /> 10.4.5.4 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-typedarray-defineownproperty" /> 10.4.5.4 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.5.4" />
 
-#### <a id="sec-typedarray-get" /> 10.4.5.5 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-typedarray-get" /> 10.4.5.5 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="4.5.5" />
 
-#### <a id="sec-typedarray-set" /> 10.4.5.6 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-typedarray-set" /> 10.4.5.6 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.5.6" />
 
-#### <a id="sec-typedarray-delete" /> 10.4.5.7 [[Delete]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
+#### <span id="sec-typedarray-delete" /> 10.4.5.7 [[Delete]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
 
 <Sec id="4.5.7" />
 
-#### <a id="sec-typedarray-ownpropertykeys" /> 10.4.5.8 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
+#### <span id="sec-typedarray-ownpropertykeys" /> 10.4.5.8 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
 
 <Sec id="4.5.8" />
 
-#### <a id="sec-typedarray-with-buffer-witness-records" /> 10.4.5.9 TypedArray With Buffer Witness Records
+#### <span id="sec-typedarray-with-buffer-witness-records" /> 10.4.5.9 TypedArray With Buffer Witness Records
 
 <Sec id="4.5.9" />
 
-#### <a id="sec-maketypedarraywithbufferwitnessrecord" /> 10.4.5.10 MakeTypedArrayWithBufferWitnessRecord ( _obj_: a TypedArray, _order_: ~seq-cst~ or ~unordered~, ): a TypedArray With Buffer Witness Record
+#### <span id="sec-maketypedarraywithbufferwitnessrecord" /> 10.4.5.10 MakeTypedArrayWithBufferWitnessRecord ( _obj_: a TypedArray, _order_: ~seq-cst~ or ~unordered~, ): a TypedArray With Buffer Witness Record
 
 <Sec id="4.5.10" />
 
-#### <a id="sec-typedarraycreate" /> 10.4.5.11 TypedArrayCreate ( _prototype_: an Object, ): a TypedArray
+#### <span id="sec-typedarraycreate" /> 10.4.5.11 TypedArrayCreate ( _prototype_: an Object, ): a TypedArray
 
 <Sec id="4.5.11" />
 
-#### <a id="sec-typedarraybytelength" /> 10.4.5.12 TypedArrayByteLength ( _taRecord_: a TypedArray With Buffer Witness Record, ): a non-negative integer
+#### <span id="sec-typedarraybytelength" /> 10.4.5.12 TypedArrayByteLength ( _taRecord_: a TypedArray With Buffer Witness Record, ): a non-negative integer
 
 <Sec id="4.5.12" />
 
-#### <a id="sec-typedarraylength" /> 10.4.5.13 TypedArrayLength ( _taRecord_: a TypedArray With Buffer Witness Record, ): a non-negative integer
+#### <span id="sec-typedarraylength" /> 10.4.5.13 TypedArrayLength ( _taRecord_: a TypedArray With Buffer Witness Record, ): a non-negative integer
 
 <Sec id="4.5.13" />
 
-#### <a id="sec-istypedarrayoutofbounds" /> 10.4.5.14 IsTypedArrayOutOfBounds ( _taRecord_: a TypedArray With Buffer Witness Record, ): a Boolean
+#### <span id="sec-istypedarrayoutofbounds" /> 10.4.5.14 IsTypedArrayOutOfBounds ( _taRecord_: a TypedArray With Buffer Witness Record, ): a Boolean
 
 <Sec id="4.5.14" />
 
-#### <a id="sec-istypedarrayfixedlength" /> 10.4.5.15 IsTypedArrayFixedLength ( _obj_: a TypedArray, ): a Boolean
+#### <span id="sec-istypedarrayfixedlength" /> 10.4.5.15 IsTypedArrayFixedLength ( _obj_: a TypedArray, ): a Boolean
 
 <Sec id="4.5.15" />
 
-#### <a id="sec-isvalidintegerindex" /> 10.4.5.16 IsValidIntegerIndex ( _obj_: a TypedArray, _index_: a Number, ): a Boolean
+#### <span id="sec-isvalidintegerindex" /> 10.4.5.16 IsValidIntegerIndex ( _obj_: a TypedArray, _index_: a Number, ): a Boolean
 
 <Sec id="4.5.16" />
 
-#### <a id="sec-typedarraygetelement" /> 10.4.5.17 TypedArrayGetElement ( _obj_: a TypedArray, _index_: a Number, ): a Number, a BigInt, or *undefined*
+#### <span id="sec-typedarraygetelement" /> 10.4.5.17 TypedArrayGetElement ( _obj_: a TypedArray, _index_: a Number, ): a Number, a BigInt, or *undefined*
 
 <Sec id="4.5.17" />
 
-#### <a id="sec-typedarraysetelement" /> 10.4.5.18 TypedArraySetElement ( _obj_: a TypedArray, _index_: a Number, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+#### <span id="sec-typedarraysetelement" /> 10.4.5.18 TypedArraySetElement ( _obj_: a TypedArray, _index_: a Number, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="4.5.18" />
 
-#### <a id="sec-isarraybufferviewoutofbounds" /> 10.4.5.19 IsArrayBufferViewOutOfBounds ( _obj_: a TypedArray or a DataView, ): a Boolean
+#### <span id="sec-isarraybufferviewoutofbounds" /> 10.4.5.19 IsArrayBufferViewOutOfBounds ( _obj_: a TypedArray or a DataView, ): a Boolean
 
 <Sec id="4.5.19" />
 
-### <a id="sec-module-namespace-exotic-objects" /> 10.4.6 Module Namespace Exotic Objects
+### <span id="sec-module-namespace-exotic-objects" /> 10.4.6 Module Namespace Exotic Objects
 
 <Sec id="4.6" />
 
-#### <a id="sec-module-namespace-exotic-objects-getprototypeof" /> 10.4.6.1 [[GetPrototypeOf]] ( ): a normal completion containing *null*
+#### <span id="sec-module-namespace-exotic-objects-getprototypeof" /> 10.4.6.1 [[GetPrototypeOf]] ( ): a normal completion containing *null*
 
 <Sec id="4.6.1" />
 
-#### <a id="sec-module-namespace-exotic-objects-setprototypeof-v" /> 10.4.6.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): a normal completion containing a Boolean
+#### <span id="sec-module-namespace-exotic-objects-setprototypeof-v" /> 10.4.6.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): a normal completion containing a Boolean
 
 <Sec id="4.6.2" />
 
-#### <a id="sec-module-namespace-exotic-objects-isextensible" /> 10.4.6.3 [[IsExtensible]] ( ): a normal completion containing *false*
+#### <span id="sec-module-namespace-exotic-objects-isextensible" /> 10.4.6.3 [[IsExtensible]] ( ): a normal completion containing *false*
 
 <Sec id="4.6.3" />
 
-#### <a id="sec-module-namespace-exotic-objects-preventextensions" /> 10.4.6.4 [[PreventExtensions]] ( ): a normal completion containing *true*
+#### <span id="sec-module-namespace-exotic-objects-preventextensions" /> 10.4.6.4 [[PreventExtensions]] ( ): a normal completion containing *true*
 
 <Sec id="4.6.4" />
 
-#### <a id="sec-module-namespace-exotic-objects-getownproperty-p" /> 10.4.6.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): either a normal completion containing either a Property Descriptor or *undefined*, or a throw completion
+#### <span id="sec-module-namespace-exotic-objects-getownproperty-p" /> 10.4.6.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): either a normal completion containing either a Property Descriptor or *undefined*, or a throw completion
 
 <Sec id="4.6.5" />
 
-#### <a id="sec-module-namespace-exotic-objects-defineownproperty-p-desc" /> 10.4.6.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-module-namespace-exotic-objects-defineownproperty-p-desc" /> 10.4.6.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.6.6" />
 
-#### <a id="sec-module-namespace-exotic-objects-hasproperty-p" /> 10.4.6.7 [[HasProperty]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
+#### <span id="sec-module-namespace-exotic-objects-hasproperty-p" /> 10.4.6.7 [[HasProperty]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
 
 <Sec id="4.6.7" />
 
-#### <a id="sec-module-namespace-exotic-objects-get-p-receiver" /> 10.4.6.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-module-namespace-exotic-objects-get-p-receiver" /> 10.4.6.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="4.6.8" />
 
-#### <a id="sec-module-namespace-exotic-objects-set-p-v-receiver" /> 10.4.6.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): a normal completion containing *false*
+#### <span id="sec-module-namespace-exotic-objects-set-p-v-receiver" /> 10.4.6.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): a normal completion containing *false*
 
 <Sec id="4.6.9" />
 
-#### <a id="sec-module-namespace-exotic-objects-delete-p" /> 10.4.6.10 [[Delete]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
+#### <span id="sec-module-namespace-exotic-objects-delete-p" /> 10.4.6.10 [[Delete]] ( _propertyKey_: a property key, ): a normal completion containing a Boolean
 
 <Sec id="4.6.10" />
 
-#### <a id="sec-module-namespace-exotic-objects-ownpropertykeys" /> 10.4.6.11 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
+#### <span id="sec-module-namespace-exotic-objects-ownpropertykeys" /> 10.4.6.11 [[OwnPropertyKeys]] ( ): a normal completion containing a List of property keys
 
 <Sec id="4.6.11" />
 
-#### <a id="sec-modulenamespacecreate" /> 10.4.6.12 ModuleNamespaceCreate ( _module_: a Module Record, _exports_: a List of Strings, ): a module namespace exotic object
+#### <span id="sec-modulenamespacecreate" /> 10.4.6.12 ModuleNamespaceCreate ( _module_: a Module Record, _exports_: a List of Strings, ): a module namespace exotic object
 
 <Sec id="4.6.12" />
 
-### <a id="sec-immutable-prototype-exotic-objects" /> 10.4.7 Immutable Prototype Exotic Objects
+### <span id="sec-immutable-prototype-exotic-objects" /> 10.4.7 Immutable Prototype Exotic Objects
 
 <Sec id="4.7" />
 
-#### <a id="sec-immutable-prototype-exotic-objects-setprototypeof-v" /> 10.4.7.1 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-immutable-prototype-exotic-objects-setprototypeof-v" /> 10.4.7.1 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.7.1" />
 
-#### <a id="sec-set-immutable-prototype" /> 10.4.7.2 SetImmutablePrototype ( _obj_: an Object, _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
+#### <span id="sec-set-immutable-prototype" /> 10.4.7.2 SetImmutablePrototype ( _obj_: an Object, _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.7.2" />
 
-## <a id="sec-proxy-object-internal-methods-and-internal-slots" /> 10.5 Proxy Object Internal Methods and Internal Slots
+## <span id="sec-proxy-object-internal-methods-and-internal-slots" /> 10.5 Proxy Object Internal Methods and Internal Slots
 
 <Sec id="5" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-getprototypeof" /> 10.5.1 [[GetPrototypeOf]] ( ): either a normal completion containing either an Object or *null*, or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-getprototypeof" /> 10.5.1 [[GetPrototypeOf]] ( ): either a normal completion containing either an Object or *null*, or a throw completion
 
 <Sec id="5.1" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-setprototypeof-v" /> 10.5.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-setprototypeof-v" /> 10.5.2 [[SetPrototypeOf]] ( _proto_: an Object or *null*, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.2" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-isextensible" /> 10.5.3 [[IsExtensible]] ( ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-isextensible" /> 10.5.3 [[IsExtensible]] ( ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.3" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-preventextensions" /> 10.5.4 [[PreventExtensions]] ( ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-preventextensions" /> 10.5.4 [[PreventExtensions]] ( ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.4" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-getownproperty-p" /> 10.5.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): either a normal completion containing either a Property Descriptor or *undefined*, or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-getownproperty-p" /> 10.5.5 [[GetOwnProperty]] ( _propertyKey_: a property key, ): either a normal completion containing either a Property Descriptor or *undefined*, or a throw completion
 
 <Sec id="5.5" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-defineownproperty-p-desc" /> 10.5.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-defineownproperty-p-desc" /> 10.5.6 [[DefineOwnProperty]] ( _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.6" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-hasproperty-p" /> 10.5.7 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-hasproperty-p" /> 10.5.7 [[HasProperty]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.7" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-get-p-receiver" /> 10.5.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-get-p-receiver" /> 10.5.8 [[Get]] ( _propertyKey_: a property key, _receiver_: an ECMAScript language value, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="5.8" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-set-p-v-receiver" /> 10.5.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-set-p-v-receiver" /> 10.5.9 [[Set]] ( _propertyKey_: a property key, _value_: an ECMAScript language value, _receiver_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.9" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-delete-p" /> 10.5.10 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-delete-p" /> 10.5.10 [[Delete]] ( _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="5.10" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-ownpropertykeys" /> 10.5.11 [[OwnPropertyKeys]] ( ): either a normal completion containing a List of property keys or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-ownpropertykeys" /> 10.5.11 [[OwnPropertyKeys]] ( ): either a normal completion containing a List of property keys or a throw completion
 
 <Sec id="5.11" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-call-thisargument-argumentslist" /> 10.5.12 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-call-thisargument-argumentslist" /> 10.5.12 [[Call]] ( _thisArgument_: an ECMAScript language value, _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="5.12" />
 
-### <a id="sec-proxy-object-internal-methods-and-internal-slots-construct-argumentslist-newtarget" /> 10.5.13 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-proxy-object-internal-methods-and-internal-slots-construct-argumentslist-newtarget" /> 10.5.13 [[Construct]] ( _argumentsList_: a List of ECMAScript language values, _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="5.13" />
 
-### <a id="sec-validatenonrevokedproxy" /> 10.5.14 ValidateNonRevokedProxy ( _proxy_: a Proxy exotic object, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-validatenonrevokedproxy" /> 10.5.14 ValidateNonRevokedProxy ( _proxy_: a Proxy exotic object, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="5.14" />
 
-### <a id="sec-proxycreate" /> 10.5.15 ProxyCreate ( _target_: an ECMAScript language value, _handler_: an ECMAScript language value, ): either a normal completion containing a Proxy exotic object or a throw completion
+### <span id="sec-proxycreate" /> 10.5.15 ProxyCreate ( _target_: an ECMAScript language value, _handler_: an ECMAScript language value, ): either a normal completion containing a Proxy exotic object or a throw completion
 
 <Sec id="5.15" />

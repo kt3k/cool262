@@ -1,413 +1,413 @@
 import { Sec } from '../lib/spec/abstract-operations'
 
-# <a id="sec-abstract-operations" /> 7 Abstract Operations
+# <span id="sec-abstract-operations" /> 7 Abstract Operations
 
 <Sec id="" />
 
-## <a id="sec-type-conversion" /> 7.1 Type Conversion
+## <span id="sec-type-conversion" /> 7.1 Type Conversion
 
 <Sec id="1" />
 
-### <a id="sec-toprimitive" /> 7.1.1 ToPrimitive ( _input_: an ECMAScript language value, optional _preferredType_: ~string~ or ~number~, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-toprimitive" /> 7.1.1 ToPrimitive ( _input_: an ECMAScript language value, optional _preferredType_: ~string~ or ~number~, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="1.1" />
 
-#### <a id="sec-ordinarytoprimitive" /> 7.1.1.1 OrdinaryToPrimitive ( _obj_: an Object, _hint_: ~string~ or ~number~, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-ordinarytoprimitive" /> 7.1.1.1 OrdinaryToPrimitive ( _obj_: an Object, _hint_: ~string~ or ~number~, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="1.1.1" />
 
-### <a id="sec-toboolean" /> 7.1.2 ToBoolean ( _argument_: an ECMAScript language value, ): a Boolean
+### <span id="sec-toboolean" /> 7.1.2 ToBoolean ( _argument_: an ECMAScript language value, ): a Boolean
 
 <Sec id="1.2" />
 
-### <a id="sec-tonumeric" /> 7.1.3 ToNumeric ( _value_: an ECMAScript language value, ): either a normal completion containing either a Number or a BigInt, or a throw completion
+### <span id="sec-tonumeric" /> 7.1.3 ToNumeric ( _value_: an ECMAScript language value, ): either a normal completion containing either a Number or a BigInt, or a throw completion
 
 <Sec id="1.3" />
 
-### <a id="sec-tonumber" /> 7.1.4 ToNumber ( _argument_: an ECMAScript language value, ): either a normal completion containing a Number or a throw completion
+### <span id="sec-tonumber" /> 7.1.4 ToNumber ( _argument_: an ECMAScript language value, ): either a normal completion containing a Number or a throw completion
 
 <Sec id="1.4" />
 
-#### <a id="sec-tonumber-applied-to-the-string-type" /> 7.1.4.1 ToNumber Applied to the String Type
+#### <span id="sec-tonumber-applied-to-the-string-type" /> 7.1.4.1 ToNumber Applied to the String Type
 
 <Sec id="1.4.1" />
 
-##### <a id="sec-stringtonumber" /> 7.1.4.1.1 StringToNumber ( _str_: a String, ): a Number
+##### <span id="sec-stringtonumber" /> 7.1.4.1.1 StringToNumber ( _str_: a String, ): a Number
 
 <Sec id="1.4.1.1" />
 
-##### <a id="sec-runtime-semantics-stringnumericvalue" /> 7.1.4.1.2 Runtime Semantics: StringNumericValue ( ): a Number
+##### <span id="sec-runtime-semantics-stringnumericvalue" /> 7.1.4.1.2 Runtime Semantics: StringNumericValue ( ): a Number
 
 <Sec id="1.4.1.2" />
 
-##### <a id="sec-roundmvresult" /> 7.1.4.1.3 RoundMVResult ( _n_: a mathematical value, ): a Number
+##### <span id="sec-roundmvresult" /> 7.1.4.1.3 RoundMVResult ( _n_: a mathematical value, ): a Number
 
 <Sec id="1.4.1.3" />
 
-### <a id="sec-tointegerorinfinity" /> 7.1.5 ToIntegerOrInfinity ( _argument_: an ECMAScript language value, ): either a normal completion containing either an integer, +&infin;, or -&infin;, or a throw completion
+### <span id="sec-tointegerorinfinity" /> 7.1.5 ToIntegerOrInfinity ( _argument_: an ECMAScript language value, ): either a normal completion containing either an integer, +&infin;, or -&infin;, or a throw completion
 
 <Sec id="1.5" />
 
-### <a id="sec-tofixedsizeinteger" /> 7.1.6 ToFixedSizeInteger ( _int_: an integer, +∞, or -∞, _signed_: ~unsigned~ or ~signed~, _bitWidth_: a positive integer, ): an integer
+### <span id="sec-tofixedsizeinteger" /> 7.1.6 ToFixedSizeInteger ( _int_: an integer, +∞, or -∞, _signed_: ~unsigned~ or ~signed~, _bitWidth_: a positive integer, ): an integer
 
 <Sec id="1.6" />
 
-### <a id="sec-toint32" /> 7.1.7 ToInt32 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-toint32" /> 7.1.7 ToInt32 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.7" />
 
-### <a id="sec-touint32" /> 7.1.8 ToUint32 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-touint32" /> 7.1.8 ToUint32 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.8" />
 
-### <a id="sec-toint16" /> 7.1.9 ToInt16 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-toint16" /> 7.1.9 ToInt16 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.9" />
 
-### <a id="sec-touint16" /> 7.1.10 ToUint16 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-touint16" /> 7.1.10 ToUint16 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.10" />
 
-### <a id="sec-toint8" /> 7.1.11 ToInt8 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-toint8" /> 7.1.11 ToInt8 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.11" />
 
-### <a id="sec-touint8" /> 7.1.12 ToUint8 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-touint8" /> 7.1.12 ToUint8 ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.12" />
 
-### <a id="sec-touint8clamp" /> 7.1.13 ToUint8Clamp ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
+### <span id="sec-touint8clamp" /> 7.1.13 ToUint8Clamp ( _argument_: an ECMAScript language value, ): either a normal completion containing an integral Number or a throw completion
 
 <Sec id="1.13" />
 
-### <a id="sec-tobigint" /> 7.1.14 ToBigInt ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
+### <span id="sec-tobigint" /> 7.1.14 ToBigInt ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
 
 <Sec id="1.14" />
 
-### <a id="sec-stringtobigint" /> 7.1.15 StringToBigInt ( _str_: a String, ): a BigInt or *undefined*
+### <span id="sec-stringtobigint" /> 7.1.15 StringToBigInt ( _str_: a String, ): a BigInt or *undefined*
 
 <Sec id="1.15" />
 
-#### <a id="sec-stringintegerliteral-grammar" /> 7.1.15.1 StringIntegerLiteral Grammar
+#### <span id="sec-stringintegerliteral-grammar" /> 7.1.15.1 StringIntegerLiteral Grammar
 
 <Sec id="1.15.1" />
 
-#### <a id="sec-runtime-semantics-mv-for-stringintegerliteral" /> 7.1.15.2 Runtime Semantics: MV
+#### <span id="sec-runtime-semantics-mv-for-stringintegerliteral" /> 7.1.15.2 Runtime Semantics: MV
 
 <Sec id="1.15.2" />
 
-### <a id="sec-tobigint64" /> 7.1.16 ToBigInt64 ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
+### <span id="sec-tobigint64" /> 7.1.16 ToBigInt64 ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
 
 <Sec id="1.16" />
 
-### <a id="sec-tobiguint64" /> 7.1.17 ToBigUint64 ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
+### <span id="sec-tobiguint64" /> 7.1.17 ToBigUint64 ( _argument_: an ECMAScript language value, ): either a normal completion containing a BigInt or a throw completion
 
 <Sec id="1.17" />
 
-### <a id="sec-tostring" /> 7.1.18 ToString ( _argument_: an ECMAScript language value, ): either a normal completion containing a String or a throw completion
+### <span id="sec-tostring" /> 7.1.18 ToString ( _argument_: an ECMAScript language value, ): either a normal completion containing a String or a throw completion
 
 <Sec id="1.18" />
 
-### <a id="sec-toobject" /> 7.1.19 ToObject ( _argument_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-toobject" /> 7.1.19 ToObject ( _argument_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="1.19" />
 
-### <a id="sec-topropertykey" /> 7.1.20 ToPropertyKey ( _argument_: an ECMAScript language value, ): either a normal completion containing a property key or a throw completion
+### <span id="sec-topropertykey" /> 7.1.20 ToPropertyKey ( _argument_: an ECMAScript language value, ): either a normal completion containing a property key or a throw completion
 
 <Sec id="1.20" />
 
-### <a id="sec-tolength" /> 7.1.21 ToLength ( _argument_: an ECMAScript language value, ): either a normal completion containing a non-negative integral Number or a throw completion
+### <span id="sec-tolength" /> 7.1.21 ToLength ( _argument_: an ECMAScript language value, ): either a normal completion containing a non-negative integral Number or a throw completion
 
 <Sec id="1.21" />
 
-### <a id="sec-canonicalnumericindexstring" /> 7.1.22 CanonicalNumericIndexString ( _argument_: a String, ): a Number or *undefined*
+### <span id="sec-canonicalnumericindexstring" /> 7.1.22 CanonicalNumericIndexString ( _argument_: a String, ): a Number or *undefined*
 
 <Sec id="1.22" />
 
-### <a id="sec-toindex" /> 7.1.23 ToIndex ( _value_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
+### <span id="sec-toindex" /> 7.1.23 ToIndex ( _value_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="1.23" />
 
-## <a id="sec-testing-and-comparison-operations" /> 7.2 Testing and Comparison Operations
+## <span id="sec-testing-and-comparison-operations" /> 7.2 Testing and Comparison Operations
 
-### <a id="sec-requireobjectcoercible" /> 7.2.1 RequireObjectCoercible ( _argument_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-requireobjectcoercible" /> 7.2.1 RequireObjectCoercible ( _argument_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="2.1" />
 
-### <a id="sec-isarray" /> 7.2.2 IsArray ( _argument_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-isarray" /> 7.2.2 IsArray ( _argument_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="2.2" />
 
-### <a id="sec-iscallable" /> 7.2.3 IsCallable ( _argument_: an ECMAScript language value, ): a Boolean
+### <span id="sec-iscallable" /> 7.2.3 IsCallable ( _argument_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.3" />
 
-### <a id="sec-isconstructor" /> 7.2.4 IsConstructor ( _argument_: an ECMAScript language value, ): a Boolean
+### <span id="sec-isconstructor" /> 7.2.4 IsConstructor ( _argument_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.4" />
 
-### <a id="sec-isextensible-o" /> 7.2.5 IsExtensible ( _obj_: an Object, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-isextensible-o" /> 7.2.5 IsExtensible ( _obj_: an Object, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="2.5" />
 
-### <a id="sec-isregexp" /> 7.2.6 IsRegExp ( _argument_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-isregexp" /> 7.2.6 IsRegExp ( _argument_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="2.6" />
 
-### <a id="sec-isstringwellformedunicode" /> 7.2.7 Static Semantics: IsStringWellFormedUnicode ( _string_: a String, ): a Boolean
+### <span id="sec-isstringwellformedunicode" /> 7.2.7 Static Semantics: IsStringWellFormedUnicode ( _string_: a String, ): a Boolean
 
 <Sec id="2.7" />
 
-### <a id="sec-sametype" /> 7.2.8 SameType ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
+### <span id="sec-sametype" /> 7.2.8 SameType ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.8" />
 
-### <a id="sec-samevalue" /> 7.2.9 SameValue ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
+### <span id="sec-samevalue" /> 7.2.9 SameValue ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.9" />
 
-### <a id="sec-samevaluezero" /> 7.2.10 SameValueZero ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
+### <span id="sec-samevaluezero" /> 7.2.10 SameValueZero ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.10" />
 
-### <a id="sec-samevaluenonnumber" /> 7.2.11 SameValueNonNumber ( _x_: an ECMAScript language value, but not a Number, _y_: an ECMAScript language value, but not a Number, ): a Boolean
+### <span id="sec-samevaluenonnumber" /> 7.2.11 SameValueNonNumber ( _x_: an ECMAScript language value, but not a Number, _y_: an ECMAScript language value, but not a Number, ): a Boolean
 
 <Sec id="2.11" />
 
-### <a id="sec-islessthan" /> 7.2.12 IsLessThan ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, _leftFirst_: a Boolean, ): either a normal completion containing either a Boolean or *undefined*, or a throw completion
+### <span id="sec-islessthan" /> 7.2.12 IsLessThan ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, _leftFirst_: a Boolean, ): either a normal completion containing either a Boolean or *undefined*, or a throw completion
 
 <Sec id="2.12" />
 
-### <a id="sec-islooselyequal" /> 7.2.13 IsLooselyEqual ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-islooselyequal" /> 7.2.13 IsLooselyEqual ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="2.13" />
 
-### <a id="sec-isstrictlyequal" /> 7.2.14 IsStrictlyEqual ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
+### <span id="sec-isstrictlyequal" /> 7.2.14 IsStrictlyEqual ( _x_: an ECMAScript language value, _y_: an ECMAScript language value, ): a Boolean
 
 <Sec id="2.14" />
 
-## <a id="sec-operations-on-objects" /> 7.3 Operations on Objects
+## <span id="sec-operations-on-objects" /> 7.3 Operations on Objects
 
-### <a id="sec-makebasicobject" /> 7.3.1 MakeBasicObject ( _internalSlotsList_: a List of internal slot names, ): an Object
+### <span id="sec-makebasicobject" /> 7.3.1 MakeBasicObject ( _internalSlotsList_: a List of internal slot names, ): an Object
 
 <Sec id="3.1" />
 
-### <a id="sec-get-o-p" /> 7.3.2 Get ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-get-o-p" /> 7.3.2 Get ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.2" />
 
-### <a id="sec-getv" /> 7.3.3 GetV ( _value_: an ECMAScript language value, _propertyKey_: a property key, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-getv" /> 7.3.3 GetV ( _value_: an ECMAScript language value, _propertyKey_: a property key, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.3" />
 
-### <a id="sec-set-o-p-v-throw" /> 7.3.4 Set ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _throw_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-set-o-p-v-throw" /> 7.3.4 Set ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, _throw_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.4" />
 
-### <a id="sec-createdataproperty" /> 7.3.5 CreateDataProperty ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-createdataproperty" /> 7.3.5 CreateDataProperty ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.5" />
 
-### <a id="sec-createdatapropertyorthrow" /> 7.3.6 CreateDataPropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-createdatapropertyorthrow" /> 7.3.6 CreateDataPropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.6" />
 
-### <a id="sec-createnonenumerabledatapropertyorthrow" /> 7.3.7 CreateNonEnumerableDataPropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): ~unused~
+### <span id="sec-createnonenumerabledatapropertyorthrow" /> 7.3.7 CreateNonEnumerableDataPropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): ~unused~
 
 <Sec id="3.7" />
 
-### <a id="sec-definepropertyorthrow" /> 7.3.8 DefinePropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-definepropertyorthrow" /> 7.3.8 DefinePropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, _desc_: a Property Descriptor, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.8" />
 
-### <a id="sec-deletepropertyorthrow" /> 7.3.9 DeletePropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-deletepropertyorthrow" /> 7.3.9 DeletePropertyOrThrow ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.9" />
 
-### <a id="sec-getmethod" /> 7.3.10 GetMethod ( _value_: an ECMAScript language value, _propertyKey_: a property key, ): either a normal completion containing either a function object or *undefined*, or a throw completion
+### <span id="sec-getmethod" /> 7.3.10 GetMethod ( _value_: an ECMAScript language value, _propertyKey_: a property key, ): either a normal completion containing either a function object or *undefined*, or a throw completion
 
 <Sec id="3.10" />
 
-### <a id="sec-hasproperty" /> 7.3.11 HasProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-hasproperty" /> 7.3.11 HasProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.11" />
 
-### <a id="sec-hasownproperty" /> 7.3.12 HasOwnProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-hasownproperty" /> 7.3.12 HasOwnProperty ( _obj_: an Object, _propertyKey_: a property key, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.12" />
 
-### <a id="sec-call" /> 7.3.13 Call ( _func_: an ECMAScript language value, _thisValue_: an ECMAScript language value, optional _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-call" /> 7.3.13 Call ( _func_: an ECMAScript language value, _thisValue_: an ECMAScript language value, optional _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.13" />
 
-### <a id="sec-construct" /> 7.3.14 Construct ( _constructor_: a constructor, optional _argumentsList_: a List of ECMAScript language values, optional _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-construct" /> 7.3.14 Construct ( _constructor_: a constructor, optional _argumentsList_: a List of ECMAScript language values, optional _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="3.14" />
 
-### <a id="sec-setintegritylevel" /> 7.3.15 SetIntegrityLevel ( _obj_: an Object, _level_: ~sealed~ or ~frozen~, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-setintegritylevel" /> 7.3.15 SetIntegrityLevel ( _obj_: an Object, _level_: ~sealed~ or ~frozen~, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.15" />
 
-### <a id="sec-testintegritylevel" /> 7.3.16 TestIntegrityLevel ( _obj_: an Object, _level_: ~sealed~ or ~frozen~, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-testintegritylevel" /> 7.3.16 TestIntegrityLevel ( _obj_: an Object, _level_: ~sealed~ or ~frozen~, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.16" />
 
-### <a id="sec-createarrayfromlist" /> 7.3.17 CreateArrayFromList ( _elements_: a List of ECMAScript language values, ): an Array
+### <span id="sec-createarrayfromlist" /> 7.3.17 CreateArrayFromList ( _elements_: a List of ECMAScript language values, ): an Array
 
 <Sec id="3.17" />
 
-### <a id="sec-lengthofarraylike" /> 7.3.18 LengthOfArrayLike ( _obj_: an Object, ): either a normal completion containing a non-negative integer or a throw completion
+### <span id="sec-lengthofarraylike" /> 7.3.18 LengthOfArrayLike ( _obj_: an Object, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="3.18" />
 
-### <a id="sec-createlistfromarraylike" /> 7.3.19 CreateListFromArrayLike ( _obj_: an ECMAScript language value, optional _validElementTypes_: ~all~ or ~property-key~, ): either a normal completion containing a List of ECMAScript language values or a throw completion
+### <span id="sec-createlistfromarraylike" /> 7.3.19 CreateListFromArrayLike ( _obj_: an ECMAScript language value, optional _validElementTypes_: ~all~ or ~property-key~, ): either a normal completion containing a List of ECMAScript language values or a throw completion
 
 <Sec id="3.19" />
 
-### <a id="sec-invoke" /> 7.3.20 Invoke ( _value_: an ECMAScript language value, _propertyKey_: a property key, optional _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-invoke" /> 7.3.20 Invoke ( _value_: an ECMAScript language value, _propertyKey_: a property key, optional _argumentsList_: a List of ECMAScript language values, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.20" />
 
-### <a id="sec-ordinaryhasinstance" /> 7.3.21 OrdinaryHasInstance ( _constructor_: an ECMAScript language value, _instance_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-ordinaryhasinstance" /> 7.3.21 OrdinaryHasInstance ( _constructor_: an ECMAScript language value, _instance_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="3.21" />
 
-### <a id="sec-speciesconstructor" /> 7.3.22 SpeciesConstructor ( _obj_: an Object, _defaultConstructor_: a constructor, ): either a normal completion containing a constructor or a throw completion
+### <span id="sec-speciesconstructor" /> 7.3.22 SpeciesConstructor ( _obj_: an Object, _defaultConstructor_: a constructor, ): either a normal completion containing a constructor or a throw completion
 
 <Sec id="3.22" />
 
-### <a id="sec-enumerableownproperties" /> 7.3.23 EnumerableOwnProperties ( _obj_: an Object, _kind_: ~key~, ~value~, or ~key+value~, ): either a normal completion containing a List of ECMAScript language values or a throw completion
+### <span id="sec-enumerableownproperties" /> 7.3.23 EnumerableOwnProperties ( _obj_: an Object, _kind_: ~key~, ~value~, or ~key+value~, ): either a normal completion containing a List of ECMAScript language values or a throw completion
 
 <Sec id="3.23" />
 
-### <a id="sec-getfunctionrealm" /> 7.3.24 GetFunctionRealm ( _func_: a function object, ): either a normal completion containing a Realm Record or a throw completion
+### <span id="sec-getfunctionrealm" /> 7.3.24 GetFunctionRealm ( _func_: a function object, ): either a normal completion containing a Realm Record or a throw completion
 
 <Sec id="3.24" />
 
-### <a id="sec-copydataproperties" /> 7.3.25 CopyDataProperties ( _target_: an Object, _source_: an ECMAScript language value, _excludedItems_: a List of property keys, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-copydataproperties" /> 7.3.25 CopyDataProperties ( _target_: an Object, _source_: an ECMAScript language value, _excludedItems_: a List of property keys, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.25" />
 
-### <a id="sec-privateelementfind" /> 7.3.26 PrivateElementFind ( _obj_: an Object, _privateName_: a Private Name, ): a PrivateElement or ~empty~
+### <span id="sec-privateelementfind" /> 7.3.26 PrivateElementFind ( _obj_: an Object, _privateName_: a Private Name, ): a PrivateElement or ~empty~
 
 <Sec id="3.26" />
 
-### <a id="sec-privatefieldadd" /> 7.3.27 PrivateFieldAdd ( _obj_: an Object, _privateName_: a Private Name, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-privatefieldadd" /> 7.3.27 PrivateFieldAdd ( _obj_: an Object, _privateName_: a Private Name, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.27" />
 
-### <a id="sec-privatemethodoraccessoradd" /> 7.3.28 PrivateMethodOrAccessorAdd ( _obj_: an Object, _method_: a PrivateElement, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-privatemethodoraccessoradd" /> 7.3.28 PrivateMethodOrAccessorAdd ( _obj_: an Object, _method_: a PrivateElement, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.28" />
 
-### <a id="sec-hostensurecanaddprivateelement" /> 7.3.29 HostEnsureCanAddPrivateElement ( _obj_: an Object, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-hostensurecanaddprivateelement" /> 7.3.29 HostEnsureCanAddPrivateElement ( _obj_: an Object, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.29" />
 
-### <a id="sec-privateget" /> 7.3.30 PrivateGet ( _obj_: an Object, _privateName_: a Private Name, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-privateget" /> 7.3.30 PrivateGet ( _obj_: an Object, _privateName_: a Private Name, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="3.30" />
 
-### <a id="sec-privateset" /> 7.3.31 PrivateSet ( _obj_: an Object, _privateName_: a Private Name, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-privateset" /> 7.3.31 PrivateSet ( _obj_: an Object, _privateName_: a Private Name, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.31" />
 
-### <a id="sec-definefield" /> 7.3.32 DefineField ( _receiver_: an Object, _fieldRecord_: a ClassFieldDefinition Record, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-definefield" /> 7.3.32 DefineField ( _receiver_: an Object, _fieldRecord_: a ClassFieldDefinition Record, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.32" />
 
-### <a id="sec-initializeinstanceelements" /> 7.3.33 InitializeInstanceElements ( _obj_: an Object, _constructor_: an ECMAScript function object or a built-in function object, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-initializeinstanceelements" /> 7.3.33 InitializeInstanceElements ( _obj_: an Object, _constructor_: an ECMAScript function object or a built-in function object, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.33" />
 
-### <a id="sec-add-value-to-keyed-group" /> 7.3.34 AddValueToKeyedGroup ( _groups_: a List of Records with fields [[Key]] (an ECMAScript language value) and [[Elements]] (a List of ECMAScript language values), _key_: an ECMAScript language value, _value_: an ECMAScript language value, ): ~unused~
+### <span id="sec-add-value-to-keyed-group" /> 7.3.34 AddValueToKeyedGroup ( _groups_: a List of Records with fields [[Key]] (an ECMAScript language value) and [[Elements]] (a List of ECMAScript language values), _key_: an ECMAScript language value, _value_: an ECMAScript language value, ): ~unused~
 
 <Sec id="3.34" />
 
-### <a id="sec-groupby" /> 7.3.35 GroupBy ( _items_: an ECMAScript language value, _callback_: an ECMAScript language value, _keyCoercion_: ~property~ or ~collection~, ): either a normal completion containing a List of Records with fields [[Key]] (an ECMAScript language value) and [[Elements]] (a List of ECMAScript language values), or a throw completion
+### <span id="sec-groupby" /> 7.3.35 GroupBy ( _items_: an ECMAScript language value, _callback_: an ECMAScript language value, _keyCoercion_: ~property~ or ~collection~, ): either a normal completion containing a List of Records with fields [[Key]] (an ECMAScript language value) and [[Elements]] (a List of ECMAScript language values), or a throw completion
 
 <Sec id="3.35" />
 
-### <a id="sec-getoptionsobject" /> 7.3.36 GetOptionsObject ( _options_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-getoptionsobject" /> 7.3.36 GetOptionsObject ( _options_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="3.36" />
 
-### <a id="sec-SetterThatIgnoresPrototypeProperties" /> 7.3.37 SetterThatIgnoresPrototypeProperties ( _thisValue_: an ECMAScript language value, _home_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-SetterThatIgnoresPrototypeProperties" /> 7.3.37 SetterThatIgnoresPrototypeProperties ( _thisValue_: an ECMAScript language value, _home_: an Object, _propertyKey_: a property key, _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="3.37" />
 
-## <a id="sec-operations-on-iterator-objects" /> 7.4 Operations on Iterator Objects
+## <span id="sec-operations-on-iterator-objects" /> 7.4 Operations on Iterator Objects
 
 <Sec id="4" />
 
-### <a id="sec-iterator-records" /> 7.4.1 Iterator Records
+### <span id="sec-iterator-records" /> 7.4.1 Iterator Records
 
 <Sec id="4.1" />
 
-### <a id="sec-getiteratordirect" /> 7.4.2 GetIteratorDirect ( _obj_: an Object, ): either a normal completion containing an Iterator Record or a throw completion
+### <span id="sec-getiteratordirect" /> 7.4.2 GetIteratorDirect ( _obj_: an Object, ): either a normal completion containing an Iterator Record or a throw completion
 
 <Sec id="4.2" />
 
-### <a id="sec-getiteratorfrommethod" /> 7.4.3 GetIteratorFromMethod ( _obj_: an ECMAScript language value, _method_: a function object, ): either a normal completion containing an Iterator Record or a throw completion
+### <span id="sec-getiteratorfrommethod" /> 7.4.3 GetIteratorFromMethod ( _obj_: an ECMAScript language value, _method_: a function object, ): either a normal completion containing an Iterator Record or a throw completion
 
 <Sec id="4.3" />
 
-### <a id="sec-getiterator" /> 7.4.4 GetIterator ( _obj_: an ECMAScript language value, _kind_: ~sync~ or ~async~, ): either a normal completion containing an Iterator Record or a throw completion
+### <span id="sec-getiterator" /> 7.4.4 GetIterator ( _obj_: an ECMAScript language value, _kind_: ~sync~ or ~async~, ): either a normal completion containing an Iterator Record or a throw completion
 
 <Sec id="4.4" />
 
-### <a id="sec-getiteratorflattenable" /> 7.4.5 GetIteratorFlattenable ( _obj_: an ECMAScript language value, _primitiveHandling_: ~iterate-string-primitives~ or ~reject-primitives~, ): either a normal completion containing an Iterator Record or a throw completion
+### <span id="sec-getiteratorflattenable" /> 7.4.5 GetIteratorFlattenable ( _obj_: an ECMAScript language value, _primitiveHandling_: ~iterate-string-primitives~ or ~reject-primitives~, ): either a normal completion containing an Iterator Record or a throw completion
 
 <Sec id="4.5" />
 
-### <a id="sec-iteratornext" /> 7.4.6 IteratorNext ( _iteratorRecord_: an Iterator Record, optional _value_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+### <span id="sec-iteratornext" /> 7.4.6 IteratorNext ( _iteratorRecord_: an Iterator Record, optional _value_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="4.6" />
 
-### <a id="sec-iteratorcomplete" /> 7.4.7 IteratorComplete ( _iteratorResult_: an Object, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-iteratorcomplete" /> 7.4.7 IteratorComplete ( _iteratorResult_: an Object, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="4.7" />
 
-### <a id="sec-iteratorvalue" /> 7.4.8 IteratorValue ( _iteratorResult_: an Object, ): either a normal completion containing an ECMAScript language value or a throw completion
+### <span id="sec-iteratorvalue" /> 7.4.8 IteratorValue ( _iteratorResult_: an Object, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="4.8" />
 
-### <a id="sec-iteratorstep" /> 7.4.9 IteratorStep ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing either an Object or ~done~, or a throw completion
+### <span id="sec-iteratorstep" /> 7.4.9 IteratorStep ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing either an Object or ~done~, or a throw completion
 
 <Sec id="4.9" />
 
-### <a id="sec-iteratorstepvalue" /> 7.4.10 IteratorStepValue ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing either an ECMAScript language value or ~done~, or a throw completion
+### <span id="sec-iteratorstepvalue" /> 7.4.10 IteratorStepValue ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing either an ECMAScript language value or ~done~, or a throw completion
 
 <Sec id="4.10" />
 
-### <a id="sec-iteratorclose" /> 7.4.11 IteratorClose ( _iteratorRecord_: an Iterator Record, _completion_: a Completion Record, ): a Completion Record
+### <span id="sec-iteratorclose" /> 7.4.11 IteratorClose ( _iteratorRecord_: an Iterator Record, _completion_: a Completion Record, ): a Completion Record
 
 <Sec id="4.11" />
 
-### <a id="sec-iteratorcloseall" /> 7.4.12 IteratorCloseAll ( _iters_: a List of Iterator Records, _completion_: a Completion Record, ): a Completion Record
+### <span id="sec-iteratorcloseall" /> 7.4.12 IteratorCloseAll ( _iters_: a List of Iterator Records, _completion_: a Completion Record, ): a Completion Record
 
 <Sec id="4.12" />
 
-### <a id="sec-ifabruptcloseiterator" /> 7.4.13 IfAbruptCloseIterator ( _value_, _iteratorRecord_ )
+### <span id="sec-ifabruptcloseiterator" /> 7.4.13 IfAbruptCloseIterator ( _value_, _iteratorRecord_ )
 
 <Sec id="4.13" />
 
-### <a id="sec-asynciteratorclose" /> 7.4.14 AsyncIteratorClose ( _iteratorRecord_: an Iterator Record, _completion_: a Completion Record, ): a Completion Record
+### <span id="sec-asynciteratorclose" /> 7.4.14 AsyncIteratorClose ( _iteratorRecord_: an Iterator Record, _completion_: a Completion Record, ): a Completion Record
 
 <Sec id="4.14" />
 
-### <a id="sec-ifabruptcloseasynciterator" /> 7.4.15 IfAbruptCloseAsyncIterator ( _value_, _iteratorRecord_ )
+### <span id="sec-ifabruptcloseasynciterator" /> 7.4.15 IfAbruptCloseAsyncIterator ( _value_, _iteratorRecord_ )
 
 <Sec id="4.15" />
 
-### <a id="sec-createiterresultobject" /> 7.4.16 CreateIteratorResultObject ( _value_: an ECMAScript language value, _done_: a Boolean, ): an Object that conforms to the IteratorResult interface
+### <span id="sec-createiterresultobject" /> 7.4.16 CreateIteratorResultObject ( _value_: an ECMAScript language value, _done_: a Boolean, ): an Object that conforms to the IteratorResult interface
 
 <Sec id="4.16" />
 
-### <a id="sec-createlistiteratorRecord" /> 7.4.17 CreateListIteratorRecord ( _list_: a List of ECMAScript language values, ): an Iterator Record
+### <span id="sec-createlistiteratorRecord" /> 7.4.17 CreateListIteratorRecord ( _list_: a List of ECMAScript language values, ): an Iterator Record
 
 <Sec id="4.17" />
 
-### <a id="sec-iteratortolist" /> 7.4.18 IteratorToList ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing a List of ECMAScript language values or a throw completion
+### <span id="sec-iteratortolist" /> 7.4.18 IteratorToList ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing a List of ECMAScript language values or a throw completion
 
 <Sec id="4.18" />

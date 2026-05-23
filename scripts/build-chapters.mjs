@@ -164,10 +164,11 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
     const childNum = chapterPrefix === '' ? childSecPath : `${chapterPrefix}.${childSecPath}`
     const hashes = '#'.repeat(Math.min(depth, 6))
     // Inline anchor before the heading text so #<spec-id> resolves to the
-    // start of the heading after navigation. Auto-slugged heading ids (from
-    // the heading text) don't match the spec's "sec-..." ids, so we provide
-    // them ourselves.
-    const anchor = child.id ? `<a id="${child.id}" /> ` : ''
+    // start of the heading after navigation. Use <span>, not <a>: Nextra's
+    // TOC wraps each heading's content in its own <a href="#…">, and a
+    // nested <a> inside that is invalid HTML. Any element with `id` works
+    // as a fragment target.
+    const anchor = child.id ? `<span id="${child.id}" /> ` : ''
     lines.push(`${hashes} ${anchor}${childNum} ${child.title}`)
     lines.push('')
     lines.push(...renderMdxTree(child.tree, chapterPrefix, childSecPath, depth + 1))
@@ -485,7 +486,7 @@ built.forEach((c) => {
   fs.writeFileSync(path.join(LIB_DIR, `${slug}.jsx`), componentSrc)
   totalBytes += componentSrc.length
 
-  const chapterAnchor = `<a id="${c.id}" /> `
+  const chapterAnchor = `<span id="${c.id}" /> `
   let chapterHeading
   if (c.kind === 'emu-intro') {
     chapterHeading = `# ${chapterAnchor}${c.title}`

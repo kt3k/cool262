@@ -1,601 +1,601 @@
 import { Sec } from '../lib/spec/text-processing'
 
-# <a id="sec-text-processing" /> 22 Text Processing
+# <span id="sec-text-processing" /> 22 Text Processing
 
-## <a id="sec-string-objects" /> 22.1 String Objects
+## <span id="sec-string-objects" /> 22.1 String Objects
 
-### <a id="sec-string-constructor" /> 22.1.1 The String Constructor
+### <span id="sec-string-constructor" /> 22.1.1 The String Constructor
 
 <Sec id="1.1" />
 
-#### <a id="sec-string-constructor-string-value" /> 22.1.1.1 String ( _value_ )
+#### <span id="sec-string-constructor-string-value" /> 22.1.1.1 String ( _value_ )
 
 <Sec id="1.1.1" />
 
-### <a id="sec-properties-of-the-string-constructor" /> 22.1.2 Properties of the String Constructor
+### <span id="sec-properties-of-the-string-constructor" /> 22.1.2 Properties of the String Constructor
 
 <Sec id="1.2" />
 
-#### <a id="sec-string.fromcharcode" /> 22.1.2.1 String.fromCharCode ( ..._codeUnits_ )
+#### <span id="sec-string.fromcharcode" /> 22.1.2.1 String.fromCharCode ( ..._codeUnits_ )
 
 <Sec id="1.2.1" />
 
-#### <a id="sec-string.fromcodepoint" /> 22.1.2.2 String.fromCodePoint ( ..._codePoints_ )
+#### <span id="sec-string.fromcodepoint" /> 22.1.2.2 String.fromCodePoint ( ..._codePoints_ )
 
 <Sec id="1.2.2" />
 
-#### <a id="sec-string.prototype" /> 22.1.2.3 String.prototype
+#### <span id="sec-string.prototype" /> 22.1.2.3 String.prototype
 
 <Sec id="1.2.3" />
 
-#### <a id="sec-string.raw" /> 22.1.2.4 String.raw ( _template_, ..._substitutions_ )
+#### <span id="sec-string.raw" /> 22.1.2.4 String.raw ( _template_, ..._substitutions_ )
 
 <Sec id="1.2.4" />
 
-### <a id="sec-properties-of-the-string-prototype-object" /> 22.1.3 Properties of the String Prototype Object
+### <span id="sec-properties-of-the-string-prototype-object" /> 22.1.3 Properties of the String Prototype Object
 
 <Sec id="1.3" />
 
-#### <a id="sec-string.prototype.at" /> 22.1.3.1 String.prototype.at ( _index_ )
+#### <span id="sec-string.prototype.at" /> 22.1.3.1 String.prototype.at ( _index_ )
 
 <Sec id="1.3.1" />
 
-#### <a id="sec-string.prototype.charat" /> 22.1.3.2 String.prototype.charAt ( _pos_ )
+#### <span id="sec-string.prototype.charat" /> 22.1.3.2 String.prototype.charAt ( _pos_ )
 
 <Sec id="1.3.2" />
 
-#### <a id="sec-string.prototype.charcodeat" /> 22.1.3.3 String.prototype.charCodeAt ( _pos_ )
+#### <span id="sec-string.prototype.charcodeat" /> 22.1.3.3 String.prototype.charCodeAt ( _pos_ )
 
 <Sec id="1.3.3" />
 
-#### <a id="sec-string.prototype.codepointat" /> 22.1.3.4 String.prototype.codePointAt ( _pos_ )
+#### <span id="sec-string.prototype.codepointat" /> 22.1.3.4 String.prototype.codePointAt ( _pos_ )
 
 <Sec id="1.3.4" />
 
-#### <a id="sec-string.prototype.concat" /> 22.1.3.5 String.prototype.concat ( ..._args_ )
+#### <span id="sec-string.prototype.concat" /> 22.1.3.5 String.prototype.concat ( ..._args_ )
 
 <Sec id="1.3.5" />
 
-#### <a id="sec-string.prototype.constructor" /> 22.1.3.6 String.prototype.constructor
+#### <span id="sec-string.prototype.constructor" /> 22.1.3.6 String.prototype.constructor
 
 <Sec id="1.3.6" />
 
-#### <a id="sec-string.prototype.endswith" /> 22.1.3.7 String.prototype.endsWith ( _searchString_ [ , _endPosition_ ] )
+#### <span id="sec-string.prototype.endswith" /> 22.1.3.7 String.prototype.endsWith ( _searchString_ [ , _endPosition_ ] )
 
 <Sec id="1.3.7" />
 
-#### <a id="sec-string.prototype.includes" /> 22.1.3.8 String.prototype.includes ( _searchString_ [ , _position_ ] )
+#### <span id="sec-string.prototype.includes" /> 22.1.3.8 String.prototype.includes ( _searchString_ [ , _position_ ] )
 
 <Sec id="1.3.8" />
 
-#### <a id="sec-string.prototype.indexof" /> 22.1.3.9 String.prototype.indexOf ( _searchString_ [ , _position_ ] )
+#### <span id="sec-string.prototype.indexof" /> 22.1.3.9 String.prototype.indexOf ( _searchString_ [ , _position_ ] )
 
 <Sec id="1.3.9" />
 
-#### <a id="sec-string.prototype.iswellformed" /> 22.1.3.10 String.prototype.isWellFormed ( )
+#### <span id="sec-string.prototype.iswellformed" /> 22.1.3.10 String.prototype.isWellFormed ( )
 
 <Sec id="1.3.10" />
 
-#### <a id="sec-string.prototype.lastindexof" /> 22.1.3.11 String.prototype.lastIndexOf ( _searchString_ [ , _position_ ] )
+#### <span id="sec-string.prototype.lastindexof" /> 22.1.3.11 String.prototype.lastIndexOf ( _searchString_ [ , _position_ ] )
 
 <Sec id="1.3.11" />
 
-#### <a id="sec-string.prototype.localecompare" /> 22.1.3.12 String.prototype.localeCompare ( _that_ [ , _reserved1_ [ , _reserved2_ ] ] )
+#### <span id="sec-string.prototype.localecompare" /> 22.1.3.12 String.prototype.localeCompare ( _that_ [ , _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="1.3.12" />
 
-#### <a id="sec-string.prototype.match" /> 22.1.3.13 String.prototype.match ( _regexpOrPattern_ )
+#### <span id="sec-string.prototype.match" /> 22.1.3.13 String.prototype.match ( _regexpOrPattern_ )
 
 <Sec id="1.3.13" />
 
-#### <a id="sec-string.prototype.matchall" /> 22.1.3.14 String.prototype.matchAll ( _regexpOrPattern_ )
+#### <span id="sec-string.prototype.matchall" /> 22.1.3.14 String.prototype.matchAll ( _regexpOrPattern_ )
 
 <Sec id="1.3.14" />
 
-#### <a id="sec-string.prototype.normalize" /> 22.1.3.15 String.prototype.normalize ( [ _form_ ] )
+#### <span id="sec-string.prototype.normalize" /> 22.1.3.15 String.prototype.normalize ( [ _form_ ] )
 
 <Sec id="1.3.15" />
 
-#### <a id="sec-string.prototype.padend" /> 22.1.3.16 String.prototype.padEnd ( _maxLength_ [ , _fillString_ ] )
+#### <span id="sec-string.prototype.padend" /> 22.1.3.16 String.prototype.padEnd ( _maxLength_ [ , _fillString_ ] )
 
 <Sec id="1.3.16" />
 
-#### <a id="sec-string.prototype.padstart" /> 22.1.3.17 String.prototype.padStart ( _maxLength_ [ , _fillString_ ] )
+#### <span id="sec-string.prototype.padstart" /> 22.1.3.17 String.prototype.padStart ( _maxLength_ [ , _fillString_ ] )
 
 <Sec id="1.3.17" />
 
-##### <a id="sec-stringpaddingbuiltinsimpl" /> 22.1.3.17.1 StringPaddingBuiltinsImpl ( _thisValue_: an ECMAScript language value, _maxLength_: an ECMAScript language value, _fillString_: an ECMAScript language value, _placement_: ~start~ or ~end~, ): either a normal completion containing a String or a throw completion
+##### <span id="sec-stringpaddingbuiltinsimpl" /> 22.1.3.17.1 StringPaddingBuiltinsImpl ( _thisValue_: an ECMAScript language value, _maxLength_: an ECMAScript language value, _fillString_: an ECMAScript language value, _placement_: ~start~ or ~end~, ): either a normal completion containing a String or a throw completion
 
 <Sec id="1.3.17.1" />
 
-##### <a id="sec-stringpad" /> 22.1.3.17.2 StringPad ( _str_: a String, _maxLength_: a non-negative integer, _fillString_: a String, _placement_: ~start~ or ~end~, ): a String
+##### <span id="sec-stringpad" /> 22.1.3.17.2 StringPad ( _str_: a String, _maxLength_: a non-negative integer, _fillString_: a String, _placement_: ~start~ or ~end~, ): a String
 
 <Sec id="1.3.17.2" />
 
-##### <a id="sec-tozeropaddeddecimalstring" /> 22.1.3.17.3 ToZeroPaddedDecimalString ( _n_: a non-negative integer, _minLength_: a non-negative integer, ): a String
+##### <span id="sec-tozeropaddeddecimalstring" /> 22.1.3.17.3 ToZeroPaddedDecimalString ( _n_: a non-negative integer, _minLength_: a non-negative integer, ): a String
 
 <Sec id="1.3.17.3" />
 
-#### <a id="sec-string.prototype.repeat" /> 22.1.3.18 String.prototype.repeat ( _count_ )
+#### <span id="sec-string.prototype.repeat" /> 22.1.3.18 String.prototype.repeat ( _count_ )
 
 <Sec id="1.3.18" />
 
-#### <a id="sec-string.prototype.replace" /> 22.1.3.19 String.prototype.replace ( _searchValue_, _replaceValue_ )
+#### <span id="sec-string.prototype.replace" /> 22.1.3.19 String.prototype.replace ( _searchValue_, _replaceValue_ )
 
 <Sec id="1.3.19" />
 
-##### <a id="sec-getsubstitution" /> 22.1.3.19.1 GetSubstitution ( _matched_: a String, _str_: a String, _position_: a non-negative integer, _captures_: a List of either Strings or *undefined*, _namedCaptures_: an Object or *undefined*, _replacementTemplate_: a String, ): either a normal completion containing a String or a throw completion
+##### <span id="sec-getsubstitution" /> 22.1.3.19.1 GetSubstitution ( _matched_: a String, _str_: a String, _position_: a non-negative integer, _captures_: a List of either Strings or *undefined*, _namedCaptures_: an Object or *undefined*, _replacementTemplate_: a String, ): either a normal completion containing a String or a throw completion
 
 <Sec id="1.3.19.1" />
 
-#### <a id="sec-string.prototype.replaceall" /> 22.1.3.20 String.prototype.replaceAll ( _searchValue_, _replaceValue_ )
+#### <span id="sec-string.prototype.replaceall" /> 22.1.3.20 String.prototype.replaceAll ( _searchValue_, _replaceValue_ )
 
 <Sec id="1.3.20" />
 
-#### <a id="sec-string.prototype.search" /> 22.1.3.21 String.prototype.search ( _regexpOrPattern_ )
+#### <span id="sec-string.prototype.search" /> 22.1.3.21 String.prototype.search ( _regexpOrPattern_ )
 
 <Sec id="1.3.21" />
 
-#### <a id="sec-string.prototype.slice" /> 22.1.3.22 String.prototype.slice ( _start_, _end_ )
+#### <span id="sec-string.prototype.slice" /> 22.1.3.22 String.prototype.slice ( _start_, _end_ )
 
 <Sec id="1.3.22" />
 
-#### <a id="sec-string.prototype.split" /> 22.1.3.23 String.prototype.split ( _separator_, _limit_ )
+#### <span id="sec-string.prototype.split" /> 22.1.3.23 String.prototype.split ( _separator_, _limit_ )
 
 <Sec id="1.3.23" />
 
-#### <a id="sec-string.prototype.startswith" /> 22.1.3.24 String.prototype.startsWith ( _searchString_ [ , _position_ ] )
+#### <span id="sec-string.prototype.startswith" /> 22.1.3.24 String.prototype.startsWith ( _searchString_ [ , _position_ ] )
 
 <Sec id="1.3.24" />
 
-#### <a id="sec-string.prototype.substring" /> 22.1.3.25 String.prototype.substring ( _start_, _end_ )
+#### <span id="sec-string.prototype.substring" /> 22.1.3.25 String.prototype.substring ( _start_, _end_ )
 
 <Sec id="1.3.25" />
 
-#### <a id="sec-string.prototype.tolocalelowercase" /> 22.1.3.26 String.prototype.toLocaleLowerCase ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <span id="sec-string.prototype.tolocalelowercase" /> 22.1.3.26 String.prototype.toLocaleLowerCase ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="1.3.26" />
 
-#### <a id="sec-string.prototype.tolocaleuppercase" /> 22.1.3.27 String.prototype.toLocaleUpperCase ( [ _reserved1_ [ , _reserved2_ ] ] )
+#### <span id="sec-string.prototype.tolocaleuppercase" /> 22.1.3.27 String.prototype.toLocaleUpperCase ( [ _reserved1_ [ , _reserved2_ ] ] )
 
 <Sec id="1.3.27" />
 
-#### <a id="sec-string.prototype.tolowercase" /> 22.1.3.28 String.prototype.toLowerCase ( )
+#### <span id="sec-string.prototype.tolowercase" /> 22.1.3.28 String.prototype.toLowerCase ( )
 
 <Sec id="1.3.28" />
 
-#### <a id="sec-string.prototype.tostring" /> 22.1.3.29 String.prototype.toString ( )
+#### <span id="sec-string.prototype.tostring" /> 22.1.3.29 String.prototype.toString ( )
 
 <Sec id="1.3.29" />
 
-#### <a id="sec-string.prototype.touppercase" /> 22.1.3.30 String.prototype.toUpperCase ( )
+#### <span id="sec-string.prototype.touppercase" /> 22.1.3.30 String.prototype.toUpperCase ( )
 
 <Sec id="1.3.30" />
 
-#### <a id="sec-string.prototype.towellformed" /> 22.1.3.31 String.prototype.toWellFormed ( )
+#### <span id="sec-string.prototype.towellformed" /> 22.1.3.31 String.prototype.toWellFormed ( )
 
 <Sec id="1.3.31" />
 
-#### <a id="sec-string.prototype.trim" /> 22.1.3.32 String.prototype.trim ( )
+#### <span id="sec-string.prototype.trim" /> 22.1.3.32 String.prototype.trim ( )
 
 <Sec id="1.3.32" />
 
-##### <a id="sec-trimstring" /> 22.1.3.32.1 TrimString ( _string_: an ECMAScript language value, _where_: ~start~, ~end~, or ~start+end~, ): either a normal completion containing a String or a throw completion
+##### <span id="sec-trimstring" /> 22.1.3.32.1 TrimString ( _string_: an ECMAScript language value, _where_: ~start~, ~end~, or ~start+end~, ): either a normal completion containing a String or a throw completion
 
 <Sec id="1.3.32.1" />
 
-#### <a id="sec-string.prototype.trimend" /> 22.1.3.33 String.prototype.trimEnd ( )
+#### <span id="sec-string.prototype.trimend" /> 22.1.3.33 String.prototype.trimEnd ( )
 
 <Sec id="1.3.33" />
 
-#### <a id="sec-string.prototype.trimstart" /> 22.1.3.34 String.prototype.trimStart ( )
+#### <span id="sec-string.prototype.trimstart" /> 22.1.3.34 String.prototype.trimStart ( )
 
 <Sec id="1.3.34" />
 
-#### <a id="sec-string.prototype.valueof" /> 22.1.3.35 String.prototype.valueOf ( )
+#### <span id="sec-string.prototype.valueof" /> 22.1.3.35 String.prototype.valueOf ( )
 
 <Sec id="1.3.35" />
 
-##### <a id="sec-thisstringvalue" /> 22.1.3.35.1 ThisStringValue ( _value_: an ECMAScript language value, ): either a normal completion containing a String or a throw completion
+##### <span id="sec-thisstringvalue" /> 22.1.3.35.1 ThisStringValue ( _value_: an ECMAScript language value, ): either a normal completion containing a String or a throw completion
 
 <Sec id="1.3.35.1" />
 
-#### <a id="sec-string.prototype-%symbol.iterator%" /> 22.1.3.36 String.prototype [ %Symbol.iterator% ] ( )
+#### <span id="sec-string.prototype-%symbol.iterator%" /> 22.1.3.36 String.prototype [ %Symbol.iterator% ] ( )
 
 <Sec id="1.3.36" />
 
-### <a id="sec-properties-of-string-instances" /> 22.1.4 Properties of String Instances
+### <span id="sec-properties-of-string-instances" /> 22.1.4 Properties of String Instances
 
 <Sec id="1.4" />
 
-#### <a id="sec-properties-of-string-instances-length" /> 22.1.4.1 length
+#### <span id="sec-properties-of-string-instances-length" /> 22.1.4.1 length
 
 <Sec id="1.4.1" />
 
-### <a id="sec-string-iterator-objects" /> 22.1.5 String Iterator Objects
+### <span id="sec-string-iterator-objects" /> 22.1.5 String Iterator Objects
 
 <Sec id="1.5" />
 
-#### <a id="sec-%stringiteratorprototype%-object" /> 22.1.5.1 The %StringIteratorPrototype% Object
+#### <span id="sec-%stringiteratorprototype%-object" /> 22.1.5.1 The %StringIteratorPrototype% Object
 
 <Sec id="1.5.1" />
 
-##### <a id="sec-%stringiteratorprototype%.next" /> 22.1.5.1.1 %StringIteratorPrototype%.next ( )
+##### <span id="sec-%stringiteratorprototype%.next" /> 22.1.5.1.1 %StringIteratorPrototype%.next ( )
 
 <Sec id="1.5.1.1" />
 
-##### <a id="sec-%stringiteratorprototype%-%symbol.tostringtag%" /> 22.1.5.1.2 %StringIteratorPrototype% [ %Symbol.toStringTag% ]
+##### <span id="sec-%stringiteratorprototype%-%symbol.tostringtag%" /> 22.1.5.1.2 %StringIteratorPrototype% [ %Symbol.toStringTag% ]
 
 <Sec id="1.5.1.2" />
 
-## <a id="sec-regexp-regular-expression-objects" /> 22.2 RegExp (Regular Expression) Objects
+## <span id="sec-regexp-regular-expression-objects" /> 22.2 RegExp (Regular Expression) Objects
 
 <Sec id="2" />
 
-### <a id="sec-patterns" /> 22.2.1 Patterns
+### <span id="sec-patterns" /> 22.2.1 Patterns
 
 <Sec id="2.1" />
 
-#### <a id="sec-patterns-static-semantics-early-errors" /> 22.2.1.1 Static Semantics: Early Errors
+#### <span id="sec-patterns-static-semantics-early-errors" /> 22.2.1.1 Static Semantics: Early Errors
 
 <Sec id="2.1.1" />
 
-#### <a id="sec-countleftcapturingparenswithin" /> 22.2.1.2 Static Semantics: CountLeftCapturingParensWithin ( _node_: a Parse Node, ): a non-negative integer
+#### <span id="sec-countleftcapturingparenswithin" /> 22.2.1.2 Static Semantics: CountLeftCapturingParensWithin ( _node_: a Parse Node, ): a non-negative integer
 
 <Sec id="2.1.2" />
 
-#### <a id="sec-countleftcapturingparensbefore" /> 22.2.1.3 Static Semantics: CountLeftCapturingParensBefore ( _node_: a Parse Node, ): a non-negative integer
+#### <span id="sec-countleftcapturingparensbefore" /> 22.2.1.3 Static Semantics: CountLeftCapturingParensBefore ( _node_: a Parse Node, ): a non-negative integer
 
 <Sec id="2.1.3" />
 
-#### <a id="sec-mightbothparticipate" /> 22.2.1.4 Static Semantics: MightBothParticipate ( _x_: a Parse Node, _y_: a Parse Node, ): a Boolean
+#### <span id="sec-mightbothparticipate" /> 22.2.1.4 Static Semantics: MightBothParticipate ( _x_: a Parse Node, _y_: a Parse Node, ): a Boolean
 
 <Sec id="2.1.4" />
 
-#### <a id="sec-patterns-static-semantics-capturing-group-number" /> 22.2.1.5 Static Semantics: CapturingGroupNumber ( ): a positive integer
+#### <span id="sec-patterns-static-semantics-capturing-group-number" /> 22.2.1.5 Static Semantics: CapturingGroupNumber ( ): a positive integer
 
 <Sec id="2.1.5" />
 
-#### <a id="sec-patterns-static-semantics-is-character-class" /> 22.2.1.6 Static Semantics: IsCharacterClass ( ): a Boolean
+#### <span id="sec-patterns-static-semantics-is-character-class" /> 22.2.1.6 Static Semantics: IsCharacterClass ( ): a Boolean
 
 <Sec id="2.1.6" />
 
-#### <a id="sec-patterns-static-semantics-character-value" /> 22.2.1.7 Static Semantics: CharacterValue ( ): a non-negative integer
+#### <span id="sec-patterns-static-semantics-character-value" /> 22.2.1.7 Static Semantics: CharacterValue ( ): a non-negative integer
 
 <Sec id="2.1.7" />
 
-#### <a id="sec-static-semantics-maycontainstrings" /> 22.2.1.8 Static Semantics: MayContainStrings ( ): a Boolean
+#### <span id="sec-static-semantics-maycontainstrings" /> 22.2.1.8 Static Semantics: MayContainStrings ( ): a Boolean
 
 <Sec id="2.1.8" />
 
-#### <a id="sec-groupspecifiersthatmatch" /> 22.2.1.9 Static Semantics: GroupSpecifiersThatMatch ( _thisGroupName_: a |GroupName| Parse Node, ): a List of |GroupSpecifier| Parse Nodes
+#### <span id="sec-groupspecifiersthatmatch" /> 22.2.1.9 Static Semantics: GroupSpecifiersThatMatch ( _thisGroupName_: a |GroupName| Parse Node, ): a List of |GroupSpecifier| Parse Nodes
 
 <Sec id="2.1.9" />
 
-#### <a id="sec-static-semantics-capturinggroupname" /> 22.2.1.10 Static Semantics: CapturingGroupName ( ): a String
+#### <span id="sec-static-semantics-capturinggroupname" /> 22.2.1.10 Static Semantics: CapturingGroupName ( ): a String
 
 <Sec id="2.1.10" />
 
-#### <a id="sec-regexpidentifiercodepoints" /> 22.2.1.11 Static Semantics: RegExpIdentifierCodePoints ( ): a List of code points
+#### <span id="sec-regexpidentifiercodepoints" /> 22.2.1.11 Static Semantics: RegExpIdentifierCodePoints ( ): a List of code points
 
 <Sec id="2.1.11" />
 
-#### <a id="sec-regexpidentifiercodepoint" /> 22.2.1.12 Static Semantics: RegExpIdentifierCodePoint ( ): a code point
+#### <span id="sec-regexpidentifiercodepoint" /> 22.2.1.12 Static Semantics: RegExpIdentifierCodePoint ( ): a code point
 
 <Sec id="2.1.12" />
 
-### <a id="sec-pattern-semantics" /> 22.2.2 Pattern Semantics
+### <span id="sec-pattern-semantics" /> 22.2.2 Pattern Semantics
 
 <Sec id="2.2" />
 
-#### <a id="sec-pattern-notation" /> 22.2.2.1 Notation
+#### <span id="sec-pattern-notation" /> 22.2.2.1 Notation
 
 <Sec id="2.2.1" />
 
-##### <a id="sec-regexp-records" /> 22.2.2.1.1 RegExp Records
+##### <span id="sec-regexp-records" /> 22.2.2.1.1 RegExp Records
 
 <Sec id="2.2.1.1" />
 
-#### <a id="sec-compilepattern" /> 22.2.2.2 Runtime Semantics: CompilePattern ( _regexpRecord_: a RegExp Record, ): an Abstract Closure that takes a List of characters and a non-negative integer and returns either a MatchState or ~failure~
+#### <span id="sec-compilepattern" /> 22.2.2.2 Runtime Semantics: CompilePattern ( _regexpRecord_: a RegExp Record, ): an Abstract Closure that takes a List of characters and a non-negative integer and returns either a MatchState or ~failure~
 
 <Sec id="2.2.2" />
 
-#### <a id="sec-compilesubpattern" /> 22.2.2.3 Runtime Semantics: CompileSubpattern ( _regexpRecord_: a RegExp Record, _direction_: ~forward~ or ~backward~, ): a Matcher
+#### <span id="sec-compilesubpattern" /> 22.2.2.3 Runtime Semantics: CompileSubpattern ( _regexpRecord_: a RegExp Record, _direction_: ~forward~ or ~backward~, ): a Matcher
 
 <Sec id="2.2.3" />
 
-##### <a id="sec-runtime-semantics-repeatmatcher-abstract-operation" /> 22.2.2.3.1 RepeatMatcher ( _m_: a Matcher, _min_: a non-negative integer, _max_: a non-negative integer or +&infin;, _greedy_: a Boolean, _matchState_: a MatchState, _continue_: a MatcherContinuation, _parenIndex_: a non-negative integer, _parenCount_: a non-negative integer, ): either a MatchState or ~failure~
+##### <span id="sec-runtime-semantics-repeatmatcher-abstract-operation" /> 22.2.2.3.1 RepeatMatcher ( _m_: a Matcher, _min_: a non-negative integer, _max_: a non-negative integer or +&infin;, _greedy_: a Boolean, _matchState_: a MatchState, _continue_: a MatcherContinuation, _parenIndex_: a non-negative integer, _parenCount_: a non-negative integer, ): either a MatchState or ~failure~
 
 <Sec id="2.2.3.1" />
 
-##### <a id="sec-emptymatcher" /> 22.2.2.3.2 EmptyMatcher ( ): a Matcher
+##### <span id="sec-emptymatcher" /> 22.2.2.3.2 EmptyMatcher ( ): a Matcher
 
 <Sec id="2.2.3.2" />
 
-##### <a id="sec-matchtwoalternatives" /> 22.2.2.3.3 MatchTwoAlternatives ( _m1_: a Matcher, _m2_: a Matcher, ): a Matcher
+##### <span id="sec-matchtwoalternatives" /> 22.2.2.3.3 MatchTwoAlternatives ( _m1_: a Matcher, _m2_: a Matcher, ): a Matcher
 
 <Sec id="2.2.3.3" />
 
-##### <a id="sec-matchsequence" /> 22.2.2.3.4 MatchSequence ( _m1_: a Matcher, _m2_: a Matcher, _direction_: ~forward~ or ~backward~, ): a Matcher
+##### <span id="sec-matchsequence" /> 22.2.2.3.4 MatchSequence ( _m1_: a Matcher, _m2_: a Matcher, _direction_: ~forward~ or ~backward~, ): a Matcher
 
 <Sec id="2.2.3.4" />
 
-#### <a id="sec-compileassertion" /> 22.2.2.4 Runtime Semantics: CompileAssertion ( _regexpRecord_: a RegExp Record, ): a Matcher
+#### <span id="sec-compileassertion" /> 22.2.2.4 Runtime Semantics: CompileAssertion ( _regexpRecord_: a RegExp Record, ): a Matcher
 
 <Sec id="2.2.4" />
 
-##### <a id="sec-runtime-semantics-iswordchar-abstract-operation" /> 22.2.2.4.1 IsWordChar ( _regexpRecord_: a RegExp Record, _input_: a List of characters, _e_: an integer, ): a Boolean
+##### <span id="sec-runtime-semantics-iswordchar-abstract-operation" /> 22.2.2.4.1 IsWordChar ( _regexpRecord_: a RegExp Record, _input_: a List of characters, _e_: an integer, ): a Boolean
 
 <Sec id="2.2.4.1" />
 
-#### <a id="sec-compilequantifier" /> 22.2.2.5 Runtime Semantics: CompileQuantifier ( ): a Record with fields [[Min]] (a non-negative integer), [[Max]] (a non-negative integer or +&infin;), and [[Greedy]] (a Boolean)
+#### <span id="sec-compilequantifier" /> 22.2.2.5 Runtime Semantics: CompileQuantifier ( ): a Record with fields [[Min]] (a non-negative integer), [[Max]] (a non-negative integer or +&infin;), and [[Greedy]] (a Boolean)
 
 <Sec id="2.2.5" />
 
-#### <a id="sec-compilequantifierprefix" /> 22.2.2.6 Runtime Semantics: CompileQuantifierPrefix ( ): a Record with fields [[Min]] (a non-negative integer) and [[Max]] (a non-negative integer or +&infin;)
+#### <span id="sec-compilequantifierprefix" /> 22.2.2.6 Runtime Semantics: CompileQuantifierPrefix ( ): a Record with fields [[Min]] (a non-negative integer) and [[Max]] (a non-negative integer or +&infin;)
 
 <Sec id="2.2.6" />
 
-#### <a id="sec-compileatom" /> 22.2.2.7 Runtime Semantics: CompileAtom ( _regexpRecord_: a RegExp Record, _direction_: ~forward~ or ~backward~, ): a Matcher
+#### <span id="sec-compileatom" /> 22.2.2.7 Runtime Semantics: CompileAtom ( _regexpRecord_: a RegExp Record, _direction_: ~forward~ or ~backward~, ): a Matcher
 
 <Sec id="2.2.7" />
 
-##### <a id="sec-runtime-semantics-charactersetmatcher-abstract-operation" /> 22.2.2.7.1 CharacterSetMatcher ( _regexpRecord_: a RegExp Record, _charSet_: a CharSet, _invert_: a Boolean, _direction_: ~forward~ or ~backward~, ): a Matcher
+##### <span id="sec-runtime-semantics-charactersetmatcher-abstract-operation" /> 22.2.2.7.1 CharacterSetMatcher ( _regexpRecord_: a RegExp Record, _charSet_: a CharSet, _invert_: a Boolean, _direction_: ~forward~ or ~backward~, ): a Matcher
 
 <Sec id="2.2.7.1" />
 
-##### <a id="sec-backreference-matcher" /> 22.2.2.7.2 BackreferenceMatcher ( _regexpRecord_: a RegExp Record, _ns_: a List of positive integers, _direction_: ~forward~ or ~backward~, ): a Matcher
+##### <span id="sec-backreference-matcher" /> 22.2.2.7.2 BackreferenceMatcher ( _regexpRecord_: a RegExp Record, _ns_: a List of positive integers, _direction_: ~forward~ or ~backward~, ): a Matcher
 
 <Sec id="2.2.7.2" />
 
-##### <a id="sec-runtime-semantics-canonicalize-ch" /> 22.2.2.7.3 Canonicalize ( _regexpRecord_: a RegExp Record, _ch_: a character, ): a character
+##### <span id="sec-runtime-semantics-canonicalize-ch" /> 22.2.2.7.3 Canonicalize ( _regexpRecord_: a RegExp Record, _ch_: a character, ): a character
 
 <Sec id="2.2.7.3" />
 
-##### <a id="sec-updatemodifiers" /> 22.2.2.7.4 UpdateModifiers ( _regexpRecord_: a RegExp Record, _add_: a String, _remove_: a String, ): a RegExp Record
+##### <span id="sec-updatemodifiers" /> 22.2.2.7.4 UpdateModifiers ( _regexpRecord_: a RegExp Record, _add_: a String, _remove_: a String, ): a RegExp Record
 
 <Sec id="2.2.7.4" />
 
-#### <a id="sec-compilecharacterclass" /> 22.2.2.8 Runtime Semantics: CompileCharacterClass ( _regexpRecord_: a RegExp Record, ): a Record with fields [[CharSet]] (a CharSet) and [[Invert]] (a Boolean)
+#### <span id="sec-compilecharacterclass" /> 22.2.2.8 Runtime Semantics: CompileCharacterClass ( _regexpRecord_: a RegExp Record, ): a Record with fields [[CharSet]] (a CharSet) and [[Invert]] (a Boolean)
 
 <Sec id="2.2.8" />
 
-#### <a id="sec-compiletocharset" /> 22.2.2.9 Runtime Semantics: CompileToCharSet ( _regexpRecord_: a RegExp Record, ): a CharSet
+#### <span id="sec-compiletocharset" /> 22.2.2.9 Runtime Semantics: CompileToCharSet ( _regexpRecord_: a RegExp Record, ): a CharSet
 
 <Sec id="2.2.9" />
 
-##### <a id="sec-runtime-semantics-characterrange-abstract-operation" /> 22.2.2.9.1 CharacterRange ( _charSet_: a CharSet, _otherSet_: a CharSet, ): a CharSet
+##### <span id="sec-runtime-semantics-characterrange-abstract-operation" /> 22.2.2.9.1 CharacterRange ( _charSet_: a CharSet, _otherSet_: a CharSet, ): a CharSet
 
 <Sec id="2.2.9.1" />
 
-##### <a id="sec-runtime-semantics-haseitherunicodeflag-abstract-operation" /> 22.2.2.9.2 HasEitherUnicodeFlag ( _regexpRecord_: a RegExp Record, ): a Boolean
+##### <span id="sec-runtime-semantics-haseitherunicodeflag-abstract-operation" /> 22.2.2.9.2 HasEitherUnicodeFlag ( _regexpRecord_: a RegExp Record, ): a Boolean
 
 <Sec id="2.2.9.2" />
 
-##### <a id="sec-wordcharacters" /> 22.2.2.9.3 WordCharacters ( _regexpRecord_: a RegExp Record, ): a CharSet
+##### <span id="sec-wordcharacters" /> 22.2.2.9.3 WordCharacters ( _regexpRecord_: a RegExp Record, ): a CharSet
 
 <Sec id="2.2.9.3" />
 
-##### <a id="sec-allcharacters" /> 22.2.2.9.4 AllCharacters ( _regexpRecord_: a RegExp Record, ): a CharSet
+##### <span id="sec-allcharacters" /> 22.2.2.9.4 AllCharacters ( _regexpRecord_: a RegExp Record, ): a CharSet
 
 <Sec id="2.2.9.4" />
 
-##### <a id="sec-maybesimplecasefolding" /> 22.2.2.9.5 MaybeSimpleCaseFolding ( _regexpRecord_: a RegExp Record, _charSet_: a CharSet, ): a CharSet
+##### <span id="sec-maybesimplecasefolding" /> 22.2.2.9.5 MaybeSimpleCaseFolding ( _regexpRecord_: a RegExp Record, _charSet_: a CharSet, ): a CharSet
 
 <Sec id="2.2.9.5" />
 
-##### <a id="sec-charactercomplement" /> 22.2.2.9.6 CharacterComplement ( _regexpRecord_: a RegExp Record, _complement_: a CharSet, ): a CharSet
+##### <span id="sec-charactercomplement" /> 22.2.2.9.6 CharacterComplement ( _regexpRecord_: a RegExp Record, _complement_: a CharSet, ): a CharSet
 
 <Sec id="2.2.9.6" />
 
-##### <a id="sec-runtime-semantics-unicodematchproperty-p" /> 22.2.2.9.7 UnicodeMatchProperty ( _regexpRecord_: a RegExp Record, _p_: ECMAScript source text, ): a Unicode property name
+##### <span id="sec-runtime-semantics-unicodematchproperty-p" /> 22.2.2.9.7 UnicodeMatchProperty ( _regexpRecord_: a RegExp Record, _p_: ECMAScript source text, ): a Unicode property name
 
 <Sec id="2.2.9.7" />
 
-##### <a id="sec-runtime-semantics-unicodematchpropertyvalue-p-v" /> 22.2.2.9.8 UnicodeMatchPropertyValue ( _p_: ECMAScript source text, _v_: ECMAScript source text, ): a Unicode property value
+##### <span id="sec-runtime-semantics-unicodematchpropertyvalue-p-v" /> 22.2.2.9.8 UnicodeMatchPropertyValue ( _p_: ECMAScript source text, _v_: ECMAScript source text, ): a Unicode property value
 
 <Sec id="2.2.9.8" />
 
-#### <a id="sec-compileclasssetstring" /> 22.2.2.10 Runtime Semantics: CompileClassSetString ( _regexpRecord_: a RegExp Record, ): a sequence of characters
+#### <span id="sec-compileclasssetstring" /> 22.2.2.10 Runtime Semantics: CompileClassSetString ( _regexpRecord_: a RegExp Record, ): a sequence of characters
 
 <Sec id="2.2.10" />
 
-### <a id="sec-abstract-operations-for-regexp-creation" /> 22.2.3 Abstract Operations for RegExp Creation
+### <span id="sec-abstract-operations-for-regexp-creation" /> 22.2.3 Abstract Operations for RegExp Creation
 
-#### <a id="sec-regexpcreate" /> 22.2.3.1 RegExpCreate ( _pattern_: an ECMAScript language value, _flags_: a String or *undefined*, ): either a normal completion containing an Object or a throw completion
+#### <span id="sec-regexpcreate" /> 22.2.3.1 RegExpCreate ( _pattern_: an ECMAScript language value, _flags_: a String or *undefined*, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="2.3.1" />
 
-#### <a id="sec-regexpalloc" /> 22.2.3.2 RegExpAlloc ( _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
+#### <span id="sec-regexpalloc" /> 22.2.3.2 RegExpAlloc ( _newTarget_: a constructor, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="2.3.2" />
 
-#### <a id="sec-regexpinitialize" /> 22.2.3.3 RegExpInitialize ( _obj_: an Object, _pattern_: an ECMAScript language value, _flags_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
+#### <span id="sec-regexpinitialize" /> 22.2.3.3 RegExpInitialize ( _obj_: an Object, _pattern_: an ECMAScript language value, _flags_: an ECMAScript language value, ): either a normal completion containing an Object or a throw completion
 
 <Sec id="2.3.3" />
 
-#### <a id="sec-parsepattern" /> 22.2.3.4 Static Semantics: ParsePattern ( _patternText_: a sequence of Unicode code points, _u_: a Boolean, _v_: a Boolean, ): a Parse Node or a non-empty List of *SyntaxError* objects
+#### <span id="sec-parsepattern" /> 22.2.3.4 Static Semantics: ParsePattern ( _patternText_: a sequence of Unicode code points, _u_: a Boolean, _v_: a Boolean, ): a Parse Node or a non-empty List of *SyntaxError* objects
 
 <Sec id="2.3.4" />
 
-### <a id="sec-regexp-constructor" /> 22.2.4 The RegExp Constructor
+### <span id="sec-regexp-constructor" /> 22.2.4 The RegExp Constructor
 
 <Sec id="2.4" />
 
-#### <a id="sec-regexp-pattern-flags" /> 22.2.4.1 RegExp ( _patternOrRegexp_, _flags_ )
+#### <span id="sec-regexp-pattern-flags" /> 22.2.4.1 RegExp ( _patternOrRegexp_, _flags_ )
 
 <Sec id="2.4.1" />
 
-### <a id="sec-properties-of-the-regexp-constructor" /> 22.2.5 Properties of the RegExp Constructor
+### <span id="sec-properties-of-the-regexp-constructor" /> 22.2.5 Properties of the RegExp Constructor
 
 <Sec id="2.5" />
 
-#### <a id="sec-regexp.escape" /> 22.2.5.1 RegExp.escape ( _str_ )
+#### <span id="sec-regexp.escape" /> 22.2.5.1 RegExp.escape ( _str_ )
 
 <Sec id="2.5.1" />
 
-##### <a id="sec-encodeforregexpescape" /> 22.2.5.1.1 EncodeForRegExpEscape ( _cp_: a code point, ): a String
+##### <span id="sec-encodeforregexpescape" /> 22.2.5.1.1 EncodeForRegExpEscape ( _cp_: a code point, ): a String
 
 <Sec id="2.5.1.1" />
 
-#### <a id="sec-regexp.prototype" /> 22.2.5.2 RegExp.prototype
+#### <span id="sec-regexp.prototype" /> 22.2.5.2 RegExp.prototype
 
 <Sec id="2.5.2" />
 
-#### <a id="sec-get-regexp-%symbol.species%" /> 22.2.5.3 get RegExp [ %Symbol.species% ]
+#### <span id="sec-get-regexp-%symbol.species%" /> 22.2.5.3 get RegExp [ %Symbol.species% ]
 
 <Sec id="2.5.3" />
 
-### <a id="sec-properties-of-the-regexp-prototype-object" /> 22.2.6 Properties of the RegExp Prototype Object
+### <span id="sec-properties-of-the-regexp-prototype-object" /> 22.2.6 Properties of the RegExp Prototype Object
 
 <Sec id="2.6" />
 
-#### <a id="sec-regexp.prototype.constructor" /> 22.2.6.1 RegExp.prototype.constructor
+#### <span id="sec-regexp.prototype.constructor" /> 22.2.6.1 RegExp.prototype.constructor
 
 <Sec id="2.6.1" />
 
-#### <a id="sec-regexp.prototype.exec" /> 22.2.6.2 RegExp.prototype.exec ( _string_ )
+#### <span id="sec-regexp.prototype.exec" /> 22.2.6.2 RegExp.prototype.exec ( _string_ )
 
 <Sec id="2.6.2" />
 
-#### <a id="sec-get-regexp.prototype.dotAll" /> 22.2.6.3 get RegExp.prototype.dotAll
+#### <span id="sec-get-regexp.prototype.dotAll" /> 22.2.6.3 get RegExp.prototype.dotAll
 
 <Sec id="2.6.3" />
 
-#### <a id="sec-get-regexp.prototype.flags" /> 22.2.6.4 get RegExp.prototype.flags
+#### <span id="sec-get-regexp.prototype.flags" /> 22.2.6.4 get RegExp.prototype.flags
 
 <Sec id="2.6.4" />
 
-##### <a id="sec-regexphasflag" /> 22.2.6.4.1 RegExpHasFlag ( _regexp_: an ECMAScript language value, _codeUnit_: a code unit, ): either a normal completion containing either a Boolean or *undefined*, or a throw completion
+##### <span id="sec-regexphasflag" /> 22.2.6.4.1 RegExpHasFlag ( _regexp_: an ECMAScript language value, _codeUnit_: a code unit, ): either a normal completion containing either a Boolean or *undefined*, or a throw completion
 
 <Sec id="2.6.4.1" />
 
-#### <a id="sec-get-regexp.prototype.global" /> 22.2.6.5 get RegExp.prototype.global
+#### <span id="sec-get-regexp.prototype.global" /> 22.2.6.5 get RegExp.prototype.global
 
 <Sec id="2.6.5" />
 
-#### <a id="sec-get-regexp.prototype.hasIndices" /> 22.2.6.6 get RegExp.prototype.hasIndices
+#### <span id="sec-get-regexp.prototype.hasIndices" /> 22.2.6.6 get RegExp.prototype.hasIndices
 
 <Sec id="2.6.6" />
 
-#### <a id="sec-get-regexp.prototype.ignorecase" /> 22.2.6.7 get RegExp.prototype.ignoreCase
+#### <span id="sec-get-regexp.prototype.ignorecase" /> 22.2.6.7 get RegExp.prototype.ignoreCase
 
 <Sec id="2.6.7" />
 
-#### <a id="sec-regexp.prototype-%symbol.match%" /> 22.2.6.8 RegExp.prototype [ %Symbol.match% ] ( _string_ )
+#### <span id="sec-regexp.prototype-%symbol.match%" /> 22.2.6.8 RegExp.prototype [ %Symbol.match% ] ( _string_ )
 
 <Sec id="2.6.8" />
 
-#### <a id="sec-regexp-prototype-%symbol.matchall%" /> 22.2.6.9 RegExp.prototype [ %Symbol.matchAll% ] ( _string_ )
+#### <span id="sec-regexp-prototype-%symbol.matchall%" /> 22.2.6.9 RegExp.prototype [ %Symbol.matchAll% ] ( _string_ )
 
 <Sec id="2.6.9" />
 
-#### <a id="sec-get-regexp.prototype.multiline" /> 22.2.6.10 get RegExp.prototype.multiline
+#### <span id="sec-get-regexp.prototype.multiline" /> 22.2.6.10 get RegExp.prototype.multiline
 
 <Sec id="2.6.10" />
 
-#### <a id="sec-regexp.prototype-%symbol.replace%" /> 22.2.6.11 RegExp.prototype [ %Symbol.replace% ] ( _string_, _replaceValue_ )
+#### <span id="sec-regexp.prototype-%symbol.replace%" /> 22.2.6.11 RegExp.prototype [ %Symbol.replace% ] ( _string_, _replaceValue_ )
 
 <Sec id="2.6.11" />
 
-#### <a id="sec-regexp.prototype-%symbol.search%" /> 22.2.6.12 RegExp.prototype [ %Symbol.search% ] ( _string_ )
+#### <span id="sec-regexp.prototype-%symbol.search%" /> 22.2.6.12 RegExp.prototype [ %Symbol.search% ] ( _string_ )
 
 <Sec id="2.6.12" />
 
-#### <a id="sec-get-regexp.prototype.source" /> 22.2.6.13 get RegExp.prototype.source
+#### <span id="sec-get-regexp.prototype.source" /> 22.2.6.13 get RegExp.prototype.source
 
 <Sec id="2.6.13" />
 
-##### <a id="sec-escaperegexppattern" /> 22.2.6.13.1 EscapeRegExpPattern ( _pattern_: a String, _flags_: a String, ): a String
+##### <span id="sec-escaperegexppattern" /> 22.2.6.13.1 EscapeRegExpPattern ( _pattern_: a String, _flags_: a String, ): a String
 
 <Sec id="2.6.13.1" />
 
-#### <a id="sec-regexp.prototype-%symbol.split%" /> 22.2.6.14 RegExp.prototype [ %Symbol.split% ] ( _string_, _limit_ )
+#### <span id="sec-regexp.prototype-%symbol.split%" /> 22.2.6.14 RegExp.prototype [ %Symbol.split% ] ( _string_, _limit_ )
 
 <Sec id="2.6.14" />
 
-#### <a id="sec-get-regexp.prototype.sticky" /> 22.2.6.15 get RegExp.prototype.sticky
+#### <span id="sec-get-regexp.prototype.sticky" /> 22.2.6.15 get RegExp.prototype.sticky
 
 <Sec id="2.6.15" />
 
-#### <a id="sec-regexp.prototype.test" /> 22.2.6.16 RegExp.prototype.test ( _str_ )
+#### <span id="sec-regexp.prototype.test" /> 22.2.6.16 RegExp.prototype.test ( _str_ )
 
 <Sec id="2.6.16" />
 
-#### <a id="sec-regexp.prototype.tostring" /> 22.2.6.17 RegExp.prototype.toString ( )
+#### <span id="sec-regexp.prototype.tostring" /> 22.2.6.17 RegExp.prototype.toString ( )
 
 <Sec id="2.6.17" />
 
-#### <a id="sec-get-regexp.prototype.unicode" /> 22.2.6.18 get RegExp.prototype.unicode
+#### <span id="sec-get-regexp.prototype.unicode" /> 22.2.6.18 get RegExp.prototype.unicode
 
 <Sec id="2.6.18" />
 
-#### <a id="sec-get-regexp.prototype.unicodesets" /> 22.2.6.19 get RegExp.prototype.unicodeSets
+#### <span id="sec-get-regexp.prototype.unicodesets" /> 22.2.6.19 get RegExp.prototype.unicodeSets
 
 <Sec id="2.6.19" />
 
-### <a id="sec-abstract-operations-for-regexp-matching" /> 22.2.7 Abstract Operations for RegExp Matching
+### <span id="sec-abstract-operations-for-regexp-matching" /> 22.2.7 Abstract Operations for RegExp Matching
 
-#### <a id="sec-regexpexec" /> 22.2.7.1 RegExpExec ( _regexp_: an Object, _str_: a String, ): either a normal completion containing either an Object or *null*, or a throw completion
+#### <span id="sec-regexpexec" /> 22.2.7.1 RegExpExec ( _regexp_: an Object, _str_: a String, ): either a normal completion containing either an Object or *null*, or a throw completion
 
 <Sec id="2.7.1" />
 
-#### <a id="sec-regexpbuiltinexec" /> 22.2.7.2 RegExpBuiltinExec ( _regexp_: an initialized RegExp instance, _str_: a String, ): either a normal completion containing either an Array exotic object or *null*, or a throw completion
+#### <span id="sec-regexpbuiltinexec" /> 22.2.7.2 RegExpBuiltinExec ( _regexp_: an initialized RegExp instance, _str_: a String, ): either a normal completion containing either an Array exotic object or *null*, or a throw completion
 
 <Sec id="2.7.2" />
 
-#### <a id="sec-advancestringindex" /> 22.2.7.3 AdvanceStringIndex ( _str_: a String, _index_: a non-negative integer, _unicode_: a Boolean, ): a non-negative integer
+#### <span id="sec-advancestringindex" /> 22.2.7.3 AdvanceStringIndex ( _str_: a String, _index_: a non-negative integer, _unicode_: a Boolean, ): a non-negative integer
 
 <Sec id="2.7.3" />
 
-#### <a id="sec-getstringindex" /> 22.2.7.4 GetStringIndex ( _str_: a String, _codePointIndex_: a non-negative integer, ): a non-negative integer
+#### <span id="sec-getstringindex" /> 22.2.7.4 GetStringIndex ( _str_: a String, _codePointIndex_: a non-negative integer, ): a non-negative integer
 
 <Sec id="2.7.4" />
 
-#### <a id="sec-match-records" /> 22.2.7.5 Match Records
+#### <span id="sec-match-records" /> 22.2.7.5 Match Records
 
 <Sec id="2.7.5" />
 
-#### <a id="sec-getmatchstring" /> 22.2.7.6 GetMatchString ( _str_: a String, _match_: a Match Record, ): a String
+#### <span id="sec-getmatchstring" /> 22.2.7.6 GetMatchString ( _str_: a String, _match_: a Match Record, ): a String
 
 <Sec id="2.7.6" />
 
-#### <a id="sec-getmatchindexpair" /> 22.2.7.7 GetMatchIndexPair ( _str_: a String, _match_: a Match Record, ): an Array
+#### <span id="sec-getmatchindexpair" /> 22.2.7.7 GetMatchIndexPair ( _str_: a String, _match_: a Match Record, ): an Array
 
 <Sec id="2.7.7" />
 
-#### <a id="sec-makematchindicesindexpairarray" /> 22.2.7.8 MakeMatchIndicesIndexPairArray ( _str_: a String, _indices_: a List of either Match Records or *undefined*, _groupNames_: a List of either Strings or *undefined*, _hasGroups_: a Boolean, ): an Array
+#### <span id="sec-makematchindicesindexpairarray" /> 22.2.7.8 MakeMatchIndicesIndexPairArray ( _str_: a String, _indices_: a List of either Match Records or *undefined*, _groupNames_: a List of either Strings or *undefined*, _hasGroups_: a Boolean, ): an Array
 
 <Sec id="2.7.8" />
 
-### <a id="sec-properties-of-regexp-instances" /> 22.2.8 Properties of RegExp Instances
+### <span id="sec-properties-of-regexp-instances" /> 22.2.8 Properties of RegExp Instances
 
 <Sec id="2.8" />
 
-#### <a id="sec-lastindex" /> 22.2.8.1 lastIndex
+#### <span id="sec-lastindex" /> 22.2.8.1 lastIndex
 
 <Sec id="2.8.1" />
 
-### <a id="sec-regexp-string-iterator-objects" /> 22.2.9 RegExp String Iterator Objects
+### <span id="sec-regexp-string-iterator-objects" /> 22.2.9 RegExp String Iterator Objects
 
 <Sec id="2.9" />
 
-#### <a id="sec-createregexpstringiterator" /> 22.2.9.1 CreateRegExpStringIterator ( _regexp_: an Object, _str_: a String, _global_: a Boolean, _fullUnicode_: a Boolean, ): an Object
+#### <span id="sec-createregexpstringiterator" /> 22.2.9.1 CreateRegExpStringIterator ( _regexp_: an Object, _str_: a String, _global_: a Boolean, _fullUnicode_: a Boolean, ): an Object
 
 <Sec id="2.9.1" />
 
-#### <a id="sec-%regexpstringiteratorprototype%-object" /> 22.2.9.2 The %RegExpStringIteratorPrototype% Object
+#### <span id="sec-%regexpstringiteratorprototype%-object" /> 22.2.9.2 The %RegExpStringIteratorPrototype% Object
 
 <Sec id="2.9.2" />
 
-##### <a id="sec-%regexpstringiteratorprototype%.next" /> 22.2.9.2.1 %RegExpStringIteratorPrototype%.next ( )
+##### <span id="sec-%regexpstringiteratorprototype%.next" /> 22.2.9.2.1 %RegExpStringIteratorPrototype%.next ( )
 
 <Sec id="2.9.2.1" />
 
-##### <a id="sec-%regexpstringiteratorprototype%-%symbol.tostringtag%" /> 22.2.9.2.2 %RegExpStringIteratorPrototype% [ %Symbol.toStringTag% ]
+##### <span id="sec-%regexpstringiteratorprototype%-%symbol.tostringtag%" /> 22.2.9.2.2 %RegExpStringIteratorPrototype% [ %Symbol.toStringTag% ]
 
 <Sec id="2.9.2.2" />
 
-#### <a id="sec-properties-of-regexp-string-iterator-instances" /> 22.2.9.3 Properties of RegExp String Iterator Instances
+#### <span id="sec-properties-of-regexp-string-iterator-instances" /> 22.2.9.3 Properties of RegExp String Iterator Instances
 
 <Sec id="2.9.3" />

@@ -1,629 +1,629 @@
 import { Sec } from '../lib/spec/structured-data'
 
-# <a id="sec-structured-data" /> 25 Structured Data
+# <span id="sec-structured-data" /> 25 Structured Data
 
-## <a id="sec-arraybuffer-objects" /> 25.1 ArrayBuffer Objects
+## <span id="sec-arraybuffer-objects" /> 25.1 ArrayBuffer Objects
 
-### <a id="sec-arraybuffer-notation" /> 25.1.1 Notation
+### <span id="sec-arraybuffer-notation" /> 25.1.1 Notation
 
 <Sec id="1.1" />
 
-### <a id="sec-fixed-length-and-resizable-arraybuffer-objects" /> 25.1.2 Fixed-length and Resizable ArrayBuffer Objects
+### <span id="sec-fixed-length-and-resizable-arraybuffer-objects" /> 25.1.2 Fixed-length and Resizable ArrayBuffer Objects
 
 <Sec id="1.2" />
 
-### <a id="sec-abstract-operations-for-arraybuffer-objects" /> 25.1.3 Abstract Operations For ArrayBuffer Objects
+### <span id="sec-abstract-operations-for-arraybuffer-objects" /> 25.1.3 Abstract Operations For ArrayBuffer Objects
 
-#### <a id="sec-allocatearraybuffer" /> 25.1.3.1 AllocateArrayBuffer ( _constructor_: a constructor, _byteLength_: a non-negative integer, optional _maxByteLength_: a non-negative integer or ~empty~, ): either a normal completion containing an ArrayBuffer or a throw completion
+#### <span id="sec-allocatearraybuffer" /> 25.1.3.1 AllocateArrayBuffer ( _constructor_: a constructor, _byteLength_: a non-negative integer, optional _maxByteLength_: a non-negative integer or ~empty~, ): either a normal completion containing an ArrayBuffer or a throw completion
 
 <Sec id="1.3.1" />
 
-#### <a id="sec-arraybufferbytelength" /> 25.1.3.2 ArrayBufferByteLength ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _order_: ~seq-cst~ or ~unordered~, ): a non-negative integer
+#### <span id="sec-arraybufferbytelength" /> 25.1.3.2 ArrayBufferByteLength ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _order_: ~seq-cst~ or ~unordered~, ): a non-negative integer
 
 <Sec id="1.3.2" />
 
-#### <a id="sec-arraybuffercopyanddetach" /> 25.1.3.3 ArrayBufferCopyAndDetach ( _arrayBuffer_: an ECMAScript language value, _newLength_: an ECMAScript language value, _preserveResizability_: ~preserve-resizability~ or ~fixed-length~, ): either a normal completion containing an ArrayBuffer or a throw completion
+#### <span id="sec-arraybuffercopyanddetach" /> 25.1.3.3 ArrayBufferCopyAndDetach ( _arrayBuffer_: an ECMAScript language value, _newLength_: an ECMAScript language value, _preserveResizability_: ~preserve-resizability~ or ~fixed-length~, ): either a normal completion containing an ArrayBuffer or a throw completion
 
 <Sec id="1.3.3" />
 
-#### <a id="sec-isdetachedbuffer" /> 25.1.3.4 IsDetachedBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
+#### <span id="sec-isdetachedbuffer" /> 25.1.3.4 IsDetachedBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
 
 <Sec id="1.3.4" />
 
-#### <a id="sec-detacharraybuffer" /> 25.1.3.5 DetachArrayBuffer ( _arrayBuffer_: an ArrayBuffer, optional _key_: anything, ): either a normal completion containing ~unused~ or a throw completion
+#### <span id="sec-detacharraybuffer" /> 25.1.3.5 DetachArrayBuffer ( _arrayBuffer_: an ArrayBuffer, optional _key_: anything, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="1.3.5" />
 
-#### <a id="sec-clonearraybuffer" /> 25.1.3.6 CloneArrayBuffer ( _srcBuffer_: an ArrayBuffer or a SharedArrayBuffer, _srcByteOffset_: a non-negative integer, _srcLength_: a non-negative integer, ): either a normal completion containing an ArrayBuffer or a throw completion
+#### <span id="sec-clonearraybuffer" /> 25.1.3.6 CloneArrayBuffer ( _srcBuffer_: an ArrayBuffer or a SharedArrayBuffer, _srcByteOffset_: a non-negative integer, _srcLength_: a non-negative integer, ): either a normal completion containing an ArrayBuffer or a throw completion
 
 <Sec id="1.3.6" />
 
-#### <a id="sec-getarraybuffermaxbytelengthoption" /> 25.1.3.7 GetArrayBufferMaxByteLengthOption ( _options_: an ECMAScript language value, ): either a normal completion containing either a non-negative integer or ~empty~, or a throw completion
+#### <span id="sec-getarraybuffermaxbytelengthoption" /> 25.1.3.7 GetArrayBufferMaxByteLengthOption ( _options_: an ECMAScript language value, ): either a normal completion containing either a non-negative integer or ~empty~, or a throw completion
 
 <Sec id="1.3.7" />
 
-#### <a id="sec-hostresizearraybuffer" /> 25.1.3.8 HostResizeArrayBuffer ( _buffer_: an ArrayBuffer, _newByteLength_: a non-negative integer, ): either a normal completion containing either ~handled~ or ~unhandled~, or a throw completion
+#### <span id="sec-hostresizearraybuffer" /> 25.1.3.8 HostResizeArrayBuffer ( _buffer_: an ArrayBuffer, _newByteLength_: a non-negative integer, ): either a normal completion containing either ~handled~ or ~unhandled~, or a throw completion
 
 <Sec id="1.3.8" />
 
-#### <a id="sec-isfixedlengtharraybuffer" /> 25.1.3.9 IsFixedLengthArrayBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
+#### <span id="sec-isfixedlengtharraybuffer" /> 25.1.3.9 IsFixedLengthArrayBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
 
 <Sec id="1.3.9" />
 
-#### <a id="sec-isunsignedelementtype" /> 25.1.3.10 IsUnsignedElementType ( _type_: a TypedArray element type, ): a Boolean
+#### <span id="sec-isunsignedelementtype" /> 25.1.3.10 IsUnsignedElementType ( _type_: a TypedArray element type, ): a Boolean
 
 <Sec id="1.3.10" />
 
-#### <a id="sec-isunclampedintegerelementtype" /> 25.1.3.11 IsUnclampedIntegerElementType ( _type_: a TypedArray element type, ): a Boolean
+#### <span id="sec-isunclampedintegerelementtype" /> 25.1.3.11 IsUnclampedIntegerElementType ( _type_: a TypedArray element type, ): a Boolean
 
 <Sec id="1.3.11" />
 
-#### <a id="sec-isbigintelementtype" /> 25.1.3.12 IsBigIntElementType ( _type_: a TypedArray element type, ): a Boolean
+#### <span id="sec-isbigintelementtype" /> 25.1.3.12 IsBigIntElementType ( _type_: a TypedArray element type, ): a Boolean
 
 <Sec id="1.3.12" />
 
-#### <a id="sec-isnotearconfiguration" /> 25.1.3.13 IsNoTearConfiguration ( _type_: a TypedArray element type, _order_: ~seq-cst~, ~unordered~, or ~init~, ): a Boolean
+#### <span id="sec-isnotearconfiguration" /> 25.1.3.13 IsNoTearConfiguration ( _type_: a TypedArray element type, _order_: ~seq-cst~, ~unordered~, or ~init~, ): a Boolean
 
 <Sec id="1.3.13" />
 
-#### <a id="sec-rawbytestonumeric" /> 25.1.3.14 RawBytesToNumeric ( _type_: a TypedArray element type, _rawBytes_: a List of byte values, _isLittleEndian_: a Boolean, ): a Number or a BigInt
+#### <span id="sec-rawbytestonumeric" /> 25.1.3.14 RawBytesToNumeric ( _type_: a TypedArray element type, _rawBytes_: a List of byte values, _isLittleEndian_: a Boolean, ): a Number or a BigInt
 
 <Sec id="1.3.14" />
 
-#### <a id="sec-getrawbytesfromsharedblock" /> 25.1.3.15 GetRawBytesFromSharedBlock ( _block_: a Shared Data Block, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _isTypedArray_: a Boolean, _order_: ~seq-cst~ or ~unordered~, ): a List of byte values
+#### <span id="sec-getrawbytesfromsharedblock" /> 25.1.3.15 GetRawBytesFromSharedBlock ( _block_: a Shared Data Block, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _isTypedArray_: a Boolean, _order_: ~seq-cst~ or ~unordered~, ): a List of byte values
 
 <Sec id="1.3.15" />
 
-#### <a id="sec-getvaluefrombuffer" /> 25.1.3.16 GetValueFromBuffer ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _isTypedArray_: a Boolean, _order_: ~seq-cst~ or ~unordered~, optional _isLittleEndian_: a Boolean, ): a Number or a BigInt
+#### <span id="sec-getvaluefrombuffer" /> 25.1.3.16 GetValueFromBuffer ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _isTypedArray_: a Boolean, _order_: ~seq-cst~ or ~unordered~, optional _isLittleEndian_: a Boolean, ): a Number or a BigInt
 
 <Sec id="1.3.16" />
 
-#### <a id="sec-numerictorawbytes" /> 25.1.3.17 NumericToRawBytes ( _type_: a TypedArray element type, _value_: a Number or a BigInt, _isLittleEndian_: a Boolean, ): a List of byte values
+#### <span id="sec-numerictorawbytes" /> 25.1.3.17 NumericToRawBytes ( _type_: a TypedArray element type, _value_: a Number or a BigInt, _isLittleEndian_: a Boolean, ): a List of byte values
 
 <Sec id="1.3.17" />
 
-#### <a id="sec-setvalueinbuffer" /> 25.1.3.18 SetValueInBuffer ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _value_: a Number or a BigInt, _isTypedArray_: a Boolean, _order_: ~seq-cst~, ~unordered~, or ~init~, optional _isLittleEndian_: a Boolean, ): ~unused~
+#### <span id="sec-setvalueinbuffer" /> 25.1.3.18 SetValueInBuffer ( _arrayBuffer_: an ArrayBuffer or SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _value_: a Number or a BigInt, _isTypedArray_: a Boolean, _order_: ~seq-cst~, ~unordered~, or ~init~, optional _isLittleEndian_: a Boolean, ): ~unused~
 
 <Sec id="1.3.18" />
 
-#### <a id="sec-getmodifysetvalueinbuffer" /> 25.1.3.19 GetModifySetValueInBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _value_: a Number or a BigInt, _op_: a read-modify-write modification function, ): a Number or a BigInt
+#### <span id="sec-getmodifysetvalueinbuffer" /> 25.1.3.19 GetModifySetValueInBuffer ( _arrayBuffer_: an ArrayBuffer or a SharedArrayBuffer, _byteIndex_: a non-negative integer, _type_: a TypedArray element type, _value_: a Number or a BigInt, _op_: a read-modify-write modification function, ): a Number or a BigInt
 
 <Sec id="1.3.19" />
 
-### <a id="sec-arraybuffer-constructor" /> 25.1.4 The ArrayBuffer Constructor
+### <span id="sec-arraybuffer-constructor" /> 25.1.4 The ArrayBuffer Constructor
 
 <Sec id="1.4" />
 
-#### <a id="sec-arraybuffer-length" /> 25.1.4.1 ArrayBuffer ( _length_ [ , _options_ ] )
+#### <span id="sec-arraybuffer-length" /> 25.1.4.1 ArrayBuffer ( _length_ [ , _options_ ] )
 
 <Sec id="1.4.1" />
 
-### <a id="sec-properties-of-the-arraybuffer-constructor" /> 25.1.5 Properties of the ArrayBuffer Constructor
+### <span id="sec-properties-of-the-arraybuffer-constructor" /> 25.1.5 Properties of the ArrayBuffer Constructor
 
 <Sec id="1.5" />
 
-#### <a id="sec-arraybuffer.isview" /> 25.1.5.1 ArrayBuffer.isView ( _arg_ )
+#### <span id="sec-arraybuffer.isview" /> 25.1.5.1 ArrayBuffer.isView ( _arg_ )
 
 <Sec id="1.5.1" />
 
-#### <a id="sec-arraybuffer.prototype" /> 25.1.5.2 ArrayBuffer.prototype
+#### <span id="sec-arraybuffer.prototype" /> 25.1.5.2 ArrayBuffer.prototype
 
 <Sec id="1.5.2" />
 
-#### <a id="sec-get-arraybuffer-%symbol.species%" /> 25.1.5.3 get ArrayBuffer [ %Symbol.species% ]
+#### <span id="sec-get-arraybuffer-%symbol.species%" /> 25.1.5.3 get ArrayBuffer [ %Symbol.species% ]
 
 <Sec id="1.5.3" />
 
-### <a id="sec-properties-of-the-arraybuffer-prototype-object" /> 25.1.6 Properties of the ArrayBuffer Prototype Object
+### <span id="sec-properties-of-the-arraybuffer-prototype-object" /> 25.1.6 Properties of the ArrayBuffer Prototype Object
 
 <Sec id="1.6" />
 
-#### <a id="sec-get-arraybuffer.prototype.bytelength" /> 25.1.6.1 get ArrayBuffer.prototype.byteLength
+#### <span id="sec-get-arraybuffer.prototype.bytelength" /> 25.1.6.1 get ArrayBuffer.prototype.byteLength
 
 <Sec id="1.6.1" />
 
-#### <a id="sec-arraybuffer.prototype.constructor" /> 25.1.6.2 ArrayBuffer.prototype.constructor
+#### <span id="sec-arraybuffer.prototype.constructor" /> 25.1.6.2 ArrayBuffer.prototype.constructor
 
 <Sec id="1.6.2" />
 
-#### <a id="sec-get-arraybuffer.prototype.detached" /> 25.1.6.3 get ArrayBuffer.prototype.detached
+#### <span id="sec-get-arraybuffer.prototype.detached" /> 25.1.6.3 get ArrayBuffer.prototype.detached
 
 <Sec id="1.6.3" />
 
-#### <a id="sec-get-arraybuffer.prototype.maxbytelength" /> 25.1.6.4 get ArrayBuffer.prototype.maxByteLength
+#### <span id="sec-get-arraybuffer.prototype.maxbytelength" /> 25.1.6.4 get ArrayBuffer.prototype.maxByteLength
 
 <Sec id="1.6.4" />
 
-#### <a id="sec-get-arraybuffer.prototype.resizable" /> 25.1.6.5 get ArrayBuffer.prototype.resizable
+#### <span id="sec-get-arraybuffer.prototype.resizable" /> 25.1.6.5 get ArrayBuffer.prototype.resizable
 
 <Sec id="1.6.5" />
 
-#### <a id="sec-arraybuffer.prototype.resize" /> 25.1.6.6 ArrayBuffer.prototype.resize ( _newLength_ )
+#### <span id="sec-arraybuffer.prototype.resize" /> 25.1.6.6 ArrayBuffer.prototype.resize ( _newLength_ )
 
 <Sec id="1.6.6" />
 
-#### <a id="sec-arraybuffer.prototype.slice" /> 25.1.6.7 ArrayBuffer.prototype.slice ( _start_, _end_ )
+#### <span id="sec-arraybuffer.prototype.slice" /> 25.1.6.7 ArrayBuffer.prototype.slice ( _start_, _end_ )
 
 <Sec id="1.6.7" />
 
-#### <a id="sec-arraybuffer.prototype.transfer" /> 25.1.6.8 ArrayBuffer.prototype.transfer ( [ _newLength_ ] )
+#### <span id="sec-arraybuffer.prototype.transfer" /> 25.1.6.8 ArrayBuffer.prototype.transfer ( [ _newLength_ ] )
 
 <Sec id="1.6.8" />
 
-#### <a id="sec-arraybuffer.prototype.transfertofixedlength" /> 25.1.6.9 ArrayBuffer.prototype.transferToFixedLength ( [ _newLength_ ] )
+#### <span id="sec-arraybuffer.prototype.transfertofixedlength" /> 25.1.6.9 ArrayBuffer.prototype.transferToFixedLength ( [ _newLength_ ] )
 
 <Sec id="1.6.9" />
 
-#### <a id="sec-arraybuffer.prototype-%symbol.tostringtag%" /> 25.1.6.10 ArrayBuffer.prototype [ %Symbol.toStringTag% ]
+#### <span id="sec-arraybuffer.prototype-%symbol.tostringtag%" /> 25.1.6.10 ArrayBuffer.prototype [ %Symbol.toStringTag% ]
 
 <Sec id="1.6.10" />
 
-### <a id="sec-properties-of-the-arraybuffer-instances" /> 25.1.7 Properties of ArrayBuffer Instances
+### <span id="sec-properties-of-the-arraybuffer-instances" /> 25.1.7 Properties of ArrayBuffer Instances
 
 <Sec id="1.7" />
 
-### <a id="sec-resizable-arraybuffer-guidelines" /> 25.1.8 Resizable ArrayBuffer Guidelines
+### <span id="sec-resizable-arraybuffer-guidelines" /> 25.1.8 Resizable ArrayBuffer Guidelines
 
 <Sec id="1.8" />
 
-## <a id="sec-sharedarraybuffer-objects" /> 25.2 SharedArrayBuffer Objects
+## <span id="sec-sharedarraybuffer-objects" /> 25.2 SharedArrayBuffer Objects
 
-### <a id="sec-fixed-length-and-growable-sharedarraybuffer-objects" /> 25.2.1 Fixed-length and Growable SharedArrayBuffer Objects
+### <span id="sec-fixed-length-and-growable-sharedarraybuffer-objects" /> 25.2.1 Fixed-length and Growable SharedArrayBuffer Objects
 
 <Sec id="2.1" />
 
-### <a id="sec-abstract-operations-for-sharedarraybuffer-objects" /> 25.2.2 Abstract Operations for SharedArrayBuffer Objects
+### <span id="sec-abstract-operations-for-sharedarraybuffer-objects" /> 25.2.2 Abstract Operations for SharedArrayBuffer Objects
 
-#### <a id="sec-allocatesharedarraybuffer" /> 25.2.2.1 AllocateSharedArrayBuffer ( _constructor_: a constructor, _byteLength_: a non-negative integer, optional _maxByteLength_: a non-negative integer or ~empty~, ): either a normal completion containing a SharedArrayBuffer or a throw completion
+#### <span id="sec-allocatesharedarraybuffer" /> 25.2.2.1 AllocateSharedArrayBuffer ( _constructor_: a constructor, _byteLength_: a non-negative integer, optional _maxByteLength_: a non-negative integer or ~empty~, ): either a normal completion containing a SharedArrayBuffer or a throw completion
 
 <Sec id="2.2.1" />
 
-#### <a id="sec-issharedarraybuffer" /> 25.2.2.2 IsSharedArrayBuffer ( _obj_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
+#### <span id="sec-issharedarraybuffer" /> 25.2.2.2 IsSharedArrayBuffer ( _obj_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
 
 <Sec id="2.2.2" />
 
-#### <a id="sec-isgrowablesharedarraybuffer" /> 25.2.2.3 IsGrowableSharedArrayBuffer ( _obj_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
+#### <span id="sec-isgrowablesharedarraybuffer" /> 25.2.2.3 IsGrowableSharedArrayBuffer ( _obj_: an ArrayBuffer or a SharedArrayBuffer, ): a Boolean
 
 <Sec id="2.2.3" />
 
-#### <a id="sec-hostgrowsharedarraybuffer" /> 25.2.2.4 HostGrowSharedArrayBuffer ( _buffer_: a SharedArrayBuffer, _newByteLength_: a non-negative integer, ): either a normal completion containing either ~handled~ or ~unhandled~, or a throw completion
+#### <span id="sec-hostgrowsharedarraybuffer" /> 25.2.2.4 HostGrowSharedArrayBuffer ( _buffer_: a SharedArrayBuffer, _newByteLength_: a non-negative integer, ): either a normal completion containing either ~handled~ or ~unhandled~, or a throw completion
 
 <Sec id="2.2.4" />
 
-### <a id="sec-sharedarraybuffer-constructor" /> 25.2.3 The SharedArrayBuffer Constructor
+### <span id="sec-sharedarraybuffer-constructor" /> 25.2.3 The SharedArrayBuffer Constructor
 
 <Sec id="2.3" />
 
-#### <a id="sec-sharedarraybuffer-length" /> 25.2.3.1 SharedArrayBuffer ( _length_ [ , _options_ ] )
+#### <span id="sec-sharedarraybuffer-length" /> 25.2.3.1 SharedArrayBuffer ( _length_ [ , _options_ ] )
 
 <Sec id="2.3.1" />
 
-### <a id="sec-properties-of-the-sharedarraybuffer-constructor" /> 25.2.4 Properties of the SharedArrayBuffer Constructor
+### <span id="sec-properties-of-the-sharedarraybuffer-constructor" /> 25.2.4 Properties of the SharedArrayBuffer Constructor
 
 <Sec id="2.4" />
 
-#### <a id="sec-sharedarraybuffer.prototype" /> 25.2.4.1 SharedArrayBuffer.prototype
+#### <span id="sec-sharedarraybuffer.prototype" /> 25.2.4.1 SharedArrayBuffer.prototype
 
 <Sec id="2.4.1" />
 
-#### <a id="sec-sharedarraybuffer-%symbol.species%" /> 25.2.4.2 get SharedArrayBuffer [ %Symbol.species% ]
+#### <span id="sec-sharedarraybuffer-%symbol.species%" /> 25.2.4.2 get SharedArrayBuffer [ %Symbol.species% ]
 
 <Sec id="2.4.2" />
 
-### <a id="sec-properties-of-the-sharedarraybuffer-prototype-object" /> 25.2.5 Properties of the SharedArrayBuffer Prototype Object
+### <span id="sec-properties-of-the-sharedarraybuffer-prototype-object" /> 25.2.5 Properties of the SharedArrayBuffer Prototype Object
 
 <Sec id="2.5" />
 
-#### <a id="sec-get-sharedarraybuffer.prototype.bytelength" /> 25.2.5.1 get SharedArrayBuffer.prototype.byteLength
+#### <span id="sec-get-sharedarraybuffer.prototype.bytelength" /> 25.2.5.1 get SharedArrayBuffer.prototype.byteLength
 
 <Sec id="2.5.1" />
 
-#### <a id="sec-sharedarraybuffer.prototype.constructor" /> 25.2.5.2 SharedArrayBuffer.prototype.constructor
+#### <span id="sec-sharedarraybuffer.prototype.constructor" /> 25.2.5.2 SharedArrayBuffer.prototype.constructor
 
 <Sec id="2.5.2" />
 
-#### <a id="sec-sharedarraybuffer.prototype.grow" /> 25.2.5.3 SharedArrayBuffer.prototype.grow ( _newLength_ )
+#### <span id="sec-sharedarraybuffer.prototype.grow" /> 25.2.5.3 SharedArrayBuffer.prototype.grow ( _newLength_ )
 
 <Sec id="2.5.3" />
 
-#### <a id="sec-get-sharedarraybuffer.prototype.growable" /> 25.2.5.4 get SharedArrayBuffer.prototype.growable
+#### <span id="sec-get-sharedarraybuffer.prototype.growable" /> 25.2.5.4 get SharedArrayBuffer.prototype.growable
 
 <Sec id="2.5.4" />
 
-#### <a id="sec-get-sharedarraybuffer.prototype.maxbytelength" /> 25.2.5.5 get SharedArrayBuffer.prototype.maxByteLength
+#### <span id="sec-get-sharedarraybuffer.prototype.maxbytelength" /> 25.2.5.5 get SharedArrayBuffer.prototype.maxByteLength
 
 <Sec id="2.5.5" />
 
-#### <a id="sec-sharedarraybuffer.prototype.slice" /> 25.2.5.6 SharedArrayBuffer.prototype.slice ( _start_, _end_ )
+#### <span id="sec-sharedarraybuffer.prototype.slice" /> 25.2.5.6 SharedArrayBuffer.prototype.slice ( _start_, _end_ )
 
 <Sec id="2.5.6" />
 
-#### <a id="sec-sharedarraybuffer.prototype-%symbol.tostringtag%" /> 25.2.5.7 SharedArrayBuffer.prototype [ %Symbol.toStringTag% ]
+#### <span id="sec-sharedarraybuffer.prototype-%symbol.tostringtag%" /> 25.2.5.7 SharedArrayBuffer.prototype [ %Symbol.toStringTag% ]
 
 <Sec id="2.5.7" />
 
-### <a id="sec-properties-of-the-sharedarraybuffer-instances" /> 25.2.6 Properties of SharedArrayBuffer Instances
+### <span id="sec-properties-of-the-sharedarraybuffer-instances" /> 25.2.6 Properties of SharedArrayBuffer Instances
 
 <Sec id="2.6" />
 
-### <a id="sec-growable-sharedarraybuffer-guidelines" /> 25.2.7 Growable SharedArrayBuffer Guidelines
+### <span id="sec-growable-sharedarraybuffer-guidelines" /> 25.2.7 Growable SharedArrayBuffer Guidelines
 
 <Sec id="2.7" />
 
-## <a id="sec-dataview-objects" /> 25.3 DataView Objects
+## <span id="sec-dataview-objects" /> 25.3 DataView Objects
 
-### <a id="sec-abstract-operations-for-dataview-objects" /> 25.3.1 Abstract Operations For DataView Objects
+### <span id="sec-abstract-operations-for-dataview-objects" /> 25.3.1 Abstract Operations For DataView Objects
 
-#### <a id="sec-dataview-with-buffer-witness-records" /> 25.3.1.1 DataView With Buffer Witness Records
+#### <span id="sec-dataview-with-buffer-witness-records" /> 25.3.1.1 DataView With Buffer Witness Records
 
 <Sec id="3.1.1" />
 
-#### <a id="sec-makedataviewwithbufferwitnessrecord" /> 25.3.1.2 MakeDataViewWithBufferWitnessRecord ( _obj_: a DataView, _order_: ~seq-cst~ or ~unordered~, ): a DataView With Buffer Witness Record
+#### <span id="sec-makedataviewwithbufferwitnessrecord" /> 25.3.1.2 MakeDataViewWithBufferWitnessRecord ( _obj_: a DataView, _order_: ~seq-cst~ or ~unordered~, ): a DataView With Buffer Witness Record
 
 <Sec id="3.1.2" />
 
-#### <a id="sec-getviewbytelength" /> 25.3.1.3 GetViewByteLength ( _viewRecord_: a DataView With Buffer Witness Record, ): a non-negative integer
+#### <span id="sec-getviewbytelength" /> 25.3.1.3 GetViewByteLength ( _viewRecord_: a DataView With Buffer Witness Record, ): a non-negative integer
 
 <Sec id="3.1.3" />
 
-#### <a id="sec-isviewoutofbounds" /> 25.3.1.4 IsViewOutOfBounds ( _viewRecord_: a DataView With Buffer Witness Record, ): a Boolean
+#### <span id="sec-isviewoutofbounds" /> 25.3.1.4 IsViewOutOfBounds ( _viewRecord_: a DataView With Buffer Witness Record, ): a Boolean
 
 <Sec id="3.1.4" />
 
-#### <a id="sec-getviewvalue" /> 25.3.1.5 GetViewValue ( _view_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, _isLittleEndian_: an ECMAScript language value, _type_: a TypedArray element type, ): either a normal completion containing either a Number or a BigInt, or a throw completion
+#### <span id="sec-getviewvalue" /> 25.3.1.5 GetViewValue ( _view_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, _isLittleEndian_: an ECMAScript language value, _type_: a TypedArray element type, ): either a normal completion containing either a Number or a BigInt, or a throw completion
 
 <Sec id="3.1.5" />
 
-#### <a id="sec-setviewvalue" /> 25.3.1.6 SetViewValue ( _view_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, _isLittleEndian_: an ECMAScript language value, _type_: a TypedArray element type, _value_: an ECMAScript language value, ): either a normal completion containing *undefined* or a throw completion
+#### <span id="sec-setviewvalue" /> 25.3.1.6 SetViewValue ( _view_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, _isLittleEndian_: an ECMAScript language value, _type_: a TypedArray element type, _value_: an ECMAScript language value, ): either a normal completion containing *undefined* or a throw completion
 
 <Sec id="3.1.6" />
 
-### <a id="sec-dataview-constructor" /> 25.3.2 The DataView Constructor
+### <span id="sec-dataview-constructor" /> 25.3.2 The DataView Constructor
 
 <Sec id="3.2" />
 
-#### <a id="sec-dataview-buffer-byteoffset-bytelength" /> 25.3.2.1 DataView ( _buffer_ [ , _byteOffset_ [ , _byteLength_ ] ] )
+#### <span id="sec-dataview-buffer-byteoffset-bytelength" /> 25.3.2.1 DataView ( _buffer_ [ , _byteOffset_ [ , _byteLength_ ] ] )
 
 <Sec id="3.2.1" />
 
-### <a id="sec-properties-of-the-dataview-constructor" /> 25.3.3 Properties of the DataView Constructor
+### <span id="sec-properties-of-the-dataview-constructor" /> 25.3.3 Properties of the DataView Constructor
 
 <Sec id="3.3" />
 
-#### <a id="sec-dataview.prototype" /> 25.3.3.1 DataView.prototype
+#### <span id="sec-dataview.prototype" /> 25.3.3.1 DataView.prototype
 
 <Sec id="3.3.1" />
 
-### <a id="sec-properties-of-the-dataview-prototype-object" /> 25.3.4 Properties of the DataView Prototype Object
+### <span id="sec-properties-of-the-dataview-prototype-object" /> 25.3.4 Properties of the DataView Prototype Object
 
 <Sec id="3.4" />
 
-#### <a id="sec-get-dataview.prototype.buffer" /> 25.3.4.1 get DataView.prototype.buffer
+#### <span id="sec-get-dataview.prototype.buffer" /> 25.3.4.1 get DataView.prototype.buffer
 
 <Sec id="3.4.1" />
 
-#### <a id="sec-get-dataview.prototype.bytelength" /> 25.3.4.2 get DataView.prototype.byteLength
+#### <span id="sec-get-dataview.prototype.bytelength" /> 25.3.4.2 get DataView.prototype.byteLength
 
 <Sec id="3.4.2" />
 
-#### <a id="sec-get-dataview.prototype.byteoffset" /> 25.3.4.3 get DataView.prototype.byteOffset
+#### <span id="sec-get-dataview.prototype.byteoffset" /> 25.3.4.3 get DataView.prototype.byteOffset
 
 <Sec id="3.4.3" />
 
-#### <a id="sec-dataview.prototype.constructor" /> 25.3.4.4 DataView.prototype.constructor
+#### <span id="sec-dataview.prototype.constructor" /> 25.3.4.4 DataView.prototype.constructor
 
 <Sec id="3.4.4" />
 
-#### <a id="sec-dataview.prototype.getbigint64" /> 25.3.4.5 DataView.prototype.getBigInt64 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getbigint64" /> 25.3.4.5 DataView.prototype.getBigInt64 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.5" />
 
-#### <a id="sec-dataview.prototype.getbiguint64" /> 25.3.4.6 DataView.prototype.getBigUint64 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getbiguint64" /> 25.3.4.6 DataView.prototype.getBigUint64 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.6" />
 
-#### <a id="sec-dataview.prototype.getfloat16" /> 25.3.4.7 DataView.prototype.getFloat16 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getfloat16" /> 25.3.4.7 DataView.prototype.getFloat16 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.7" />
 
-#### <a id="sec-dataview.prototype.getfloat32" /> 25.3.4.8 DataView.prototype.getFloat32 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getfloat32" /> 25.3.4.8 DataView.prototype.getFloat32 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.8" />
 
-#### <a id="sec-dataview.prototype.getfloat64" /> 25.3.4.9 DataView.prototype.getFloat64 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getfloat64" /> 25.3.4.9 DataView.prototype.getFloat64 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.9" />
 
-#### <a id="sec-dataview.prototype.getint8" /> 25.3.4.10 DataView.prototype.getInt8 ( _byteOffset_ )
+#### <span id="sec-dataview.prototype.getint8" /> 25.3.4.10 DataView.prototype.getInt8 ( _byteOffset_ )
 
 <Sec id="3.4.10" />
 
-#### <a id="sec-dataview.prototype.getint16" /> 25.3.4.11 DataView.prototype.getInt16 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getint16" /> 25.3.4.11 DataView.prototype.getInt16 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.11" />
 
-#### <a id="sec-dataview.prototype.getint32" /> 25.3.4.12 DataView.prototype.getInt32 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getint32" /> 25.3.4.12 DataView.prototype.getInt32 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.12" />
 
-#### <a id="sec-dataview.prototype.getuint8" /> 25.3.4.13 DataView.prototype.getUint8 ( _byteOffset_ )
+#### <span id="sec-dataview.prototype.getuint8" /> 25.3.4.13 DataView.prototype.getUint8 ( _byteOffset_ )
 
 <Sec id="3.4.13" />
 
-#### <a id="sec-dataview.prototype.getuint16" /> 25.3.4.14 DataView.prototype.getUint16 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getuint16" /> 25.3.4.14 DataView.prototype.getUint16 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.14" />
 
-#### <a id="sec-dataview.prototype.getuint32" /> 25.3.4.15 DataView.prototype.getUint32 ( _byteOffset_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.getuint32" /> 25.3.4.15 DataView.prototype.getUint32 ( _byteOffset_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.15" />
 
-#### <a id="sec-dataview.prototype.setbigint64" /> 25.3.4.16 DataView.prototype.setBigInt64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setbigint64" /> 25.3.4.16 DataView.prototype.setBigInt64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.16" />
 
-#### <a id="sec-dataview.prototype.setbiguint64" /> 25.3.4.17 DataView.prototype.setBigUint64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setbiguint64" /> 25.3.4.17 DataView.prototype.setBigUint64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.17" />
 
-#### <a id="sec-dataview.prototype.setfloat16" /> 25.3.4.18 DataView.prototype.setFloat16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setfloat16" /> 25.3.4.18 DataView.prototype.setFloat16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.18" />
 
-#### <a id="sec-dataview.prototype.setfloat32" /> 25.3.4.19 DataView.prototype.setFloat32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setfloat32" /> 25.3.4.19 DataView.prototype.setFloat32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.19" />
 
-#### <a id="sec-dataview.prototype.setfloat64" /> 25.3.4.20 DataView.prototype.setFloat64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setfloat64" /> 25.3.4.20 DataView.prototype.setFloat64 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.20" />
 
-#### <a id="sec-dataview.prototype.setint8" /> 25.3.4.21 DataView.prototype.setInt8 ( _byteOffset_, _value_ )
+#### <span id="sec-dataview.prototype.setint8" /> 25.3.4.21 DataView.prototype.setInt8 ( _byteOffset_, _value_ )
 
 <Sec id="3.4.21" />
 
-#### <a id="sec-dataview.prototype.setint16" /> 25.3.4.22 DataView.prototype.setInt16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setint16" /> 25.3.4.22 DataView.prototype.setInt16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.22" />
 
-#### <a id="sec-dataview.prototype.setint32" /> 25.3.4.23 DataView.prototype.setInt32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setint32" /> 25.3.4.23 DataView.prototype.setInt32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.23" />
 
-#### <a id="sec-dataview.prototype.setuint8" /> 25.3.4.24 DataView.prototype.setUint8 ( _byteOffset_, _value_ )
+#### <span id="sec-dataview.prototype.setuint8" /> 25.3.4.24 DataView.prototype.setUint8 ( _byteOffset_, _value_ )
 
 <Sec id="3.4.24" />
 
-#### <a id="sec-dataview.prototype.setuint16" /> 25.3.4.25 DataView.prototype.setUint16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setuint16" /> 25.3.4.25 DataView.prototype.setUint16 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.25" />
 
-#### <a id="sec-dataview.prototype.setuint32" /> 25.3.4.26 DataView.prototype.setUint32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
+#### <span id="sec-dataview.prototype.setuint32" /> 25.3.4.26 DataView.prototype.setUint32 ( _byteOffset_, _value_ [ , _littleEndian_ ] )
 
 <Sec id="3.4.26" />
 
-#### <a id="sec-dataview.prototype-%symbol.tostringtag%" /> 25.3.4.27 DataView.prototype [ %Symbol.toStringTag% ]
+#### <span id="sec-dataview.prototype-%symbol.tostringtag%" /> 25.3.4.27 DataView.prototype [ %Symbol.toStringTag% ]
 
 <Sec id="3.4.27" />
 
-### <a id="sec-properties-of-dataview-instances" /> 25.3.5 Properties of DataView Instances
+### <span id="sec-properties-of-dataview-instances" /> 25.3.5 Properties of DataView Instances
 
 <Sec id="3.5" />
 
-## <a id="sec-atomics-object" /> 25.4 The Atomics Object
+## <span id="sec-atomics-object" /> 25.4 The Atomics Object
 
 <Sec id="4" />
 
-### <a id="sec-waiter-record" /> 25.4.1 Waiter Record
+### <span id="sec-waiter-record" /> 25.4.1 Waiter Record
 
 <Sec id="4.1" />
 
-### <a id="sec-waiterlist-records" /> 25.4.2 WaiterList Records
+### <span id="sec-waiterlist-records" /> 25.4.2 WaiterList Records
 
 <Sec id="4.2" />
 
-### <a id="sec-abstract-operations-for-atomics" /> 25.4.3 Abstract Operations for Atomics
+### <span id="sec-abstract-operations-for-atomics" /> 25.4.3 Abstract Operations for Atomics
 
-#### <a id="sec-validateintegertypedarray" /> 25.4.3.1 ValidateIntegerTypedArray ( _typedArray_: an ECMAScript language value, _waitable_: a Boolean, ): either a normal completion containing a TypedArray With Buffer Witness Record, or a throw completion
+#### <span id="sec-validateintegertypedarray" /> 25.4.3.1 ValidateIntegerTypedArray ( _typedArray_: an ECMAScript language value, _waitable_: a Boolean, ): either a normal completion containing a TypedArray With Buffer Witness Record, or a throw completion
 
 <Sec id="4.3.1" />
 
-#### <a id="sec-validateatomicaccess" /> 25.4.3.2 ValidateAtomicAccess ( _taRecord_: a TypedArray With Buffer Witness Record, _requestIndex_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
+#### <span id="sec-validateatomicaccess" /> 25.4.3.2 ValidateAtomicAccess ( _taRecord_: a TypedArray With Buffer Witness Record, _requestIndex_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="4.3.2" />
 
-#### <a id="sec-validateatomicaccessonintegertypedarray" /> 25.4.3.3 ValidateAtomicAccessOnIntegerTypedArray ( _typedArray_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
+#### <span id="sec-validateatomicaccessonintegertypedarray" /> 25.4.3.3 ValidateAtomicAccessOnIntegerTypedArray ( _typedArray_: an ECMAScript language value, _requestIndex_: an ECMAScript language value, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="4.3.3" />
 
-#### <a id="sec-revalidateatomicaccess" /> 25.4.3.4 RevalidateAtomicAccess ( _typedArray_: a TypedArray, _byteIndexInBuffer_: a non-negative integer, ): either a normal completion containing ~unused~ or a throw completion
+#### <span id="sec-revalidateatomicaccess" /> 25.4.3.4 RevalidateAtomicAccess ( _typedArray_: a TypedArray, _byteIndexInBuffer_: a non-negative integer, ): either a normal completion containing ~unused~ or a throw completion
 
 <Sec id="4.3.4" />
 
-#### <a id="sec-getwaiterlist" /> 25.4.3.5 GetWaiterList ( _block_: a Shared Data Block, _i_: a non-negative integer that is evenly divisible by 4, ): a WaiterList Record
+#### <span id="sec-getwaiterlist" /> 25.4.3.5 GetWaiterList ( _block_: a Shared Data Block, _i_: a non-negative integer that is evenly divisible by 4, ): a WaiterList Record
 
 <Sec id="4.3.5" />
 
-#### <a id="sec-entercriticalsection" /> 25.4.3.6 EnterCriticalSection ( _waiterList_: a WaiterList Record, ): ~unused~
+#### <span id="sec-entercriticalsection" /> 25.4.3.6 EnterCriticalSection ( _waiterList_: a WaiterList Record, ): ~unused~
 
 <Sec id="4.3.6" />
 
-#### <a id="sec-leavecriticalsection" /> 25.4.3.7 LeaveCriticalSection ( _waiterList_: a WaiterList Record, ): ~unused~
+#### <span id="sec-leavecriticalsection" /> 25.4.3.7 LeaveCriticalSection ( _waiterList_: a WaiterList Record, ): ~unused~
 
 <Sec id="4.3.7" />
 
-#### <a id="sec-addwaiter" /> 25.4.3.8 AddWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
+#### <span id="sec-addwaiter" /> 25.4.3.8 AddWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
 
 <Sec id="4.3.8" />
 
-#### <a id="sec-removewaiter" /> 25.4.3.9 RemoveWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
+#### <span id="sec-removewaiter" /> 25.4.3.9 RemoveWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
 
 <Sec id="4.3.9" />
 
-#### <a id="sec-removewaiters" /> 25.4.3.10 RemoveWaiters ( _waiterList_: a WaiterList Record, _count_: a non-negative integer or +&infin;, ): a List of Waiter Records
+#### <span id="sec-removewaiters" /> 25.4.3.10 RemoveWaiters ( _waiterList_: a WaiterList Record, _count_: a non-negative integer or +&infin;, ): a List of Waiter Records
 
 <Sec id="4.3.10" />
 
-#### <a id="sec-suspendthisagent" /> 25.4.3.11 SuspendThisAgent ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
+#### <span id="sec-suspendthisagent" /> 25.4.3.11 SuspendThisAgent ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
 
 <Sec id="4.3.11" />
 
-#### <a id="sec-notifywaiter" /> 25.4.3.12 NotifyWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
+#### <span id="sec-notifywaiter" /> 25.4.3.12 NotifyWaiter ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
 
 <Sec id="4.3.12" />
 
-#### <a id="sec-enqueueresolveinagentjob" /> 25.4.3.13 EnqueueResolveInAgentJob ( _agentSignifier_: an agent signifier, _promiseCapability_: a PromiseCapability Record, _resolution_: *"ok"* or *"timed-out"*, ): ~unused~
+#### <span id="sec-enqueueresolveinagentjob" /> 25.4.3.13 EnqueueResolveInAgentJob ( _agentSignifier_: an agent signifier, _promiseCapability_: a PromiseCapability Record, _resolution_: *"ok"* or *"timed-out"*, ): ~unused~
 
 <Sec id="4.3.13" />
 
-#### <a id="sec-dowait" /> 25.4.3.14 DoWait ( _mode_: ~sync~ or ~async~, _typedArray_: an ECMAScript language value, _index_: an ECMAScript language value, _value_: an ECMAScript language value, _timeout_: an ECMAScript language value, ): either a normal completion containing either an Object, *"not-equal"*, *"timed-out"*, or *"ok"*, or a throw completion
+#### <span id="sec-dowait" /> 25.4.3.14 DoWait ( _mode_: ~sync~ or ~async~, _typedArray_: an ECMAScript language value, _index_: an ECMAScript language value, _value_: an ECMAScript language value, _timeout_: an ECMAScript language value, ): either a normal completion containing either an Object, *"not-equal"*, *"timed-out"*, or *"ok"*, or a throw completion
 
 <Sec id="4.3.14" />
 
-#### <a id="sec-enqueueatomicswaitasynctimeoutjob" /> 25.4.3.15 EnqueueAtomicsWaitAsyncTimeoutJob ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
+#### <span id="sec-enqueueatomicswaitasynctimeoutjob" /> 25.4.3.15 EnqueueAtomicsWaitAsyncTimeoutJob ( _waiterList_: a WaiterList Record, _waiterRecord_: a Waiter Record, ): ~unused~
 
 <Sec id="4.3.15" />
 
-#### <a id="sec-atomiccompareexchangeinsharedblock" /> 25.4.3.16 AtomicCompareExchangeInSharedBlock ( _block_: a Shared Data Block, _byteIndexInBuffer_: an integer, _elementSize_: a non-negative integer, _expectedBytes_: a List of byte values, _replacementBytes_: a List of byte values, ): a List of byte values
+#### <span id="sec-atomiccompareexchangeinsharedblock" /> 25.4.3.16 AtomicCompareExchangeInSharedBlock ( _block_: a Shared Data Block, _byteIndexInBuffer_: an integer, _elementSize_: a non-negative integer, _expectedBytes_: a List of byte values, _replacementBytes_: a List of byte values, ): a List of byte values
 
 <Sec id="4.3.16" />
 
-#### <a id="sec-atomicreadmodifywrite" /> 25.4.3.17 AtomicReadModifyWrite ( _typedArray_: an ECMAScript language value, _index_: an ECMAScript language value, _value_: an ECMAScript language value, _op_: a read-modify-write modification function, ): either a normal completion containing either a Number or a BigInt, or a throw completion
+#### <span id="sec-atomicreadmodifywrite" /> 25.4.3.17 AtomicReadModifyWrite ( _typedArray_: an ECMAScript language value, _index_: an ECMAScript language value, _value_: an ECMAScript language value, _op_: a read-modify-write modification function, ): either a normal completion containing either a Number or a BigInt, or a throw completion
 
 <Sec id="4.3.17" />
 
-#### <a id="sec-bytelistbitwiseop" /> 25.4.3.18 ByteListBitwiseOp ( _op_: `&amp;`, `^`, or `|`, _xBytes_: a List of byte values, _yBytes_: a List of byte values, ): a List of byte values
+#### <span id="sec-bytelistbitwiseop" /> 25.4.3.18 ByteListBitwiseOp ( _op_: `&amp;`, `^`, or `|`, _xBytes_: a List of byte values, _yBytes_: a List of byte values, ): a List of byte values
 
 <Sec id="4.3.18" />
 
-#### <a id="sec-bytelistequal" /> 25.4.3.19 ByteListEqual ( _xBytes_: a List of byte values, _yBytes_: a List of byte values, ): a Boolean
+#### <span id="sec-bytelistequal" /> 25.4.3.19 ByteListEqual ( _xBytes_: a List of byte values, _yBytes_: a List of byte values, ): a Boolean
 
 <Sec id="4.3.19" />
 
-### <a id="sec-atomics.add" /> 25.4.4 Atomics.add ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.add" /> 25.4.4 Atomics.add ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.4" />
 
-### <a id="sec-atomics.and" /> 25.4.5 Atomics.and ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.and" /> 25.4.5 Atomics.and ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.5" />
 
-### <a id="sec-atomics.compareexchange" /> 25.4.6 Atomics.compareExchange ( _typedArray_, _index_, _expectedValue_, _replacementValue_ )
+### <span id="sec-atomics.compareexchange" /> 25.4.6 Atomics.compareExchange ( _typedArray_, _index_, _expectedValue_, _replacementValue_ )
 
 <Sec id="4.6" />
 
-### <a id="sec-atomics.exchange" /> 25.4.7 Atomics.exchange ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.exchange" /> 25.4.7 Atomics.exchange ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.7" />
 
-### <a id="sec-atomics.islockfree" /> 25.4.8 Atomics.isLockFree ( _size_ )
+### <span id="sec-atomics.islockfree" /> 25.4.8 Atomics.isLockFree ( _size_ )
 
 <Sec id="4.8" />
 
-### <a id="sec-atomics.load" /> 25.4.9 Atomics.load ( _typedArray_, _index_ )
+### <span id="sec-atomics.load" /> 25.4.9 Atomics.load ( _typedArray_, _index_ )
 
 <Sec id="4.9" />
 
-### <a id="sec-atomics.or" /> 25.4.10 Atomics.or ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.or" /> 25.4.10 Atomics.or ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.10" />
 
-### <a id="sec-atomics.store" /> 25.4.11 Atomics.store ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.store" /> 25.4.11 Atomics.store ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.11" />
 
-### <a id="sec-atomics.sub" /> 25.4.12 Atomics.sub ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.sub" /> 25.4.12 Atomics.sub ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.12" />
 
-### <a id="sec-atomics.wait" /> 25.4.13 Atomics.wait ( _typedArray_, _index_, _value_, _timeout_ )
+### <span id="sec-atomics.wait" /> 25.4.13 Atomics.wait ( _typedArray_, _index_, _value_, _timeout_ )
 
 <Sec id="4.13" />
 
-### <a id="sec-atomics.waitasync" /> 25.4.14 Atomics.waitAsync ( _typedArray_, _index_, _value_, _timeout_ )
+### <span id="sec-atomics.waitasync" /> 25.4.14 Atomics.waitAsync ( _typedArray_, _index_, _value_, _timeout_ )
 
 <Sec id="4.14" />
 
-### <a id="sec-atomics.notify" /> 25.4.15 Atomics.notify ( _typedArray_, _index_, _count_ )
+### <span id="sec-atomics.notify" /> 25.4.15 Atomics.notify ( _typedArray_, _index_, _count_ )
 
 <Sec id="4.15" />
 
-### <a id="sec-atomics.xor" /> 25.4.16 Atomics.xor ( _typedArray_, _index_, _value_ )
+### <span id="sec-atomics.xor" /> 25.4.16 Atomics.xor ( _typedArray_, _index_, _value_ )
 
 <Sec id="4.16" />
 
-### <a id="sec-atomics-%symbol.tostringtag%" /> 25.4.17 Atomics [ %Symbol.toStringTag% ]
+### <span id="sec-atomics-%symbol.tostringtag%" /> 25.4.17 Atomics [ %Symbol.toStringTag% ]
 
 <Sec id="4.17" />
 
-## <a id="sec-json-object" /> 25.5 The JSON Object
+## <span id="sec-json-object" /> 25.5 The JSON Object
 
 <Sec id="5" />
 
-### <a id="sec-json.israwjson" /> 25.5.1 JSON.isRawJSON ( _obj_ )
+### <span id="sec-json.israwjson" /> 25.5.1 JSON.isRawJSON ( _obj_ )
 
 <Sec id="5.1" />
 
-### <a id="sec-json.parse" /> 25.5.2 JSON.parse ( _text_ [ , _reviver_ ] )
+### <span id="sec-json.parse" /> 25.5.2 JSON.parse ( _text_ [ , _reviver_ ] )
 
 <Sec id="5.2" />
 
-#### <a id="sec-ParseJSON" /> 25.5.2.1 ParseJSON ( _text_: a String, ): either a normal completion containing a Record with fields [[ParseNode]] (a Parse Node) and [[Value]] (an ECMAScript language value), or a throw completion
+#### <span id="sec-ParseJSON" /> 25.5.2.1 ParseJSON ( _text_: a String, ): either a normal completion containing a Record with fields [[ParseNode]] (a Parse Node) and [[Value]] (an ECMAScript language value), or a throw completion
 
 <Sec id="5.2.1" />
 
-#### <a id="sec-json-parse-record" /> 25.5.2.2 JSON Parse Record
+#### <span id="sec-json-parse-record" /> 25.5.2.2 JSON Parse Record
 
 <Sec id="5.2.2" />
 
-#### <a id="sec-createjsonparserecord" /> 25.5.2.3 CreateJSONParseRecord ( _parseNode_: a Parse Node, _key_: a property name, _val_: an ECMAScript language value, ): a JSON Parse Record
+#### <span id="sec-createjsonparserecord" /> 25.5.2.3 CreateJSONParseRecord ( _parseNode_: a Parse Node, _key_: a property name, _val_: an ECMAScript language value, ): a JSON Parse Record
 
 <Sec id="5.2.3" />
 
-#### <a id="sec-internalizejsonproperty" /> 25.5.2.4 InternalizeJSONProperty ( _holder_: an Object, _name_: a String, _reviver_: a function object, _parseRecord_: a JSON Parse Record or ~empty~, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-internalizejsonproperty" /> 25.5.2.4 InternalizeJSONProperty ( _holder_: an Object, _name_: a String, _reviver_: a function object, _parseRecord_: a JSON Parse Record or ~empty~, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="5.2.4" />
 
-#### <a id="sec-shallowestcontainedjsonvalue" /> 25.5.2.5 Static Semantics: ShallowestContainedJSONValue ( _root_: a Parse Node, ): a Parse Node or ~empty~
+#### <span id="sec-shallowestcontainedjsonvalue" /> 25.5.2.5 Static Semantics: ShallowestContainedJSONValue ( _root_: a Parse Node, ): a Parse Node or ~empty~
 
 <Sec id="5.2.5" />
 
-#### <a id="sec-static-semantics-jsonarrayliteralcontentnodes" /> 25.5.2.6 Static Semantics: JSONArrayLiteralContentNodes ( ): a List of Parse Nodes
+#### <span id="sec-static-semantics-jsonarrayliteralcontentnodes" /> 25.5.2.6 Static Semantics: JSONArrayLiteralContentNodes ( ): a List of Parse Nodes
 
 <Sec id="5.2.6" />
 
-### <a id="sec-json.rawjson" /> 25.5.3 JSON.rawJSON ( _text_ )
+### <span id="sec-json.rawjson" /> 25.5.3 JSON.rawJSON ( _text_ )
 
 <Sec id="5.3" />
 
-### <a id="sec-json.stringify" /> 25.5.4 JSON.stringify ( _value_ [ , _replacer_ [ , _space_ ] ] )
+### <span id="sec-json.stringify" /> 25.5.4 JSON.stringify ( _value_ [ , _replacer_ [ , _space_ ] ] )
 
 <Sec id="5.4" />
 
-#### <a id="sec-json-serialization-record" /> 25.5.4.1 JSON Serialization Record
+#### <span id="sec-json-serialization-record" /> 25.5.4.1 JSON Serialization Record
 
 <Sec id="5.4.1" />
 
-#### <a id="sec-serializejsonproperty" /> 25.5.4.2 SerializeJSONProperty ( _state_: a JSON Serialization Record, _key_: a String, _holder_: an Object, ): either a normal completion containing either a String or *undefined*, or a throw completion
+#### <span id="sec-serializejsonproperty" /> 25.5.4.2 SerializeJSONProperty ( _state_: a JSON Serialization Record, _key_: a String, _holder_: an Object, ): either a normal completion containing either a String or *undefined*, or a throw completion
 
 <Sec id="5.4.2" />
 
-#### <a id="sec-quotejsonstring" /> 25.5.4.3 QuoteJSONString ( _value_: a String, ): a String
+#### <span id="sec-quotejsonstring" /> 25.5.4.3 QuoteJSONString ( _value_: a String, ): a String
 
 <Sec id="5.4.3" />
 
-#### <a id="sec-unicodeescape" /> 25.5.4.4 UnicodeEscape ( _codeUnit_: a code unit, ): a String
+#### <span id="sec-unicodeescape" /> 25.5.4.4 UnicodeEscape ( _codeUnit_: a code unit, ): a String
 
 <Sec id="5.4.4" />
 
-#### <a id="sec-serializejsonobject" /> 25.5.4.5 SerializeJSONObject ( _state_: a JSON Serialization Record, _value_: an Object, ): either a normal completion containing a String or a throw completion
+#### <span id="sec-serializejsonobject" /> 25.5.4.5 SerializeJSONObject ( _state_: a JSON Serialization Record, _value_: an Object, ): either a normal completion containing a String or a throw completion
 
 <Sec id="5.4.5" />
 
-#### <a id="sec-serializejsonarray" /> 25.5.4.6 SerializeJSONArray ( _state_: a JSON Serialization Record, _value_: an Object, ): either a normal completion containing a String or a throw completion
+#### <span id="sec-serializejsonarray" /> 25.5.4.6 SerializeJSONArray ( _state_: a JSON Serialization Record, _value_: an Object, ): either a normal completion containing a String or a throw completion
 
 <Sec id="5.4.6" />
 
-### <a id="sec-json-%symbol.tostringtag%" /> 25.5.5 JSON [ %Symbol.toStringTag% ]
+### <span id="sec-json-%symbol.tostringtag%" /> 25.5.5 JSON [ %Symbol.toStringTag% ]
 
 <Sec id="5.5" />
