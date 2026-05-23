@@ -386,6 +386,57 @@ function applyGrammarSubst(html) {
   )
 }
 
+// Inline ecmarkup markup: a Markdown-like shorthand authors use in regular
+// prose, emu-alg step text, emu-eqn equations, table cells, etc. ecmarkup
+// expands these to typed inline elements at build time; we do the same so
+// readers see italic variables, bold spec values, monospace terminals, etc.
+//
+//   `foo`     → <code>foo</code>
+//   |Foo|     → <emu-nt>Foo</emu-nt>          (nonterminal, italic via CSS)
+//   ~enum~    → <emu-const>enum</emu-const>   (small-caps via CSS)
+//   %Foo.Bar% → <code class="emu-intrinsic">%Foo.Bar%</code>
+//   *foo*     → <b>foo</b>
+//   _x_       → <var>x</var>
+//
+// We tokenize the HTML and skip text inside <pre>/<code>/<emu-grammar>/<emu-not-ref>
+// so literal content (grammar bodies, code samples) isn't accidentally rewritten.
+const inlineSkipTags = new Set(['pre', 'code', 'emu-grammar', 'emu-not-ref', 'script', 'style'])
+
+function transformInlineText(text) {
+  let out = text
+  out = out.replace(/`([^`\n]+)`/g, '<code>$1</code>')
+  out = out.replace(/\|([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]*\])?\??)\|/g, '<emu-nt>$1</emu-nt>')
+  out = out.replace(/~([^\s~][^~]*?)~/g, '<emu-const>$1</emu-const>')
+  out = out.replace(/%([A-Za-z][A-Za-z0-9.@]*)%/g, '<code class="emu-intrinsic">%$1%</code>')
+  out = out.replace(/\*([^*\s][^*]*?[^*\s]|[^*\s])\*/g, '<b>$1</b>')
+  out = out.replace(/(?<![A-Za-z0-9_])_([A-Za-z][A-Za-z0-9_]*)_(?![A-Za-z0-9_])/g, '<var>$1</var>')
+  return out
+}
+
+function applyInlineMarkup(html) {
+  const tagRe = /<\/?([a-zA-Z][a-zA-Z0-9-]*)\b[^>]*>|<!--[\s\S]*?-->/g
+  let out = ''
+  let last = 0
+  let skipDepth = 0
+  let m
+  while ((m = tagRe.exec(html)) !== null) {
+    const text = html.slice(last, m.index)
+    out += skipDepth === 0 ? transformInlineText(text) : text
+    out += m[0]
+    if (m[1]) {
+      const tag = m[1].toLowerCase()
+      if (inlineSkipTags.has(tag)) {
+        if (m[0].startsWith('</')) skipDepth = Math.max(0, skipDepth - 1)
+        else if (!m[0].endsWith('/>')) skipDepth++
+      }
+    }
+    last = tagRe.lastIndex
+  }
+  const tail = html.slice(last)
+  out += skipDepth === 0 ? transformInlineText(tail) : tail
+  return out
+}
+
 fs.rmSync(CONTENT_DIR, { recursive: true, force: true })
 fs.rmSync(LIB_DIR, { recursive: true, force: true })
 fs.mkdirSync(CONTENT_DIR, { recursive: true })
@@ -397,7 +448,7 @@ built.forEach((c) => {
   const { slug, pageSlug, chapterNum, tree } = c
   const sections = flattenTree(tree).map(([k, v]) => [
     k,
-    applyXrefSubst(applyProdrefSubst(applyGrammarSubst(applyAlgSubst(v)))),
+    applyInlineMarkup(applyXrefSubst(applyProdrefSubst(applyGrammarSubst(applyAlgSubst(v))))),
   ])
   const sectionsObj = Object.fromEntries(sections)
 

@@ -9,6 +9,19 @@
   display: block;
 }
 
+/* Inline ecmarkup markup, expanded by build-chapters.mjs from |Foo|, ~enum~,
+   %intrinsic%, etc. Browsers have no default style for these custom elements,
+   so add the typographic conventions ecmarkup uses. */
+.ecma-spec emu-nt {
+  font-style: italic;
+}
+.ecma-spec emu-const {
+  font-variant: small-caps;
+}
+.ecma-spec emu-eqn {
+  font-style: italic;
+}
+
 /* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
    with depth, instead of the browser default of decimal at every level. */
 .ecma-spec emu-alg ol {
