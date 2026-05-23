@@ -9,6 +9,33 @@
   display: block;
 }
 
+/* Notes get a "Note" label and a callout box, matching how ecmarkup sets
+   them apart from surrounding prose. */
+.ecma-spec emu-note {
+  display: block;
+  border-left: 3px solid rgba(127, 127, 127, 0.4);
+  background: rgba(127, 127, 127, 0.08);
+  padding: 0.75em 1em;
+  margin-block: 1.5em;
+  border-radius: 0 4px 4px 0;
+}
+.ecma-spec emu-note::before {
+  content: "Note";
+  display: block;
+  font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+  opacity: 0.7;
+}
+.ecma-spec emu-note > p:first-of-type {
+  margin-top: 0;
+}
+.ecma-spec emu-note > p:last-of-type {
+  margin-bottom: 0;
+}
+
 /* Inline ecmarkup markup, expanded by build-chapters.mjs from |Foo|, ~enum~,
    %intrinsic%, etc. Browsers have no default style for these custom elements,
    so add the typographic conventions ecmarkup uses. */
