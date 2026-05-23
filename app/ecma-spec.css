@@ -45,8 +45,20 @@
 .ecma-spec emu-const {
   font-variant: small-caps;
 }
+/* Inline math equations like 𝔽(_x_), abs(_x_), floor(_x_) - _x_ - lean on
+   a math/serif font so identifiers read like LaTeX-style math italics, not
+   ordinary italic prose. Stays inline; doesn't break paragraph flow. */
 .ecma-spec emu-eqn {
   font-style: italic;
+  font-family:
+    "Cambria Math", "Latin Modern Math", "STIX Two Math",
+    "TeX Gyre Termes Math", Cambria, "Times New Roman", serif;
+}
+/* Variables inside an equation are already italic via <var>; switch them
+   off so the parent's math font is what carries the slant, matching the
+   typographic feel of the source markup. */
+.ecma-spec emu-eqn var {
+  font-style: normal;
 }
 
 /* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
