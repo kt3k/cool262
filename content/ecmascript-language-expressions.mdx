@@ -22,7 +22,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="2" />
 
-### <span id="sec-this-keyword" /> 13.2.1 The `this` Keyword
+### <span id="sec-this-keyword" /> 13.2.1 The <code>this</code> Keyword
 
 #### <span id="sec-this-keyword-runtime-semantics-evaluation" /> 13.2.1.1 Runtime Semantics: Evaluation
 
@@ -44,7 +44,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="2.4" />
 
-#### <span id="sec-runtime-semantics-arrayaccumulation" /> 13.2.4.1 Runtime Semantics: ArrayAccumulation ( _array_: an Array, _nextIndex_: an integer, ): either a normal completion containing an integer or an abrupt completion
+#### <span id="sec-runtime-semantics-arrayaccumulation" /> 13.2.4.1 Runtime Semantics: ArrayAccumulation ( <var>array</var>: an Array, <var>nextIndex</var>: an integer, ): either a normal completion containing an integer or an abrupt completion
 
 <Sec id="2.4.1" />
 
@@ -76,7 +76,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="2.5.5" />
 
-#### <span id="sec-runtime-semantics-propertydefinitionevaluation" /> 13.2.5.6 Runtime Semantics: PropertyDefinitionEvaluation ( _object_: an Object, ): either a normal completion containing ~unused~ or an abrupt completion
+#### <span id="sec-runtime-semantics-propertydefinitionevaluation" /> 13.2.5.6 Runtime Semantics: PropertyDefinitionEvaluation ( <var>object</var>: an Object, ): either a normal completion containing <emu-const>unused</emu-const> or an abrupt completion
 
 <Sec id="2.5.6" />
 
@@ -92,7 +92,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="2.7.1" />
 
-#### <span id="sec-isvalidregularexpressionliteral" /> 13.2.7.2 Static Semantics: IsValidRegularExpressionLiteral ( _literal_: a |RegularExpressionLiteral| Parse Node, ): a Boolean
+#### <span id="sec-isvalidregularexpressionliteral" /> 13.2.7.2 Static Semantics: IsValidRegularExpressionLiteral ( <var>literal</var>: a <emu-nt>RegularExpressionLiteral</emu-nt> Parse Node, ): a Boolean
 
 <Sec id="2.7.2" />
 
@@ -108,15 +108,15 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="2.8.1" />
 
-#### <span id="sec-static-semantics-templatestrings" /> 13.2.8.2 Static Semantics: TemplateStrings ( _raw_: a Boolean, ): a List of either Strings or *undefined*
+#### <span id="sec-static-semantics-templatestrings" /> 13.2.8.2 Static Semantics: TemplateStrings ( <var>raw</var>: a Boolean, ): a List of either Strings or <b>undefined</b>
 
 <Sec id="2.8.2" />
 
-#### <span id="sec-templatestring" /> 13.2.8.3 Static Semantics: TemplateString ( _templateToken_: a |NoSubstitutionTemplate| Parse Node, a |TemplateHead| Parse Node, a |TemplateMiddle| Parse Node, or a |TemplateTail| Parse Node, _raw_: a Boolean, ): a String or *undefined*
+#### <span id="sec-templatestring" /> 13.2.8.3 Static Semantics: TemplateString ( <var>templateToken</var>: a <emu-nt>NoSubstitutionTemplate</emu-nt> Parse Node, a <emu-nt>TemplateHead</emu-nt> Parse Node, a <emu-nt>TemplateMiddle</emu-nt> Parse Node, or a <emu-nt>TemplateTail</emu-nt> Parse Node, <var>raw</var>: a Boolean, ): a String or <b>undefined</b>
 
 <Sec id="2.8.3" />
 
-#### <span id="sec-gettemplateobject" /> 13.2.8.4 GetTemplateObject ( _templateLiteral_: a Parse Node, ): an Array
+#### <span id="sec-gettemplateobject" /> 13.2.8.4 GetTemplateObject ( <var>templateLiteral</var>: a Parse Node, ): an Array
 
 <Sec id="2.8.4" />
 
@@ -156,21 +156,21 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="3.2.1" />
 
-### <span id="sec-evaluate-property-access-with-expression-key" /> 13.3.3 EvaluatePropertyAccessWithExpressionKey ( _baseValue_: an ECMAScript language value, _expression_: an |Expression| Parse Node, _strict_: a Boolean, ): either a normal completion containing a Reference Record or an abrupt completion
+### <span id="sec-evaluate-property-access-with-expression-key" /> 13.3.3 EvaluatePropertyAccessWithExpressionKey ( <var>baseValue</var>: an ECMAScript language value, <var>expression</var>: an <emu-nt>Expression</emu-nt> Parse Node, <var>strict</var>: a Boolean, ): either a normal completion containing a Reference Record or an abrupt completion
 
 <Sec id="3.3" />
 
-### <span id="sec-evaluate-property-access-with-identifier-key" /> 13.3.4 EvaluatePropertyAccessWithIdentifierKey ( _baseValue_: an ECMAScript language value, _identifierName_: an |IdentifierName| Parse Node, _strict_: a Boolean, ): a Reference Record
+### <span id="sec-evaluate-property-access-with-identifier-key" /> 13.3.4 EvaluatePropertyAccessWithIdentifierKey ( <var>baseValue</var>: an ECMAScript language value, <var>identifierName</var>: an <emu-nt>IdentifierName</emu-nt> Parse Node, <var>strict</var>: a Boolean, ): a Reference Record
 
 <Sec id="3.4" />
 
-### <span id="sec-new-operator" /> 13.3.5 The `new` Operator
+### <span id="sec-new-operator" /> 13.3.5 The <code>new</code> Operator
 
 #### <span id="sec-new-operator-runtime-semantics-evaluation" /> 13.3.5.1 Runtime Semantics: Evaluation
 
 <Sec id="3.5.1" />
 
-##### <span id="sec-evaluatenew" /> 13.3.5.1.1 EvaluateNew ( _constructExpr_: a |NewExpression| Parse Node or a |MemberExpression| Parse Node, _arguments_: ~empty~ or an |Arguments| Parse Node, ): either a normal completion containing an Object or an abrupt completion
+##### <span id="sec-evaluatenew" /> 13.3.5.1.1 EvaluateNew ( <var>constructExpr</var>: a <emu-nt>NewExpression</emu-nt> Parse Node or a <emu-nt>MemberExpression</emu-nt> Parse Node, <var>arguments</var>: <emu-const>empty</emu-const> or an <emu-nt>Arguments</emu-nt> Parse Node, ): either a normal completion containing an Object or an abrupt completion
 
 <Sec id="3.5.1.1" />
 
@@ -180,21 +180,21 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="3.6.1" />
 
-#### <span id="sec-evaluatecall" /> 13.3.6.2 EvaluateCall ( _func_: an ECMAScript language value, _ref_: an ECMAScript language value or a Reference Record, _arguments_: a Parse Node, _tailPosition_: a Boolean, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+#### <span id="sec-evaluatecall" /> 13.3.6.2 EvaluateCall ( <var>func</var>: an ECMAScript language value, <var>ref</var>: an ECMAScript language value or a Reference Record, <var>arguments</var>: a Parse Node, <var>tailPosition</var>: a Boolean, ): either a normal completion containing an ECMAScript language value or an abrupt completion
 
 <Sec id="3.6.2" />
 
-### <span id="sec-super-keyword" /> 13.3.7 The `super` Keyword
+### <span id="sec-super-keyword" /> 13.3.7 The <code>super</code> Keyword
 
 #### <span id="sec-super-keyword-runtime-semantics-evaluation" /> 13.3.7.1 Runtime Semantics: Evaluation
 
 <Sec id="3.7.1" />
 
-#### <span id="sec-getsuperconstructor" /> 13.3.7.2 GetSuperConstructor ( ): an Object or *null*
+#### <span id="sec-getsuperconstructor" /> 13.3.7.2 GetSuperConstructor ( ): an Object or <b>null</b>
 
 <Sec id="3.7.2" />
 
-#### <span id="sec-makesuperpropertyreference" /> 13.3.7.3 MakeSuperPropertyReference ( _actualThis_: an ECMAScript language value, _propertyKey_: an ECMAScript language value, _strict_: a Boolean, ): a Super Reference Record
+#### <span id="sec-makesuperpropertyreference" /> 13.3.7.3 MakeSuperPropertyReference ( <var>actualThis</var>: an ECMAScript language value, <var>propertyKey</var>: an ECMAScript language value, <var>strict</var>: a Boolean, ): a Super Reference Record
 
 <Sec id="3.7.3" />
 
@@ -214,7 +214,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="3.9.1" />
 
-#### <span id="sec-optional-chaining-chain-evaluation" /> 13.3.9.2 Runtime Semantics: ChainEvaluation ( _baseValue_: an ECMAScript language value, _baseReference_: an ECMAScript language value or a Reference Record, ): either a normal completion containing either an ECMAScript language value or a Reference Record, or an abrupt completion
+#### <span id="sec-optional-chaining-chain-evaluation" /> 13.3.9.2 Runtime Semantics: ChainEvaluation ( <var>baseValue</var>: an ECMAScript language value, <var>baseReference</var>: an ECMAScript language value or a Reference Record, ): either a normal completion containing either an ECMAScript language value or a Reference Record, or an abrupt completion
 
 <Sec id="3.9.2" />
 
@@ -224,11 +224,11 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="3.10.1" />
 
-#### <span id="sec-evaluate-import-call" /> 13.3.10.2 EvaluateImportCall ( _specifierExpression_: a Parse Node, optional _optionsExpression_: a Parse Node, ): either a normal completion containing a Promise or an abrupt completion
+#### <span id="sec-evaluate-import-call" /> 13.3.10.2 EvaluateImportCall ( <var>specifierExpression</var>: a Parse Node, optional <var>optionsExpression</var>: a Parse Node, ): either a normal completion containing a Promise or an abrupt completion
 
 <Sec id="3.10.2" />
 
-#### <span id="sec-ContinueDynamicImport" /> 13.3.10.3 ContinueDynamicImport ( _promiseCapability_: a PromiseCapability Record, _moduleCompletion_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+#### <span id="sec-ContinueDynamicImport" /> 13.3.10.3 ContinueDynamicImport ( <var>promiseCapability</var>: a PromiseCapability Record, <var>moduleCompletion</var>: either a normal completion containing a Module Record or a throw completion, ): <emu-const>unused</emu-const>
 
 <Sec id="3.10.3" />
 
@@ -246,11 +246,11 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="3.12.1" />
 
-##### <span id="sec-hostgetimportmetaproperties" /> 13.3.12.1.1 HostGetImportMetaProperties ( _moduleRecord_: a Module Record, ): a List of Records with fields [[Key]] (a property key) and [[Value]] (an ECMAScript language value)
+##### <span id="sec-hostgetimportmetaproperties" /> 13.3.12.1.1 HostGetImportMetaProperties ( <var>moduleRecord</var>: a Module Record, ): a List of Records with fields [[Key]] (a property key) and [[Value]] (an ECMAScript language value)
 
 <Sec id="3.12.1.1" />
 
-##### <span id="sec-hostfinalizeimportmeta" /> 13.3.12.1.2 HostFinalizeImportMeta ( _importMeta_: an Object, _moduleRecord_: a Module Record, ): ~unused~
+##### <span id="sec-hostfinalizeimportmeta" /> 13.3.12.1.2 HostFinalizeImportMeta ( <var>importMeta</var>: an Object, <var>moduleRecord</var>: a Module Record, ): <emu-const>unused</emu-const>
 
 <Sec id="3.12.1.2" />
 
@@ -290,7 +290,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="5" />
 
-### <span id="sec-delete-operator" /> 13.5.1 The `delete` Operator
+### <span id="sec-delete-operator" /> 13.5.1 The <code>delete</code> Operator
 
 #### <span id="sec-delete-operator-static-semantics-early-errors" /> 13.5.1.1 Static Semantics: Early Errors
 
@@ -300,19 +300,19 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="5.1.2" />
 
-### <span id="sec-void-operator" /> 13.5.2 The `void` Operator
+### <span id="sec-void-operator" /> 13.5.2 The <code>void</code> Operator
 
 #### <span id="sec-void-operator-runtime-semantics-evaluation" /> 13.5.2.1 Runtime Semantics: Evaluation
 
 <Sec id="5.2.1" />
 
-### <span id="sec-typeof-operator" /> 13.5.3 The `typeof` Operator
+### <span id="sec-typeof-operator" /> 13.5.3 The <code>typeof</code> Operator
 
 #### <span id="sec-typeof-operator-runtime-semantics-evaluation" /> 13.5.3.1 Runtime Semantics: Evaluation
 
 <Sec id="5.3.1" />
 
-### <span id="sec-unary-plus-operator" /> 13.5.4 Unary `+` Operator
+### <span id="sec-unary-plus-operator" /> 13.5.4 Unary <code>+</code> Operator
 
 <Sec id="5.4" />
 
@@ -320,7 +320,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="5.4.1" />
 
-### <span id="sec-unary-minus-operator" /> 13.5.5 Unary `-` Operator
+### <span id="sec-unary-minus-operator" /> 13.5.5 Unary <code>-</code> Operator
 
 <Sec id="5.5" />
 
@@ -328,13 +328,13 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="5.5.1" />
 
-### <span id="sec-bitwise-not-operator" /> 13.5.6 Bitwise NOT Operator ( `~` )
+### <span id="sec-bitwise-not-operator" /> 13.5.6 Bitwise NOT Operator ( <code>~</code> )
 
 #### <span id="sec-bitwise-not-operator-runtime-semantics-evaluation" /> 13.5.6.1 Runtime Semantics: Evaluation
 
 <Sec id="5.6.1" />
 
-### <span id="sec-logical-not-operator" /> 13.5.7 Logical NOT Operator ( `!` )
+### <span id="sec-logical-not-operator" /> 13.5.7 Logical NOT Operator ( <code>!</code> )
 
 #### <span id="sec-logical-not-operator-runtime-semantics-evaluation" /> 13.5.7.1 Runtime Semantics: Evaluation
 
@@ -360,7 +360,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="8" />
 
-### <span id="sec-addition-operator-plus" /> 13.8.1 The Addition Operator ( `+` )
+### <span id="sec-addition-operator-plus" /> 13.8.1 The Addition Operator ( <code>+</code> )
 
 <Sec id="8.1" />
 
@@ -368,7 +368,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="8.1.1" />
 
-### <span id="sec-subtraction-operator-minus" /> 13.8.2 The Subtraction Operator ( `-` )
+### <span id="sec-subtraction-operator-minus" /> 13.8.2 The Subtraction Operator ( <code>-</code> )
 
 <Sec id="8.2" />
 
@@ -380,7 +380,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="9" />
 
-### <span id="sec-left-shift-operator" /> 13.9.1 The Left Shift Operator ( `&lt;&lt;` )
+### <span id="sec-left-shift-operator" /> 13.9.1 The Left Shift Operator ( <code>&lt;&lt;</code> )
 
 <Sec id="9.1" />
 
@@ -388,7 +388,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="9.1.1" />
 
-### <span id="sec-signed-right-shift-operator" /> 13.9.2 The Signed Right Shift Operator ( `>>` )
+### <span id="sec-signed-right-shift-operator" /> 13.9.2 The Signed Right Shift Operator ( <code>>></code> )
 
 <Sec id="9.2" />
 
@@ -396,7 +396,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="9.2.1" />
 
-### <span id="sec-unsigned-right-shift-operator" /> 13.9.3 The Unsigned Right Shift Operator ( `>>>` )
+### <span id="sec-unsigned-right-shift-operator" /> 13.9.3 The Unsigned Right Shift Operator ( <code>>>></code> )
 
 <Sec id="9.3" />
 
@@ -412,7 +412,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="10.1" />
 
-### <span id="sec-instanceofoperator" /> 13.10.2 InstanceofOperator ( _value_: an ECMAScript language value, _target_: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
+### <span id="sec-instanceofoperator" /> 13.10.2 InstanceofOperator ( <var>value</var>: an ECMAScript language value, <var>target</var>: an ECMAScript language value, ): either a normal completion containing a Boolean or a throw completion
 
 <Sec id="10.2" />
 
@@ -440,7 +440,7 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="13.1" />
 
-## <span id="sec-conditional-operator" /> 13.14 Conditional Operator ( `? :` )
+## <span id="sec-conditional-operator" /> 13.14 Conditional Operator ( <code>? :</code> )
 
 <Sec id="14" />
 
@@ -460,11 +460,11 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="15.2" />
 
-### <span id="sec-applystringornumericbinaryoperator" /> 13.15.3 ApplyStringOrNumericBinaryOperator ( _lVal_: an ECMAScript language value, _opText_: `**`, `*`, `/`, `%`, `+`, `-`, `&lt;&lt;`, `&gt;&gt;`, `&gt;&gt;&gt;`, `&amp;`, `^`, or `|`, _rVal_: an ECMAScript language value, ): either a normal completion containing either a String, a BigInt, or a Number, or a throw completion
+### <span id="sec-applystringornumericbinaryoperator" /> 13.15.3 ApplyStringOrNumericBinaryOperator ( <var>lVal</var>: an ECMAScript language value, <var>opText</var>: <code>**</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>+</code>, <code>-</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code>, <code>&amp;</code>, <code>^</code>, or <code>|</code>, <var>rVal</var>: an ECMAScript language value, ): either a normal completion containing either a String, a BigInt, or a Number, or a throw completion
 
 <Sec id="15.3" />
 
-### <span id="sec-evaluatestringornumericbinaryexpression" /> 13.15.4 EvaluateStringOrNumericBinaryExpression ( _leftOperand_: a Parse Node, _opText_: `**`, `*`, `/`, `%`, `+`, `-`, `&lt;&lt;`, `&gt;&gt;`, `&gt;&gt;&gt;`, `&amp;`, `^`, or `|`, _rightOperand_: a Parse Node, ): either a normal completion containing either a String, a BigInt, or a Number, or an abrupt completion
+### <span id="sec-evaluatestringornumericbinaryexpression" /> 13.15.4 EvaluateStringOrNumericBinaryExpression ( <var>leftOperand</var>: a Parse Node, <var>opText</var>: <code>**</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>+</code>, <code>-</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code>, <code>&amp;</code>, <code>^</code>, or <code>|</code>, <var>rightOperand</var>: a Parse Node, ): either a normal completion containing either a String, a BigInt, or a Number, or an abrupt completion
 
 <Sec id="15.4" />
 
@@ -476,27 +476,27 @@ import { Sec } from '../lib/spec/ecmascript-language-expressions'
 
 <Sec id="15.5.1" />
 
-#### <span id="sec-runtime-semantics-destructuringassignmentevaluation" /> 13.15.5.2 Runtime Semantics: DestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, ): either a normal completion containing ~unused~ or an abrupt completion
+#### <span id="sec-runtime-semantics-destructuringassignmentevaluation" /> 13.15.5.2 Runtime Semantics: DestructuringAssignmentEvaluation ( <var>value</var>: an ECMAScript language value, ): either a normal completion containing <emu-const>unused</emu-const> or an abrupt completion
 
 <Sec id="15.5.2" />
 
-#### <span id="sec-runtime-semantics-propertydestructuringassignmentevaluation" /> 13.15.5.3 Runtime Semantics: PropertyDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, ): either a normal completion containing a List of property keys or an abrupt completion
+#### <span id="sec-runtime-semantics-propertydestructuringassignmentevaluation" /> 13.15.5.3 Runtime Semantics: PropertyDestructuringAssignmentEvaluation ( <var>value</var>: an ECMAScript language value, ): either a normal completion containing a List of property keys or an abrupt completion
 
 <Sec id="15.5.3" />
 
-#### <span id="sec-runtime-semantics-restdestructuringassignmentevaluation" /> 13.15.5.4 Runtime Semantics: RestDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, _excludedNames_: a List of property keys, ): either a normal completion containing ~unused~ or an abrupt completion
+#### <span id="sec-runtime-semantics-restdestructuringassignmentevaluation" /> 13.15.5.4 Runtime Semantics: RestDestructuringAssignmentEvaluation ( <var>value</var>: an ECMAScript language value, <var>excludedNames</var>: a List of property keys, ): either a normal completion containing <emu-const>unused</emu-const> or an abrupt completion
 
 <Sec id="15.5.4" />
 
-#### <span id="sec-runtime-semantics-iteratordestructuringassignmentevaluation" /> 13.15.5.5 Runtime Semantics: IteratorDestructuringAssignmentEvaluation ( _iteratorRecord_: an Iterator Record, ): either a normal completion containing ~unused~ or an abrupt completion
+#### <span id="sec-runtime-semantics-iteratordestructuringassignmentevaluation" /> 13.15.5.5 Runtime Semantics: IteratorDestructuringAssignmentEvaluation ( <var>iteratorRecord</var>: an Iterator Record, ): either a normal completion containing <emu-const>unused</emu-const> or an abrupt completion
 
 <Sec id="15.5.5" />
 
-#### <span id="sec-runtime-semantics-keyeddestructuringassignmentevaluation" /> 13.15.5.6 Runtime Semantics: KeyedDestructuringAssignmentEvaluation ( _value_: an ECMAScript language value, _propertyName_: a property key, ): either a normal completion containing ~unused~ or an abrupt completion
+#### <span id="sec-runtime-semantics-keyeddestructuringassignmentevaluation" /> 13.15.5.6 Runtime Semantics: KeyedDestructuringAssignmentEvaluation ( <var>value</var>: an ECMAScript language value, <var>propertyName</var>: a property key, ): either a normal completion containing <emu-const>unused</emu-const> or an abrupt completion
 
 <Sec id="15.5.6" />
 
-## <span id="sec-comma-operator" /> 13.16 Comma Operator ( `,` )
+## <span id="sec-comma-operator" /> 13.16 Comma Operator ( <code>,</code> )
 
 <Sec id="16" />
 

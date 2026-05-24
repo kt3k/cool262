@@ -22,23 +22,23 @@ import { Sec } from '../lib/spec/memory-model'
 
 ## <span id="sec-abstract-operations-for-the-memory-model" /> 29.5 Abstract Operations for the Memory Model
 
-### <span id="sec-event-set" /> 29.5.1 EventSet ( _execution_: a candidate execution, ): a Set of Memory events
+### <span id="sec-event-set" /> 29.5.1 EventSet ( <var>execution</var>: a candidate execution, ): a Set of Memory events
 
 <Sec id="5.1" />
 
-### <span id="sec-sharedatablockeventset" /> 29.5.2 SharedDataBlockEventSet ( _execution_: a candidate execution, ): a Set of Shared Data Block events
+### <span id="sec-sharedatablockeventset" /> 29.5.2 SharedDataBlockEventSet ( <var>execution</var>: a candidate execution, ): a Set of Shared Data Block events
 
 <Sec id="5.2" />
 
-### <span id="sec-hosteventset" /> 29.5.3 HostEventSet ( _execution_: a candidate execution, ): a Set of Memory events
+### <span id="sec-hosteventset" /> 29.5.3 HostEventSet ( <var>execution</var>: a candidate execution, ): a Set of Memory events
 
 <Sec id="5.3" />
 
-### <span id="sec-composewriteeventbytes" /> 29.5.4 ComposeWriteEventBytes ( _execution_: a candidate execution, _byteIndex_: a non-negative integer, _writes_: a List of either WriteSharedMemory or ReadModifyWriteSharedMemory events, ): a List of byte values
+### <span id="sec-composewriteeventbytes" /> 29.5.4 ComposeWriteEventBytes ( <var>execution</var>: a candidate execution, <var>byteIndex</var>: a non-negative integer, <var>writes</var>: a List of either WriteSharedMemory or ReadModifyWriteSharedMemory events, ): a List of byte values
 
 <Sec id="5.4" />
 
-### <span id="sec-valueofreadevent" /> 29.5.5 ValueOfReadEvent ( _execution_: a candidate execution, _readEvent_: a ReadSharedMemory or ReadModifyWriteSharedMemory event, ): a List of byte values
+### <span id="sec-valueofreadevent" /> 29.5.5 ValueOfReadEvent ( <var>execution</var>: a candidate execution, <var>readEvent</var>: a ReadSharedMemory or ReadModifyWriteSharedMemory event, ): a List of byte values
 
 <Sec id="5.5" />
 

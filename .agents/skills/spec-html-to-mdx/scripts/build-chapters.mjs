@@ -152,6 +152,23 @@ function annexLabel(n) {
   return s
 }
 
+// Decode the named HTML entities that ecmarkup actually uses in headings —
+// enough for the spec's "&lt;&lt;", "&infin;", "&ldquo;" etc. without pulling
+// in a full HTML entity table. Numeric refs (&#123; / &#xAB;) covered too.
+function decodeEntities(s) {
+  return s
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(parseInt(n, 10)))
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&infin;/g, '∞')
+    .replace(/&ldquo;/g, '“')
+    .replace(/&rdquo;/g, '”')
+    .replace(/&amp;/g, '&') // must be last so we don't double-decode
+}
+
 // Emit MDX lines: <Sec id=... /> for the current node, then heading + recurse for each child.
 function renderMdxTree(tree, chapterPrefix, secPath, depth) {
   const lines = []
@@ -169,7 +186,10 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
     // nested <a> inside that is invalid HTML. Any element with `id` works
     // as a fragment target.
     const anchor = child.id ? `<span id="${child.id}" /> ` : ''
-    lines.push(`${hashes} ${anchor}${childNum} ${child.title}`)
+    // Run inline ecmarkup markup on the heading text too (it's stripped to
+    // plain text earlier but still contains `_x_`, `*foo*`, ~enum~, etc.),
+    // and let MDX parse the resulting <var>/<b>/<emu-…> tags inline.
+    lines.push(`${hashes} ${anchor}${childNum} ${transformInlineText(child.title)}`)
     lines.push('')
     lines.push(...renderMdxTree(child.tree, chapterPrefix, childSecPath, depth + 1))
   })
@@ -427,14 +447,21 @@ function applyGrammarSubst(html) {
 const inlineSkipTags = new Set(['pre', 'code', 'emu-grammar', 'emu-not-ref', 'script', 'style'])
 
 function transformInlineText(text) {
-  let out = text
-  out = out.replace(/`([^`\n]+)`/g, '<code>$1</code>')
+  // Pull backtick-wrapped runs out first and replace them with a NUL-marker
+  // placeholder so the later `*` / `_` regexes can't reach across the
+  // generated <code>…</code> boundaries (e.g. `*` adjacent to `**` is the
+  // case in ApplyStringOrNumericBinaryOperator's heading).
+  const code = []
+  let out = text.replace(/`([^`\n]+)`/g, (_, c) => {
+    code.push(c)
+    return `\x00${code.length - 1}\x00`
+  })
   out = out.replace(/\|([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]*\])?\??)\|/g, '<emu-nt>$1</emu-nt>')
   out = out.replace(/~([^\s~][^~]*?)~/g, '<emu-const>$1</emu-const>')
   out = out.replace(/%([A-Za-z][A-Za-z0-9.@]*)%/g, '<code class="emu-intrinsic">%$1%</code>')
   out = out.replace(/\*([^*\s][^*]*?[^*\s]|[^*\s])\*/g, '<b>$1</b>')
   out = out.replace(/(?<![A-Za-z0-9_])_([A-Za-z][A-Za-z0-9_]*)_(?![A-Za-z0-9_])/g, '<var>$1</var>')
-  return out
+  return out.replace(/\x00(\d+)\x00/g, (_, i) => `<code>${code[Number(i)]}</code>`)
 }
 
 function applyInlineMarkup(html) {
@@ -498,13 +525,14 @@ built.forEach((c) => {
   totalBytes += componentSrc.length
 
   const chapterAnchor = `<span id="${c.id}" /> `
+  const chapterTitleRich = transformInlineText(c.title)
   let chapterHeading
   if (c.kind === 'emu-intro') {
-    chapterHeading = `# ${chapterAnchor}${c.title}`
+    chapterHeading = `# ${chapterAnchor}${chapterTitleRich}`
   } else if (c.kind === 'emu-annex') {
-    chapterHeading = `# ${chapterAnchor}Annex ${chapterNum} ${c.title}`
+    chapterHeading = `# ${chapterAnchor}Annex ${chapterNum} ${chapterTitleRich}`
   } else {
-    chapterHeading = `# ${chapterAnchor}${chapterNum} ${c.title}`
+    chapterHeading = `# ${chapterAnchor}${chapterNum} ${chapterTitleRich}`
   }
 
   const mdxLines = [
@@ -517,11 +545,15 @@ built.forEach((c) => {
   const mdx = mdxLines.join('\n').replace(/\n{3,}/g, '\n\n').replace(/\n*$/, '\n')
   fs.writeFileSync(path.join(CONTENT_DIR, `${pageSlug}.mdx`), mdx)
 
+  // Sidebar label is plain text rendered by Nextra, so decode entities
+  // (e.g. "&lt;&lt;" → "<<") and leave ecmarkup shorthand alone — markup
+  // tags would show up as literal text in the sidebar.
+  const titlePlain = decodeEntities(c.title)
   const display = c.kind === 'emu-intro'
-    ? c.title
+    ? titlePlain
     : c.kind === 'emu-annex'
-      ? `Annex ${chapterNum}: ${c.title}`
-      : `${chapterNum}. ${c.title}`
+      ? `Annex ${chapterNum}: ${titlePlain}`
+      : `${chapterNum}. ${titlePlain}`
   meta[pageSlug] = display
 })
 

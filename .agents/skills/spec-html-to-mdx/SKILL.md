@@ -70,9 +70,7 @@ Expect ~2.8 MB of JSX across `lib/spec/` for the full TC39 spec (38 chapters), u
 ## Known limitations
 
 - **No grammar-token color coding.** `<pre class="emu-grammar">` blocks are monospace, but ecmarkup's source uses bare nonterminal names, backtick-wrapped terminals, etc., that aren't tokenized into spans. Add CSS / a tokenizer if syntax highlighting matters.
-- **HTML entities in headings** (e.g. `&amp;`, `&lt;`) are not decoded, so they render literally as `&amp;` in the markdown heading. Decode if any chapter title triggers this in practice.
 - **Inline `*foo*` matcher is conservative.** Requires non-space at both ends of the wrap, so `*x*` and `*+0*` work but unusual cases like `*a *b*` won't. Spec authors should be writing tight markup anyway.
-- **Heading text retains raw ecmarkup markup.** Title strings (lifted from `<h1>` text) still contain `_x_` / `*foo*` / `~enum~` / `|Foo|` etc., because the inline markup pass only touches section HTML, not the MDX heading lines we emit. Easy fix if needed: run `transformInlineText` over `child.title` before pushing it into the heading.
 - **basePath-aware Sec component depends on `NEXT_PUBLIC_BASE_PATH`.** If you set Next's `basePath` but forget to mirror it into env, raw `<a href="/…">` xrefs will resolve to the wrong host. The `next.config.mjs` pattern is `env: { NEXT_PUBLIC_BASE_PATH: basePath }`.
 
 ## Files in this skill

@@ -24,35 +24,35 @@ import { Sec } from '../lib/spec/global-object'
 
 ## <span id="sec-function-properties-of-the-global-object" /> 19.2 Function Properties of the Global Object
 
-### <span id="sec-eval-x" /> 19.2.1 eval ( _source_ )
+### <span id="sec-eval-x" /> 19.2.1 eval ( <var>source</var> )
 
 <Sec id="2.1" />
 
-#### <span id="sec-performeval" /> 19.2.1.1 PerformEval ( _source_: an ECMAScript language value, _strictCaller_: a Boolean, _direct_: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
+#### <span id="sec-performeval" /> 19.2.1.1 PerformEval ( <var>source</var>: an ECMAScript language value, <var>strictCaller</var>: a Boolean, <var>direct</var>: a Boolean, ): either a normal completion containing an ECMAScript language value or a throw completion
 
 <Sec id="2.1.1" />
 
-#### <span id="sec-hostensurecancompilestrings" /> 19.2.1.2 HostEnsureCanCompileStrings ( _calleeRealm_: a Realm Record, _parameterStrings_: a List of Strings, _bodyString_: a String, _direct_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+#### <span id="sec-hostensurecancompilestrings" /> 19.2.1.2 HostEnsureCanCompileStrings ( <var>calleeRealm</var>: a Realm Record, <var>parameterStrings</var>: a List of Strings, <var>bodyString</var>: a String, <var>direct</var>: a Boolean, ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.2" />
 
-#### <span id="sec-evaldeclarationinstantiation" /> 19.2.1.3 EvalDeclarationInstantiation ( _body_: a |ScriptBody| Parse Node, _varEnv_: an Environment Record, _lexEnv_: a Declarative Environment Record, _privateEnv_: a PrivateEnvironment Record or *null*, _strict_: a Boolean, ): either a normal completion containing ~unused~ or a throw completion
+#### <span id="sec-evaldeclarationinstantiation" /> 19.2.1.3 EvalDeclarationInstantiation ( <var>body</var>: a <emu-nt>ScriptBody</emu-nt> Parse Node, <var>varEnv</var>: an Environment Record, <var>lexEnv</var>: a Declarative Environment Record, <var>privateEnv</var>: a PrivateEnvironment Record or <b>null</b>, <var>strict</var>: a Boolean, ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.3" />
 
-### <span id="sec-isfinite-number" /> 19.2.2 isFinite ( _number_ )
+### <span id="sec-isfinite-number" /> 19.2.2 isFinite ( <var>number</var> )
 
 <Sec id="2.2" />
 
-### <span id="sec-isnan-number" /> 19.2.3 isNaN ( _number_ )
+### <span id="sec-isnan-number" /> 19.2.3 isNaN ( <var>number</var> )
 
 <Sec id="2.3" />
 
-### <span id="sec-parsefloat-string" /> 19.2.4 parseFloat ( _string_ )
+### <span id="sec-parsefloat-string" /> 19.2.4 parseFloat ( <var>string</var> )
 
 <Sec id="2.4" />
 
-### <span id="sec-parseint-string-radix" /> 19.2.5 parseInt ( _string_, _radix_ )
+### <span id="sec-parseint-string-radix" /> 19.2.5 parseInt ( <var>string</var>, <var>radix</var> )
 
 <Sec id="2.5" />
 
@@ -60,31 +60,31 @@ import { Sec } from '../lib/spec/global-object'
 
 <Sec id="2.6" />
 
-#### <span id="sec-decodeuri-encodeduri" /> 19.2.6.1 decodeURI ( _encodedURI_ )
+#### <span id="sec-decodeuri-encodeduri" /> 19.2.6.1 decodeURI ( <var>encodedURI</var> )
 
 <Sec id="2.6.1" />
 
-#### <span id="sec-decodeuricomponent-encodeduricomponent" /> 19.2.6.2 decodeURIComponent ( _encodedURIComponent_ )
+#### <span id="sec-decodeuricomponent-encodeduricomponent" /> 19.2.6.2 decodeURIComponent ( <var>encodedURIComponent</var> )
 
 <Sec id="2.6.2" />
 
-#### <span id="sec-encodeuri-uri" /> 19.2.6.3 encodeURI ( _uri_ )
+#### <span id="sec-encodeuri-uri" /> 19.2.6.3 encodeURI ( <var>uri</var> )
 
 <Sec id="2.6.3" />
 
-#### <span id="sec-encodeuricomponent-uricomponent" /> 19.2.6.4 encodeURIComponent ( _uriComponent_ )
+#### <span id="sec-encodeuricomponent-uricomponent" /> 19.2.6.4 encodeURIComponent ( <var>uriComponent</var> )
 
 <Sec id="2.6.4" />
 
-#### <span id="sec-encode" /> 19.2.6.5 Encode ( _string_: a String, _extraUnescaped_: a String, ): either a normal completion containing a String or a throw completion
+#### <span id="sec-encode" /> 19.2.6.5 Encode ( <var>string</var>: a String, <var>extraUnescaped</var>: a String, ): either a normal completion containing a String or a throw completion
 
 <Sec id="2.6.5" />
 
-#### <span id="sec-decode" /> 19.2.6.6 Decode ( _string_: a String, _preserveEscapeSet_: a String, ): either a normal completion containing a String or a throw completion
+#### <span id="sec-decode" /> 19.2.6.6 Decode ( <var>string</var>: a String, <var>preserveEscapeSet</var>: a String, ): either a normal completion containing a String or a throw completion
 
 <Sec id="2.6.6" />
 
-#### <span id="sec-parsehexoctet" /> 19.2.6.7 ParseHexOctet ( _string_: a String, _position_: a non-negative integer, ): either a non-negative integer or a non-empty List of *SyntaxError* objects
+#### <span id="sec-parsehexoctet" /> 19.2.6.7 ParseHexOctet ( <var>string</var>: a String, <var>position</var>: a non-negative integer, ): either a non-negative integer or a non-empty List of <b>SyntaxError</b> objects
 
 <Sec id="2.6.7" />
 

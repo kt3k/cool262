@@ -22,15 +22,15 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="1.4" />
 
-### <span id="sec-parse-script" /> 16.1.5 ParseScript ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Script Record or a non-empty List of *SyntaxError* objects
+### <span id="sec-parse-script" /> 16.1.5 ParseScript ( <var>sourceText</var>: ECMAScript source text, <var>realm</var>: a Realm Record, <var>hostDefined</var>: anything, ): a Script Record or a non-empty List of <b>SyntaxError</b> objects
 
 <Sec id="1.5" />
 
-### <span id="sec-runtime-semantics-scriptevaluation" /> 16.1.6 ScriptEvaluation ( _scriptRecord_: a Script Record, ): either a normal completion containing an ECMAScript language value or an abrupt completion
+### <span id="sec-runtime-semantics-scriptevaluation" /> 16.1.6 ScriptEvaluation ( <var>scriptRecord</var>: a Script Record, ): either a normal completion containing an ECMAScript language value or an abrupt completion
 
 <Sec id="1.6" />
 
-### <span id="sec-globaldeclarationinstantiation" /> 16.1.7 GlobalDeclarationInstantiation ( _script_: a |Script| Parse Node, _env_: a Global Environment Record, ): either a normal completion containing ~unused~ or a throw completion
+### <span id="sec-globaldeclarationinstantiation" /> 16.1.7 GlobalDeclarationInstantiation ( <var>script</var>: a <emu-nt>Script</emu-nt> Parse Node, <var>env</var>: a Global Environment Record, ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="1.7" />
 
@@ -44,7 +44,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.1" />
 
-#### <span id="sec-importedlocalnames" /> 16.2.1.2 Static Semantics: ImportedLocalNames ( _importEntries_: a List of ImportEntry Records, ): a List of Strings
+#### <span id="sec-importedlocalnames" /> 16.2.1.2 Static Semantics: ImportedLocalNames ( <var>importEntries</var>: a List of ImportEntry Records, ): a List of Strings
 
 <Sec id="2.1.2" />
 
@@ -52,7 +52,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.3" />
 
-##### <span id="sec-ModuleRequestsEqual" /> 16.2.1.3.1 ModuleRequestsEqual ( _left_: a ModuleRequest Record or a LoadedModuleRequest Record, _right_: a ModuleRequest Record or a LoadedModuleRequest Record, ): a Boolean
+##### <span id="sec-ModuleRequestsEqual" /> 16.2.1.3.1 ModuleRequestsEqual ( <var>left</var>: a ModuleRequest Record or a LoadedModuleRequest Record, <var>right</var>: a ModuleRequest Record or a LoadedModuleRequest Record, ): a Boolean
 
 <Sec id="2.1.3.1" />
 
@@ -64,7 +64,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.5" />
 
-##### <span id="sec-EvaluateModuleSync" /> 16.2.1.5.1 EvaluateModuleSync ( _module_: a Module Record, ): either a normal completion containing ~unused~ or a throw completion
+##### <span id="sec-EvaluateModuleSync" /> 16.2.1.5.1 EvaluateModuleSync ( <var>module</var>: a Module Record, ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.5.1" />
 
@@ -76,23 +76,23 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.6.1" />
 
-###### <span id="sec-LoadRequestedModules" /> 16.2.1.6.1.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
+###### <span id="sec-LoadRequestedModules" /> 16.2.1.6.1.1 LoadRequestedModules ( optional <var>hostDefined</var>: anything, ): a Promise
 
 <Sec id="2.1.6.1.1" />
 
-###### <span id="sec-InnerModuleLoading" /> 16.2.1.6.1.1.1 InnerModuleLoading ( _state_: a GraphLoadingState Record, _module_: a Module Record, ): ~unused~
+###### <span id="sec-InnerModuleLoading" /> 16.2.1.6.1.1.1 InnerModuleLoading ( <var>state</var>: a GraphLoadingState Record, <var>module</var>: a Module Record, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.1.1" />
 
-###### <span id="sec-ContinueModuleLoading" /> 16.2.1.6.1.1.2 ContinueModuleLoading ( _state_: a GraphLoadingState Record, _moduleCompletion_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+###### <span id="sec-ContinueModuleLoading" /> 16.2.1.6.1.1.2 ContinueModuleLoading ( <var>state</var>: a GraphLoadingState Record, <var>moduleCompletion</var>: either a normal completion containing a Module Record or a throw completion, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.1.2" />
 
-###### <span id="sec-moduledeclarationlinking" /> 16.2.1.6.1.2 Link ( ): either a normal completion containing ~unused~ or a throw completion
+###### <span id="sec-moduledeclarationlinking" /> 16.2.1.6.1.2 Link ( ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.6.1.2" />
 
-###### <span id="sec-InnerModuleLinking" /> 16.2.1.6.1.2.1 InnerModuleLinking ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
+###### <span id="sec-InnerModuleLinking" /> 16.2.1.6.1.2.1 InnerModuleLinking ( <var>module</var>: a Module Record, <var>stack</var>: a List of Cyclic Module Records, <var>index</var>: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="2.1.6.1.2.1" />
 
@@ -100,23 +100,23 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.6.1.3" />
 
-###### <span id="sec-innermoduleevaluation" /> 16.2.1.6.1.3.1 InnerModuleEvaluation ( _module_: a Module Record, _stack_: a List of Cyclic Module Records, _index_: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
+###### <span id="sec-innermoduleevaluation" /> 16.2.1.6.1.3.1 InnerModuleEvaluation ( <var>module</var>: a Module Record, <var>stack</var>: a List of Cyclic Module Records, <var>index</var>: a non-negative integer, ): either a normal completion containing a non-negative integer or a throw completion
 
 <Sec id="2.1.6.1.3.1" />
 
-###### <span id="sec-execute-async-module" /> 16.2.1.6.1.3.2 ExecuteAsyncModule ( _module_: a Cyclic Module Record, ): ~unused~
+###### <span id="sec-execute-async-module" /> 16.2.1.6.1.3.2 ExecuteAsyncModule ( <var>module</var>: a Cyclic Module Record, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.3.2" />
 
-###### <span id="sec-gather-available-ancestors" /> 16.2.1.6.1.3.3 GatherAvailableAncestors ( _module_: a Cyclic Module Record, _execList_: a List of Cyclic Module Records, ): ~unused~
+###### <span id="sec-gather-available-ancestors" /> 16.2.1.6.1.3.3 GatherAvailableAncestors ( <var>module</var>: a Cyclic Module Record, <var>execList</var>: a List of Cyclic Module Records, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.3.3" />
 
-###### <span id="sec-async-module-execution-fulfilled" /> 16.2.1.6.1.3.4 AsyncModuleExecutionFulfilled ( _module_: a Cyclic Module Record, ): ~unused~
+###### <span id="sec-async-module-execution-fulfilled" /> 16.2.1.6.1.3.4 AsyncModuleExecutionFulfilled ( <var>module</var>: a Cyclic Module Record, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.3.4" />
 
-###### <span id="sec-async-module-execution-rejected" /> 16.2.1.6.1.3.5 AsyncModuleExecutionRejected ( _module_: a Cyclic Module Record, _error_: an ECMAScript language value, ): ~unused~
+###### <span id="sec-async-module-execution-rejected" /> 16.2.1.6.1.3.5 AsyncModuleExecutionRejected ( <var>module</var>: a Cyclic Module Record, <var>error</var>: an ECMAScript language value, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.6.1.3.5" />
 
@@ -128,7 +128,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.7" />
 
-##### <span id="sec-parsemodule" /> 16.2.1.7.1 ParseModule ( _sourceText_: ECMAScript source text, _realm_: a Realm Record, _hostDefined_: anything, ): a Source Text Module Record or a non-empty List of *SyntaxError* objects
+##### <span id="sec-parsemodule" /> 16.2.1.7.1 ParseModule ( <var>sourceText</var>: ECMAScript source text, <var>realm</var>: a Realm Record, <var>hostDefined</var>: anything, ): a Source Text Module Record or a non-empty List of <b>SyntaxError</b> objects
 
 <Sec id="2.1.7.1" />
 
@@ -136,11 +136,11 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.7.2" />
 
-###### <span id="sec-getexportednames" /> 16.2.1.7.2.1 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
+###### <span id="sec-getexportednames" /> 16.2.1.7.2.1 GetExportedNames ( optional <var>exportStarSet</var>: a List of Source Text Module Records, ): a List of Strings
 
 <Sec id="2.1.7.2.1" />
 
-###### <span id="sec-resolveexport" /> 16.2.1.7.2.2 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
+###### <span id="sec-resolveexport" /> 16.2.1.7.2.2 ResolveExport ( <var>exportName</var>: a String, optional <var>resolveSet</var>: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, <b>null</b>, or <emu-const>ambiguous</emu-const>
 
 <Sec id="2.1.7.2.2" />
 
@@ -148,11 +148,11 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.7.3" />
 
-###### <span id="sec-source-text-module-record-initialize-environment" /> 16.2.1.7.3.1 InitializeEnvironment ( ): either a normal completion containing ~unused~ or a throw completion
+###### <span id="sec-source-text-module-record-initialize-environment" /> 16.2.1.7.3.1 InitializeEnvironment ( ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.7.3.1" />
 
-###### <span id="sec-source-text-module-record-execute-module" /> 16.2.1.7.3.2 ExecuteModule ( optional _capability_: a PromiseCapability Record, ): either a normal completion containing ~unused~ or a throw completion
+###### <span id="sec-source-text-module-record-execute-module" /> 16.2.1.7.3.2 ExecuteModule ( optional <var>capability</var>: a PromiseCapability Record, ): either a normal completion containing <emu-const>unused</emu-const> or a throw completion
 
 <Sec id="2.1.7.3.2" />
 
@@ -160,15 +160,15 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.8" />
 
-##### <span id="sec-create-default-export-synthetic-module" /> 16.2.1.8.1 CreateDefaultExportSyntheticModule ( _defaultExport_: an ECMAScript language value, ): a Synthetic Module Record
+##### <span id="sec-create-default-export-synthetic-module" /> 16.2.1.8.1 CreateDefaultExportSyntheticModule ( <var>defaultExport</var>: an ECMAScript language value, ): a Synthetic Module Record
 
 <Sec id="2.1.8.1" />
 
-##### <span id="sec-parse-json-module" /> 16.2.1.8.2 ParseJSONModule ( _source_: a String, ): either a normal completion containing a Synthetic Module Record, or a throw completion
+##### <span id="sec-parse-json-module" /> 16.2.1.8.2 ParseJSONModule ( <var>source</var>: a String, ): either a normal completion containing a Synthetic Module Record, or a throw completion
 
 <Sec id="2.1.8.2" />
 
-##### <span id="sec-setsyntheticmoduleexport" /> 16.2.1.8.3 SetSyntheticModuleExport ( _module_: a Synthetic Module Record, _exportName_: a String, _exportValue_: an ECMAScript language value, ): ~unused~
+##### <span id="sec-setsyntheticmoduleexport" /> 16.2.1.8.3 SetSyntheticModuleExport ( <var>module</var>: a Synthetic Module Record, <var>exportName</var>: a String, <var>exportValue</var>: an ECMAScript language value, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.8.3" />
 
@@ -176,19 +176,19 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.8.4" />
 
-###### <span id="sec-smr-LoadRequestedModules" /> 16.2.1.8.4.1 LoadRequestedModules ( optional _hostDefined_: anything, ): a Promise
+###### <span id="sec-smr-LoadRequestedModules" /> 16.2.1.8.4.1 LoadRequestedModules ( optional <var>hostDefined</var>: anything, ): a Promise
 
 <Sec id="2.1.8.4.1" />
 
-###### <span id="sec-smr-getexportednames" /> 16.2.1.8.4.2 GetExportedNames ( optional _exportStarSet_: a List of Source Text Module Records, ): a List of Strings
+###### <span id="sec-smr-getexportednames" /> 16.2.1.8.4.2 GetExportedNames ( optional <var>exportStarSet</var>: a List of Source Text Module Records, ): a List of Strings
 
 <Sec id="2.1.8.4.2" />
 
-###### <span id="sec-smr-resolveexport" /> 16.2.1.8.4.3 ResolveExport ( _exportName_: a String, optional _resolveSet_: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, *null*, or ~ambiguous~
+###### <span id="sec-smr-resolveexport" /> 16.2.1.8.4.3 ResolveExport ( <var>exportName</var>: a String, optional <var>resolveSet</var>: a List of Records with fields [[Module]] (a Module Record) and [[ExportName]] (a String), ): a ResolvedBinding Record, <b>null</b>, or <emu-const>ambiguous</emu-const>
 
 <Sec id="2.1.8.4.3" />
 
-###### <span id="sec-smr-Link" /> 16.2.1.8.4.4 Link ( ): a normal completion containing ~unused~
+###### <span id="sec-smr-Link" /> 16.2.1.8.4.4 Link ( ): a normal completion containing <emu-const>unused</emu-const>
 
 <Sec id="2.1.8.4.4" />
 
@@ -196,19 +196,19 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.8.4.5" />
 
-#### <span id="sec-GetImportedModule" /> 16.2.1.9 GetImportedModule ( _referrer_: a Cyclic Module Record, _request_: a ModuleRequest Record, ): a Module Record
+#### <span id="sec-GetImportedModule" /> 16.2.1.9 GetImportedModule ( <var>referrer</var>: a Cyclic Module Record, <var>request</var>: a ModuleRequest Record, ): a Module Record
 
 <Sec id="2.1.9" />
 
-#### <span id="sec-HostLoadImportedModule" /> 16.2.1.10 HostLoadImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _hostDefined_: anything, _payload_: a GraphLoadingState Record or a PromiseCapability Record, ): ~unused~
+#### <span id="sec-HostLoadImportedModule" /> 16.2.1.10 HostLoadImportedModule ( <var>referrer</var>: a Script Record, a Cyclic Module Record, or a Realm Record, <var>moduleRequest</var>: a ModuleRequest Record, <var>hostDefined</var>: anything, <var>payload</var>: a GraphLoadingState Record or a PromiseCapability Record, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.10" />
 
-#### <span id="sec-FinishLoadingImportedModule" /> 16.2.1.11 FinishLoadingImportedModule ( _referrer_: a Script Record, a Cyclic Module Record, or a Realm Record, _moduleRequest_: a ModuleRequest Record, _payload_: a GraphLoadingState Record or a PromiseCapability Record, _result_: either a normal completion containing a Module Record or a throw completion, ): ~unused~
+#### <span id="sec-FinishLoadingImportedModule" /> 16.2.1.11 FinishLoadingImportedModule ( <var>referrer</var>: a Script Record, a Cyclic Module Record, or a Realm Record, <var>moduleRequest</var>: a ModuleRequest Record, <var>payload</var>: a GraphLoadingState Record or a PromiseCapability Record, <var>result</var>: either a normal completion containing a Module Record or a throw completion, ): <emu-const>unused</emu-const>
 
 <Sec id="2.1.11" />
 
-#### <span id="sec-AllImportAttributesSupported" /> 16.2.1.12 AllImportAttributesSupported ( _attributes_: a List of ImportAttribute Records, ): a Boolean
+#### <span id="sec-AllImportAttributesSupported" /> 16.2.1.12 AllImportAttributesSupported ( <var>attributes</var>: a List of ImportAttribute Records, ): a Boolean
 
 <Sec id="2.1.12" />
 
@@ -216,7 +216,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.1.12.1" />
 
-#### <span id="sec-getmodulenamespace" /> 16.2.1.13 GetModuleNamespace ( _module_: an instance of a concrete subclass of Module Record, ): a Module Namespace Object
+#### <span id="sec-getmodulenamespace" /> 16.2.1.13 GetModuleNamespace ( <var>module</var>: an instance of a concrete subclass of Module Record, ): a Module Namespace Object
 
 <Sec id="2.1.13" />
 
@@ -236,7 +236,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.2.2" />
 
-#### <span id="sec-static-semantics-importentriesformodule" /> 16.2.2.3 Static Semantics: ImportEntriesForModule ( _module_: a ModuleRequest Record, ): a List of ImportEntry Records
+#### <span id="sec-static-semantics-importentriesformodule" /> 16.2.2.3 Static Semantics: ImportEntriesForModule ( <var>module</var>: a ModuleRequest Record, ): a List of ImportEntry Records
 
 <Sec id="2.2.3" />
 
@@ -264,7 +264,7 @@ import { Sec } from '../lib/spec/ecmascript-language-scripts-and-modules'
 
 <Sec id="2.3.4" />
 
-#### <span id="sec-static-semantics-exportentriesformodule" /> 16.2.3.5 Static Semantics: ExportEntriesForModule ( _module_: a ModuleRequest Record or *null*, ): a List of ExportEntry Records
+#### <span id="sec-static-semantics-exportentriesformodule" /> 16.2.3.5 Static Semantics: ExportEntriesForModule ( <var>module</var>: a ModuleRequest Record or <b>null</b>, ): a List of ExportEntry Records
 
 <Sec id="2.3.5" />
 
