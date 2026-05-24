@@ -476,13 +476,24 @@ built.forEach((c) => {
   ])
   const sectionsObj = Object.fromEntries(sections)
 
-  const componentSrc =
-    `// Generated from ecma262/spec.html — do not edit by hand.\n` +
-    `const sections = ${JSON.stringify(sectionsObj)};\n` +
-    `export function Sec({ id }) {\n` +
-    `  const html = sections[id] ?? '';\n` +
-    `  return <div className="ecma-spec" dangerouslySetInnerHTML={{ __html: html }} />;\n` +
-    `}\n`
+  const componentSrc = [
+    '// Generated from ecma262/spec.html — do not edit by hand.',
+    `const _sections = ${JSON.stringify(sectionsObj)};`,
+    "const _basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';",
+    'const sections = _basePath',
+    '  ? Object.fromEntries(',
+    '      Object.entries(_sections).map(([k, v]) => [',
+    '        k,',
+    '        v.replaceAll(\'href="/\', `href="${_basePath}/`),',
+    '      ])',
+    '    )',
+    '  : _sections;',
+    'export function Sec({ id }) {',
+    "  const html = sections[id] ?? '';",
+    '  return <div className="ecma-spec" dangerouslySetInnerHTML={{ __html: html }} />;',
+    '}',
+    '',
+  ].join('\n')
   fs.writeFileSync(path.join(LIB_DIR, `${slug}.jsx`), componentSrc)
   totalBytes += componentSrc.length
 
