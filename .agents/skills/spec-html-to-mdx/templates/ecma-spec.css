@@ -1,0 +1,96 @@
+/* Styles for spec content rendered via lib/spec/<chapter>.jsx (Sec component
+   wraps everything in <div class="ecma-spec">). */
+
+/* Nextra's per-page breadcrumb only contains a single item — the current
+   page's display label from _meta.js (e.g. "1. Scope") — which duplicates
+   the in-page H1. Hide it. */
+.nextra-breadcrumb {
+  display: none;
+}
+
+.ecma-spec p {
+  margin-block: 1.25em;
+}
+
+.ecma-spec emu-alg {
+  display: block;
+}
+
+/* Notes get a "Note" label and a callout box, matching how ecmarkup sets
+   them apart from surrounding prose. */
+.ecma-spec emu-note {
+  display: block;
+  border-left: 3px solid rgba(127, 127, 127, 0.4);
+  background: rgba(127, 127, 127, 0.08);
+  padding: 0.75em 1em;
+  margin-block: 1.5em;
+  border-radius: 0 4px 4px 0;
+}
+.ecma-spec emu-note::before {
+  content: "Note";
+  display: block;
+  font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4em;
+  opacity: 0.7;
+}
+.ecma-spec emu-note > p:first-of-type {
+  margin-top: 0;
+}
+.ecma-spec emu-note > p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Inline ecmarkup markup, expanded by build-chapters.mjs from |Foo|, ~enum~,
+   %intrinsic%, etc. Browsers have no default style for these custom elements,
+   so add the typographic conventions ecmarkup uses. */
+.ecma-spec emu-nt {
+  font-style: italic;
+}
+.ecma-spec emu-const {
+  font-variant: small-caps;
+}
+/* Inline math equations like 𝔽(_x_), abs(_x_), floor(_x_) - _x_ - lean on
+   a math/serif font so identifiers read like LaTeX-style math italics, not
+   ordinary italic prose. Stays inline; doesn't break paragraph flow. */
+.ecma-spec emu-eqn {
+  font-style: italic;
+  font-family:
+    "Cambria Math", "Latin Modern Math", "STIX Two Math",
+    "TeX Gyre Termes Math", Cambria, "Times New Roman", serif;
+}
+/* Variables inside an equation are already italic via <var>; switch them
+   off so the parent's math font is what carries the slant, matching the
+   typographic feel of the source markup. */
+.ecma-spec emu-eqn var {
+  font-style: normal;
+}
+
+/* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
+   with depth, instead of the browser default of decimal at every level. */
+.ecma-spec emu-alg ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol {
+  list-style-type: lower-alpha;
+}
+.ecma-spec emu-alg ol ol ol {
+  list-style-type: lower-roman;
+}
+.ecma-spec emu-alg ol ol ol ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol {
+  list-style-type: lower-roman;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol ol {
+  list-style-type: decimal;
+}
+.ecma-spec emu-alg ol ol ol ol ol ol ol ol {
+  list-style-type: lower-alpha;
+}
