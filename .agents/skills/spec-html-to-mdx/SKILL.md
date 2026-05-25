@@ -56,7 +56,15 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
    - Generates `content/_meta.js` with numbered sidebar labels (`1 Scope`, `Annex A: Grammar Summary`, …). Labels are run through a small `decodeEntities` helper so `&lt;&lt;` / `&infin;` / `&ldquo;` show up as `<<` / `∞` / `“` in the sidebar text.
    - Wipes `content/`, `lib/spec/`, and `public/img/` at the start, so the script is idempotent.
 
-4. **Drop in `templates/ecma-spec.css`** at `app/ecma-spec.css` and `import './ecma-spec.css'` in `app/layout.jsx` after the Nextra theme stylesheet. This is what gives `<emu-alg>` hierarchical step numbering (decimal → lower-alpha → lower-roman cycling), `<emu-note>` its callout box + "NOTE" label, `<emu-eqn>` a math/serif font, `<emu-nt>` italic, `<emu-const>` small-caps, generous paragraph spacing, and hides Nextra's per-page single-item breadcrumb (which duplicates the H1).
+4. **Drop in `templates/ecma-spec.css`** at `app/ecma-spec.css` and `import './ecma-spec.css'` in `app/layout.jsx` after the Nextra theme stylesheet. Highlights:
+   - A single panel surface (`--ecma-panel-bg/border/radius` CSS vars) shared by `<emu-note>` callouts, grammar `<pre>` blocks, and inline `<code>` chips so all three feel like one design language (Linear-docs influence).
+   - Asymmetric heading rhythm (`main[data-pagefind-body] article h2/h3/h4`) — large top margin, tight bottom — so section boundaries pop. The selector specificity (0,1,3) beats Nextra's utility classes (0,1,0) given that this stylesheet imports after `nextra-theme-docs/style.css`.
+   - Spec-body links carry a faint always-visible underline that deepens on hover (xrefs are dense, easier to spot). Scoped to `.ecma-spec` so navbar/sidebar links keep Nextra's own treatment.
+   - `<emu-alg>` hierarchical step numbering (decimal → lower-alpha → lower-roman cycling).
+   - `<emu-note>` "NOTE" label via `::before`.
+   - `<emu-eqn>` math/serif font, `<emu-nt>` italic, `<emu-const>` small-caps, `<emu-intrinsic>` monospace.
+   - Grammar-token spans (`.nt/.t/.geq/.p/.mod/.desc/.oneof/.cm`) styled via opacity so both light and dark themes work.
+   - Hides Nextra's per-page single-item breadcrumb (duplicates the H1).
 
 5. **Wire navigation.** The generated `content/_meta.js` already orders all chapters; no manual wiring needed unless you want to add non-spec pages.
 
