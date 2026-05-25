@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
+    "build:all": "pnpm -r build",
+    "assemble": "node packages/shared/scripts/assemble-dist.mjs",
+    "build": "pnpm build:all && pnpm assemble",
     "dev": "pnpm --filter site-draft dev"
   }
 }
