@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -27,12 +29,28 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Build with Next.js
-        run: pnpm run build
+      - name: Build all sites
+        run: pnpm -r build
+      - name: Assemble dist/
+        # Each site builds to packages/site-<id>/out; map each one into
+        # dist/<id>/ and write a root redirect that lands on draft.
+        run: |
+          mkdir -p dist
+          for site in packages/site-*; do
+            id="${site#packages/site-}"
+            cp -r "$site/out" "dist/$id"
+          done
+          cat > dist/index.html <<'EOF'
+          <!DOCTYPE html>
+          <meta charset="utf-8">
+          <meta http-equiv="refresh" content="0; url=./draft/">
+          <title>ECMA-262</title>
+          <link rel="canonical" href="./draft/">
+          EOF
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./dist
   deploy:
     environment:
       name: github-pages

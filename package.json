@@ -3,17 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "build:chapters": "node scripts/build-chapters.mjs",
-    "postinstall": "node scripts/patch-nextra-theme.mjs"
-  },
-  "dependencies": {
-    "next": "^16.2.6",
-    "nextra": "^4.6.1",
-    "nextra-theme-docs": "^4.6.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter site-draft dev"
   }
 }
