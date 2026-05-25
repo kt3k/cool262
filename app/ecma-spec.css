@@ -68,6 +68,43 @@
   font-style: normal;
 }
 
+/* Grammar tokens, emitted by build-chapters.mjs's tokenizeGrammarBlock as
+   <span class="nt|t|geq|p|mod|desc|oneof|cm"> inside <pre|code class="emu-grammar">.
+   Uses opacity (not fixed colors) so it works in light AND dark Nextra themes. */
+.ecma-spec .emu-grammar .nt {
+  font-style: italic;
+}
+.ecma-spec .emu-grammar .nt.lhs {
+  font-weight: 600;
+}
+.ecma-spec .emu-grammar .t {
+  font-weight: 600;
+}
+.ecma-spec .emu-grammar .geq {
+  opacity: 0.55;
+  padding: 0 0.15em;
+}
+.ecma-spec .emu-grammar .p {
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+.ecma-spec .emu-grammar .mod {
+  vertical-align: super;
+  font-size: 0.75em;
+}
+.ecma-spec .emu-grammar .desc {
+  font-style: italic;
+  opacity: 0.8;
+}
+.ecma-spec .emu-grammar .oneof {
+  font-style: italic;
+  opacity: 0.7;
+}
+.ecma-spec .emu-grammar .cm {
+  opacity: 0.5;
+  font-style: italic;
+}
+
 /* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
    with depth, instead of the browser default of decimal at every level. */
 .ecma-spec emu-alg ol {

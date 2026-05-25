@@ -308,7 +308,7 @@ function applyProdrefSubst(html) {
     if (!m) return full
     const def = grammarDefs.get(m[1])
     if (def === undefined) return full
-    return `<pre class="emu-prod">${def}</pre>`
+    return `<pre class="emu-grammar">${tokenizeGrammarBlock(def)}</pre>`
   })
 }
 
@@ -409,12 +409,115 @@ function applyAlgSubst(html) {
   })
 }
 
-// Render <emu-grammar> blocks as monospace so the BNF-style line breaks and
-// indentation survive. The same tag is used both inline (mid-paragraph "MV of
-// <emu-grammar>DecimalDigit :: `0`</emu-grammar>") and as a block-level
-// production definition; tell them apart by looking at what precedes the
-// opening tag on its line — if it's only whitespace, render as <pre>,
-// otherwise as inline <code> so paragraph flow isn't broken.
+// Tokenize one grammar source line into wrapped HTML spans. `isLhs` flags the
+// first non-blank line of a production so the leading nonterminal gets a
+// distinct ".nt.lhs" class for bolding.
+//   • // ...           → <span class="cm">…</span>           (ecmarkup pragma)
+//   • &gt; rest of line → <span class="desc">…</span>         (prose description)
+//   • `foo`            → <span class="t">foo</span>            (terminal)
+//   • [Yield, ?Await]  → <span class="p">[…]</span>            (params / constraint)
+//   • :, ::, :::, :::: → <span class="geq">…</span>            (production arrow)
+//   • [A-Z]\w*         → <span class="nt">…</span>             (nonterminal)
+//   • ? * +            → <span class="mod">…</span>            (modifier)
+//   • "one of"         → <span class="oneof">one of</span>
+// Whitespace is preserved verbatim so the <pre>'s line shape survives.
+function tokenizeGrammarLine(line, isLhs) {
+  if (!line.trim()) return line
+  if (/^\s*\/\//.test(line)) return `<span class="cm">${line}</span>`
+  const descM = line.match(/^([ \t]*)(&gt;\s.*)$/)
+  if (descM) return `${descM[1]}<span class="desc">${descM[2]}</span>`
+
+  let out = ''
+  let i = 0
+  let lhsClaimed = !isLhs
+  while (i < line.length) {
+    const ch = line[i]
+    if (ch === ' ' || ch === '\t') {
+      out += ch
+      i++
+      continue
+    }
+    if (ch === '`') {
+      const end = line.indexOf('`', i + 1)
+      if (end === -1) {
+        out += ch
+        i++
+        continue
+      }
+      out += `<span class="t">${line.slice(i + 1, end)}</span>`
+      i = end + 1
+      continue
+    }
+    if (ch === '[') {
+      const end = line.indexOf(']', i + 1)
+      if (end === -1) {
+        out += ch
+        i++
+        continue
+      }
+      out += `<span class="p">[${line.slice(i + 1, end)}]</span>`
+      i = end + 1
+      continue
+    }
+    if (ch === ':') {
+      let j = i
+      while (j < line.length && line[j] === ':') j++
+      out += `<span class="geq">${line.slice(i, j)}</span>`
+      i = j
+      continue
+    }
+    if (/[A-Z]/.test(ch)) {
+      let j = i + 1
+      while (j < line.length && /[A-Za-z0-9_]/.test(line[j])) j++
+      const cls = lhsClaimed ? 'nt' : 'nt lhs'
+      out += `<span class="${cls}">${line.slice(i, j)}</span>`
+      lhsClaimed = true
+      i = j
+      continue
+    }
+    if (ch === '?' || ch === '*' || ch === '+') {
+      out += `<span class="mod">${ch}</span>`
+      i++
+      continue
+    }
+    if (
+      line.slice(i, i + 6) === 'one of' &&
+      (i + 6 === line.length || !/[A-Za-z0-9_]/.test(line[i + 6]))
+    ) {
+      out += '<span class="oneof">one of</span>'
+      i += 6
+      continue
+    }
+    out += ch
+    i++
+  }
+  return out
+}
+
+// Tokenize a grammar block (one or more productions, blank-line separated).
+// The first non-blank line after each blank is treated as a new LHS line so
+// the nonterminal name gets the .lhs class.
+function tokenizeGrammarBlock(text) {
+  const out = []
+  let expectLhs = true
+  for (const line of text.split('\n')) {
+    if (!line.trim()) {
+      out.push(line)
+      expectLhs = true
+      continue
+    }
+    out.push(tokenizeGrammarLine(line, expectLhs))
+    expectLhs = false
+  }
+  return out.join('\n')
+}
+
+// Render <emu-grammar> blocks with token-aware tokenization so non-terminals,
+// terminals, parameters, geqs, modifiers, and descriptions are individually
+// styleable via CSS (see app/ecma-spec.css). The same tag is used both inline
+// (mid-paragraph "MV of <emu-grammar>DecimalDigit :: `0`</emu-grammar>") and
+// as a block-level definition; tell them apart by looking at what precedes
+// the opening tag — only-whitespace → <pre>, otherwise inline <code>.
 function applyGrammarSubst(html) {
   return html.replace(
     /<emu-grammar([^>]*?)>([\s\S]*?)<\/emu-grammar>/g,
@@ -423,9 +526,9 @@ function applyGrammarSubst(html) {
       const isBlock = source.slice(lineStart, offset).trim() === ''
       const trimmed = inner.replace(/^\s*\n/, '').replace(/\n\s*$/, '')
       if (isBlock) {
-        return `<pre class="emu-grammar">${dedent(trimmed)}</pre>`
+        return `<pre class="emu-grammar">${tokenizeGrammarBlock(dedent(trimmed))}</pre>`
       }
-      return `<code class="emu-grammar">${trimmed.trim()}</code>`
+      return `<code class="emu-grammar">${tokenizeGrammarBlock(trimmed.trim())}</code>`
     },
   )
 }

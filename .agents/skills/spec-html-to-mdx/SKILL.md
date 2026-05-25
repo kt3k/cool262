@@ -42,8 +42,8 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
      | pass | rewrites | to |
      |---|---|---|
      | `applyAlgSubst` | `<emu-alg>` body's `1.` / `*` Markdown-style lines | nested `<ol>` / `<ul>` (gobbling deeper-indent non-bullet lines as continuations; stripping `[id=…]`/`[declared=…]` step attrs) |
-     | `applyGrammarSubst` | `<emu-grammar>...</emu-grammar>` | `<pre class="emu-grammar">` if opening tag starts its line, else inline `<code class="emu-grammar">` |
-     | `applyProdrefSubst` | empty `<emu-prodref name="X">` | `<pre class="emu-prod">` containing X's production text from `grammarDefs` |
+     | `applyGrammarSubst` | `<emu-grammar>...</emu-grammar>` | `<pre class="emu-grammar">` if opening tag starts its line, else inline `<code class="emu-grammar">`; body tokenized via `tokenizeGrammarBlock` into `<span class="nt\|t\|geq\|p\|mod\|desc\|oneof\|cm">` so each token is individually styleable |
+     | `applyProdrefSubst` | empty `<emu-prodref name="X">` | `<pre class="emu-grammar">` containing X's production text from `grammarDefs`, also run through `tokenizeGrammarBlock` |
      | `applyXrefSubst` | both empty and non-empty `<emu-xref href="#id">` | `<a href="<path>#<id>">…</a>` (text = section number for empty, original text for non-empty) |
      | `applyInlineMarkup` | text outside `<pre>`/`<code>`/`<emu-grammar>`/`<emu-not-ref>` | `` `foo` `` → `<code>`, `\|Foo\|` → `<emu-nt>`, `~enum~` → `<emu-const>`, `%Foo.Bar%` → `<code class="emu-intrinsic">`, `*foo*` → `<b>`, `_x_` → `<var>` |
 
@@ -70,8 +70,8 @@ Expect ~2.8 MB of JSX across `lib/spec/` for the full TC39 spec (38 chapters), u
 
 ## Known limitations
 
-- **No grammar-token color coding.** `<pre class="emu-grammar">` blocks are monospace, but ecmarkup's source uses bare nonterminal names, backtick-wrapped terminals, etc., that aren't tokenized into spans. Add CSS / a tokenizer if syntax highlighting matters.
 - **Inline `*foo*` matcher is conservative.** Requires non-space at both ends of the wrap, so `*x*` and `*+0*` work but unusual cases like `*a *b*` won't. Spec authors should be writing tight markup anyway.
+- **Grammar tokens aren't linked.** `tokenizeGrammarBlock` emits `<span class="nt">…</span>` for nonterminal references but doesn't wrap them in `<a href="…">` pointing at the canonical definition (the grammar summary annex would be the natural target). Add link-wrapping in `tokenizeGrammarLine` if you want clickable production cross-refs.
 - **basePath-aware Sec component depends on `NEXT_PUBLIC_BASE_PATH`.** If you set Next's `basePath` but forget to mirror it into env, raw `<a href="/…">` xrefs will resolve to the wrong host. The `next.config.mjs` pattern is `env: { NEXT_PUBLIC_BASE_PATH: basePath }`.
 
 ## Files in this skill
