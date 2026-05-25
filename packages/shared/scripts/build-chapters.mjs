@@ -1,18 +1,28 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { parseArgs } from 'node:util'
 
-// Transitional: paths resolved from the site package's cwd. Task 2 in
-// multiversion_todo.md replaces these constants with parseArgs() so any site
-// can pass its own --input / --content-dir / --lib-dir / --public-img-dir.
-// For now, the only consumer is packages/site-draft, which is run as
-// `cd packages/site-draft && node ../shared/scripts/build-chapters.mjs`.
-const CWD = process.cwd()
-const REPO_ROOT = path.resolve(CWD, '../..')
-const SPEC_FILE = path.join(REPO_ROOT, 'ecma262/draft/spec.html')
-const SPEC_IMG_DIR = path.join(REPO_ROOT, 'ecma262/draft/img')
-const CONTENT_DIR = path.join(CWD, 'content')
-const LIB_DIR = path.join(CWD, 'lib/spec')
-const PUBLIC_IMG_DIR = path.join(CWD, 'public/img')
+const { values } = parseArgs({
+  options: {
+    input:            { type: 'string' },
+    'content-dir':    { type: 'string', default: 'content' },
+    'lib-dir':        { type: 'string', default: 'lib/spec' },
+    'public-img-dir': { type: 'string', default: 'public/img' },
+    'base-path':      { type: 'string', default: '' },
+  },
+})
+if (!values.input) {
+  console.error('build-chapters: --input <spec.html> is required')
+  process.exit(1)
+}
+const SPEC_FILE = path.resolve(values.input)
+const SPEC_IMG_DIR = path.join(path.dirname(SPEC_FILE), 'img')
+const CONTENT_DIR = path.resolve(values['content-dir'])
+const LIB_DIR = path.resolve(values['lib-dir'])
+const PUBLIC_IMG_DIR = path.resolve(values['public-img-dir'])
+// Baked into xref hrefs at build time. Empty for local dev (URLs are root-
+// relative), '/cool262/draft' / '/cool262/es2025' / … in CI per site.
+const BASE_PATH = values['base-path']
 
 const src = fs.readFileSync(SPEC_FILE, 'utf8')
 
@@ -231,10 +241,13 @@ const built = chapters.map((c) => {
   return { ...c, slug, pageSlug, chapterNum, tree }
 })
 
-// emu-intro lives at /, all other chapters at /<slug>. Helper used by xref
-// substitution so links survive routing.
+// emu-intro lives at <basePath>/, all other chapters at <basePath>/<slug>.
+// Helper used by xref substitution so links survive routing under any
+// basePath (empty for local dev, '/cool262/draft' / '/cool262/es2025' / … in
+// production).
 function pathFor(slug) {
-  return slug === 'index' ? '' : `/${slug}`
+  const local = slug === 'index' ? '' : `/${slug}`
+  return `${BASE_PATH}${local}`
 }
 
 // <emu-xref href="#id"> is ecmarkup's cross-reference tag. Two source forms:
@@ -610,18 +623,11 @@ built.forEach((c) => {
   ])
   const sectionsObj = Object.fromEntries(sections)
 
+  // basePath is already baked into href values in this map (see pathFor in
+  // build-chapters.mjs), so the runtime is just lookup + dangerouslySetInnerHTML.
   const componentSrc = [
     '// Generated from ecma262/spec.html — do not edit by hand.',
-    `const _sections = ${JSON.stringify(sectionsObj)};`,
-    "const _basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';",
-    'const sections = _basePath',
-    '  ? Object.fromEntries(',
-    '      Object.entries(_sections).map(([k, v]) => [',
-    '        k,',
-    '        v.replaceAll(\'href="/\', `href="${_basePath}/`),',
-    '      ])',
-    '    )',
-    '  : _sections;',
+    `const sections = ${JSON.stringify(sectionsObj)};`,
     'export function Sec({ id }) {',
     "  const html = sections[id] ?? '';",
     '  return <div className="ecma-spec" dangerouslySetInnerHTML={{ __html: html }} />;',

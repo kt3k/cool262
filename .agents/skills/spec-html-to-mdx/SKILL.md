@@ -28,9 +28,20 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
 
 2. **Patch `nextra-theme-docs@4.6.x` schema bug.** Versions 4.6.0/4.6.1 declare `children: reactNode` (required) in `LayoutPropsSchema` but the `Layout` runtime destructures `children` out before calling `safeParse`, so every page renders with `Invalid input: expected nonoptional → at children`. Copy `scripts/patch-nextra-theme.mjs` into the project and wire it as `postinstall` in `package.json`. Confirm fixed in 4.7+ before applying blindly — read `node_modules/nextra-theme-docs/dist/schemas.js` and `dist/layout.js` to verify the destructure-then-validate pattern still exists.
 
-3. **Run the chapter splitter.** Copy `scripts/build-chapters.mjs` into the project's `scripts/` and run `node scripts/build-chapters.mjs`. It does, in order:
+3. **Run the chapter splitter.** Copy `scripts/build-chapters.mjs` into the project's `scripts/` and invoke it with CLI args:
 
-   - Reads `ecma262/spec.html` (adjust `SPEC_FILE` if different path).
+   ```bash
+   node scripts/build-chapters.mjs \
+     --input ecma262/spec.html \
+     --content-dir content \
+     --lib-dir lib/spec \
+     --public-img-dir public/img \
+     --base-path /cool262/draft   # empty for local dev
+   ```
+
+   `--input` is required; the rest have sensible defaults relative to `process.cwd()`. `--base-path` is baked into the xref hrefs at build time (no runtime env mirror needed). It does, in order:
+
+   - Reads the file given by `--input`.
    - Regex-matches `^<(emu-(?:intro|clause|annex))\b[^>]*>$` (multiline). Only matches at column 0, which is the ecmarkup convention for top-level chapters — nested clauses are indented.
    - For each chapter, recursively walks nested `<emu-clause>` / `<emu-annex>` elements (depth-balanced by tag name) to build a section tree. Each node records its `id`, `<h1>` title, and the "pre-body" HTML — everything between this node's opening and its first nested child.
    - Numbers chapters: `emu-intro` → no prefix; `emu-clause` → 1, 2, 3, …; `emu-annex` → A, B, C, … with letter labels.
@@ -48,7 +59,7 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
      | `applyInlineMarkup` | text outside `<pre>`/`<code>`/`<emu-grammar>`/`<emu-not-ref>` | `` `foo` `` → `<code>`, `\|Foo\|` → `<emu-nt>`, `~enum~` → `<emu-const>`, `%Foo.Bar%` → `<emu-intrinsic>`, `*foo*` → `<b>`, `_x_` → `<var>` |
 
    - Writes:
-     - `lib/spec/<slug>.jsx` — Server Component exporting `Sec({ id })`. Sections are stored in a `_sections` map (keyed by dotted path: `""` for chapter pre-body, `"1"`, `"3.2"`, …). At module-load the map is post-processed to prefix every `href="/…"` with `process.env.NEXT_PUBLIC_BASE_PATH` so xrefs work under a project-page `basePath` (e.g. `/cool262`). Mirror `basePath` into `env.NEXT_PUBLIC_BASE_PATH` in `next.config.mjs` for this to take effect.
+     - `lib/spec/<slug>.jsx` — Server Component exporting `Sec({ id })`. Sections are stored in a `sections` map (keyed by dotted path: `""` for chapter pre-body, `"1"`, `"3.2"`, …) of raw HTML strings. xref hrefs already include `--base-path` baked in, so the component is just `sections[id]` + `dangerouslySetInnerHTML`.
      - `content/<slug>.mdx` — imports `Sec`, emits the chapter heading with an inline `<span id="<spec-id>" />` anchor before the title text, then for each tree node a `<Sec id="…" />` followed by the child's markdown heading (also with anchor). Heading text itself is also run through `transformInlineText`, so titles like "ToPrimitive ( `_input_`, `~string~` … )" emit real `<var>`/`<emu-const>` tags inline. The spec's Introduction (`emu-intro`) is written to `content/index.mdx` so it serves at site root.
    - Anchors are `<span id>`, not `<a id>`: Nextra's TOC wraps each heading's content in its own `<a href="#…">`, and a nested `<a>` inside is invalid HTML and triggers a hydration error.
    - `transformInlineText` first replaces every backtick-wrapped run with a NUL-marker placeholder, applies the other shorthand regexes, then restores the placeholders as `<code>…</code>`. Without this, e.g. `` `**`, `*` `` in `ApplyStringOrNumericBinaryOperator`'s heading would let the `*` regex match across two `<code>` spans and produce invalid HTML that MDX rejects.
@@ -80,7 +91,7 @@ Expect ~2.8 MB of JSX across `lib/spec/` for the full TC39 spec (38 chapters), u
 
 - **Inline `*foo*` matcher is conservative.** Requires non-space at both ends of the wrap, so `*x*` and `*+0*` work but unusual cases like `*a *b*` won't. Spec authors should be writing tight markup anyway.
 - **Grammar tokens aren't linked.** `tokenizeGrammarBlock` emits `<span class="nt">…</span>` for nonterminal references but doesn't wrap them in `<a href="…">` pointing at the canonical definition (the grammar summary annex would be the natural target). Add link-wrapping in `tokenizeGrammarLine` if you want clickable production cross-refs.
-- **basePath-aware Sec component depends on `NEXT_PUBLIC_BASE_PATH`.** If you set Next's `basePath` but forget to mirror it into env, raw `<a href="/…">` xrefs will resolve to the wrong host. The `next.config.mjs` pattern is `env: { NEXT_PUBLIC_BASE_PATH: basePath }`.
+- **basePath is build-time, not run-time.** Each Next config + build:chapters invocation has to agree on the basePath (we use a single `BASE_PATH` env var in `package.json`'s `build` script for that). If you change basePath without rebuilding, hrefs in `lib/spec/*.jsx` will be stale.
 
 ## Files in this skill
 
