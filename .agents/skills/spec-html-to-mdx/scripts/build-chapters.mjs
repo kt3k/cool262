@@ -656,7 +656,7 @@ built.forEach((c) => {
     ? titlePlain
     : c.kind === 'emu-annex'
       ? `Annex ${chapterNum}: ${titlePlain}`
-      : `${chapterNum}. ${titlePlain}`
+      : `${chapterNum} ${titlePlain}`
   meta[pageSlug] = display
 })
 
