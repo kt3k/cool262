@@ -561,7 +561,7 @@ function transformInlineText(text) {
   })
   out = out.replace(/\|([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]*\])?\??)\|/g, '<emu-nt>$1</emu-nt>')
   out = out.replace(/~([^\s~][^~]*?)~/g, '<emu-const>$1</emu-const>')
-  out = out.replace(/%([A-Za-z][A-Za-z0-9.@]*)%/g, '<code class="emu-intrinsic">%$1%</code>')
+  out = out.replace(/%([A-Za-z][A-Za-z0-9.@]*)%/g, '<emu-intrinsic>%$1%</emu-intrinsic>')
   out = out.replace(/\*([^*\s][^*]*?[^*\s]|[^*\s])\*/g, '<b>$1</b>')
   out = out.replace(/(?<![A-Za-z0-9_])_([A-Za-z][A-Za-z0-9_]*)_(?![A-Za-z0-9_])/g, '<var>$1</var>')
   return out.replace(/\x00(\d+)\x00/g, (_, i) => `<code>${code[Number(i)]}</code>`)

@@ -45,7 +45,7 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
      | `applyGrammarSubst` | `<emu-grammar>...</emu-grammar>` | `<pre class="emu-grammar">` if opening tag starts its line, else inline `<code class="emu-grammar">`; body tokenized via `tokenizeGrammarBlock` into `<span class="nt\|t\|geq\|p\|mod\|desc\|oneof\|cm">` so each token is individually styleable |
      | `applyProdrefSubst` | empty `<emu-prodref name="X">` | `<pre class="emu-grammar">` containing X's production text from `grammarDefs`, also run through `tokenizeGrammarBlock` |
      | `applyXrefSubst` | both empty and non-empty `<emu-xref href="#id">` | `<a href="<path>#<id>">…</a>` (text = section number for empty, original text for non-empty) |
-     | `applyInlineMarkup` | text outside `<pre>`/`<code>`/`<emu-grammar>`/`<emu-not-ref>` | `` `foo` `` → `<code>`, `\|Foo\|` → `<emu-nt>`, `~enum~` → `<emu-const>`, `%Foo.Bar%` → `<code class="emu-intrinsic">`, `*foo*` → `<b>`, `_x_` → `<var>` |
+     | `applyInlineMarkup` | text outside `<pre>`/`<code>`/`<emu-grammar>`/`<emu-not-ref>` | `` `foo` `` → `<code>`, `\|Foo\|` → `<emu-nt>`, `~enum~` → `<emu-const>`, `%Foo.Bar%` → `<emu-intrinsic>`, `*foo*` → `<b>`, `_x_` → `<var>` |
 
    - Writes:
      - `lib/spec/<slug>.jsx` — Server Component exporting `Sec({ id })`. Sections are stored in a `_sections` map (keyed by dotted path: `""` for chapter pre-body, `"1"`, `"3.2"`, …). At module-load the map is post-processed to prefix every `href="/…"` with `process.env.NEXT_PUBLIC_BASE_PATH` so xrefs work under a project-page `basePath` (e.g. `/cool262`). Mirror `basePath` into `env.NEXT_PUBLIC_BASE_PATH` in `next.config.mjs` for this to take effect.
