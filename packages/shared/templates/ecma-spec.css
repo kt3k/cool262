@@ -213,10 +213,10 @@ main[data-pagefind-body] article h4 {
   --ecma-text-body: #d0d6e0;
   --ecma-text-strong: #f7f8f8;
 }
-main[data-pagefind-body] article {
+main[data-pagefind-body] {
   color: var(--ecma-text-body);
 }
-main[data-pagefind-body] article :is(h1, h2, h3, h4, h5, h6),
-main[data-pagefind-body] article :is(b, strong) {
+main[data-pagefind-body] :is(h1, h2, h3, h4, h5, h6),
+main[data-pagefind-body] :is(b, strong) {
   color: var(--ecma-text-strong);
 }
