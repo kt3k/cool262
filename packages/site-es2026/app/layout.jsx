@@ -12,7 +12,28 @@ export const metadata = {
     'The ECMAScript 2026 Language Specification, 17th edition (candidate, awaiting June 2026 approval).'
 }
 
-const navbar = <Navbar logo={<b>{siteTitle}</b>} />
+const specCommit = process.env.NEXT_PUBLIC_SPEC_COMMIT
+const specCommitUrl = process.env.NEXT_PUBLIC_SPEC_COMMIT_URL
+
+const navbar = (
+  <Navbar logo={<b>{siteTitle}</b>}>
+    {specCommit ? (
+      <a
+        href={specCommitUrl}
+        target="_blank"
+        rel="noreferrer"
+        title={`Built from tc39/ecma262@${specCommit}`}
+        style={{
+          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+          fontSize: '0.8em',
+          color: 'var(--x-color-gray-500, #6b7280)',
+        }}
+      >
+        {specCommit}
+      </a>
+    ) : null}
+  </Navbar>
+)
 const footer = <Footer>MIT {new Date().getFullYear()} © cool262.</Footer>
 
 export default async function RootLayout({ children }) {

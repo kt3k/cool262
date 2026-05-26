@@ -4,9 +4,9 @@
 //   dist/index.html          <- landing page linking to each version
 //
 // Run from anywhere after `pnpm build:all`; paths resolve off the repo root.
-import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
+import { readSpecSource } from './spec-source.mjs'
 
 const root = path.resolve(import.meta.dirname, '../../..')
 const packagesDir = path.join(root, 'packages')
@@ -21,30 +21,18 @@ function readSiteTitle(siteDir, fallback) {
   return m ? m[1] : fallback
 }
 
-// Editions sourced from a git submodule (the moving draft) track an upstream
-// tc39/ecma262 commit; vendored-from-tag editions are plain dirs with no .git.
-// Surface that commit on the landing page so readers know the exact snapshot.
-function readSpecCommit(id) {
-  const specDir = path.join(root, 'ecma262', id)
-  if (!fs.existsSync(path.join(specDir, '.git'))) return null
-  try {
-    return execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: specDir,
-      encoding: 'utf8',
-    }).trim()
-  } catch (err) {
-    console.warn(`[assemble-dist] could not read commit for ${id}: ${err.message}`)
-    return null
-  }
-}
-
 const sites = fs
   .readdirSync(packagesDir)
   .filter((name) => name.startsWith('site-'))
   .map((name) => {
     const id = name.slice('site-'.length)
     const dir = path.join(packagesDir, name)
-    return { id, dir, title: readSiteTitle(dir, id), commit: readSpecCommit(id) }
+    return {
+      id,
+      dir,
+      title: readSiteTitle(dir, id),
+      source: readSpecSource(path.join(root, 'ecma262', id)),
+    }
   })
 
 if (sites.length === 0) {
@@ -80,9 +68,8 @@ const escape = (s) =>
 const items = ordered
   .map((s) => {
     let line = `<a href="./${s.id}/">${escape(s.title)}</a>`
-    if (s.commit) {
-      const url = `https://github.com/tc39/ecma262/commit/${s.commit}`
-      line += ` <a class="commit" href="${url}"><code>${s.commit.slice(0, 7)}</code></a>`
+    if (s.source) {
+      line += ` <a class="commit" href="${s.source.url}"><code>${s.source.short}</code></a>`
     }
     return `      <li>${line}</li>`
   })
