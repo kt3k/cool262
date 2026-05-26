@@ -199,19 +199,47 @@ main[data-pagefind-body] article h4 {
   list-style-type: lower-alpha;
 }
 
-/* ── Text palette matched to Linear's docs ──────────────────────────────
-   Linear paints body prose with a near-neutral "secondary" gray and reserves
-   the darker "primary" for headings + bold emphasis. Mirror that here,
-   overriding Nextra's content colors (slate-700 body / gray-900 headings).
-   Selector specificity (≥0,1,2) beats the theme's utility classes and relies
-   on this stylesheet importing after the theme (same trick as the H2 rhythm). */
+/* ── Unify the gray palette onto Tailwind's slate (cool/blue) ramp ─────────
+   Nextra mixes three gray temperatures: cool `gray`, blue `slate`, and
+   achromatic `neutral`. Remap `gray` and `neutral` onto the `slate` values
+   so every surface / border / text shares one blue-leaning gray. The blue
+   accent (--nextra-primary-*) is intentionally left untouched. Unlayered
+   :root overrides Tailwind's @layer theme token definitions. */
 :root {
-  --ecma-text-body: #3c4149;
-  --ecma-text-strong: #282a30;
+  --x-color-gray-50: #f8fafc;
+  --x-color-gray-100: #f1f5f9;
+  --x-color-gray-200: #e2e8f0;
+  --x-color-gray-300: #cad5e2;
+  --x-color-gray-400: #90a1b9;
+  --x-color-gray-500: #62748e;
+  --x-color-gray-600: #45556c;
+  --x-color-gray-700: #314158;
+  --x-color-gray-800: #1d293d;
+  --x-color-gray-900: #0f172b;
+  --x-color-gray-950: #020618;
+
+  --x-color-neutral-50: #f8fafc;
+  --x-color-neutral-100: #f1f5f9;
+  --x-color-neutral-200: #e2e8f0;
+  --x-color-neutral-300: #cad5e2;
+  --x-color-neutral-400: #90a1b9;
+  --x-color-neutral-500: #62748e;
+  --x-color-neutral-600: #45556c;
+  --x-color-neutral-700: #314158;
+  --x-color-neutral-800: #1d293d;
+  --x-color-neutral-900: #0f172b;
+  --x-color-neutral-950: #020618;
+}
+
+/* Spec content text in the slate ramp (nearest to the prior Linear-tuned
+   values): body = slate-700 / slate-300, headings + bold = slate-800 / slate-50. */
+:root {
+  --ecma-text-body: #314158;
+  --ecma-text-strong: #1d293d;
 }
 .dark {
-  --ecma-text-body: #d0d6e0;
-  --ecma-text-strong: #f7f8f8;
+  --ecma-text-body: #cad5e2;
+  --ecma-text-strong: #f8fafc;
 }
 main[data-pagefind-body] {
   color: var(--ecma-text-body);
