@@ -651,7 +651,7 @@ built.forEach((c) => {
   } else if (c.kind === 'emu-annex') {
     chapterHeading = c.backMatter
       ? `# ${chapterAnchor}${chapterTitleRich}`
-      : `# ${chapterAnchor}Annex ${chapterNum} ${chapterTitleRich}`
+      : `# ${chapterAnchor}Annex ${chapterNum} (${c.normative ? 'normative' : 'informative'}) ${chapterTitleRich}`
   } else {
     chapterHeading = `# ${chapterAnchor}${chapterNum} ${chapterTitleRich}`
   }
