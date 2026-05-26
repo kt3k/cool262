@@ -16,33 +16,43 @@ const specCommit = process.env.NEXT_PUBLIC_SPEC_COMMIT
 const specCommitUrl = process.env.NEXT_PUBLIC_SPEC_COMMIT_URL
 const homeHref = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`
 
-// Commit hash sits right next to the title; logoLink={false} lets us put our
-// own anchors inside the logo (the title links home, the hash links the commit)
-// without nesting them inside Nextra's logo link.
+// logoLink={false} lets us own the anchors inside the logo. The title links
+// home; when the title ends in "(draft)" and we know the source commit, that
+// "(draft)" word links to the exact tc39/ecma262 commit (no separate hash).
+const draftIdx = siteTitle.indexOf('(draft)')
+const draftLink = draftIdx >= 0 && specCommitUrl
+const titleMain = draftLink ? siteTitle.slice(0, draftIdx).trimEnd() : siteTitle
+
 const logo = (
   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4em' }}>
-    <a href={homeHref} style={{ color: 'inherit', textDecoration: 'none' }}>
-      <b>{siteTitle}</b>
-    </a>
-    <VersionSwitcher />
-    {specCommit ? (
-      <a
-        href={specCommitUrl}
-        target="_blank"
-        rel="noreferrer"
-        title={`Built from tc39/ecma262@${specCommit}`}
-        style={{
-          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-          fontSize: '0.8em',
-          fontWeight: 'normal',
-          color: 'var(--x-color-gray-500, #6b7280)',
-        }}
-      >
-        {specCommit}
+    <span>
+      <a href={homeHref} style={{ color: 'inherit', textDecoration: 'none' }}>
+        <b>{titleMain}</b>
       </a>
-    ) : null}
+      {draftLink ? (
+        <>
+          {' '}
+          <a
+            href={specCommitUrl}
+            target="_blank"
+            rel="noreferrer"
+            title={`Built from tc39/ecma262@${specCommit}`}
+            style={{
+              color: 'inherit',
+              textDecoration: 'underline',
+              textDecorationStyle: 'dotted',
+              textUnderlineOffset: '3px',
+            }}
+          >
+            <b>(draft)</b>
+          </a>
+        </>
+      ) : null}
+    </span>
+    <VersionSwitcher />
   </span>
 )
+
 const navbar = <Navbar logo={logo} logoLink={false} />
 const editions = JSON.parse(process.env.NEXT_PUBLIC_EDITIONS || '[]')
 const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || '/'
