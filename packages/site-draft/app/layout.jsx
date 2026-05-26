@@ -33,7 +33,46 @@ const navbar = (
     ) : null}
   </Navbar>
 )
-const footer = <Footer>MIT {new Date().getFullYear()} © ecma262.</Footer>
+const editions = JSON.parse(process.env.NEXT_PUBLIC_EDITIONS || '[]')
+const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || '/'
+
+const footer = (
+  <Footer>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', width: '100%' }}>
+      <b>ECMA-262 editions</b>
+      {editions.map((e) => (
+        <span key={e.id}>
+          <a
+            href={`${deployBase}${e.id}/`}
+            style={e.title === siteTitle ? { fontWeight: 600 } : undefined}
+          >
+            {e.title}
+          </a>
+          {e.source ? (
+            <>
+              {' '}
+              <a
+                href={e.source.url}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                  fontSize: '0.8em',
+                  color: 'var(--x-color-gray-500, #6b7280)',
+                }}
+              >
+                {e.source.short}
+              </a>
+            </>
+          ) : null}
+        </span>
+      ))}
+      <span style={{ marginTop: '0.5rem', color: 'var(--x-color-gray-500, #6b7280)' }}>
+        MIT {new Date().getFullYear()} © ecma262.
+      </span>
+    </div>
+  </Footer>
+)
 
 export default async function RootLayout({ children }) {
   return (
