@@ -34,7 +34,7 @@ const navbar = (
     ) : null}
   </Navbar>
 )
-const footer = <Footer>MIT {new Date().getFullYear()} © cool262.</Footer>
+const footer = <Footer>MIT {new Date().getFullYear()} © ecma262.</Footer>
 
 export default async function RootLayout({ children }) {
   return (
@@ -45,7 +45,7 @@ export default async function RootLayout({ children }) {
           navbar={navbar}
           footer={footer}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/kt3k/cool262/tree/main"
+          docsRepositoryBase="https://github.com/kt3k/ecma262/tree/main"
         >
           {children}
         </Layout>

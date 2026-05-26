@@ -21,7 +21,7 @@ const CONTENT_DIR = path.resolve(values['content-dir'])
 const LIB_DIR = path.resolve(values['lib-dir'])
 const PUBLIC_IMG_DIR = path.resolve(values['public-img-dir'])
 // Baked into xref hrefs at build time. Empty for local dev (URLs are root-
-// relative), '/cool262/draft' / '/cool262/es2025' / … in CI per site.
+// relative), '/ecma262/draft' / '/ecma262/es2025' / … in CI per site.
 const BASE_PATH = values['base-path']
 
 const src = fs.readFileSync(SPEC_FILE, 'utf8')
@@ -243,7 +243,7 @@ const built = chapters.map((c) => {
 
 // emu-intro lives at <basePath>/, all other chapters at <basePath>/<slug>.
 // Helper used by xref substitution so links survive routing under any
-// basePath (empty for local dev, '/cool262/draft' / '/cool262/es2025' / … in
+// basePath (empty for local dev, '/ecma262/draft' / '/ecma262/es2025' / … in
 // production).
 function pathFor(slug) {
   const local = slug === 'index' ? '' : `/${slug}`

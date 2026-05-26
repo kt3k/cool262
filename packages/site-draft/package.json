@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm build:chapters && next dev",
-    "build": "BASE_PATH=/cool262/draft pnpm build:chapters && BASE_PATH=/cool262/draft next build",
+    "build": "BASE_PATH=/ecma262/draft pnpm build:chapters && BASE_PATH=/ecma262/draft next build",
     "start": "next start",
     "build:chapters": "node ../shared/scripts/build-chapters.mjs --input ../../ecma262/draft/spec.html --base-path \"${BASE_PATH:-}\"",
     "postinstall": "node ../shared/scripts/patch-nextra-theme.mjs"

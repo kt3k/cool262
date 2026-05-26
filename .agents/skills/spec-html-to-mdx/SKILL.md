@@ -36,7 +36,7 @@ The splitter recurses into nested `<emu-clause>`/`<emu-annex>` to lift their `<h
      --content-dir content \
      --lib-dir lib/spec \
      --public-img-dir public/img \
-     --base-path /cool262/draft   # empty for local dev
+     --base-path /ecma262/draft   # empty for local dev
    ```
 
    `--input` is required; the rest have sensible defaults relative to `process.cwd()`. `--base-path` is baked into the xref hrefs at build time (no runtime env mirror needed). It does, in order:

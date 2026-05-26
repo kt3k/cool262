@@ -9,7 +9,7 @@
 ### 1. monorepo レイアウト
 
 ```
-cool262/
+ecma262/
   pnpm-workspace.yaml          # packages/* を workspace に
   package.json                  # root: build:all, deploy
   ecma262/                      # spec source の集約場所
@@ -37,7 +37,7 @@ cool262/
         catch-all-route.jsx
     site-draft/
       package.json              # name: "site-draft"
-      next.config.mjs           # basePath: '/cool262/draft' (CI 時)
+      next.config.mjs           # basePath: '/ecma262/draft' (CI 時)
       app/
         layout.jsx              # metadata.title: "ECMA-262, 18th, ES2027 (draft)"
       content/                  # build:chapters の出力 (gitignored)
@@ -45,7 +45,7 @@ cool262/
       public/img/               # 同上
       mdx-components.jsx
     site-es2026/
-      package.json              # name: "site-es2026", basePath '/cool262/es2026'
+      package.json              # name: "site-es2026", basePath '/ecma262/es2026'
       app/layout.jsx            # title: "ECMA-262, 17th, ES2026"
       ... (site-draft と同構造)
     site-es2025/
@@ -78,7 +78,7 @@ onlyBuiltDependencies:
   "name": "site-es2025",
   "private": true,
   "scripts": {
-    "build:chapters": "node ../shared/scripts/build-chapters.mjs --input ../../ecma262/es2025/spec.html --base-path /cool262/es2025",
+    "build:chapters": "node ../shared/scripts/build-chapters.mjs --input ../../ecma262/es2025/spec.html --base-path /ecma262/es2025",
     "build": "pnpm build:chapters && next build",
     "dev": "pnpm build:chapters && next dev",
     "postinstall": "node ../shared/scripts/patch-nextra-theme.mjs"
@@ -118,7 +118,7 @@ const SPEC_IMG_DIR = path.join(path.dirname(SPEC_FILE), 'img')
 実行は site dir から相対パスで:
 ```bash
 cd packages/site-es2025
-node ../shared/scripts/build-chapters.mjs --input ../../ecma262/es2025/spec.html --base-path /cool262/es2025
+node ../shared/scripts/build-chapters.mjs --input ../../ecma262/es2025/spec.html --base-path /ecma262/es2025
 ```
 
 ### 3. spec source layout
@@ -160,7 +160,7 @@ git submodule add https://github.com/tc39/ecma262 ecma262/draft
 ```js
 import nextra from 'nextra'
 const withNextra = nextra({})
-const basePath = process.env.GITHUB_ACTIONS === 'true' ? '/cool262/es2025' : ''
+const basePath = process.env.GITHUB_ACTIONS === 'true' ? '/ecma262/es2025' : ''
 // ↑ ローカル dev では basePath なし (site 単独で localhost:3000 で動く)
 // CI では GitHub Pages の repo path + version id
 export default withNextra({
@@ -244,9 +244,9 @@ const navbar = <Navbar logo={<b>ECMA-262, 16th, ES2025</b>} />
 ```
 
 GitHub Pages デプロイ後の URL:
-- `kt3k.github.io/cool262/` → landing
-- `kt3k.github.io/cool262/draft/` → site-draft (ECMA-262, 18th, ES2027 draft)
-- `kt3k.github.io/cool262/es2025/` → site-es2025 (ECMA-262, 16th, ES2025)
+- `kt3k.github.io/ecma262/` → landing
+- `kt3k.github.io/ecma262/draft/` → site-draft (ECMA-262, 18th, ES2027 draft)
+- `kt3k.github.io/ecma262/es2025/` → site-es2025 (ECMA-262, 16th, ES2025)
 - ...
 
 ローカル開発: `cd packages/site-es2025 && pnpm dev` で `localhost:3000` (basePath 無し) でその site だけ立ち上げる。
@@ -260,7 +260,7 @@ GitHub Pages デプロイ後の URL:
 
 ## マイルストーン順序の提案
 
-1. **タスク 1 着手** — まずディレクトリ移動だけ。`packages/site-draft/` を作って現在のファイルを丸ごと移し、現状 `ecma262/` の submodule を `ecma262/draft/` へ再配置、CI が引き続き通ることを確認 (basePath は `/cool262/draft` に更新)
+1. **タスク 1 着手** — まずディレクトリ移動だけ。`packages/site-draft/` を作って現在のファイルを丸ごと移し、現状 `ecma262/` の submodule を `ecma262/draft/` へ再配置、CI が引き続き通ることを確認 (basePath は `/ecma262/draft` に更新)
 2. **タスク 2** — build-chapters.mjs 引数化、site-draft で動作確認
 3. **タスク 3** — `ecma262/es2025/spec.html` を 1 個だけ持ってきて、`packages/site-es2025/` を site-draft から複製して作成
 4. **タスク 4** — site-es2025 が basePath と title 込みで build できることを確認
