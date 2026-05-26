@@ -39,37 +39,24 @@ const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || '/'
 
 const footer = (
   <Footer>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', width: '100%' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        gap: '0.4rem',
+        width: '100%',
+      }}
+    >
       <b>ECMA-262 editions</b>
       {editions.map((e) => (
-        <span key={e.id}>
-          <a
-            href={`${deployBase}${e.id}/`}
-            style={e.title === siteTitle ? { fontWeight: 600 } : undefined}
-          >
-            {e.title}
-          </a>
-          {e.source ? (
-            <>
-              {' '}
-              <a
-                href={e.source.url}
-                target="_blank"
-                rel="noreferrer"
-                style={{
-                  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-                  fontSize: '0.8em',
-                  color: 'var(--x-color-gray-500, #6b7280)',
-                }}
-              >
-                {e.source.short}
-              </a>
-            </>
-          ) : null}
-        </span>
+        <a key={e.id} href={`${deployBase}${e.id}/`}>
+          {e.title}
+        </a>
       ))}
       <span style={{ marginTop: '0.5rem', color: 'var(--x-color-gray-500, #6b7280)' }}>
-        MIT {new Date().getFullYear()} © ecma262.
+        MIT {new Date().getFullYear()} © Alternative Styling of ECMA-262
       </span>
     </div>
   </Footer>
