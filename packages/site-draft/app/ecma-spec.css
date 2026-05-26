@@ -198,3 +198,25 @@ main[data-pagefind-body] article h4 {
 .ecma-spec emu-alg ol ol ol ol ol ol ol ol {
   list-style-type: lower-alpha;
 }
+
+/* ── Text palette matched to Linear's docs ──────────────────────────────
+   Linear paints body prose with a near-neutral "secondary" gray and reserves
+   the darker "primary" for headings + bold emphasis. Mirror that here,
+   overriding Nextra's content colors (slate-700 body / gray-900 headings).
+   Selector specificity (≥0,1,2) beats the theme's utility classes and relies
+   on this stylesheet importing after the theme (same trick as the H2 rhythm). */
+:root {
+  --ecma-text-body: #3c4149;
+  --ecma-text-strong: #282a30;
+}
+.dark {
+  --ecma-text-body: #d0d6e0;
+  --ecma-text-strong: #f7f8f8;
+}
+main[data-pagefind-body] article {
+  color: var(--ecma-text-body);
+}
+main[data-pagefind-body] article :is(h1, h2, h3, h4, h5, h6),
+main[data-pagefind-body] article :is(b, strong) {
+  color: var(--ecma-text-strong);
+}
