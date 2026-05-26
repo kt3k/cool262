@@ -14,9 +14,16 @@ export const metadata = {
 
 const specCommit = process.env.NEXT_PUBLIC_SPEC_COMMIT
 const specCommitUrl = process.env.NEXT_PUBLIC_SPEC_COMMIT_URL
+const homeHref = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`
 
-const navbar = (
-  <Navbar logo={<b>{siteTitle}</b>}>
+// Commit hash sits right next to the title; logoLink={false} lets us put our
+// own anchors inside the logo (the title links home, the hash links the commit)
+// without nesting them inside Nextra's logo link.
+const logo = (
+  <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.45em' }}>
+    <a href={homeHref} style={{ color: 'inherit', textDecoration: 'none' }}>
+      <b>{siteTitle}</b>
+    </a>
     {specCommit ? (
       <a
         href={specCommitUrl}
@@ -26,14 +33,16 @@ const navbar = (
         style={{
           fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
           fontSize: '0.8em',
+          fontWeight: 'normal',
           color: 'var(--x-color-gray-500, #6b7280)',
         }}
       >
         {specCommit}
       </a>
     ) : null}
-  </Navbar>
+  </span>
 )
+const navbar = <Navbar logo={logo} logoLink={false} />
 const editions = JSON.parse(process.env.NEXT_PUBLIC_EDITIONS || '[]')
 const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || '/'
 

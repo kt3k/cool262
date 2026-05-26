@@ -32,5 +32,6 @@ export default withNextra({
     NEXT_PUBLIC_SPEC_COMMIT_URL: source?.url ?? '',
     NEXT_PUBLIC_EDITIONS: JSON.stringify(editions),
     NEXT_PUBLIC_DEPLOY_BASE: deployBase,
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
 })
