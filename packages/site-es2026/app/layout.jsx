@@ -73,6 +73,7 @@ export default async function RootLayout({ children }) {
           footer={footer}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/kt3k/ecma262/tree/main"
+          editLink={null}
         >
           {children}
         </Layout>
