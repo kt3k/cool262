@@ -38,25 +38,26 @@ const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || '/'
 
 const footer = (
   <Footer>
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        textAlign: 'center',
-        gap: '0.4rem',
-        width: '100%',
-      }}
-    >
-      <b>ECMA-262 editions</b>
-      {editions.map((e) => (
-        <a key={e.id} href={`${deployBase}${e.id}/`}>
-          {e.title}
-        </a>
-      ))}
-      <span style={{ marginTop: '0.5rem', color: 'var(--x-color-gray-500, #6b7280)' }}>
-        MIT {new Date().getFullYear()} © Alternative Styling of ECMA-262
-      </span>
+    <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          textAlign: 'left',
+          gap: '0.4rem',
+        }}
+      >
+        <b>ECMA-262 editions</b>
+        {editions.map((e) => (
+          <a key={e.id} href={`${deployBase}${e.id}/`}>
+            {e.title}
+          </a>
+        ))}
+        <span style={{ marginTop: '0.5rem', color: 'var(--x-color-gray-500, #6b7280)' }}>
+          MIT {new Date().getFullYear()} © Alternative Styling of ECMA-262
+        </span>
+      </div>
     </div>
   </Footer>
 )
