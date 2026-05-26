@@ -261,3 +261,61 @@ main[data-pagefind-body] :is(h1, h2, h3, h4, h5, h6),
 main[data-pagefind-body] :is(b, strong) {
   color: var(--ecma-text-strong);
 }
+/* ── Version switcher dropdown (navbar) — see app/version-switcher.jsx ─────── */
+.ecma-vs {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.ecma-vs-trigger {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0 0.1em;
+  font-size: 0.7em;
+  line-height: 1;
+  opacity: 0.55;
+  display: inline-flex;
+  align-items: center;
+}
+.ecma-vs-trigger:hover {
+  opacity: 1;
+}
+.ecma-vs-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin: 0.5rem 0 0;
+  padding: 0.3rem;
+  z-index: 50;
+  min-width: max-content;
+  list-style: none;
+  background: var(--x-color-gray-50);
+  border: 1px solid var(--x-color-gray-200);
+  border-radius: 8px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+.dark .ecma-vs-menu {
+  background: var(--x-color-gray-900);
+  border-color: var(--x-color-gray-700);
+}
+.ecma-vs-item {
+  display: block;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: var(--ecma-text-body);
+}
+.ecma-vs-item:hover {
+  background: var(--x-color-gray-200);
+}
+.dark .ecma-vs-item:hover {
+  background: var(--x-color-gray-800);
+}
+.ecma-vs-current {
+  font-weight: 600;
+  color: var(--x-color-primary-600);
+}

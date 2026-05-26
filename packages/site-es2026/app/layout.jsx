@@ -3,6 +3,7 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './ecma-spec.css'
+import { VersionSwitcher } from './version-switcher'
 
 const siteTitle = 'ECMA-262, 17th, ES2026 (draft)'
 
@@ -20,10 +21,11 @@ const homeHref = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`
 // own anchors inside the logo (the title links home, the hash links the commit)
 // without nesting them inside Nextra's logo link.
 const logo = (
-  <span style={{ display: 'inline-flex', alignItems: 'baseline', gap: '0.45em' }}>
+  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4em' }}>
     <a href={homeHref} style={{ color: 'inherit', textDecoration: 'none' }}>
       <b>{siteTitle}</b>
     </a>
+    <VersionSwitcher />
     {specCommit ? (
       <a
         href={specCommitUrl}
