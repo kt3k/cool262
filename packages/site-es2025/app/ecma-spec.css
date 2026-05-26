@@ -8,13 +8,13 @@
   display: none;
 }
 
-/* One panel surface — semi-transparent neutral bg + 1px border + radius —
+/* One panel surface — semi-transparent slate-500 bg + 1px border + radius —
    shared by emu-note callouts, grammar <pre>, and inline <code> chips, so
    they feel like one design system rather than three accidents. Borrowed
    from Linear's docs (where pre/note/inline-code all share the same chrome). */
 .ecma-spec {
-  --ecma-panel-bg: rgba(127, 127, 127, 0.08);
-  --ecma-panel-border: rgba(127, 127, 127, 0.25);
+  --ecma-panel-bg: rgba(98, 116, 142, 0.08);
+  --ecma-panel-border: rgba(98, 116, 142, 0.25);
   --ecma-panel-radius: 6px;
 }
 
@@ -48,7 +48,7 @@ main[data-pagefind-body] article h4 {
    so Nextra's nav / sidebar / footer links keep their own treatment. */
 .ecma-spec a {
   text-decoration: underline;
-  text-decoration-color: rgba(127, 127, 127, 0.45);
+  text-decoration-color: rgba(98, 116, 142, 0.45);
   text-underline-offset: 2px;
   transition: text-decoration-color 0.15s;
 }
