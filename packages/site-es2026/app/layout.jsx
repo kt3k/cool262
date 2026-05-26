@@ -4,11 +4,12 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import './ecma-spec.css'
 
-const siteTitle = 'ECMA-262, 17th, ES2026'
+const siteTitle = 'ECMA-262, 17th, ES2026 (draft)'
 
 export const metadata = {
   title: siteTitle,
-  description: 'The ECMAScript 2026 Language Specification, 17th edition.'
+  description:
+    'The ECMAScript 2026 Language Specification, 17th edition (candidate, awaiting June 2026 approval).'
 }
 
 const navbar = <Navbar logo={<b>{siteTitle}</b>} />

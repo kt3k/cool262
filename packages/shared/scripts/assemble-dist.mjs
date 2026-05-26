@@ -4,6 +4,7 @@
 //   dist/index.html          <- landing page linking to each version
 //
 // Run from anywhere after `pnpm build:all`; paths resolve off the repo root.
+import { execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -20,13 +21,30 @@ function readSiteTitle(siteDir, fallback) {
   return m ? m[1] : fallback
 }
 
+// Editions sourced from a git submodule (the moving draft) track an upstream
+// tc39/ecma262 commit; vendored-from-tag editions are plain dirs with no .git.
+// Surface that commit on the landing page so readers know the exact snapshot.
+function readSpecCommit(id) {
+  const specDir = path.join(root, 'ecma262', id)
+  if (!fs.existsSync(path.join(specDir, '.git'))) return null
+  try {
+    return execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: specDir,
+      encoding: 'utf8',
+    }).trim()
+  } catch (err) {
+    console.warn(`[assemble-dist] could not read commit for ${id}: ${err.message}`)
+    return null
+  }
+}
+
 const sites = fs
   .readdirSync(packagesDir)
   .filter((name) => name.startsWith('site-'))
   .map((name) => {
     const id = name.slice('site-'.length)
     const dir = path.join(packagesDir, name)
-    return { id, dir, title: readSiteTitle(dir, id) }
+    return { id, dir, title: readSiteTitle(dir, id), commit: readSpecCommit(id) }
   })
 
 if (sites.length === 0) {
@@ -60,7 +78,14 @@ const escape = (s) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 const items = ordered
-  .map((s) => `      <li><a href="./${s.id}/">${escape(s.title)}</a></li>`)
+  .map((s) => {
+    let line = `<a href="./${s.id}/">${escape(s.title)}</a>`
+    if (s.commit) {
+      const url = `https://github.com/tc39/ecma262/commit/${s.commit}`
+      line += ` <a class="commit" href="${url}"><code>${s.commit.slice(0, 7)}</code></a>`
+    }
+    return `      <li>${line}</li>`
+  })
   .join('\n')
 
 const html = `<!DOCTYPE html>
@@ -76,6 +101,8 @@ const html = `<!DOCTYPE html>
     li { margin: 0.5rem 0; }
     a { text-decoration: none; color: #0366d6; }
     a:hover { text-decoration: underline; }
+    a.commit { color: #57606a; font-size: 0.85em; }
+    a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   </style>
 </head>
 <body>
