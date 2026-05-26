@@ -60,8 +60,11 @@ for (let i = 0; i < starts.length; i++) {
     inner = inner.replace(/^\s+/, '')
   }
   // `back-matter` annexes (Bibliography, Colophon) are unlettered in ecmarkup.
+  // Annexes are informative by default; a `normative` attribute marks the
+  // exceptions (e.g. Annex B, web-compat features).
   const backMatter = /\bback-matter\b/.test(s.attrs)
-  chapters.push({ id, title, inner, kind: s.tag, backMatter })
+  const normative = /\bnormative\b/.test(s.attrs)
+  chapters.push({ id, title, inner, kind: s.tag, backMatter, normative })
 }
 
 // Locate the first nested section opener (<emu-clause or <emu-annex) at or
@@ -670,7 +673,9 @@ built.forEach((c) => {
   const display = c.kind === 'emu-intro'
     ? titlePlain
     : c.kind === 'emu-annex'
-      ? (c.backMatter ? titlePlain : `Annex ${chapterNum}: ${titlePlain}`)
+      ? (c.backMatter
+          ? titlePlain
+          : `Annex ${chapterNum} (${c.normative ? 'normative' : 'informative'}) ${titlePlain}`)
       : `${chapterNum} ${titlePlain}`
   meta[pageSlug] = display
 })
