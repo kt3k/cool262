@@ -44,7 +44,7 @@ const logo = (
               textUnderlineOffset: '3px',
             }}
           >
-            <b>(draft)</b>
+            <b>draft</b>
           </a>
         </>
       ) : null}
