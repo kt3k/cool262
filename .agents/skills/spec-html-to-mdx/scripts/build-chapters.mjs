@@ -59,7 +59,9 @@ for (let i = 0; i < starts.length; i++) {
     inner = inner.slice(0, titleMatch.index) + inner.slice(titleMatch.index + titleMatch[0].length)
     inner = inner.replace(/^\s+/, '')
   }
-  chapters.push({ id, title, inner, kind: s.tag })
+  // `back-matter` annexes (Bibliography, Colophon) are unlettered in ecmarkup.
+  const backMatter = /\bback-matter\b/.test(s.attrs)
+  chapters.push({ id, title, inner, kind: s.tag, backMatter })
 }
 
 // Locate the first nested section opener (<emu-clause or <emu-annex) at or
@@ -233,7 +235,8 @@ const built = chapters.map((c) => {
     clauseIdx++
     chapterNum = String(clauseIdx)
   } else if (c.kind === 'emu-annex') {
-    chapterNum = annexLabel(annexIdx++)
+    // back-matter annexes stay unnumbered (and don't consume a letter).
+    chapterNum = c.backMatter ? '' : annexLabel(annexIdx++)
   }
   const tree = parseTree(c.inner)
   idToSection.set(c.id, { number: chapterNum, slug: pageSlug })
@@ -643,7 +646,9 @@ built.forEach((c) => {
   if (c.kind === 'emu-intro') {
     chapterHeading = `# ${chapterAnchor}${chapterTitleRich}`
   } else if (c.kind === 'emu-annex') {
-    chapterHeading = `# ${chapterAnchor}Annex ${chapterNum} ${chapterTitleRich}`
+    chapterHeading = c.backMatter
+      ? `# ${chapterAnchor}${chapterTitleRich}`
+      : `# ${chapterAnchor}Annex ${chapterNum} ${chapterTitleRich}`
   } else {
     chapterHeading = `# ${chapterAnchor}${chapterNum} ${chapterTitleRich}`
   }
@@ -665,7 +670,7 @@ built.forEach((c) => {
   const display = c.kind === 'emu-intro'
     ? titlePlain
     : c.kind === 'emu-annex'
-      ? `Annex ${chapterNum}: ${titlePlain}`
+      ? (c.backMatter ? titlePlain : `Annex ${chapterNum}: ${titlePlain}`)
       : `${chapterNum} ${titlePlain}`
   meta[pageSlug] = display
 })
