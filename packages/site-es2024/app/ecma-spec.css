@@ -8,13 +8,13 @@
   display: none;
 }
 
-/* One panel surface — semi-transparent slate-500 bg + 1px border + radius —
+/* One panel surface — semi-transparent neutral bg + 1px border + radius —
    shared by emu-note callouts, grammar <pre>, and inline <code> chips, so
    they feel like one design system rather than three accidents. Borrowed
    from Linear's docs (where pre/note/inline-code all share the same chrome). */
 .ecma-spec {
-  --ecma-panel-bg: rgba(98, 116, 142, 0.08);
-  --ecma-panel-border: rgba(98, 116, 142, 0.25);
+  --ecma-panel-bg: rgba(115, 115, 115, 0.08);
+  --ecma-panel-border: rgba(115, 115, 115, 0.25);
   --ecma-panel-radius: 6px;
 }
 
@@ -48,7 +48,7 @@ main[data-pagefind-body] article h4 {
    so Nextra's nav / sidebar / footer links keep their own treatment. */
 .ecma-spec a {
   text-decoration: underline;
-  text-decoration-color: rgba(98, 116, 142, 0.45);
+  text-decoration-color: rgba(115, 115, 115, 0.45);
   text-underline-offset: 2px;
   transition: text-decoration-color 0.15s;
 }
@@ -199,47 +199,60 @@ main[data-pagefind-body] article h4 {
   list-style-type: lower-alpha;
 }
 
-/* ── Unify the gray palette onto Tailwind's slate (cool/blue) ramp ─────────
-   Nextra mixes three gray temperatures: cool `gray`, blue `slate`, and
-   achromatic `neutral`. Remap `gray` and `neutral` onto the `slate` values
-   so every surface / border / text shares one blue-leaning gray. The blue
-   accent (--nextra-primary-*) is intentionally left untouched. Unlayered
-   :root overrides Tailwind's @layer theme token definitions. */
+/* ── Unify the gray palette onto an achromatic neutral ramp ───────────────
+   Nextra mixes cool `gray`, blue `slate`, and achromatic `neutral`. An
+   earlier slate unification read as too blue, so remap all three onto neutral
+   grays whose luminance equals the slate ramp's — identical contrast, no hue.
+   The blue accent (--nextra-primary-*) is intentionally left untouched.
+   Unlayered :root overrides Tailwind's @layer theme token definitions. */
 :root {
-  --x-color-gray-50: #f8fafc;
-  --x-color-gray-100: #f1f5f9;
-  --x-color-gray-200: #e2e8f0;
-  --x-color-gray-300: #cad5e2;
-  --x-color-gray-400: #90a1b9;
-  --x-color-gray-500: #62748e;
-  --x-color-gray-600: #45556c;
-  --x-color-gray-700: #314158;
-  --x-color-gray-800: #1d293d;
-  --x-color-gray-900: #0f172b;
-  --x-color-gray-950: #020618;
+  --x-color-gray-50: #fafafa;
+  --x-color-gray-100: #f4f4f4;
+  --x-color-gray-200: #e7e7e7;
+  --x-color-gray-300: #d4d4d4;
+  --x-color-gray-400: #a0a0a0;
+  --x-color-gray-500: #737373;
+  --x-color-gray-600: #545454;
+  --x-color-gray-700: #404040;
+  --x-color-gray-800: #292929;
+  --x-color-gray-900: #181818;
+  --x-color-gray-950: #070707;
 
-  --x-color-neutral-50: #f8fafc;
-  --x-color-neutral-100: #f1f5f9;
-  --x-color-neutral-200: #e2e8f0;
-  --x-color-neutral-300: #cad5e2;
-  --x-color-neutral-400: #90a1b9;
-  --x-color-neutral-500: #62748e;
-  --x-color-neutral-600: #45556c;
-  --x-color-neutral-700: #314158;
-  --x-color-neutral-800: #1d293d;
-  --x-color-neutral-900: #0f172b;
-  --x-color-neutral-950: #020618;
+  --x-color-slate-50: #fafafa;
+  --x-color-slate-100: #f4f4f4;
+  --x-color-slate-200: #e7e7e7;
+  --x-color-slate-300: #d4d4d4;
+  --x-color-slate-400: #a0a0a0;
+  --x-color-slate-500: #737373;
+  --x-color-slate-600: #545454;
+  --x-color-slate-700: #404040;
+  --x-color-slate-800: #292929;
+  --x-color-slate-900: #181818;
+  --x-color-slate-950: #070707;
+
+  --x-color-neutral-50: #fafafa;
+  --x-color-neutral-100: #f4f4f4;
+  --x-color-neutral-200: #e7e7e7;
+  --x-color-neutral-300: #d4d4d4;
+  --x-color-neutral-400: #a0a0a0;
+  --x-color-neutral-500: #737373;
+  --x-color-neutral-600: #545454;
+  --x-color-neutral-700: #404040;
+  --x-color-neutral-800: #292929;
+  --x-color-neutral-900: #181818;
+  --x-color-neutral-950: #070707;
+
 }
 
-/* Spec content text in the slate ramp (nearest to the prior Linear-tuned
-   values): body = slate-700 / slate-300, headings + bold = slate-800 / slate-50. */
+/* Spec content text as equal-luminance neutral grays (matching what were the
+   slate-700/300 body and slate-800/50 heading values): */
 :root {
-  --ecma-text-body: #314158;
-  --ecma-text-strong: #1d293d;
+  --ecma-text-body: #404040;
+  --ecma-text-strong: #292929;
 }
 .dark {
-  --ecma-text-body: #cad5e2;
-  --ecma-text-strong: #f8fafc;
+  --ecma-text-body: #d4d4d4;
+  --ecma-text-strong: #fafafa;
 }
 main[data-pagefind-body] {
   color: var(--ecma-text-body);
