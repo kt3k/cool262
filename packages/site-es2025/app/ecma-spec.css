@@ -28,17 +28,17 @@
 
 /* Asymmetric heading rhythm: big lead-in before H2/H3/H4, tight lead-out
    to the following paragraph. Makes section boundaries pop without inflating
-   intra-section spacing. Specificity (0,1,3) beats Nextra's utility classes
+   intra-section spacing. Specificity (0,1,2) beats Nextra's utility classes
    (0,1,0) and rides on the fact that our CSS imports after the theme stylesheet. */
-main[data-pagefind-body] article h2 {
+main[data-pagefind-body] h2 {
   margin-top: 3.5em;
   margin-bottom: 0.4em;
 }
-main[data-pagefind-body] article h3 {
+main[data-pagefind-body] h3 {
   margin-top: 2.5em;
   margin-bottom: 0.4em;
 }
-main[data-pagefind-body] article h4 {
+main[data-pagefind-body] h4 {
   margin-top: 2em;
   margin-bottom: 0.4em;
 }
