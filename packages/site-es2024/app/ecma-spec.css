@@ -176,6 +176,9 @@ main[data-pagefind-body] h4 {
    with depth, instead of the browser default of decimal at every level. */
 .ecma-spec emu-alg ol {
   list-style-type: decimal;
+  /* Tailwind's preflight zeroes list padding; restore it so nested algorithm
+     steps indent per level (matches ecmarkup's 40px). */
+  padding-inline-start: 40px;
 }
 .ecma-spec emu-alg ol ol {
   list-style-type: lower-alpha;
