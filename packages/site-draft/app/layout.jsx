@@ -5,7 +5,7 @@ import 'nextra-theme-docs/style.css'
 import './ecma-spec.css'
 import { VersionSwitcher } from './version-switcher'
 
-const siteTitle = 'ECMA-262, 18th, ES2027 (draft)'
+const siteTitle = 'ECMA-262, 18th, ES2027 draft'
 
 export const metadata = {
   title: siteTitle,
