@@ -88,6 +88,219 @@ function findNextSection(html, from) {
   return null
 }
 
+// ── ecmarkup "structured header" transform ──────────────────────────────────
+// Clauses whose <h1> holds a typed signature (e.g. "Foo ( _x_: a Number ): a
+// Boolean") immediately followed by <dl class="header"> are processed by
+// ecmarkup at build time: the return type is stripped from the heading and a
+// descriptive preamble paragraph ("The abstract operation Foo takes argument
+// _x_ (a Number) and returns a Boolean. It performs the following steps when
+// called:") is synthesised from the signature plus the dl entries (for /
+// description). Upstream we inject the raw ecmarkup *source*, which skips this
+// pass, so we replicate it here. Port of ecmarkup src/header-parser.ts
+// (parseHeader / formatHeader / formatPreamble) and src/Clause.ts.
+
+function formatEnglishList(list, conjunction = 'and') {
+  if (list.length === 1) return list[0]
+  if (list.length === 2) return `${list[0]} ${conjunction} ${list[1]}`
+  return `${list.slice(0, -1).join(', ')}, ${conjunction} ${list[list.length - 1]}`
+}
+
+// Parse the raw <h1> inner source into { prefix, name, params, optionalParams,
+// returnType }, or null if it doesn't look like a signature. Faithful subset of
+// ecmarkup's parseHeader (no ins/del/mark diff wrappers — absent in releases).
+function parseStructuredH1(source) {
+  let text = source.replace(/^\s*/, '')
+  let prefix = null
+  let m
+  if ((m = text.match(/^(Static|Runtime) Semantics:\s*/i))) {
+    prefix = m[0].trimEnd()
+    text = text.slice(m[0].length)
+  }
+  if (!(m = text.match(/^[^(\s]+\s*/))) return null
+  const name = m[0].trimEnd()
+  text = text.slice(m[0].length)
+  const params = []
+  const optionalParams = []
+  if (text === '') return { prefix, name, params, optionalParams, returnType: null }
+  // ecmarkup eats `( ` with literal spaces only, so a newline after `(` flags
+  // the multi-line (typed) parameter form.
+  if (!(m = text.match(/^\([ \t]*/))) return null
+  text = text.slice(m[0].length)
+  if (text[0] === '\n') {
+    text = text.replace(/^\s*/, '')
+    while (true) {
+      if ((m = text.match(/^\)\s*/))) {
+        text = text.slice(m[0].length)
+        break
+      }
+      let optional = false
+      if ((m = text.match(/^optional\s*/i))) {
+        optional = true
+        text = text.slice(m[0].length)
+      }
+      if (!(m = text.match(/^[A-Za-z0-9_]+[ \t]*/))) return null
+      const pname = m[0].trimEnd()
+      text = text.slice(m[0].length)
+      if (!(m = text.match(/^:+[ \t]*/))) return null
+      text = text.slice(m[0].length)
+      if (!(m = text.match(/^[^\n]+\n\s*/))) return null
+      let ptype = m[0].trimEnd()
+      text = text.slice(m[0].length)
+      if (ptype.endsWith(',')) ptype = ptype.slice(0, -1)
+      ;(optional ? optionalParams : params).push({ name: pname, type: ptype === 'unknown' ? null : ptype })
+    }
+  } else {
+    let optional = false
+    while (true) {
+      if ((m = text.match(/^\)\s*/))) {
+        text = text.slice(m[0].length)
+        break
+      }
+      if ((m = text.match(/^\[(\s*,)?\s*/))) {
+        optional = true
+        text = text.slice(m[0].length)
+      }
+      if (!(m = text.match(/^[A-Za-z0-9_]+\s*/))) return null
+      const pname = m[0].trimEnd()
+      text = text.slice(m[0].length)
+      ;(optional ? optionalParams : params).push({ name: pname, type: null })
+      if ((m = text.match(/^((\s*\])+|,)\s*/))) text = text.slice(m[0].length)
+    }
+  }
+  let returnType = null
+  if ((m = text.match(/^:[ \t]*/))) {
+    text = text.slice(m[0].length)
+    const r = text.match(/^.*/)
+    if (r) {
+      returnType = r[0].trim() || null
+      if (returnType === 'unknown') returnType = null
+    }
+  }
+  return { prefix, name, params, optionalParams, returnType }
+}
+
+// "( a, b [ , c ] )" — param names verbatim (still carry ecmarkup shorthand
+// like _x_, expanded to <var> downstream). Mirrors printSimpleParamList.
+function formatSimpleParamList(params, optionalParams) {
+  let result = '(' + params.map((p) => ' ' + p.name).join(',')
+  if (optionalParams.length > 0) {
+    result += optionalParams
+      .map((p, i) => ' [ ' + (i > 0 || params.length > 0 ? ', ' : '') + p.name)
+      .join('')
+    result += optionalParams.map(() => ' ]').join('')
+  }
+  result += ' )'
+  return result
+}
+
+// "no arguments" | "argument x (a Number)" | "arguments a (T) and b (U)" | …
+function formatParamsClause(params, optionalParams) {
+  const withType = (p) => (p.type != null ? `${p.name} (${p.type})` : p.name)
+  if (params.length === 0 && optionalParams.length === 0) return 'no arguments'
+  let s = ''
+  if (params.length > 0) {
+    s += (params.length === 1 ? 'argument' : 'arguments') + ' ' + formatEnglishList(params.map(withType))
+    if (optionalParams.length > 0) s += ' and '
+  }
+  if (optionalParams.length > 0) {
+    s += 'optional ' + (optionalParams.length === 1 ? 'argument' : 'arguments') + ' ' +
+      formatEnglishList(optionalParams.map(withType))
+  }
+  return s
+}
+
+// The cleaned heading text: prefix + name + param list, with the return type
+// dropped. `type="sdo"` headings drop the parameter list entirely.
+function formatHeaderTitle(parsed, type) {
+  let h = (parsed.prefix ? parsed.prefix + ' ' : '') + parsed.name + ' ' +
+    formatSimpleParamList(parsed.params, parsed.optionalParams)
+  if (type === 'sdo' && h.includes('(')) {
+    h = (h.substring(0, h.indexOf('(')) + h.substring(h.lastIndexOf(')') + 1)).trim()
+  }
+  return h
+}
+
+// Pull <dt>/<dd> pairs out of the structured header <dl>. Only `for` and
+// `description` feed the preamble; effects / skip-checks are dropped.
+function parseHeaderDl(dlInner) {
+  const out = { for: null, description: null }
+  const re = /<dt>([\s\S]*?)<\/dt>\s*<dd>([\s\S]*?)<\/dd>/gi
+  let m
+  while ((m = re.exec(dlInner)) !== null) {
+    const label = m[1].replace(/<[^>]+>/g, '').trim().toLowerCase()
+    const value = m[2].trim()
+    if (label === 'for' && out.for === null) out.for = value
+    else if (label === 'description' && out.description === null) out.description = value
+  }
+  return out
+}
+
+// Build the section body that replaces the structured header: the synthesised
+// preamble paragraph(s) followed by `rest` (the original content after the dl).
+// Mirrors formatPreamble, including where the trailing "It performs the
+// following steps…" sentence lands (inline vs its own <p> before the algorithm).
+function buildStructuredBody(clauseType, parsed, dlEntries, rest) {
+  const type = (clauseType || '').toLowerCase()
+  const name = parsed.name
+  const formattedParams = formatParamsClause(parsed.params, parsed.optionalParams)
+  let main
+  switch (type) {
+    case 'numeric method':
+    case 'abstract operation':
+      main = `The abstract operation ${name}`
+      break
+    case 'host-defined abstract operation':
+      main = `The host-defined abstract operation ${name}`
+      break
+    case 'implementation-defined abstract operation':
+      main = `The implementation-defined abstract operation ${name}`
+      break
+    case 'sdo':
+    case 'syntax-directed operation':
+      main = `The syntax-directed operation ${name}`
+      break
+    case 'internal method':
+    case 'concrete method':
+      main = `The ${name} ${type} of ${dlEntries.for ?? ''}`
+      break
+    default:
+      main = name
+  }
+  main += ` takes ${formattedParams}`
+  if (parsed.returnType != null) main += ` and returns ${parsed.returnType}`
+  main += '.'
+
+  const blockParas = []
+  if (dlEntries.description != null) {
+    if (/^<(p|ul|ol|emu-alg|emu-note|figure|emu-table|dl|div)[\s>]/i.test(dlEntries.description)) {
+      blockParas.push(dlEntries.description)
+    } else {
+      main += ' ' + dlEntries.description
+    }
+  }
+
+  const isSdo = type === 'sdo' || type === 'syntax-directed operation'
+  const lastSentence = isSdo
+    ? 'It is defined piecewise over the following productions:'
+    : 'It performs the following steps when called:'
+  const targetTag = isSdo ? '<emu-grammar' : '<emu-alg'
+  // The algorithm/grammar must belong to THIS clause (appear before any nested
+  // sub-clause), else there's nothing to attach the trailing sentence to.
+  const sub = findNextSection(rest, 0)
+  const subIdx = sub ? sub.idx : rest.length
+  const tIdx = rest.indexOf(targetTag)
+  if (tIdx >= 0 && tIdx < subIdx) {
+    const notesPresent = /<emu-note\b/.test(rest.slice(0, tIdx))
+    if (blockParas.length > 0 || notesPresent) {
+      const newRest = rest.slice(0, tIdx) + `<p>${lastSentence}</p>\n` + rest.slice(tIdx)
+      return `<p>${main}</p>` + blockParas.join('') + newRest
+    }
+    main += ' ' + lastSentence
+    return `<p>${main}</p>` + rest
+  }
+  return `<p>${main}</p>` + blockParas.join('') + rest
+}
+
 // Recursively split inner HTML into a tree of nested <emu-clause>/<emu-annex>
 // subsections. Returns { pre, children: [{ id, title, tree }] } where `pre`
 // is the HTML before the first nested section.
@@ -134,12 +347,27 @@ function parseTree(html) {
     const attrs = openTag.slice(tag.length + 1, -1)
     const idMatch = attrs.match(/\bid="([^"]+)"/)
     const id = idMatch ? idMatch[1] : ''
+    const typeMatch = attrs.match(/\btype="([^"]+)"/)
+    const clauseType = typeMatch ? typeMatch[1] : null
     const titleMatch = innerHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)
     const titleHtml = titleMatch ? titleMatch[1] : id
-    const title = titleHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
-    const innerStripped = titleMatch
-      ? (innerHtml.slice(0, titleMatch.index) + innerHtml.slice(titleMatch.index + titleMatch[0].length)).replace(/^\s+/, '')
-      : innerHtml
+    let title
+    let innerStripped
+    // Structured header: <h1> signature immediately followed by <dl class="header">.
+    const afterH1 = titleMatch ? innerHtml.slice(titleMatch.index + titleMatch[0].length) : ''
+    const dlMatch = titleMatch && afterH1.match(/^\s*<dl class="header">([\s\S]*?)<\/dl>/)
+    const parsedHeader = dlMatch ? parseStructuredH1(titleHtml) : null
+    if (dlMatch && parsedHeader && parsedHeader.name) {
+      title = formatHeaderTitle(parsedHeader, clauseType)
+      const rest = afterH1.slice(dlMatch[0].length)
+      innerStripped = buildStructuredBody(clauseType, parsedHeader, parseHeaderDl(dlMatch[1]), rest)
+        .replace(/^\s+/, '')
+    } else {
+      title = titleHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()
+      innerStripped = titleMatch
+        ? (innerHtml.slice(0, titleMatch.index) + afterH1).replace(/^\s+/, '')
+        : innerHtml
+    }
     const preText = html.slice(i, openIdx)
     if (children.length === 0) pre += preText
     else if (preText.trim() !== '') children[children.length - 1].tree.pre += preText
