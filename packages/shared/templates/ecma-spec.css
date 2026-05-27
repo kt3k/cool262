@@ -202,6 +202,18 @@ main[data-pagefind-body] h4 {
   list-style-type: lower-alpha;
 }
 
+/* Prose lists (outside emu-alg): Tailwind's preflight strips markers + indent;
+   restore disc/decimal + indentation. Algorithm lists keep their own cycling
+   scheme via the more-specific .ecma-spec emu-alg ol rules above. */
+.ecma-spec ul {
+  list-style-type: disc;
+  padding-inline-start: 40px;
+}
+.ecma-spec ol {
+  list-style-type: decimal;
+  padding-inline-start: 40px;
+}
+
 /* ── Unify the gray palette onto an achromatic neutral ramp ───────────────
    Nextra mixes cool `gray`, blue `slate`, and achromatic `neutral`. An
    earlier slate unification read as too blue, so remap all three onto neutral

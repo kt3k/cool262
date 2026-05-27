@@ -2,7 +2,7 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
-import './ecma-spec.css'
+import 'shared/ecma-spec.css'
 import { VersionSwitcher } from './version-switcher'
 
 const siteTitle = 'ECMA-262, 18th, ES2027 draft'
