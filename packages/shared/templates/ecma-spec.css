@@ -16,29 +16,87 @@
   --ecma-panel-bg: rgba(115, 115, 115, 0.08);
   --ecma-panel-border: rgba(115, 115, 115, 0.25);
   --ecma-panel-radius: 6px;
+
+  /* Measure / breakout grid (proposal 1): prose lives in a fixed-width `main`
+     track (the reading measure); wide blocks (tables, figures) span into the
+     extra `1fr` to the right via `grid-column`. minmax(0, …) lets the measure
+     shrink below --ecma-measure on narrow viewports instead of overflowing. */
+  display: grid;
+  grid-template-columns:
+    [main-start] minmax(0, var(--ecma-measure, 45rem)) [main-end]
+    minmax(0, 1fr) [wide-end];
 }
 
-.ecma-spec p {
-  margin-block: 1.25em;
+/* Vertical rhythm (proposal 2): em-based so spacing tracks font size, with one
+   knob (--ecma-rhythm) to scale the whole density. Grid items don't
+   margin-collapse, so spacing is driven from a single margin-top between
+   adjacent siblings rather than symmetric block margins. */
+.ecma-spec > * {
+  grid-column: main;
+  min-width: 0;
+}
+.ecma-spec > * + * {
+  margin-top: calc(1.5em * var(--ecma-rhythm, 1));
+}
+/* Tables and figures break out of the measure into the wider column. */
+.ecma-spec > :is(emu-table, emu-figure) {
+  grid-column: main-start / wide-end;
+}
+.ecma-spec > emu-table {
+  display: block;
+  overflow-x: auto;
+}
+.ecma-spec > emu-table,
+.ecma-spec > emu-table + * {
+  margin-top: calc(2em * var(--ecma-rhythm, 1));
+}
+/* Paragraphs nested inside notes / lists / quotes aren't direct grid children,
+   so they keep their own block spacing (the old blanket p-margin is gone). */
+.ecma-spec :is(emu-note, li, blockquote) > p {
+  margin-block: 0.75em;
 }
 
 .ecma-spec emu-alg {
   display: block;
 }
 
-/* Asymmetric heading rhythm: big lead-in before H2/H3/H4, tight lead-out
-   to the following paragraph. Makes section boundaries pop without inflating
-   intra-section spacing. Specificity (0,1,2) beats Nextra's utility classes
-   (0,1,0) and rides on the fact that our CSS imports after the theme stylesheet. */
+/* Reading zone (proposals 3–5): a ~17px reading size with a relaxed
+   line-height, the measure exposed as a variable, and an em-based heading
+   scale so headings track the body size. */
+main[data-pagefind-body] {
+  --ecma-measure: 45rem;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+/* Headings stay aligned to the prose measure; only tables/figures break out. */
+main[data-pagefind-body] > :is(h1, h2, h3, h4, h5, h6) {
+  max-width: var(--ecma-measure);
+}
+/* Slight negative tracking tightens large headings (proposal 4). */
+main[data-pagefind-body] :is(h1, h2, h3, h4) {
+  letter-spacing: -0.011em;
+}
+
+/* Asymmetric heading rhythm: big lead-in before H2/H3/H4, tight lead-out to the
+   following paragraph. Makes section boundaries pop without inflating
+   intra-section spacing. Sizes are em (relative to the 17px body) so the scale
+   tracks the reading size (proposal 3). Specificity (0,1,1) beats Nextra's
+   utility classes (0,1,0) and rides on this CSS importing after the theme. */
+main[data-pagefind-body] h1 {
+  font-size: 2.1em;
+}
 main[data-pagefind-body] h2 {
+  font-size: 1.75em;
   margin-top: 3.5em;
   margin-bottom: 0.4em;
 }
 main[data-pagefind-body] h3 {
+  font-size: 1.4em;
   margin-top: 2.5em;
   margin-bottom: 0.4em;
 }
 main[data-pagefind-body] h4 {
+  font-size: 1.18em;
   margin-top: 2em;
   margin-bottom: 0.4em;
 }
@@ -237,6 +295,17 @@ main[data-pagefind-body] h4 {
   padding-inline-start: 40px;
 }
 
+/* Inter-item spacing. Tailwind's preflight zeroes li margins, so list items
+   were separated only by line-height, reading cramped next to the now-airier
+   paragraphs. Give prose lists a small rhythm (~1/3 of the paragraph gap);
+   keep algorithm steps dense per ecmarkup convention with just a hairline. */
+.ecma-spec :is(ul, ol) > li + li {
+  margin-top: 0.4em;
+}
+.ecma-spec emu-alg ol > li + li {
+  margin-top: 0.15em;
+}
+
 /* ── Unify the gray palette onto an achromatic neutral ramp ───────────────
    Nextra mixes cool `gray`, blue `slate`, and achromatic `neutral`. An
    earlier slate unification read as too blue, so remap all three onto neutral
@@ -279,7 +348,6 @@ main[data-pagefind-body] h4 {
   --x-color-neutral-800: #292929;
   --x-color-neutral-900: #181818;
   --x-color-neutral-950: #070707;
-
 }
 
 /* Spec content text as equal-luminance neutral grays (matching what were the
