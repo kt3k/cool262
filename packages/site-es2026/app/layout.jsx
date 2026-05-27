@@ -5,7 +5,7 @@ import 'nextra-theme-docs/style.css'
 import './ecma-spec.css'
 import { VersionSwitcher } from './version-switcher'
 
-const siteTitle = 'ECMA-262, 17th, ES2026 (draft)'
+const siteTitle = 'ECMA-262, 17th, ES2026 candidate'
 
 export const metadata = {
   title: siteTitle,
@@ -18,11 +18,12 @@ const specCommitUrl = process.env.NEXT_PUBLIC_SPEC_COMMIT_URL
 const homeHref = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`
 
 // logoLink={false} lets us own the anchors inside the logo. The title links
-// home; when the title ends in "(draft)" and we know the source commit, that
-// "(draft)" word links to the exact tc39/ecma262 commit (no separate hash).
-const draftIdx = siteTitle.indexOf('(draft)')
-const draftLink = draftIdx >= 0 && specCommitUrl
-const titleMain = draftLink ? siteTitle.slice(0, draftIdx).trimEnd() : siteTitle
+// home; a trailing status word ("(draft)" / "candidate") is rendered without
+// parentheses and links to the exact tc39/ecma262 commit.
+const qualMatch = siteTitle.match(/\s+\(?(draft|candidate)\)?$/i)
+const qualLink = qualMatch && specCommitUrl
+const titleMain = qualLink ? siteTitle.slice(0, qualMatch.index).trimEnd() : siteTitle
+const qualText = qualMatch ? qualMatch[1] : ''
 
 const logo = (
   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4em' }}>
@@ -30,7 +31,7 @@ const logo = (
       <a href={homeHref} style={{ color: 'inherit', textDecoration: 'none' }}>
         <b>{titleMain}</b>
       </a>
-      {draftLink ? (
+      {qualLink ? (
         <>
           {' '}
           <a
@@ -45,7 +46,7 @@ const logo = (
               textUnderlineOffset: '3px',
             }}
           >
-            <b>draft</b>
+            <b>{qualText}</b>
           </a>
         </>
       ) : null}
