@@ -5,37 +5,41 @@
 //   - vendored-from-tag editions: a plain dir -> read ecma262/<id>/source.json
 //
 // Returns { commit, short, url } or null when the source is unknown.
-import { execFileSync } from 'node:child_process'
-import fs from 'node:fs'
-import path from 'node:path'
+import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
 
 export function readSpecSource(specDir) {
-  let commit = null
+  let commit = null;
 
-  if (fs.existsSync(path.join(specDir, '.git'))) {
+  if (fs.existsSync(path.join(specDir, ".git"))) {
     try {
-      commit = execFileSync('git', ['rev-parse', 'HEAD'], {
+      commit = execFileSync("git", ["rev-parse", "HEAD"], {
         cwd: specDir,
-        encoding: 'utf8',
-      }).trim()
+        encoding: "utf8",
+      }).trim();
     } catch (err) {
-      console.warn(`[spec-source] git rev-parse failed in ${specDir}: ${err.message}`)
+      console.warn(
+        `[spec-source] git rev-parse failed in ${specDir}: ${err.message}`,
+      );
     }
   } else {
-    const metaFile = path.join(specDir, 'source.json')
+    const metaFile = path.join(specDir, "source.json");
     if (fs.existsSync(metaFile)) {
       try {
-        commit = JSON.parse(fs.readFileSync(metaFile, 'utf8')).commit ?? null
+        commit = JSON.parse(fs.readFileSync(metaFile, "utf8")).commit ?? null;
       } catch (err) {
-        console.warn(`[spec-source] bad source.json in ${specDir}: ${err.message}`)
+        console.warn(
+          `[spec-source] bad source.json in ${specDir}: ${err.message}`,
+        );
       }
     }
   }
 
-  if (!commit) return null
+  if (!commit) return null;
   return {
     commit,
     short: commit.slice(0, 7),
     url: `https://github.com/tc39/ecma262/commit/${commit}`,
-  }
+  };
 }

@@ -1,0 +1,16 @@
+{
+  "fmt": {
+    "exclude": [
+      "node_modules",
+      "dist",
+      "ecma262",
+      "pnpm-lock.yaml",
+      "**/.next",
+      "**/out",
+      "packages/*/content",
+      "packages/*/lib",
+      "packages/*/public",
+      "**/*.svg"
+    ]
+  }
+}

@@ -4,48 +4,49 @@
 //   dist/index.html          <- landing page linking to each version
 //
 // Run from anywhere after `pnpm build:all`; paths resolve off the repo root.
-import fs from 'node:fs'
-import path from 'node:path'
-import { readEditions } from './editions.mjs'
+import fs from "node:fs";
+import path from "node:path";
+import { readEditions } from "./editions.mjs";
 
-const root = path.resolve(import.meta.dirname, '../../..')
-const packagesDir = path.join(root, 'packages')
-const distDir = path.join(root, 'dist')
+const root = path.resolve(import.meta.dirname, "../../..");
+const packagesDir = path.join(root, "packages");
+const distDir = path.join(root, "dist");
 
-const editions = readEditions(root)
+const editions = readEditions(root);
 
 if (editions.length === 0) {
-  console.error('[assemble-dist] no packages/site-* found')
-  process.exit(1)
+  console.error("[assemble-dist] no packages/site-* found");
+  process.exit(1);
 }
 
-fs.rmSync(distDir, { recursive: true, force: true })
-fs.mkdirSync(distDir, { recursive: true })
+fs.rmSync(distDir, { recursive: true, force: true });
+fs.mkdirSync(distDir, { recursive: true });
 
 for (const edition of editions) {
-  const out = path.join(packagesDir, `site-${edition.id}`, 'out')
+  const out = path.join(packagesDir, `site-${edition.id}`, "out");
   if (!fs.existsSync(out)) {
     console.error(
       `[assemble-dist] missing build output: ${out}\n` +
-        '  run `pnpm build:all` first',
-    )
-    process.exit(1)
+        "  run `pnpm build:all` first",
+    );
+    process.exit(1);
   }
-  fs.cpSync(out, path.join(distDir, edition.id), { recursive: true })
+  fs.cpSync(out, path.join(distDir, edition.id), { recursive: true });
 }
 
 const escape = (s) =>
-  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const items = editions
   .map((s) => {
-    let line = `<a href="./${s.id}/">${escape(s.title)}</a>`
+    let line = `<a href="./${s.id}/">${escape(s.title)}</a>`;
     if (s.source) {
-      line += ` <a class="commit" href="${s.source.url}"><code>${s.source.short}</code></a>`
+      line +=
+        ` <a class="commit" href="${s.source.url}"><code>${s.source.short}</code></a>`;
     }
-    return `      <li>${line}</li>`
+    return `      <li>${line}</li>`;
   })
-  .join('\n')
+  .join("\n");
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -71,7 +72,7 @@ ${items}
   </ul>
 </body>
 </html>
-`
+`;
 
-fs.writeFileSync(path.join(distDir, 'index.html'), html)
-console.log(`[assemble-dist] assembled dist/ from ${editions.length} sites`)
+fs.writeFileSync(path.join(distDir, "index.html"), html);
+console.log(`[assemble-dist] assembled dist/ from ${editions.length} sites`);
