@@ -288,13 +288,30 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   display: inline-block;
 }
 .ecma-spec emu-figure::after {
-  content: "Figure — " attr(caption);
+  content: "Figure " attr(data-num) ": " attr(caption);
   display: block;
   margin-top: 0.6em;
   font-size: 0.875em;
   color: var(--ecma-text-body);
   opacity: 0.75;
   font-style: italic;
+}
+
+/* emu-table: like emu-figure, the caption= attribute is invisible by default.
+   Render it above the table as "Table N: <caption>" (N from data-num, set by
+   build-chapters' float numbering). */
+.ecma-spec emu-table {
+  display: block;
+}
+.ecma-spec emu-table::before {
+  content: "Table " attr(data-num) ": " attr(caption);
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 0.875em;
+  color: var(--ecma-text-body);
+  opacity: 0.75;
+  font-style: italic;
+  text-align: center;
 }
 
 /* Prose lists (outside emu-alg): Tailwind's preflight strips markers + indent;

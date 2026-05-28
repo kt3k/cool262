@@ -530,6 +530,57 @@ const built = chapters.map((c) => {
   return { ...c, slug, pageSlug, chapterNum, tree };
 });
 
+// Number every <emu-table>/<emu-figure> in document order (global counters,
+// like ecmarkup) so empty <emu-xref> to them resolve to "Table N"/"Figure N"
+// links and their captions can show the number. `idToLabel` is the non-clause
+// xref resolver (id → { text, slug }); tableNum/figureNum drive the caption
+// CSS via a data-num attribute. oldids are registered too so legacy anchors
+// still resolve to text.
+const idToLabel = new Map();
+const tableNum = new Map();
+const figureNum = new Map();
+{
+  let tN = 0;
+  let fN = 0;
+  const re = /<emu-(table|figure)\b([^>]*)>/g;
+  for (const c of built) {
+    let mm;
+    while ((mm = re.exec(c.inner)) !== null) {
+      const idm = mm[2].match(/\bid="([^"]+)"/);
+      if (!idm) continue;
+      const id = idm[1];
+      const isTable = mm[1] === "table";
+      const n = isTable ? ++tN : ++fN;
+      (isTable ? tableNum : figureNum).set(id, String(n));
+      const entry = {
+        text: `${isTable ? "Table" : "Figure"} ${n}`,
+        slug: c.pageSlug,
+      };
+      idToLabel.set(id, entry);
+      const oldids = mm[2].match(/\boldids="([^"]+)"/);
+      if (oldids) {
+        for (
+          const o of oldids[1].split(",").map((s) => s.trim()).filter(Boolean)
+        ) {
+          idToLabel.set(o, entry);
+        }
+      }
+    }
+    re.lastIndex = 0;
+  }
+}
+
+// Add data-num="N" to <emu-table>/<emu-figure> so the caption CSS can render
+// "Table N: <caption>" / "Figure N: <caption>".
+function applyFloatNum(html) {
+  return html.replace(/<emu-(table|figure)\b([^>]*)>/g, (full, kind, attrs) => {
+    const idm = attrs.match(/\bid="([^"]+)"/);
+    if (!idm) return full;
+    const num = (kind === "table" ? tableNum : figureNum).get(idm[1]);
+    return num ? `<emu-${kind}${attrs} data-num="${num}">` : full;
+  });
+}
+
 // emu-intro lives at <basePath>/, all other chapters at <basePath>/<slug>.
 // Helper used by xref substitution so links survive routing under any
 // basePath (empty for local dev, '/ecma262/draft' / '/ecma262/es2025' / … in
@@ -549,18 +600,22 @@ function applyXrefSubst(html) {
   html = html.replace(/<emu-xref([^>]*?)>\s*<\/emu-xref>/g, (full, attrs) => {
     const m = attrs.match(/\bhref="#([^"]+)"/);
     if (!m) return full;
-    const s = idToSection.get(m[1]);
-    if (!s) return m[1];
-    return `<a href="${pathFor(s.slug)}#${m[1]}">${s.number}</a>`;
+    const id = m[1];
+    const s = idToSection.get(id);
+    if (s) return `<a href="${pathFor(s.slug)}#${id}">${s.number}</a>`;
+    const l = idToLabel.get(id);
+    if (l) return `<a href="${pathFor(l.slug)}#${id}">${l.text}</a>`;
+    return id;
   });
   html = html.replace(
     /<emu-xref([^>]*?)>([\s\S]+?)<\/emu-xref>/g,
     (full, attrs, inner) => {
       const m = attrs.match(/\bhref="#([^"]+)"/);
       if (!m) return full;
-      const s = idToSection.get(m[1]);
+      const id = m[1];
+      const s = idToSection.get(id) ?? idToLabel.get(id);
       if (!s) return inner;
-      return `<a href="${pathFor(s.slug)}#${m[1]}">${inner}</a>`;
+      return `<a href="${pathFor(s.slug)}#${id}">${inner}</a>`;
     },
   );
   return html;
@@ -957,7 +1012,9 @@ built.forEach((c) => {
   const sections = flattenTree(tree).map(([k, v]) => [
     k,
     applyInlineMarkup(
-      applyXrefSubst(applyProdrefSubst(applyGrammarSubst(applyAlgSubst(v)))),
+      applyXrefSubst(
+        applyProdrefSubst(applyGrammarSubst(applyAlgSubst(applyFloatNum(v)))),
+      ),
     ),
   ]);
   const sectionsObj = Object.fromEntries(sections);
