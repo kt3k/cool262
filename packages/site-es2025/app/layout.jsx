@@ -64,13 +64,20 @@ const deployBase = process.env.NEXT_PUBLIC_DEPLOY_BASE || "/";
 
 const footer = (
   <Footer>
-    <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "4rem",
+        flexWrap: "wrap",
+        width: "100%",
+      }}
+    >
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
-          textAlign: "left",
           gap: "0.4rem",
         }}
       >
@@ -79,6 +86,15 @@ const footer = (
             {e.title}
           </a>
         ))}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: "0.4rem",
+        }}
+      >
         <a href={`${deployBase}about/`}>About</a>
         <a href={`${deployBase}pipeline/`}>How it's built</a>
         <span
