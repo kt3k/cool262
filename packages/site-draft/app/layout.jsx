@@ -81,6 +81,7 @@ const footer = (
           </a>
         ))}
         <a href={`${deployBase}about/`}>About</a>
+        <a href={`${deployBase}pipeline/`}>How it's built</a>
         <span
           style={{
             marginTop: "0.5rem",

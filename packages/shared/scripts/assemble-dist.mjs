@@ -66,11 +66,11 @@ const landingCss =
     a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
     nav { margin-top: 2rem; font-size: 0.9em; }`;
 
-// Editorial styling for /about, evoking the Ghost "Edition" theme: Mulish sans
-// throughout with an extra-bold (800) display heading, a narrow measure, roomy
-// line-height, and muted underlined links. 62.5% root keeps rem ≈ px/10
-// (as Edition does).
-const aboutCss =
+// Editorial styling for the top-level article pages (/about, /pipeline),
+// evoking the Ghost "Edition" theme: Mulish sans throughout with an extra-bold
+// (800) display heading, a narrow measure, roomy line-height, and muted
+// underlined links. 62.5% root keeps rem ≈ px/10 (as Edition does).
+const articleCss =
   `    @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap');
     html { font-size: 62.5%; }
     body {
@@ -95,6 +95,9 @@ const aboutCss =
       margin: 0 0 2rem;
     }
     p { margin: 0 0 1.6rem; }
+    h2 { font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 2.6rem; line-height: 1.25; letter-spacing: -0.01em; color: #15171a; margin: 3.4rem 0 1rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; background: #f6f6f6; padding: 0.1em 0.35em; border-radius: 4px; }
+    .flow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.4rem; line-height: 1.75; background: #f6f6f6; border-radius: 6px; padding: 1.2rem 1.4rem; overflow-x: auto; color: #444; margin: 0 0 2.4rem; }
     strong { font-weight: 600; color: #15171a; }
     a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.28); text-underline-offset: 3px; }
     a:hover { text-decoration-color: currentColor; }
@@ -121,28 +124,60 @@ const landing = page(
   <ul>
 ${items}
   </ul>
-  <nav><a href="./about/">About this site</a></nav>`,
+  <nav><a href="./about/">About</a> &middot; <a href="./pipeline/">How it's built</a></nav>`,
   landingCss,
 );
 fs.writeFileSync(path.join(distDir, "index.html"), landing);
 
-const aboutEditions = editions
-  .map((s) => `    <a href="../${s.id}/">${escape(s.title)}</a>`)
-  .join("\n");
+// Footer shared by the article pages: the edition list (styled like the site
+// footer) plus the copyright line. Edition links are relative to a /<page>/ dir.
+const articleFooter = `  <footer>
+${
+  editions.map((s) => `    <a href="../${s.id}/">${escape(s.title)}</a>`).join(
+    "\n",
+  )
+}
+    <span class="copyright">${
+  new Date().getFullYear()
+} © <a href="https://github.com/kt3k/ecma262">ECMA-262 Restyled</a></span>
+  </footer>`;
 
-const about = page(
+const writeArticle = (slug, title, main) => {
+  fs.mkdirSync(path.join(distDir, slug), { recursive: true });
+  fs.writeFileSync(
+    path.join(distDir, slug, "index.html"),
+    page(title, `${main}\n${articleFooter}`, articleCss),
+  );
+};
+
+writeArticle(
+  "about",
   "About — ECMA-262 Restyled",
   `  <h1>About</h1>
-  <p><strong>ECMA-262 Restyled</strong> is an unofficial, reader-focused rendering of the ECMAScript® Language Specification. It mirrors the source from the official <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> repository and restyles it for readability; it is <strong>not normative</strong> — for the authoritative text, see the official specification at <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. The source for this site is at <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>
-  <footer>
-${aboutEditions}
-    <span class="copyright">${
-    new Date().getFullYear()
-  } © <a href="https://github.com/kt3k/ecma262">ECMA-262 Restyled</a></span>
-  </footer>`,
-  aboutCss,
+  <p><strong>ECMA-262 Restyled</strong> is an unofficial, reader-focused rendering of the ECMAScript® Language Specification. It mirrors the source from the official <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> repository and restyles it for readability; it is <strong>not normative</strong> — for the authoritative text, see the official specification at <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. The source for this site is at <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>`,
 );
-fs.mkdirSync(path.join(distDir, "about"), { recursive: true });
-fs.writeFileSync(path.join(distDir, "about", "index.html"), about);
+
+writeArticle(
+  "pipeline",
+  "How it's built — ECMA-262 Restyled",
+  `  <h1>How this site is built</h1>
+  <p><strong>ECMA-262 Restyled</strong> is generated automatically from the official specification — none of the text is edited by hand. Here is the whole pipeline.</p>
+  <pre class="flow">tc39/ecma262
+   │   spec.html  (vendored, one per edition)
+   ▼
+build script  ──▶  one page per chapter (MDX / JSX)
+   ▼
+Next.js + Nextra  ──▶  restyled pages + Pagefind search
+   ▼
+one static site  (all editions)</pre>
+  <h2>1 · Vendor the source</h2>
+  <p>The official source from <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> is vendored as a single <code>spec.html</code> per edition. The draft tracks the upstream repository as a git submodule; ES2024, ES2025, and ES2026 are pinned snapshots.</p>
+  <h2>2 · Transform</h2>
+  <p>A build script parses each <code>spec.html</code> into one page per top-level chapter and replays the steps the raw source leaves out: it writes the descriptive preamble under each operation's heading, numbers and links every cross-reference (sections, tables, figures, notes, and algorithm steps), and formats grammars, algorithms, and inline notation.</p>
+  <h2>3 · Render &amp; assemble</h2>
+  <p>Next.js and Nextra render the pages with the restyled typography, Pagefind builds the search index, and every edition is combined into one static site.</p>
+  <h2>Not normative</h2>
+  <p>This site mirrors the specification for readability only. For the authoritative text, always refer to <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. Source for this project: <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>`,
+);
 
 console.log(`[assemble-dist] assembled dist/ from ${editions.length} sites`);
