@@ -1279,12 +1279,20 @@ built.forEach((c) => {
     chapterHeading = `# ${chapterAnchor}${chapterNum} ${chapterTitleRich}`;
   }
 
+  // Wrap the entire chapter body in <div id="spec-container"> so the same CSS
+  // hooks that tc39.es/ecma262 exposes (e.g. `#spec-container > emu-clause`,
+  // `#spec-container :target`) work here too. MDX parses markdown inside a
+  // raw <div> as long as the open/close tags are surrounded by blank lines.
   const mdxLines = [
     `import { Sec } from '../lib/spec/${slug}'`,
+    "",
+    `<div id="spec-container">`,
     "",
     chapterHeading,
     "",
     ...renderMdxTree(tree, chapterNum, "", 2),
+    "",
+    `</div>`,
   ];
   const mdx = mdxLines.join("\n").replace(/\n{3,}/g, "\n\n").replace(
     /\n*$/,
