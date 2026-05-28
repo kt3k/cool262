@@ -257,14 +257,21 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.92em;
 }
-/* Inline math equations like 𝔽(_x_), abs(_x_), floor(_x_) - _x_ - lean on
-   a math/serif font so identifiers read like LaTeX-style math italics, not
-   ordinary italic prose. Stays inline; doesn't break paragraph flow. */
+/* Math equations like 𝔽(_x_), abs(_x_), floor(_x_) - _x_ - lean on a math/
+   serif font so identifiers read like LaTeX-style math italics, not ordinary
+   italic prose. Block emu-eqn (its own line) is indented; emu-eqn.inline
+   sits in text flow with no extra margin (matches tc39's display split). */
 .ecma-spec emu-eqn {
+  display: block;
+  margin-inline-start: 4em;
   font-style: italic;
   font-family:
     "Cambria Math", "Latin Modern Math", "STIX Two Math",
     "TeX Gyre Termes Math", Cambria, "Times New Roman", serif;
+}
+.ecma-spec emu-eqn.inline {
+  display: inline;
+  margin: 0;
 }
 /* Variables inside an equation are already italic via <var>; switch them
    off so the parent's math font is what carries the slant, matching the

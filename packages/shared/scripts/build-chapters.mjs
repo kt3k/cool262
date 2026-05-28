@@ -1218,6 +1218,28 @@ function applyGrammarSubst(html) {
   );
 }
 
+// Tag inline-position <emu-eqn> with class="inline" so it stays in the text
+// flow (display:inline + margin:0). The detection mirrors applyGrammarSubst:
+// only-whitespace before the opening tag on its line → block; anything else
+// on the line (so the eqn sits mid-paragraph) → inline. Preserves any
+// existing attributes (id, aoid) — only the class is added.
+function applyEqnInlineSubst(html) {
+  return html.replace(
+    /<emu-eqn(\b[^>]*)>/g,
+    (full, attrs, offset) => {
+      const lineStart = html.lastIndexOf("\n", offset - 1) + 1;
+      const isInline = html.slice(lineStart, offset).trim() !== "";
+      if (!isInline) return full;
+      if (/\bclass=/.test(attrs)) {
+        return `<emu-eqn${
+          attrs.replace(/\bclass="([^"]*)"/, 'class="$1 inline"')
+        }>`;
+      }
+      return `<emu-eqn class="inline"${attrs}>`;
+    },
+  );
+}
+
 // Inline ecmarkup markup: a Markdown-like shorthand authors use in regular
 // prose, emu-alg step text, emu-eqn equations, table cells, etc. ecmarkup
 // expands these to typed inline elements at build time; we do the same so
@@ -1334,7 +1356,9 @@ built.forEach((c) => {
     applyInlineMarkup(
       applyXrefSubst(
         applyProdrefSubst(
-          applyGrammarSubst(applyAlgSubst(applyFloatNum(applyNoteNum(v)))),
+          applyEqnInlineSubst(
+            applyGrammarSubst(applyAlgSubst(applyFloatNum(applyNoteNum(v)))),
+          ),
         ),
       ),
     ),
