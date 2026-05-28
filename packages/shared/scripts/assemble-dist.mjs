@@ -66,11 +66,12 @@ const landingCss =
     a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
     nav { margin-top: 2rem; font-size: 0.9em; }`;
 
-// Editorial styling for /about, evoking the Ghost "Edition" theme: Lora serif
-// display heading, Mulish sans body, a narrow measure, roomy line-height, and
-// muted underlined links. 62.5% root keeps rem ≈ px/10 (as Edition does).
+// Editorial styling for /about, evoking the Ghost "Edition" theme: Mulish sans
+// throughout with an extra-bold (800) display heading, a narrow measure, roomy
+// line-height, and muted underlined links. 62.5% root keeps rem ≈ px/10
+// (as Edition does).
 const aboutCss =
-  `    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Mulish:wght@400;600;700&display=swap');
+  `    @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap');
     html { font-size: 62.5%; }
     body {
       font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -85,11 +86,11 @@ const aboutCss =
       -moz-osx-font-smoothing: grayscale;
     }
     h1 {
-      font-family: 'Lora', Georgia, 'Times New Roman', serif;
-      font-weight: 600;
+      font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-weight: 800;
       font-size: 4.4rem;
       line-height: 1.15;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       color: #15171a;
       margin: 0 0 2rem;
     }
