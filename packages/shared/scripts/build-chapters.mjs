@@ -616,6 +616,17 @@ for (const c of built) {
   }
 }
 
+// Pre-pass: register step ids → dotted ordinal label ("1.d") / slug so
+// <emu-xref> to algorithm steps resolve to the step number.
+for (const c of built) {
+  const algRe = /<emu-alg([^>]*?)>([\s\S]*?)<\/emu-alg>/g;
+  let am;
+  while ((am = algRe.exec(c.inner)) !== null) {
+    const root = buildAlgTree(am[2]);
+    if (root) collectAlgSteps(root.children, 0, "", c.pageSlug, idToLabel);
+  }
+}
+
 // emu-intro lives at <basePath>/, all other chapters at <basePath>/<slug>.
 // Helper used by xref substitution so links survive routing under any
 // basePath (empty for local dev, '/ecma262/draft' / '/ecma262/es2025' / … in
@@ -731,7 +742,11 @@ function dedent(text) {
 // Parse <emu-alg> body (Markdown-style "1." numbered + "*" bulleted lists
 // with 2-space indent per nesting level) into real nested <ol>/<ul> HTML, so
 // the browser renders proper hierarchical step numbering.
-function parseAlg(inner) {
+// Parse the <emu-alg> body into a tree of { type:'ol'|'ul', text, id, children }
+// items. `id` captures a leading [id="step-…"] annotation (used for the <li>
+// anchor and step numbering); all leading [..] annotations are stripped from
+// the displayed text.
+function buildAlgTree(inner) {
   const lines = inner.split("\n");
   // The first bullet line establishes baseline indent (level 0).
   let baseIndent = -1;
@@ -758,7 +773,11 @@ function parseAlg(inner) {
     const indent = l.length - t.length;
     const depth = Math.max(0, Math.floor((indent - baseIndent) / 2));
     const type = olM ? "ol" : "ul";
-    let text = (olM ? olM[1] : ulM[1]).replace(/^(?:\[[^\]]+\]\s*)+/, "");
+    const raw = olM ? olM[1] : ulM[1];
+    const ann = raw.match(/^(?:\[[^\]]+\]\s*)+/);
+    const idm = ann && ann[0].match(/\bid="(step-[^"]+)"/);
+    const id = idm ? idm[1] : null;
+    let text = raw.replace(/^(?:\[[^\]]+\]\s*)+/, "");
     // Continuation lines: any non-bullet line at deeper indent belongs to this
     // item (commonly embedded <figure>/<table> blocks).
     let j = i + 1;
@@ -775,7 +794,7 @@ function parseAlg(inner) {
       text += "\n" + lines[j];
       j++;
     }
-    items.push({ depth, type, text: text.replace(/\s+$/, "") });
+    items.push({ depth, type, id, text: text.replace(/\s+$/, "") });
     i = j;
   }
   if (!items.length) return null;
@@ -788,18 +807,30 @@ function parseAlg(inner) {
     while (stack.length < it.depth + 1) {
       const parent = stack[stack.length - 1];
       if (!parent.children.length) {
-        parent.children.push({ type: it.type, text: "", children: [] });
+        parent.children.push({
+          type: it.type,
+          text: "",
+          id: null,
+          children: [],
+        });
       }
       stack.push(parent.children[parent.children.length - 1]);
     }
     stack[stack.length - 1].children.push({
       type: it.type,
       text: it.text,
+      id: it.id,
       children: [],
     });
   }
+  return root;
+}
 
+function parseAlg(inner) {
+  const root = buildAlgTree(inner);
+  if (!root) return null;
   // Serialize: group consecutive same-type siblings into a single <ol>/<ul>.
+  // A step's [id] becomes the <li> anchor so #step-… links resolve.
   function serialize(nodes) {
     let html = "";
     let k = 0;
@@ -811,12 +842,78 @@ function parseAlg(inner) {
         k++;
       }
       html += `<${t}>` + group.map((n) =>
-        `<li>${n.text}${serialize(n.children)}</li>`
+        `<li${n.id ? ` id="${n.id}"` : ""}>${n.text}${
+          serialize(n.children)
+        }</li>`
       ).join("") + `</${t}>`;
     }
     return html;
   }
   return serialize(root.children);
+}
+
+// Step ordinals match the CSS list-style cycle: <ol> levels go decimal,
+// lower-alpha, lower-roman, repeating.
+function alphaLabel(n) {
+  let s = "";
+  while (n > 0) {
+    n--;
+    s = String.fromCharCode(97 + (n % 26)) + s;
+    n = Math.floor(n / 26);
+  }
+  return s;
+}
+function romanLabel(n) {
+  const map = [
+    [1000, "m"],
+    [900, "cm"],
+    [500, "d"],
+    [400, "cd"],
+    [100, "c"],
+    [
+      90,
+      "xc",
+    ],
+    [50, "l"],
+    [40, "xl"],
+    [10, "x"],
+    [9, "ix"],
+    [5, "v"],
+    [4, "iv"],
+    [1, "i"],
+  ];
+  let s = "";
+  for (const [v, sym] of map) {
+    while (n >= v) {
+      s += sym;
+      n -= v;
+    }
+  }
+  return s;
+}
+function stepOrdinal(n, olLevel) {
+  const k = (olLevel - 1) % 3;
+  return k === 0 ? String(n) : k === 1 ? alphaLabel(n) : romanLabel(n);
+}
+
+// Walk an alg tree, registering step id → dotted ordinal label ("1.d") for
+// xref resolution. `olAncestors` is the number of <ol> levels above `nodes`.
+function collectAlgSteps(nodes, olAncestors, prefix, slug, out) {
+  let olIdx = 0;
+  for (const n of nodes) {
+    let childPrefix = prefix;
+    let childOl = olAncestors;
+    if (n.type === "ol") {
+      olIdx++;
+      const label = stepOrdinal(olIdx, olAncestors + 1);
+      childPrefix = prefix ? `${prefix}.${label}` : label;
+      childOl = olAncestors + 1;
+      if (n.id) out.set(n.id, { text: childPrefix, slug });
+    } else if (n.id) {
+      out.set(n.id, { text: prefix, slug });
+    }
+    collectAlgSteps(n.children, childOl, childPrefix, slug, out);
+  }
 }
 
 function applyAlgSubst(html) {
