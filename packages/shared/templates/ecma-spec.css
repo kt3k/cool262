@@ -39,38 +39,45 @@ emu-annex {
   --ecma-panel-bg: rgba(115, 115, 115, 0.08);
   --ecma-panel-border: rgba(115, 115, 115, 0.25);
   --ecma-panel-radius: 6px;
+}
 
-  /* Measure / breakout grid (proposal 1): prose lives in a fixed-width `main`
-     track (the reading measure); wide blocks (tables, figures) span into the
-     extra `1fr` to the right via `grid-column`. minmax(0, …) lets the measure
-     shrink below --ecma-measure on narrow viewports instead of overflowing. */
+/* Measure / breakout grid: prose lives in a fixed-width `main` track (the
+   reading measure); wide blocks (tables, figures) span into the extra `1fr`
+   to the right via `grid-column`. The grid is applied to each <emu-clause>
+   (and the outer container) because Sec wrappers are display:contents — the
+   real block ancestors of the prose are the clauses themselves. */
+.ecma-spec,
+.ecma-spec emu-clause,
+.ecma-spec emu-intro,
+.ecma-spec emu-annex {
   display: grid;
   grid-template-columns:
     [main-start] minmax(0, var(--ecma-measure, 45rem)) [main-end]
     minmax(0, 1fr) [wide-end];
 }
 
-/* Vertical rhythm (proposal 2): em-based so spacing tracks font size, with one
-   knob (--ecma-rhythm) to scale the whole density. Grid items don't
-   margin-collapse, so spacing is driven from a single margin-top between
-   adjacent siblings rather than symmetric block margins. */
+/* Vertical rhythm: em-based so spacing tracks font size, with one knob
+   (--ecma-rhythm) to scale density. Grid items don't margin-collapse, so
+   spacing is driven from a single margin-top between adjacent siblings. */
+.ecma-spec :is(emu-clause, emu-intro, emu-annex) > *,
 .ecma-spec > * {
   grid-column: main;
   min-width: 0;
 }
+.ecma-spec :is(emu-clause, emu-intro, emu-annex) > * + *,
 .ecma-spec > * + * {
   margin-top: calc(1.5em * var(--ecma-rhythm, 1));
 }
 /* Tables and figures break out of the measure into the wider column. */
-.ecma-spec > :is(emu-table, emu-figure) {
+.ecma-spec :is(emu-table, emu-figure) {
   grid-column: main-start / wide-end;
 }
-.ecma-spec > emu-table {
+.ecma-spec emu-table {
   display: block;
   overflow-x: auto;
 }
-.ecma-spec > emu-table,
-.ecma-spec > emu-table + * {
+.ecma-spec emu-table,
+.ecma-spec emu-table + * {
   margin-top: calc(2em * var(--ecma-rhythm, 1));
 }
 /* Paragraphs nested inside notes / lists / quotes aren't direct grid children,

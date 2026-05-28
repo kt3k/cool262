@@ -1371,12 +1371,17 @@ built.forEach((c) => {
 
   // basePath is already baked into href values in this map (see pathFor in
   // build-chapters.mjs), so the runtime is just lookup + dangerouslySetInnerHTML.
+  // The wrapper <div> is `display: contents` so it's transparent for layout —
+  // its children participate in the enclosing <emu-clause>'s flow as if the
+  // div weren't there, matching the way tc39.es/ecma262 has no per-section
+  // wrapper at all. The .ecma-spec name-spacing class lives on the outer
+  // <div id="spec-container"> in the MDX wrapper.
   const componentSrc = [
     "// Generated from ecma262/spec.html — do not edit by hand.",
     `const sections = ${JSON.stringify(sectionsObj)};`,
     "export function Sec({ id }) {",
     "  const html = sections[id] ?? '';",
-    '  return <div className="ecma-spec" dangerouslySetInnerHTML={{ __html: html }} />;',
+    '  return <div style={{display:"contents"}} dangerouslySetInnerHTML={{ __html: html }} />;',
     "}",
     "",
   ].join("\n");
@@ -1412,7 +1417,7 @@ built.forEach((c) => {
   const mdxLines = [
     `import { Sec } from '../lib/spec/${slug}'`,
     "",
-    `<div id="spec-container">`,
+    `<div id="spec-container" className="ecma-spec">`,
     "",
     `<${wrapTag} id="${c.id}">`,
     "",
