@@ -55,17 +55,6 @@ ${main}
 </html>
 `;
 
-const landingCss =
-  `    body { font: 16px/1.6 system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
-    h1 { font-size: 1.4rem; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0366d6; }
-    a:hover { text-decoration: underline; }
-    a.commit { color: #57606a; font-size: 0.85em; }
-    a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-    nav { margin-top: 2rem; font-size: 0.9em; }`;
-
 // Editorial styling for the top-level article pages (/about, /pipeline),
 // evoking the Ghost "Edition" theme: Mulish sans throughout with an extra-bold
 // (800) display heading, a narrow measure, roomy line-height, and muted
@@ -119,27 +108,29 @@ const articleCss =
     footer .copyright { margin-top: 0.8rem; color: #999; font-size: 1.4rem; }
     footer .copyright a { color: inherit; text-decoration: underline; }`;
 
-const items = editions
-  .map((s) => {
-    let line = `<a href="./${s.id}/">${escape(s.title)}</a>`;
-    if (s.source) {
-      line +=
-        ` <a class="commit" href="${s.source.url}"><code>${s.source.short}</code></a>`;
-    }
-    return `      <li>${line}</li>`;
-  })
-  .join("\n");
-
-const landing = page(
-  "ECMA-262 — all editions",
-  `  <h1>ECMA-262</h1>
-  <ul>
-${items}
-  </ul>
-  <nav><a href="./about/">About</a> &middot; <a href="./pipeline/">How it's built</a></nav>`,
-  landingCss,
+// The root has no landing page; it redirects to the editor's draft (like
+// tc39.es/ecma262/). Every edition, plus /about and /pipeline, stays reachable
+// from each site's footer and version switcher.
+const redirectTo = `./${
+  (editions.find((e) => e.id === "draft") ?? editions[0]).id
+}/`;
+fs.writeFileSync(
+  path.join(distDir, "index.html"),
+  `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="0; url=${redirectTo}">
+  <link rel="canonical" href="${redirectTo}">
+  <title>ECMA-262 Restyled</title>
+  <script>location.replace(${JSON.stringify(redirectTo)});</script>
+</head>
+<body>
+  <p>Redirecting to <a href="${redirectTo}">the editor's draft</a>.</p>
+</body>
+</html>
+`,
 );
-fs.writeFileSync(path.join(distDir, "index.html"), landing);
 
 // Footer shared by the article pages: the edition list (styled like the site
 // footer) plus the copyright line. Edition links are relative to a /<page>/ dir.
