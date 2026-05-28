@@ -726,7 +726,9 @@ function applyProdrefSubst(html) {
       if (!m) return full;
       const def = grammarDefs.get(m[1]);
       if (def === undefined) return full;
-      return `<pre class="emu-grammar">${tokenizeGrammarBlock(def)}</pre>`;
+      return `<emu-grammar type="definition">${
+        tokenizeGrammarBlock(def)
+      }</emu-grammar>`;
     },
   );
 }
@@ -929,23 +931,25 @@ function applyAlgSubst(html) {
   );
 }
 
-// Tokenize one grammar source line into wrapped HTML spans. `isLhs` flags the
-// first non-blank line of a production so the leading nonterminal gets a
-// distinct ".nt.lhs" class for bolding.
+// Tokenize one grammar source line into wrapped HTML elements. `isLhs` flags
+// the first non-blank line of a production so its leading nonterminal gets the
+// ".lhs" class for bolding.
 //   • // ...           → <span class="cm">…</span>           (ecmarkup pragma)
-//   • &gt; rest of line → <span class="desc">…</span>         (prose description)
-//   • `foo`            → <span class="t">foo</span>            (terminal)
-//   • [Yield, ?Await]  → <span class="p">[…]</span>            (params / constraint)
-//   • :, ::, :::, :::: → <span class="geq">…</span>            (production arrow)
-//   • [A-Z]\w*         → <span class="nt">…</span>             (nonterminal)
-//   • ? * +            → <span class="mod">…</span>            (modifier)
-//   • "one of"         → <span class="oneof">one of</span>
-// Whitespace is preserved verbatim so the <pre>'s line shape survives.
+//   • &gt; rest of line → <emu-gprose>…</emu-gprose>          (prose description)
+//   • `foo`            → <emu-t>foo</emu-t>                  (terminal)
+//   • [Yield, ?Await]  → <emu-mods><emu-params>[…]</emu-params></emu-mods>
+//   • :, ::, :::, :::: → <emu-geq>…</emu-geq>                (production arrow)
+//   • [A-Z]\w*         → <emu-nt>…</emu-nt>                  (nonterminal)
+//   • ? * +            → <emu-mods><emu-opt>…</emu-opt></emu-mods>
+//   • "one of"         → <emu-oneof>one of</emu-oneof>
+// Trailing modifiers ([params] and ?/*/+) that sit flush against an <emu-nt>
+// (no intervening whitespace) get nested inside it as <emu-mods> children,
+// matching tc39.es/ecma262's serialization.
 function tokenizeGrammarLine(line, isLhs) {
   if (!line.trim()) return line;
   if (/^\s*\/\//.test(line)) return `<span class="cm">${line}</span>`;
   const descM = line.match(/^([ \t]*)(&gt;\s.*)$/);
-  if (descM) return `${descM[1]}<span class="desc">${descM[2]}</span>`;
+  if (descM) return `${descM[1]}<emu-gprose>${descM[2]}</emu-gprose>`;
 
   let out = "";
   let i = 0;
@@ -964,7 +968,7 @@ function tokenizeGrammarLine(line, isLhs) {
         i++;
         continue;
       }
-      out += `<span class="t">${line.slice(i + 1, end)}</span>`;
+      out += `<emu-t>${line.slice(i + 1, end)}</emu-t>`;
       i = end + 1;
       continue;
     }
@@ -975,28 +979,51 @@ function tokenizeGrammarLine(line, isLhs) {
         i++;
         continue;
       }
-      out += `<span class="p">[${line.slice(i + 1, end)}]</span>`;
+      // Free-standing parameter/constraint list (no preceding NT). Still wrap
+      // in <emu-mods> so CSS selectors match tc39's structure.
+      out += `<emu-mods><emu-params>[${
+        line.slice(i + 1, end)
+      }]</emu-params></emu-mods>`;
       i = end + 1;
       continue;
     }
     if (ch === ":") {
       let j = i;
       while (j < line.length && line[j] === ":") j++;
-      out += `<span class="geq">${line.slice(i, j)}</span>`;
+      out += `<emu-geq>${line.slice(i, j)}</emu-geq>`;
       i = j;
       continue;
     }
     if (/[A-Z]/.test(ch)) {
       let j = i + 1;
       while (j < line.length && /[A-Za-z0-9_]/.test(line[j])) j++;
-      const cls = lhsClaimed ? "nt" : "nt lhs";
-      out += `<span class="${cls}">${line.slice(i, j)}</span>`;
+      const ntName = line.slice(i, j);
+      // Look ahead for modifiers flush against the NT (no whitespace gap):
+      // [params] and/or ? * +. Multiple may chain (e.g. `Foo[+In]?`).
+      let mods = "";
+      while (j < line.length) {
+        const c2 = line[j];
+        if (c2 === "?" || c2 === "*" || c2 === "+") {
+          mods += `<emu-opt>${c2}</emu-opt>`;
+          j++;
+        } else if (c2 === "[") {
+          const end = line.indexOf("]", j + 1);
+          if (end === -1) break;
+          mods += `<emu-params>[${line.slice(j + 1, end)}]</emu-params>`;
+          j = end + 1;
+        } else {
+          break;
+        }
+      }
+      const inner = mods ? `${ntName}<emu-mods>${mods}</emu-mods>` : ntName;
+      const cls = lhsClaimed ? "" : ' class="lhs"';
+      out += `<emu-nt${cls}>${inner}</emu-nt>`;
       lhsClaimed = true;
       i = j;
       continue;
     }
     if (ch === "?" || ch === "*" || ch === "+") {
-      out += `<span class="mod">${ch}</span>`;
+      out += `<emu-mods><emu-opt>${ch}</emu-opt></emu-mods>`;
       i++;
       continue;
     }
@@ -1004,7 +1031,7 @@ function tokenizeGrammarLine(line, isLhs) {
       line.slice(i, i + 6) === "one of" &&
       (i + 6 === line.length || !/[A-Za-z0-9_]/.test(line[i + 6]))
     ) {
-      out += '<span class="oneof">one of</span>';
+      out += "<emu-oneof>one of</emu-oneof>";
       i += 6;
       continue;
     }
@@ -1014,22 +1041,89 @@ function tokenizeGrammarLine(line, isLhs) {
   return out;
 }
 
-// Tokenize a grammar block (one or more productions, blank-line separated).
-// The first non-blank line after each blank is treated as a new LHS line so
-// the nonterminal name gets the .lhs class.
-function tokenizeGrammarBlock(text) {
-  const out = [];
-  let expectLhs = true;
-  for (const line of text.split("\n")) {
+// Wrap one production chunk (a blank-line-delimited slice of the grammar
+// body) in <emu-production>: the first line carries LHS + geq + an optional
+// inline first RHS or trailing "one of"; each subsequent non-comment line is
+// its own <emu-rhs>. Indentation/newlines are preserved as raw whitespace
+// so the block keeps its visual shape when display-rendered with line breaks.
+function tokenizeGrammarProduction(chunk) {
+  const lines = chunk.split("\n");
+  let body = "";
+  let isFirst = true;
+  for (const line of lines) {
     if (!line.trim()) {
-      out.push(line);
-      expectLhs = true;
+      body += "\n";
       continue;
     }
-    out.push(tokenizeGrammarLine(line, expectLhs));
-    expectLhs = false;
+    if (isFirst) {
+      const tokenized = tokenizeGrammarLine(line, true);
+      // Split the tokenized first line at the </emu-geq> closing tag so
+      // anything after it can be wrapped in <emu-rhs> (or stand alone if it's
+      // an <emu-oneof>).
+      const geqClose = "</emu-geq>";
+      const cut = tokenized.indexOf(geqClose);
+      if (cut === -1) {
+        body += tokenized;
+      } else {
+        const head = tokenized.slice(0, cut + geqClose.length);
+        let tail = tokenized.slice(cut + geqClose.length);
+        const tailWs = tail.match(/^\s*/)[0];
+        tail = tail.slice(tailWs.length);
+        body += head + tailWs;
+        if (tail.startsWith("<emu-oneof>")) {
+          const oneofClose = "</emu-oneof>";
+          const oc = tail.indexOf(oneofClose);
+          if (oc !== -1) {
+            const oneofChunk = tail.slice(0, oc + oneofClose.length);
+            let rest = tail.slice(oc + oneofClose.length);
+            const restWs = rest.match(/^\s*/)[0];
+            rest = rest.slice(restWs.length);
+            body += oneofChunk + restWs;
+            if (rest) body += `<emu-rhs>${rest}</emu-rhs>`;
+          } else {
+            body += tail;
+          }
+        } else if (tail) {
+          body += `<emu-rhs>${tail}</emu-rhs>`;
+        }
+      }
+      isFirst = false;
+    } else if (/^\s*\/\//.test(line)) {
+      // Preserve in-grammar comments as a span; not a separate RHS.
+      body += `<span class="cm">${line}</span>`;
+    } else {
+      const leadingWs = line.match(/^\s*/)[0];
+      const rest = line.slice(leadingWs.length);
+      body += leadingWs +
+        `<emu-rhs>${tokenizeGrammarLine(rest, false)}</emu-rhs>`;
+    }
   }
-  return out.join("\n");
+  return `<emu-production>${body}</emu-production>`;
+}
+
+// Tokenize a grammar block (one or more productions, blank-line separated).
+// Each non-empty chunk is wrapped in <emu-production>; blank-line separators
+// between chunks are preserved as raw whitespace.
+function tokenizeGrammarBlock(text) {
+  const parts = text.split(/(\n[ \t]*\n)/);
+  let out = "";
+  for (const part of parts) {
+    if (/^\n[ \t]*\n$/.test(part)) {
+      out += part;
+    } else if (part.trim()) {
+      out += tokenizeGrammarProduction(part);
+    } else {
+      out += part;
+    }
+  }
+  return out;
+}
+
+// Tokenize a one-line inline grammar snippet (the form that appears
+// mid-paragraph, e.g. "MV of <emu-grammar>DecimalDigit :: `0`</emu-grammar>").
+// No <emu-production>/<emu-rhs> wrapping — tc39's inline form is flat.
+function tokenizeGrammarInline(text) {
+  return tokenizeGrammarLine(text, true);
 }
 
 // Render <emu-grammar> blocks with token-aware tokenization so non-terminals,
@@ -1037,7 +1131,8 @@ function tokenizeGrammarBlock(text) {
 // styleable via CSS (see app/ecma-spec.css). The same tag is used both inline
 // (mid-paragraph "MV of <emu-grammar>DecimalDigit :: `0`</emu-grammar>") and
 // as a block-level definition; tell them apart by looking at what precedes
-// the opening tag — only-whitespace → <pre>, otherwise inline <code>.
+// the opening tag — only-whitespace → block, otherwise inline. Block-form
+// gets type="definition" to match tc39's serialization.
 function applyGrammarSubst(html) {
   return html.replace(
     /<emu-grammar([^>]*?)>([\s\S]*?)<\/emu-grammar>/g,
@@ -1046,13 +1141,13 @@ function applyGrammarSubst(html) {
       const isBlock = source.slice(lineStart, offset).trim() === "";
       const trimmed = inner.replace(/^\s*\n/, "").replace(/\n\s*$/, "");
       if (isBlock) {
-        return `<pre class="emu-grammar">${
+        return `<emu-grammar type="definition">${
           tokenizeGrammarBlock(dedent(trimmed))
-        }</pre>`;
+        }</emu-grammar>`;
       }
-      return `<code class="emu-grammar">${
-        tokenizeGrammarBlock(trimmed.trim())
-      }</code>`;
+      return `<emu-grammar>${
+        tokenizeGrammarInline(trimmed.trim())
+      }</emu-grammar>`;
     },
   );
 }

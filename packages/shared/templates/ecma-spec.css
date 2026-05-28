@@ -140,12 +140,16 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   -webkit-box-decoration-break: clone;
 }
 
-/* Grammar pre uses the same panel surface as notes + inline code. The block
-   inherits the body (prop) font so non-terminal names, `::`, "one of", "but
-   not" etc. read as prose like tc39.es/ecma262 — only the bits that tc39
-   renders monospace (terminals, `?`/`*`/`+` modifiers, `[Yield]`-style
-   parameter lists) are switched back to mono below via .t/.mod/.p. */
-.ecma-spec pre.emu-grammar {
+/* Block-form grammar (a numbered/named production definition) uses the same
+   panel surface as notes + inline code. It inherits the body (prop) font so
+   non-terminal names, `::`, "one of", "but not" etc. read as prose like
+   tc39.es/ecma262 — only the bits that tc39 renders monospace (terminals,
+   `?`/`*`/`+` modifiers, `[Yield]`-style parameter lists) are switched back
+   to mono below via emu-t/emu-opt/emu-params. The structural elements
+   (emu-production, emu-rhs) supply line-breaks via display:block so we don't
+   need white-space: pre here. */
+.ecma-spec emu-grammar[type="definition"] {
+  display: block;
   background: var(--ecma-panel-bg);
   border: 1px solid var(--ecma-panel-border);
   border-radius: var(--ecma-panel-radius);
@@ -155,6 +159,23 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-family: inherit;
   font-size: 0.9em;
   line-height: 1.5;
+}
+/* Inline grammar (mid-paragraph) — flat, no panel chrome. */
+.ecma-spec emu-grammar:not([type="definition"]) {
+  font-family: inherit;
+}
+/* Production layout: LHS, geq, and each RHS on their own line. emu-rhs gets
+   a hanging indent so alternatives sit visually under the production head. */
+.ecma-spec emu-production {
+  display: block;
+}
+.ecma-spec emu-production > emu-rhs {
+  display: block;
+  padding-inline-start: 2em;
+}
+.ecma-spec emu-oneof {
+  font-style: italic;
+  opacity: 0.7;
 }
 
 /* Notes get a "Note" label and the shared panel surface. */
@@ -216,48 +237,43 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-style: normal;
 }
 
-/* Grammar tokens, emitted by build-chapters.mjs's tokenizeGrammarBlock as
-   <span class="nt|t|geq|p|mod|desc|oneof|cm"> inside <pre|code class="emu-grammar">.
-   Uses opacity (not fixed colors) so it works in light AND dark Nextra themes. */
-.ecma-spec .emu-grammar .nt {
-  font-style: italic;
-}
-.ecma-spec .emu-grammar .nt.lhs {
+/* Grammar tokens, emitted by build-chapters.mjs's tokenizeGrammarLine as
+   <emu-nt|emu-t|emu-geq|emu-mods|emu-params|emu-opt|emu-gprose|emu-oneof>
+   inside <emu-grammar>. Uses opacity (not fixed colors) so it works in light
+   AND dark Nextra themes. emu-nt is already italicised by the inline rule
+   higher in the file; here we just add the LHS bolding. */
+.ecma-spec emu-grammar emu-nt.lhs {
   font-weight: 600;
 }
-.ecma-spec .emu-grammar .t {
+.ecma-spec emu-grammar emu-t {
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   font-weight: 600;
 }
-.ecma-spec .emu-grammar .geq {
+.ecma-spec emu-grammar emu-geq {
   opacity: 0.55;
   padding: 0 0.15em;
 }
-.ecma-spec .emu-grammar .p {
+.ecma-spec emu-grammar emu-params {
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   font-size: 0.85em;
   opacity: 0.75;
 }
-.ecma-spec .emu-grammar .mod {
+.ecma-spec emu-grammar emu-opt {
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
   vertical-align: super;
   font-size: 0.75em;
 }
-.ecma-spec .emu-grammar .desc {
+.ecma-spec emu-grammar emu-gprose {
   font-style: italic;
   opacity: 0.8;
 }
-.ecma-spec .emu-grammar .oneof {
-  font-style: italic;
-  opacity: 0.7;
-}
-.ecma-spec .emu-grammar .cm {
+.ecma-spec emu-grammar .cm {
   opacity: 0.5;
   font-style: italic;
 }
