@@ -240,6 +240,12 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
 .ecma-spec emu-const {
   font-variant: small-caps;
 }
+/* Spec values (true/false/null/undefined/error names from `*foo*`) — bold,
+   matches the typographic weight ecmarkup gives <emu-val>. */
+.ecma-spec emu-val {
+  font-weight: 600;
+  color: var(--ecma-text-strong);
+}
 .ecma-spec emu-intrinsic {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.92em;
@@ -278,7 +284,8 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   opacity: 0.55;
   padding: 0 0.15em;
 }
-.ecma-spec emu-grammar emu-params {
+.ecma-spec emu-grammar emu-params,
+.ecma-spec emu-grammar emu-constraints {
   font-family:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;

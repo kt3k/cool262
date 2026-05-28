@@ -948,7 +948,8 @@ function applyAlgSubst(html) {
 //   • // ...           → <span class="cm">…</span>           (ecmarkup pragma)
 //   • &gt; rest of line → <emu-gprose>…</emu-gprose>          (prose description)
 //   • `foo`            → <emu-t>foo</emu-t>                  (terminal)
-//   • [Yield, ?Await]  → <emu-mods><emu-params>[…]</emu-params></emu-mods>
+//   • [+Foo] [lookahead …] (free-standing) → <emu-constraints>[…]</emu-constraints>
+//   • Foo[Yield, ?Await] (flush against NT) → <emu-nt>…<emu-mods><emu-params>[…]</emu-params></emu-mods></emu-nt>
 //   • :, ::, :::, :::: → <emu-geq>…</emu-geq>                (production arrow)
 //   • [A-Z]\w*         → <emu-nt>…</emu-nt>                  (nonterminal)
 //   • ? * +            → <emu-mods><emu-opt>…</emu-opt></emu-mods>
@@ -990,11 +991,11 @@ function tokenizeGrammarLine(line, isLhs) {
         i++;
         continue;
       }
-      // Free-standing parameter/constraint list (no preceding NT). Still wrap
-      // in <emu-mods> so CSS selectors match tc39's structure.
-      out += `<emu-mods><emu-params>[${
-        line.slice(i + 1, end)
-      }]</emu-params></emu-mods>`;
+      // Free-standing `[…]` (no preceding NT) is an RHS-level constraint —
+      // `[+Foo]`/`[~Foo]` alternative guards, `[lookahead …]`,
+      // `[no LineTerminator here]`. tc39 wraps these in <emu-constraints>
+      // rather than the <emu-mods><emu-params> used for NT parameter suffixes.
+      out += `<emu-constraints>[${line.slice(i + 1, end)}]</emu-constraints>`;
       i = end + 1;
       continue;
     }
@@ -1172,7 +1173,7 @@ function applyGrammarSubst(html) {
 //   |Foo|     → <emu-nt>Foo</emu-nt>          (nonterminal, italic via CSS)
 //   ~enum~    → <emu-const>enum</emu-const>   (small-caps via CSS)
 //   %Foo.Bar% → <code class="emu-intrinsic">%Foo.Bar%</code>
-//   *foo*     → <b>foo</b>
+//   *foo*     → <emu-val>foo</emu-val>     (spec value: `*true*`, `*null*`, …)
 //   _x_       → <var>x</var>
 //
 // We tokenize the HTML and skip text inside <pre>/<code>/<emu-grammar>/<emu-not-ref>
@@ -1205,7 +1206,10 @@ function transformInlineText(text) {
     /%([A-Za-z][A-Za-z0-9.@]*)%/g,
     "<emu-intrinsic>%$1%</emu-intrinsic>",
   );
-  out = out.replace(/\*([^*\s][^*]*?[^*\s]|[^*\s])\*/g, "<b>$1</b>");
+  out = out.replace(
+    /\*([^*\s][^*]*?[^*\s]|[^*\s])\*/g,
+    "<emu-val>$1</emu-val>",
+  );
   out = out.replace(
     /(?<![A-Za-z0-9_])_([A-Za-z][A-Za-z0-9_]*)_(?![A-Za-z0-9_])/g,
     "<var>$1</var>",
