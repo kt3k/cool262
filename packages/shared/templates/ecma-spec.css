@@ -146,11 +146,13 @@ main[data-pagefind-body] :is(h1, h2, h3, h4) {
 
 /* Literal headings inside the clause body (e.g. the spec source's
    <h2>Syntax</h2>, <h2>Supplemental Syntax</h2>) are in-body labels, not
-   numbered section headings (those come from MDX). Without this they'd inherit
-   the section h2/h3 rhythm above and render larger than their own — often
-   deeper — parent section heading. Render them as small sub-labels instead.
-   The main[data-pagefind-body] prefix lifts specificity above those rules. */
-main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
+   numbered section headings (those come from MDX as direct h1 children of
+   <emu-clause>). Render them as small sub-labels. Scoped to headings inside
+   the Sec-wrapper <div> so it doesn't swallow the section heading itself. */
+main[data-pagefind-body]
+  .ecma-spec
+  :is(emu-clause, emu-intro, emu-annex)
+  > div :is(h1, h2, h3, h4, h5, h6) {
   font-size: 1.1em;
   font-weight: 600;
   margin-top: 1.5em;
