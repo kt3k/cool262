@@ -834,7 +834,14 @@ function parseAlg(inner) {
   const root = buildAlgTree(inner);
   if (!root) return null;
   // Serialize: group consecutive same-type siblings into a single <ol>/<ul>.
-  // A step's [id] becomes the <li> anchor so #step-… links resolve.
+  // A step's [id] becomes the <li> anchor so #step-… links resolve. Steps
+  // that begin with the word "Return" or "Throw" are tagged class="exit"
+  // (matching tc39.es/ecma262) so they can be visually flagged as early
+  // exits. The \b word boundary keeps "Returns"/"Throws" from matching.
+  function attrsFor(n) {
+    const cls = /^(Return|Throw)\b/.test(n.text) ? ' class="exit"' : "";
+    return (n.id ? ` id="${n.id}"` : "") + cls;
+  }
   function serialize(nodes) {
     let html = "";
     let k = 0;
@@ -846,9 +853,7 @@ function parseAlg(inner) {
         k++;
       }
       html += `<${t}>` + group.map((n) =>
-        `<li${n.id ? ` id="${n.id}"` : ""}>${n.text}${
-          serialize(n.children)
-        }</li>`
+        `<li${attrsFor(n)}>${n.text}${serialize(n.children)}</li>`
       ).join("") + `</${t}>`;
     }
     return html;

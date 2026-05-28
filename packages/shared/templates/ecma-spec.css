@@ -278,6 +278,20 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-style: italic;
 }
 
+/* Algorithm steps that begin with "Return" or "Throw" are marked
+   `li.exit` by build-chapters.mjs (mirroring tc39.es/ecma262). Surface them
+   visually only when the page opts in via `html.show-early-exits`, matching
+   tc39's behaviour so the default reading mode stays unadorned. */
+html.show-early-exits
+  .ecma-spec
+  emu-alg li.exit:not(.ecma-spec emu-alg > ol > li:last-child)::before {
+  content: "↩";
+  position: absolute;
+  margin-inline-start: -1.4em;
+  opacity: 0.5;
+  font-size: 0.85em;
+}
+
 /* ECMA-262 algorithm step numbering cycles decimal → lower-alpha → lower-roman
    with depth, instead of the browser default of decimal at every level. */
 .ecma-spec emu-alg ol {
