@@ -69,7 +69,18 @@ for (let i = 0; i < starts.length; i++) {
   // exceptions (e.g. Annex B, web-compat features).
   const backMatter = /\bback-matter\b/.test(s.attrs);
   const normative = /\bnormative\b/.test(s.attrs);
-  chapters.push({ id, title, inner, kind: s.tag, backMatter, normative });
+  // offset/endOffset are kept so post-processing can resolve which chapter a
+  // given src position (e.g. a grammar production definition) falls in.
+  chapters.push({
+    id,
+    title,
+    inner,
+    kind: s.tag,
+    backMatter,
+    normative,
+    offset: s.offset,
+    endOffset: e,
+  });
 }
 
 // Locate the first nested section opener (<emu-clause or <emu-annex) at or
@@ -679,6 +690,10 @@ function applyXrefSubst(html) {
 // the real grammar). Each block may pack multiple productions separated by
 // blank lines; split them so a prodref resolves to just its own production.
 const grammarDefs = new Map();
+// LHS name → src offset of the canonical (longest) definition. Used after
+// chapter slugs are resolved to build the NT → {slug, prodId} link map for
+// hyperlinking <emu-nt>Foo</emu-nt> tags in prose and grammar RHSes.
+const grammarDefSrcOffset = new Map();
 {
   const grammarRe = /<emu-grammar([^>]*?)>([\s\S]*?)<\/emu-grammar>/g;
   let gm;
@@ -715,9 +730,27 @@ const grammarDefs = new Map();
       const existing = grammarDefs.get(lhs);
       if (!existing || dedented.length > existing.length) {
         grammarDefs.set(lhs, dedented);
+        grammarDefSrcOffset.set(lhs, gm.index);
       }
     }
   }
+}
+
+// Nonterminal name → { slug, prodId } for hyperlinking <emu-nt>Foo</emu-nt>
+// to its production definition (anchor `prod-Foo` on the <emu-production>).
+// Mirrors tc39.es/ecma262's behaviour where every NT reference in prose or
+// in a grammar RHS clicks through to where it's defined. We pick the chapter
+// from the src offset of the canonical (longest) definition recorded above
+// (so this has to sit after grammarDefSrcOffset is populated AND after the
+// `built` map gives us pageSlug for each chapter id).
+const ntToProd = new Map();
+for (const [lhs, srcOffset] of grammarDefSrcOffset) {
+  const chap = chapters.find((c) =>
+    c.offset <= srcOffset && srcOffset < c.endOffset
+  );
+  if (!chap) continue;
+  const b = built.find((x) => x.id === chap.id);
+  if (b) ntToProd.set(lhs, { slug: b.pageSlug, prodId: `prod-${lhs}` });
 }
 
 // Replace empty <emu-prodref name="X"></emu-prodref> with its production text
@@ -1025,7 +1058,13 @@ function tokenizeGrammarLine(line, isLhs) {
           break;
         }
       }
-      const inner = mods ? `${ntName}<emu-mods>${mods}</emu-mods>` : ntName;
+      // Hyperlink the NT name to its production definition when known
+      // (`prod-Foo` anchor on the <emu-production>), matching tc39.es.
+      const link = ntToProd.get(ntName);
+      const name = link
+        ? `<a href="${pathFor(link.slug)}#${link.prodId}">${ntName}</a>`
+        : ntName;
+      const inner = mods ? `${name}<emu-mods>${mods}</emu-mods>` : name;
       const cls = lhsClaimed ? "" : ' class="lhs"';
       out += `<emu-nt${cls}>${inner}</emu-nt>`;
       lhsClaimed = true;
@@ -1058,6 +1097,11 @@ function tokenizeGrammarLine(line, isLhs) {
 // so the block keeps its visual shape when display-rendered with line breaks.
 function tokenizeGrammarProduction(chunk) {
   const lines = chunk.split("\n");
+  // Pull the LHS name off the first non-blank line so the production gets
+  // id="prod-Foo" name="Foo", matching tc39's hyperlink target shape.
+  const firstNonEmpty = lines.find((l) => l.trim() !== "") || "";
+  const lhsMatch = firstNonEmpty.match(/^\s*([A-Za-z][A-Za-z0-9_]*)/);
+  const lhs = lhsMatch ? lhsMatch[1] : null;
   let body = "";
   let isFirst = true;
   for (const line of lines) {
@@ -1108,7 +1152,8 @@ function tokenizeGrammarProduction(chunk) {
         `<emu-rhs>${tokenizeGrammarLine(rest, false)}</emu-rhs>`;
     }
   }
-  return `<emu-production>${body}</emu-production>`;
+  const prodAttrs = lhs ? ` id="prod-${lhs}" name="${lhs}"` : "";
+  return `<emu-production${prodAttrs}>${body}</emu-production>`;
 }
 
 // Tokenize a grammar block (one or more productions, blank-line separated).
@@ -1195,9 +1240,24 @@ function transformInlineText(text) {
     code.push(c);
     return `\x00${code.length - 1}\x00`;
   });
+  // |Foo|, |Foo[X]|, |Foo?|, |Foo[X]?| → <emu-nt>…</emu-nt>; the bare NT name
+  // (Foo) is the link target, so split it from any [params] / ? suffix and
+  // wrap just that part in <a href="…#prod-Foo"> when we know where Foo is
+  // defined (mirrors tc39.es). Suffix becomes the inline emu-mods structure.
   out = out.replace(
-    /\|([A-Za-z][A-Za-z0-9_]*(?:\[[^\]]*\])?\??)\|/g,
-    "<emu-nt>$1</emu-nt>",
+    /\|([A-Za-z][A-Za-z0-9_]*)(\[[^\]]*\])?(\?)?\|/g,
+    (_, name, params, opt) => {
+      const link = ntToProd.get(name);
+      const head = link
+        ? `<a href="${pathFor(link.slug)}#${link.prodId}">${name}</a>`
+        : name;
+      let mods = "";
+      if (params) mods += `<emu-params>${params}</emu-params>`;
+      if (opt) mods += `<emu-opt>${opt}</emu-opt>`;
+      return `<emu-nt>${head}${
+        mods ? `<emu-mods>${mods}</emu-mods>` : ""
+      }</emu-nt>`;
+    },
   );
   out = out.replace(/~([^\s~][^~]*?)~/g, "<emu-const>$1</emu-const>");
   out = out.replace(
