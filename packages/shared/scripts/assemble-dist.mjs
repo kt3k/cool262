@@ -97,7 +97,12 @@ const articleCss =
     p { margin: 0 0 1.6rem; }
     h2 { font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-weight: 700; font-size: 2.6rem; line-height: 1.25; letter-spacing: -0.01em; color: #15171a; margin: 3.4rem 0 1rem; }
     code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.86em; background: #f6f6f6; padding: 0.1em 0.35em; border-radius: 4px; }
-    .flow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.4rem; line-height: 1.75; background: #f6f6f6; border-radius: 6px; padding: 1.2rem 1.4rem; overflow-x: auto; color: #444; margin: 0 0 2.4rem; }
+    .flow { list-style: none; padding: 0; margin: 0 0 1.2rem; }
+    .flow li { position: relative; background: #f6f6f6; border: 1px solid #e8e8e8; border-radius: 8px; padding: 1.2rem 1.6rem; }
+    .flow li strong { display: block; color: #15171a; font-weight: 700; font-size: 1.7rem; }
+    .flow li span { display: block; color: #6b6b6b; font-size: 1.4rem; margin-top: 0.2rem; }
+    .flow li + li { margin-top: 3.4rem; }
+    .flow li:not(:last-child)::after { content: "\\2193"; position: absolute; left: 50%; bottom: -2.9rem; transform: translateX(-50%); color: #bbb; font-size: 1.8rem; line-height: 1; }
     strong { font-weight: 600; color: #15171a; }
     a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.28); text-underline-offset: 3px; }
     a:hover { text-decoration-color: currentColor; }
@@ -152,24 +157,23 @@ const writeArticle = (slug, title, main) => {
 
 writeArticle(
   "about",
-  "About — ECMA-262 Restyled",
+  "About | ECMA-262 Restyled",
   `  <h1>About</h1>
-  <p><strong>ECMA-262 Restyled</strong> is an unofficial, reader-focused rendering of the ECMAScript® Language Specification. It mirrors the source from the official <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> repository and restyles it for readability; it is <strong>not normative</strong> — for the authoritative text, see the official specification at <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. The source for this site is at <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>`,
+  <p><strong>ECMA-262 Restyled</strong> is an unofficial, reader-focused rendering of the ECMAScript® Language Specification. It mirrors the source from the official <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> repository and restyles it for readability; it is <strong>not normative</strong>. For the authoritative text, see the official specification at <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. The source for this site is at <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>
+  <p>See <a href="../pipeline/">how this site is built</a>.</p>`,
 );
 
 writeArticle(
   "pipeline",
-  "How it's built — ECMA-262 Restyled",
+  "How it's built | ECMA-262 Restyled",
   `  <h1>How this site is built</h1>
-  <p><strong>ECMA-262 Restyled</strong> is generated automatically from the official specification — none of the text is edited by hand. Here is the whole pipeline.</p>
-  <pre class="flow">tc39/ecma262
-   │   spec.html  (vendored, one per edition)
-   ▼
-build script  ──▶  one page per chapter (MDX / JSX)
-   ▼
-Next.js + Nextra  ──▶  restyled pages + Pagefind search
-   ▼
-one static site  (all editions)</pre>
+  <p><strong>ECMA-262 Restyled</strong> is generated automatically from the official specification, with none of the text edited by hand. Here is the whole pipeline.</p>
+  <ol class="flow">
+    <li><strong>tc39/ecma262</strong><span>Official source, vendored as spec.html (one per edition)</span></li>
+    <li><strong>Build script</strong><span>Parses spec.html into one page per chapter (MDX / JSX)</span></li>
+    <li><strong>Next.js + Nextra</strong><span>Restyled pages plus a Pagefind search index</span></li>
+    <li><strong>Static site</strong><span>All editions assembled into one deploy</span></li>
+  </ol>
   <h2>1 · Vendor the source</h2>
   <p>The official source from <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> is vendored as a single <code>spec.html</code> per edition. The draft tracks the upstream repository as a git submodule; ES2024, ES2025, and ES2026 are pinned snapshots.</p>
   <h2>2 · Transform</h2>
