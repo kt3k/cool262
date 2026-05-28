@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
+import hljs from "highlight.js";
 
 const { values } = parseArgs({
   options: {
@@ -671,6 +672,31 @@ function pathFor(slug) {
 // and inject an <a href="/<slug>#<id>">…</a> inside. Anchors `id="<id>"` are
 // emitted on chapter/section headings via the surrounding <emu-clause id=…>
 // (see renderMdxTree below) so the targets exist.
+// Run highlight.js over <pre><code class="LANG">…</code></pre> blocks so
+// keywords/strings/built-ins pick up the same .hljs-* spans tc39.es uses.
+// The decoder undoes the basic entity escapes that the spec source uses
+// inside code blocks; hljs.highlight then re-emits properly escaped HTML.
+const codeEntityRe = /&(amp|lt|gt|quot|#x27|apos);/g;
+const codeEntityMap = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  "#x27": "'",
+  apos: "'",
+};
+function applyHljsSubst(html) {
+  return html.replace(
+    /<pre><code class="([A-Za-z0-9_-]+)">([\s\S]*?)<\/code><\/pre>/g,
+    (full, lang, code) => {
+      if (!hljs.getLanguage(lang)) return full;
+      const raw = code.replace(codeEntityRe, (_, e) => codeEntityMap[e] ?? _);
+      const { value } = hljs.highlight(raw, { language: lang });
+      return `<pre><code class="hljs ${lang}">${value}</code></pre>`;
+    },
+  );
+}
+
 function applyXrefSubst(html) {
   // Single pass — empty inner (`<emu-xref></emu-xref>`) gets the resolved
   // number/label injected as the <a> text; non-empty inner is used verbatim.
@@ -1373,7 +1399,11 @@ built.forEach((c) => {
       applyXrefSubst(
         applyProdrefSubst(
           applyEqnInlineSubst(
-            applyGrammarSubst(applyAlgSubst(applyFloatNum(applyNoteNum(v)))),
+            applyGrammarSubst(
+              applyAlgSubst(
+                applyHljsSubst(applyFloatNum(applyNoteNum(v))),
+              ),
+            ),
           ),
         ),
       ),

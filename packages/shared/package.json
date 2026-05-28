@@ -7,9 +7,12 @@
     "./components/spec-layout": "./components/spec-layout.jsx"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
     "nextra": "*",
-    "nextra-theme-docs": "*"
+    "nextra-theme-docs": "*",
+    "react": "*",
+    "react-dom": "*"
+  },
+  "dependencies": {
+    "highlight.js": "^11.11.1"
   }
 }

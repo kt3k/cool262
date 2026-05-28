@@ -170,6 +170,21 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   text-decoration-color: currentColor;
 }
 
+/* highlight.js github theme is light-only. In dark mode (Nextra adds .dark
+   on <html>), null out the hljs background so it sits on the panel surface
+   rather than punching a bright-white hole, and pull the text colour up. */
+html.dark .ecma-spec pre code.hljs {
+  background: transparent;
+  color: inherit;
+}
+html.dark .ecma-spec .hljs-keyword,
+html.dark .ecma-spec .hljs-built_in {
+  color: #c678dd;
+}
+html.dark .ecma-spec .hljs-string {
+  color: #98c379;
+}
+
 /* Inline code (anything <code> not inside a <pre>) renders as a chip. The
    box-decoration-break: clone makes the chip wrap cleanly across lines. */
 .ecma-spec :not(pre) > code {
