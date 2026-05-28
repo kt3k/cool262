@@ -84,6 +84,7 @@ main[data-pagefind-body] :is(h1, h2, h3, h4) {
    utility classes (0,1,0) and rides on this CSS importing after the theme. */
 main[data-pagefind-body] h1 {
   font-size: 2.1em;
+  margin-bottom: 0.4em;
 }
 main[data-pagefind-body] h2 {
   font-size: 1.75em;
