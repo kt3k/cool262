@@ -140,7 +140,11 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   -webkit-box-decoration-break: clone;
 }
 
-/* Grammar pre uses the same panel surface as notes + inline code. */
+/* Grammar pre uses the same panel surface as notes + inline code. The block
+   inherits the body (prop) font so non-terminal names, `::`, "one of", "but
+   not" etc. read as prose like tc39.es/ecma262 — only the bits that tc39
+   renders monospace (terminals, `?`/`*`/`+` modifiers, `[Yield]`-style
+   parameter lists) are switched back to mono below via .t/.mod/.p. */
 .ecma-spec pre.emu-grammar {
   background: var(--ecma-panel-bg);
   border: 1px solid var(--ecma-panel-border);
@@ -148,6 +152,7 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   padding: 0.75em 1em;
   margin-block: 1em;
   overflow-x: auto;
+  font-family: inherit;
   font-size: 0.9em;
   line-height: 1.5;
 }
@@ -221,6 +226,9 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 600;
 }
 .ecma-spec .emu-grammar .t {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   font-weight: 600;
 }
 .ecma-spec .emu-grammar .geq {
@@ -228,10 +236,16 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   padding: 0 0.15em;
 }
 .ecma-spec .emu-grammar .p {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   font-size: 0.85em;
   opacity: 0.75;
 }
 .ecma-spec .emu-grammar .mod {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
   vertical-align: super;
   font-size: 0.75em;
 }
