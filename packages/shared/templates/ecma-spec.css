@@ -107,26 +107,38 @@ main[data-pagefind-body] :is(h1, h2, h3, h4) {
   letter-spacing: -0.011em;
 }
 
-/* Asymmetric heading rhythm: big lead-in before H2/H3/H4, tight lead-out to the
-   following paragraph. Makes section boundaries pop without inflating
-   intra-section spacing. Sizes are em (relative to the 17px body) so the scale
-   tracks the reading size (proposal 3). Specificity (0,1,1) beats Nextra's
-   utility classes (0,1,0) and rides on this CSS importing after the theme. */
-main[data-pagefind-body] h1 {
+/* Asymmetric heading rhythm: big lead-in before each section's H1, tight
+   lead-out to the following paragraph. Makes section boundaries pop without
+   inflating intra-section spacing. Sizes are em (relative to the 17px body)
+   so the scale tracks the reading size. Headings are <h1> at every depth —
+   the visual hierarchy is restored by counting <emu-clause> ancestors, the
+   same scheme tc39.es/ecma262 uses. */
+.ecma-spec emu-clause > h1,
+.ecma-spec emu-intro > h1,
+.ecma-spec emu-annex > h1 {
   font-size: 2.1em;
   margin-bottom: 0.4em;
 }
-main[data-pagefind-body] h2 {
+.ecma-spec emu-clause emu-clause > h1,
+.ecma-spec emu-clause emu-intro > h1,
+.ecma-spec emu-clause emu-annex > h1,
+.ecma-spec emu-intro emu-clause > h1,
+.ecma-spec emu-annex emu-clause > h1 {
   font-size: 1.75em;
   margin-top: 3.5em;
   margin-bottom: 0.4em;
 }
-main[data-pagefind-body] h3 {
+.ecma-spec emu-clause emu-clause emu-clause > h1,
+.ecma-spec emu-clause emu-clause emu-annex > h1,
+.ecma-spec emu-clause emu-annex emu-clause > h1,
+.ecma-spec emu-annex emu-clause emu-clause > h1 {
   font-size: 1.4em;
   margin-top: 2.5em;
   margin-bottom: 0.4em;
 }
-main[data-pagefind-body] h4 {
+.ecma-spec emu-clause emu-clause emu-clause emu-clause > h1,
+.ecma-spec emu-clause emu-clause emu-clause emu-annex > h1,
+.ecma-spec emu-clause emu-clause emu-annex emu-clause > h1 {
   font-size: 1.18em;
   margin-top: 2em;
   margin-bottom: 0.4em;

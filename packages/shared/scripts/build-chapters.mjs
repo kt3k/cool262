@@ -490,15 +490,17 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
     const childNum = chapterPrefix === ""
       ? childSecPath
       : `${chapterPrefix}.${childSecPath}`;
-    const hashes = "#".repeat(Math.min(depth, 6));
     const idAttr = child.id ? ` id="${child.id}"` : "";
     // Run inline ecmarkup markup on the heading text (it still contains
     // `_x_`, `*foo*`, ~enum~, etc.), and let MDX parse the resulting
     // <var>/<b>/<emu-…> tags inline.
+    // Every section heading is emitted as <h1> (matching tc39.es/ecma262);
+    // depth-based sizing is restored by CSS rules keyed on emu-clause nesting
+    // depth, not by hN tag.
     lines.push(`<emu-clause${idAttr}>`);
     lines.push("");
     lines.push(
-      `${hashes} <span className="secnum">${childNum}</span> ${
+      `# <span className="secnum">${childNum}</span> ${
         transformInlineText(child.title)
       }`,
     );
