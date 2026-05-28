@@ -8,6 +8,29 @@
   display: none;
 }
 
+/* Each section is wrapped in <emu-clause id="sec-…"> (and the chapter root
+   in <emu-clause|emu-intro|emu-annex>) so the DOM mirrors tc39.es/ecma262.
+   These custom elements have no default styling, so make them block-level
+   containers; the inner <h*> and <Sec> divs do all the visual work. */
+emu-clause,
+emu-intro,
+emu-annex {
+  display: block;
+}
+
+/* The section number prefix in headings (`<span class="secnum">5.1.2</span>`).
+   A tabular monospace gives the digits a steady column even across
+   variable-width headings, with a touch of opacity so the title text leads. */
+.secnum {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-feature-settings: "tnum";
+  opacity: 0.65;
+  padding-inline-end: 0.4em;
+  font-weight: inherit;
+}
+
 /* One panel surface — semi-transparent neutral bg + 1px border + radius —
    shared by emu-note callouts, grammar <pre>, and inline <code> chips, so
    they feel like one design system rather than three accidents. Borrowed

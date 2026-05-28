@@ -461,7 +461,11 @@ function decodeEntities(s) {
     .replace(/&amp;/g, "&"); // must be last so we don't double-decode
 }
 
-// Emit MDX lines: <Sec id=... /> for the current node, then heading + recurse for each child.
+// Emit MDX lines: <Sec id=... /> for any prelude text, then for each child
+// open an <emu-clause id="sec-…">, emit the heading (with the section number
+// wrapped in <span class="secnum">), recurse, and close. The wrapping
+// matches tc39.es/ecma262's serialisation so CSS rules like
+// `emu-clause > h1`, `emu-clause emu-clause`, and `:target` work the same.
 function renderMdxTree(tree, chapterPrefix, secPath, depth) {
   const lines = [];
   if (tree.pre.trim() !== "") {
@@ -476,22 +480,24 @@ function renderMdxTree(tree, chapterPrefix, secPath, depth) {
       ? childSecPath
       : `${chapterPrefix}.${childSecPath}`;
     const hashes = "#".repeat(Math.min(depth, 6));
-    // Inline anchor before the heading text so #<spec-id> resolves to the
-    // start of the heading after navigation. Use <span>, not <a>: Nextra's
-    // TOC wraps each heading's content in its own <a href="#…">, and a
-    // nested <a> inside that is invalid HTML. Any element with `id` works
-    // as a fragment target.
-    const anchor = child.id ? `<span id="${child.id}" /> ` : "";
-    // Run inline ecmarkup markup on the heading text too (it's stripped to
-    // plain text earlier but still contains `_x_`, `*foo*`, ~enum~, etc.),
-    // and let MDX parse the resulting <var>/<b>/<emu-…> tags inline.
+    const idAttr = child.id ? ` id="${child.id}"` : "";
+    // Run inline ecmarkup markup on the heading text (it still contains
+    // `_x_`, `*foo*`, ~enum~, etc.), and let MDX parse the resulting
+    // <var>/<b>/<emu-…> tags inline.
+    lines.push(`<emu-clause${idAttr}>`);
+    lines.push("");
     lines.push(
-      `${hashes} ${anchor}${childNum} ${transformInlineText(child.title)}`,
+      `${hashes} <span className="secnum">${childNum}</span> ${
+        transformInlineText(child.title)
+      }`,
     );
     lines.push("");
     lines.push(
       ...renderMdxTree(child.tree, chapterPrefix, childSecPath, depth + 1),
     );
+    lines.push("");
+    lines.push("</emu-clause>");
+    lines.push("");
   });
   return lines;
 }
@@ -1269,33 +1275,44 @@ built.forEach((c) => {
   fs.writeFileSync(path.join(LIB_DIR, `${slug}.jsx`), componentSrc);
   totalBytes += componentSrc.length;
 
-  const chapterAnchor = `<span id="${c.id}" /> `;
   const chapterTitleRich = transformInlineText(c.title);
+  const secnum = (text) => `<span className="secnum">${text}</span> `;
   let chapterHeading;
   if (c.kind === "emu-intro") {
-    chapterHeading = `# ${chapterAnchor}${chapterTitleRich}`;
+    chapterHeading = `# ${chapterTitleRich}`;
   } else if (c.kind === "emu-annex") {
     chapterHeading = c.backMatter
-      ? `# ${chapterAnchor}${chapterTitleRich}`
-      : `# ${chapterAnchor}Annex ${chapterNum} (${
+      ? `# ${chapterTitleRich}`
+      : `# ${secnum(`Annex ${chapterNum}`)}(${
         c.normative ? "normative" : "informative"
       }) ${chapterTitleRich}`;
   } else {
-    chapterHeading = `# ${chapterAnchor}${chapterNum} ${chapterTitleRich}`;
+    chapterHeading = `# ${secnum(chapterNum)}${chapterTitleRich}`;
   }
 
   // Wrap the entire chapter body in <div id="spec-container"> so the same CSS
   // hooks that tc39.es/ecma262 exposes (e.g. `#spec-container > emu-clause`,
-  // `#spec-container :target`) work here too. MDX parses markdown inside a
-  // raw <div> as long as the open/close tags are surrounded by blank lines.
+  // `#spec-container :target`) work here too. The chapter itself is wrapped
+  // in <emu-intro|emu-clause|emu-annex> matching its kind, so the
+  // nested-clause structure mirrors tc39's. MDX parses markdown inside raw
+  // HTML wrappers as long as their open/close tags sit on blank-padded lines.
+  const wrapTag = c.kind === "emu-intro"
+    ? "emu-intro"
+    : c.kind === "emu-annex"
+    ? "emu-annex"
+    : "emu-clause";
   const mdxLines = [
     `import { Sec } from '../lib/spec/${slug}'`,
     "",
     `<div id="spec-container">`,
     "",
+    `<${wrapTag} id="${c.id}">`,
+    "",
     chapterHeading,
     "",
     ...renderMdxTree(tree, chapterNum, "", 2),
+    "",
+    `</${wrapTag}>`,
     "",
     `</div>`,
   ];
