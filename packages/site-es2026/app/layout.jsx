@@ -80,6 +80,7 @@ const footer = (
             {e.title}
           </a>
         ))}
+        <a href={`${deployBase}about/`}>About</a>
         <span
           style={{
             marginTop: "0.5rem",
