@@ -1413,17 +1413,16 @@ built.forEach((c) => {
 
   // basePath is already baked into href values in this map (see pathFor in
   // build-chapters.mjs), so the runtime is just lookup + dangerouslySetInnerHTML.
-  // The wrapper <div> is `display: contents` so it's transparent for layout —
-  // its children participate in the enclosing <emu-clause>'s flow as if the
-  // div weren't there, matching the way tc39.es/ecma262 has no per-section
-  // wrapper at all. The .ecma-spec name-spacing class lives on the outer
+  // The wrapper <div> is a regular block (one grid item of the enclosing
+  // <emu-clause>); inside it the paragraphs/lists flow as a normal block
+  // tree. The .ecma-spec name-spacing class lives on the outer
   // <div id="spec-container"> in the MDX wrapper.
   const componentSrc = [
     "// Generated from ecma262/spec.html — do not edit by hand.",
     `const sections = ${JSON.stringify(sectionsObj)};`,
     "export function Sec({ id }) {",
     "  const html = sections[id] ?? '';",
-    '  return <div style={{display:"contents"}} dangerouslySetInnerHTML={{ __html: html }} />;',
+    "  return <div dangerouslySetInnerHTML={{ __html: html }} />;",
     "}",
     "",
   ].join("\n");
