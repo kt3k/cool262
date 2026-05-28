@@ -220,7 +220,9 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   opacity: 0.7;
 }
 
-/* Notes get a "Note" label and the shared panel surface. */
+/* Notes get a "Note" label and the shared panel surface. The label and
+   contents are real DOM (<span class="note"> + <div class="note-contents">)
+   emitted by build-chapters.mjs, matching tc39's structure. */
 .ecma-spec emu-note {
   display: block;
   background: var(--ecma-panel-bg);
@@ -229,8 +231,7 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   padding: 0.75em 1em;
   margin-block: 1.5em;
 }
-.ecma-spec emu-note::before {
-  content: "Note";
+.ecma-spec emu-note > span.note {
   display: block;
   font-weight: 600;
   font-size: 0.8em;
@@ -239,14 +240,10 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   margin-bottom: 0.4em;
   opacity: 0.7;
 }
-/* Clauses with several notes number them (data-num set by build-chapters). */
-.ecma-spec emu-note[data-num]::before {
-  content: "Note " attr(data-num);
-}
-.ecma-spec emu-note > p:first-of-type {
+.ecma-spec emu-note > div.note-contents > p:first-of-type {
   margin-top: 0;
 }
-.ecma-spec emu-note > p:last-of-type {
+.ecma-spec emu-note > div.note-contents > p:last-of-type {
   margin-bottom: 0;
 }
 

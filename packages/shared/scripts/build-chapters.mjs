@@ -609,19 +609,26 @@ function applyFloatNum(html) {
 function numberNotes(html) {
   const found = [];
   const tags = html.match(/<emu-note\b[^>]*>/g) ?? [];
-  if (tags.length < 2) {
+  const multi = tags.length >= 2;
+  if (!multi) {
     for (const tag of tags) {
       const idm = tag.match(/\bid="([^"]+)"/);
       if (idm) found.push({ id: idm[1], label: "Note" });
     }
-    return { html, found };
   }
+  // tc39.es/ecma262 wraps every emu-note body in
+  // <span class="note">Note[ N]</span> + <div class="note-contents">…</div>
+  // so the label is real DOM, not a ::before pseudo. Restructure each note
+  // accordingly (and add data-num=N when there are several in this clause).
   let i = 0;
-  const out = html.replace(/<emu-note\b([^>]*)>/g, (full, attrs) => {
+  const noteRe = /<emu-note\b([^>]*)>([\s\S]*?)<\/emu-note>/g;
+  const out = html.replace(noteRe, (full, attrs, inner) => {
     i++;
     const idm = attrs.match(/\bid="([^"]+)"/);
-    if (idm) found.push({ id: idm[1], label: `Note ${i}` });
-    return `<emu-note${attrs} data-num="${i}">`;
+    if (multi && idm) found.push({ id: idm[1], label: `Note ${i}` });
+    const label = multi ? `Note ${i}` : "Note";
+    const numAttr = multi ? ` data-num="${i}"` : "";
+    return `<emu-note${attrs}${numAttr}><span class="note">${label}</span><div class="note-contents">${inner}</div></emu-note>`;
   });
   return { html: out, found };
 }
