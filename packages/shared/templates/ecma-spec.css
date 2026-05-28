@@ -246,6 +246,13 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   font-weight: 600;
   color: var(--ecma-text-strong);
 }
+/* Record / Property Descriptor field accesses (`[[Value]]`, `[[Foo]]`).
+   tc39 nullifies <var>'s default italic+colour so the brackets read as
+   part of the surrounding identifier text rather than as a variable. */
+.ecma-spec var.field {
+  font: inherit;
+  color: inherit;
+}
 .ecma-spec emu-intrinsic {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.92em;

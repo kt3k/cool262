@@ -1283,6 +1283,13 @@ function transformInlineText(text) {
     /(?<![A-Za-z0-9_])_([A-Za-z][A-Za-z0-9_]*)_(?![A-Za-z0-9_])/g,
     "<var>$1</var>",
   );
+  // Record internal-slot / field names: `[[Foo]]` → <var class="field">[[Foo]]</var>.
+  // tc39 styles these in italic monospace so they read as identifier-ish.
+  // Pattern is unambiguous outside grammar (which is in the skip set).
+  out = out.replace(
+    /\[\[([A-Z][A-Za-z0-9_]*)\]\]/g,
+    '<var class="field">[[$1]]</var>',
+  );
   return out.replace(
     /\x00(\d+)\x00/g,
     (_, i) => `<code>${code[Number(i)]}</code>`,
