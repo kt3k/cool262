@@ -9,7 +9,7 @@ import { readSpecSource } from "./spec-source.mjs";
 // so titles never drift from the per-site navbar/<title>.
 function readSiteTitle(siteDir, fallback) {
   const layout = fs.readFileSync(path.join(siteDir, "app/layout.jsx"), "utf8");
-  const m = layout.match(/const siteTitle = '([^']*)'/);
+  const m = layout.match(/const siteTitle = ["']([^"']*)["']/);
   return m ? m[1] : fallback;
 }
 
