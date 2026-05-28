@@ -175,6 +175,7 @@ writeArticle(
   "How it's built | ECMA-262 Restyled",
   `  <h1>How ECMA-262 Restyled is built</h1>
   <p>This page documents the internals of ECMA-262 Restyled for readers who already know <a href="https://github.com/tc39/ecmarkup">ecmarkup</a> and want to understand exactly how the site is produced. It assumes familiarity with ecmarkup's tags; it is not a guide to the specification itself.</p>
+  <p>For a short, non-technical overview of the project, see <a href="../about/">About</a>.</p>
 
   <h2>The core idea</h2>
   <p>The vendored <code>spec.html</code> is the <em>ecmarkup source</em>, before ecmarkup builds it, not the published multipage output. So a single Node script, <code>build-chapters.mjs</code>, re-implements the subset of ecmarkup's build steps the site needs, using string and regex transforms with no ecmarkup dependency. Every transform below runs at build time; the resulting HTML is injected into the page with <code>dangerouslySetInnerHTML</code>.</p>
