@@ -181,14 +181,14 @@ writeArticle(
 
   <ol class="flow">
     <li><strong>Vendor</strong><span>spec.html (ecmarkup source) per edition: draft as a git submodule, ES2024/25/26 as pinned snapshots</span></li>
-    <li><strong>Split</strong><span>parseTree() cuts each top-level emu-clause/annex/intro into a page; nested clauses become headings + &lt;Sec&gt; sections</span></li>
+    <li><strong>Split</strong><span>each top-level emu-clause/annex/intro becomes a page; nested clauses become Markdown headings with their bodies injected as HTML</span></li>
     <li><strong>Resolve &amp; transform</strong><span>two numbering passes feed a chain of per-tag rewrites (xref, prodref, grammar, alg, structured header, inline)</span></li>
     <li><strong>Render</strong><span>Next.js + Nextra inject the HTML and apply ecma-spec.css; Pagefind builds the search index</span></li>
     <li><strong>Assemble</strong><span>every edition is combined into one static site</span></li>
   </ol>
 
   <h2>Splitting into pages</h2>
-  <p><code>parseTree()</code> recursively scans for <code>&lt;emu-clause&gt;</code> / <code>&lt;emu-annex&gt;</code> boundaries. Each top-level clause becomes one page. Within a page, every clause's <code>&lt;h1&gt;</code> is emitted as a Markdown heading (with its section number and an id anchor) and its body as a <code>&lt;Sec id&gt;</code> component; <code>renderMdxTree()</code> writes the MDX plus a <code>_meta.js</code> that drives Nextra's sidebar order. At render time each <code>&lt;Sec&gt;</code> injects its pre-transformed HTML.</p>
+  <p>The build splits each top-level <code>&lt;emu-clause&gt;</code> / <code>&lt;emu-annex&gt;</code> / <code>&lt;emu-intro&gt;</code> into its own page, then walks the nested clauses. Every clause's <code>&lt;h1&gt;</code> is emitted as a Markdown heading carrying its section number and an id anchor, so Nextra builds the sidebar and table of contents from it. The clause body is emitted separately and injected as pre-transformed HTML between the headings.</p>
 
   <h2>Cross-references and numbering</h2>
   <p>ecmarkup fills empty reference tags with text at build time; the source leaves them empty (e.g. <code>&lt;emu-xref href="#sec-foo"&gt;&lt;/emu-xref&gt;</code>). We resolve them in two passes. <strong>Pass 1</strong> walks every chapter in document order and records, per anchor id, the label a reference should show:</p>
