@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "exports": {
-    "./ecma-spec.css": "./templates/ecma-spec.css"
+    "./ecma-spec.css": "./templates/ecma-spec.css",
+    "./components/spec-layout": "./components/spec-layout.jsx"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "nextra": "*",
+    "nextra-theme-docs": "*"
   }
 }

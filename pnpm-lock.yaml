@@ -8,7 +8,20 @@ importers:
 
   .: {}
 
-  packages/shared: {}
+  packages/shared:
+    dependencies:
+      nextra:
+        specifier: '*'
+        version: 4.6.1(next@16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
+      nextra-theme-docs:
+        specifier: '*'
+        version: 4.6.1(next@16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(nextra@4.6.1(next@16.2.6(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(use-sync-external-store@1.6.0(react@19.2.6))
+      react:
+        specifier: '*'
+        version: 19.2.6
+      react-dom:
+        specifier: '*'
+        version: 19.2.6(react@19.2.6)
 
   packages/site-draft:
     dependencies:

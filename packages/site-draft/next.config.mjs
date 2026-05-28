@@ -27,6 +27,7 @@ const deployBase = basePath
 
 export default withNextra({
   output: "export",
+  transpilePackages: ["shared"],
   basePath,
   images: { unoptimized: true },
   env: {
