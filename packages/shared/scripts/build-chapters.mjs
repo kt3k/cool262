@@ -872,12 +872,16 @@ function parseAlg(inner) {
   if (!root) return null;
   // Serialize: group consecutive same-type siblings into a single <ol>/<ul>.
   // A step's [id] becomes the <li> anchor so #step-… links resolve. Steps
-  // that begin with the word "Return" or "Throw" are tagged class="exit"
-  // (matching tc39.es/ecma262) so they can be visually flagged as early
-  // exits. The \b word boundary keeps "Returns"/"Throws" from matching.
+  // that exit the algorithm — either starting with Return/Throw or wrapping
+  // a conditional return/throw ("If …, return X.") — are tagged class="exit"
+  // (matching tc39.es/ecma262). The \b word boundary keeps Returns/Throws
+  // from matching; the lookahead `[A-Za-z<*_!?]` after the verb ensures
+  // we don't false-match phrases like ", return type" inside a different
+  // sentence (real return steps name a value or completion right after).
   function attrsFor(n) {
-    const cls = /^(Return|Throw)\b/.test(n.text) ? ' class="exit"' : "";
-    return (n.id ? ` id="${n.id}"` : "") + cls;
+    const isExit = /^(Return|Throw)\b/.test(n.text) ||
+      /,\s+(return|throw)\s+[A-Za-z<*_!?]/i.test(n.text);
+    return (n.id ? ` id="${n.id}"` : "") + (isExit ? ' class="exit"' : "");
   }
   function serialize(nodes) {
     let html = "";
