@@ -75,7 +75,6 @@ const footer = (
           gap: "0.4rem",
         }}
       >
-        <b>ECMA-262 editions</b>
         {editions.map((e) => (
           <a key={e.id} href={`${deployBase}${e.id}/`}>
             {e.title}
@@ -87,7 +86,15 @@ const footer = (
             color: "var(--x-color-gray-500, #6b7280)",
           }}
         >
-          MIT {new Date().getFullYear()} © Alternative Styling of ECMA-262
+          {new Date().getFullYear()} ©{" "}
+          <a
+            href="https://github.com/kt3k/ecma262"
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "inherit", textDecoration: "underline" }}
+          >
+            ECMA-262 Restyled
+          </a>
         </span>
       </div>
     </div>
