@@ -102,6 +102,19 @@ main[data-pagefind-body] h4 {
   margin-bottom: 0.4em;
 }
 
+/* Literal headings inside the clause body (e.g. the spec source's
+   <h2>Syntax</h2>, <h2>Supplemental Syntax</h2>) are in-body labels, not
+   numbered section headings (those come from MDX). Without this they'd inherit
+   the section h2/h3 rhythm above and render larger than their own — often
+   deeper — parent section heading. Render them as small sub-labels instead.
+   The main[data-pagefind-body] prefix lifts specificity above those rules. */
+main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+
 /* Spec body links keep a faint underline at rest, deepen on hover — easier
    to spot the xrefs since the spec is dense with them. Scoped to .ecma-spec
    so Nextra's nav / sidebar / footer links keep their own treatment. */
