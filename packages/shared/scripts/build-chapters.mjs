@@ -581,6 +581,41 @@ function applyFloatNum(html) {
   });
 }
 
+// Notes are labelled "Note" when a clause has one, "Note 1"/"Note 2"/… when it
+// has several (ecmarkup numbers them per clause). Each <Sec> chunk is one
+// clause body, so we number per chunk: expose the index via data-num for the
+// label CSS, and collect note ids for xref resolution.
+function numberNotes(html) {
+  const found = [];
+  const tags = html.match(/<emu-note\b[^>]*>/g) ?? [];
+  if (tags.length < 2) {
+    for (const tag of tags) {
+      const idm = tag.match(/\bid="([^"]+)"/);
+      if (idm) found.push({ id: idm[1], label: "Note" });
+    }
+    return { html, found };
+  }
+  let i = 0;
+  const out = html.replace(/<emu-note\b([^>]*)>/g, (full, attrs) => {
+    i++;
+    const idm = attrs.match(/\bid="([^"]+)"/);
+    if (idm) found.push({ id: idm[1], label: `Note ${i}` });
+    return `<emu-note${attrs} data-num="${i}">`;
+  });
+  return { html: out, found };
+}
+const applyNoteNum = (html) => numberNotes(html).html;
+
+// Pre-pass: register note ids → label/slug so cross-references resolve (must
+// run before any applyXrefSubst).
+for (const c of built) {
+  for (const [, html] of flattenTree(c.tree)) {
+    for (const { id, label } of numberNotes(html).found) {
+      idToLabel.set(id, { text: label, slug: c.pageSlug });
+    }
+  }
+}
+
 // emu-intro lives at <basePath>/, all other chapters at <basePath>/<slug>.
 // Helper used by xref substitution so links survive routing under any
 // basePath (empty for local dev, '/ecma262/draft' / '/ecma262/es2025' / … in
@@ -1013,7 +1048,9 @@ built.forEach((c) => {
     k,
     applyInlineMarkup(
       applyXrefSubst(
-        applyProdrefSubst(applyGrammarSubst(applyAlgSubst(applyFloatNum(v)))),
+        applyProdrefSubst(
+          applyGrammarSubst(applyAlgSubst(applyFloatNum(applyNoteNum(v)))),
+        ),
       ),
     ),
   ]);

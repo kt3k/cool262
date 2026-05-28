@@ -171,6 +171,10 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   margin-bottom: 0.4em;
   opacity: 0.7;
 }
+/* Clauses with several notes number them (data-num set by build-chapters). */
+.ecma-spec emu-note[data-num]::before {
+  content: "Note " attr(data-num);
+}
 .ecma-spec emu-note > p:first-of-type {
   margin-top: 0;
 }
