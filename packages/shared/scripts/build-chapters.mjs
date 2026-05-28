@@ -1080,8 +1080,11 @@ function tokenizeGrammarLine(line, isLhs) {
         ? `<a href="${pathFor(link.slug)}#${link.prodId}">${ntName}</a>`
         : ntName;
       const inner = mods ? `${name}<emu-mods>${mods}</emu-mods>` : name;
-      const cls = lhsClaimed ? "" : ' class="lhs"';
-      out += `<emu-nt${cls}>${inner}</emu-nt>`;
+      // LHS distinction is implicit: it's the <emu-nt> that's a direct child
+      // of <emu-production> (the RHS's NTs sit inside <emu-rhs>). tc39 picks
+      // it out via the positional selector `emu-production > emu-nt` rather
+      // than a class — we follow suit and drop the .lhs class.
+      out += `<emu-nt>${inner}</emu-nt>`;
       lhsClaimed = true;
       i = j;
       continue;

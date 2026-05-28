@@ -292,7 +292,9 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
    inside <emu-grammar>. Uses opacity (not fixed colors) so it works in light
    AND dark Nextra themes. emu-nt is already italicised by the inline rule
    higher in the file; here we just add the LHS bolding. */
-.ecma-spec emu-grammar emu-nt.lhs {
+/* LHS bolding via position rather than class: an <emu-nt> that's a direct
+   child of <emu-production> is the LHS (RHS NTs sit inside <emu-rhs>). */
+.ecma-spec emu-grammar emu-production > emu-nt {
   font-weight: 600;
 }
 .ecma-spec emu-grammar emu-t {
