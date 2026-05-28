@@ -38,7 +38,7 @@ const escape = (s) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 // Shared shell for the top-level static pages (landing + about).
-const page = (title, main) =>
+const page = (title, main, css) =>
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,15 +46,7 @@ const page = (title, main) =>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escape(title)}</title>
   <style>
-    body { font: 16px/1.6 system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
-    h1 { font-size: 1.4rem; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0366d6; }
-    a:hover { text-decoration: underline; }
-    a.commit { color: #57606a; font-size: 0.85em; }
-    a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
-    nav { margin-top: 2rem; font-size: 0.9em; }
+${css}
   </style>
 </head>
 <body>
@@ -62,6 +54,52 @@ ${main}
 </body>
 </html>
 `;
+
+const landingCss =
+  `    body { font: 16px/1.6 system-ui, sans-serif; max-width: 40rem; margin: 4rem auto; padding: 0 1rem; }
+    h1 { font-size: 1.4rem; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 0.5rem 0; }
+    a { text-decoration: none; color: #0366d6; }
+    a:hover { text-decoration: underline; }
+    a.commit { color: #57606a; font-size: 0.85em; }
+    a.commit code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    nav { margin-top: 2rem; font-size: 0.9em; }`;
+
+// Editorial styling for /about, evoking the Ghost "Edition" theme: Lora serif
+// display heading, Mulish sans body, a narrow measure, roomy line-height, and
+// muted underlined links. 62.5% root keeps rem ≈ px/10 (as Edition does).
+const aboutCss =
+  `    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Mulish:wght@400;600;700&display=swap');
+    html { font-size: 62.5%; }
+    body {
+      font-family: 'Mulish', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 1.9rem;
+      line-height: 1.7;
+      color: #333;
+      background: #fff;
+      max-width: 62rem;
+      margin: 14vh auto 8rem;
+      padding: 0 2rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1 {
+      font-family: 'Lora', Georgia, 'Times New Roman', serif;
+      font-weight: 600;
+      font-size: 4.4rem;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: #15171a;
+      margin: 0 0 2rem;
+    }
+    p { margin: 0 0 1.6rem; }
+    strong { font-weight: 600; color: #15171a; }
+    a { color: inherit; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.28); text-underline-offset: 3px; }
+    a:hover { text-decoration-color: currentColor; }
+    nav { margin-top: 4rem; font-size: 1.5rem; }
+    nav a { color: #999; text-decoration: none; }
+    nav a:hover { color: #333; }`;
 
 const items = editions
   .map((s) => {
@@ -81,6 +119,7 @@ const landing = page(
 ${items}
   </ul>
   <nav><a href="./about/">About this site</a></nav>`,
+  landingCss,
 );
 fs.writeFileSync(path.join(distDir, "index.html"), landing);
 
@@ -89,6 +128,7 @@ const about = page(
   `  <h1>About</h1>
   <p><strong>ECMA-262 Restyled</strong> is an unofficial, reader-focused rendering of the ECMAScript® Language Specification. It mirrors the source from the official <a href="https://github.com/tc39/ecma262">tc39/ecma262</a> repository and restyles it for readability; it is <strong>not normative</strong> — for the authoritative text, see the official specification at <a href="https://tc39.es/ecma262/">tc39.es/ecma262</a>. The source for this site is at <a href="https://github.com/kt3k/ecma262">kt3k/ecma262</a>.</p>
   <nav><a href="../">← All editions</a></nav>`,
+  aboutCss,
 );
 fs.mkdirSync(path.join(distDir, "about"), { recursive: true });
 fs.writeFileSync(path.join(distDir, "about", "index.html"), about);
