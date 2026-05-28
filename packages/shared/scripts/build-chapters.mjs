@@ -647,32 +647,30 @@ function pathFor(slug) {
 // <emu-xref href="#id"> is ecmarkup's cross-reference tag. Two source forms:
 //   <emu-xref href="#id"></emu-xref>       — empty, ecmarkup injects "14.7.2"
 //   <emu-xref href="#id">link text</emu-xref> — author-supplied text
-// We rewrite both to <a href="/<slug>#<id>">…</a>. Anchors `id="<id>"` are
-// emitted on chapter/section headings in MDX (see renderMdxTree below) so
-// the targets exist.
+// We keep the <emu-xref> wrapper (matching tc39.es/ecma262's serialisation)
+// and inject an <a href="/<slug>#<id>">…</a> inside. Anchors `id="<id>"` are
+// emitted on chapter/section headings via the surrounding <emu-clause id=…>
+// (see renderMdxTree below) so the targets exist.
 function applyXrefSubst(html) {
-  html = html.replace(/<emu-xref([^>]*?)>\s*<\/emu-xref>/g, (full, attrs) => {
-    const m = attrs.match(/\bhref="#([^"]+)"/);
-    if (!m) return full;
-    const id = m[1];
-    const s = idToSection.get(id);
-    if (s) return `<a href="${pathFor(s.slug)}#${id}">${s.number}</a>`;
-    const l = idToLabel.get(id);
-    if (l) return `<a href="${pathFor(l.slug)}#${id}">${l.text}</a>`;
-    return id;
-  });
-  html = html.replace(
-    /<emu-xref([^>]*?)>([\s\S]+?)<\/emu-xref>/g,
+  // Single pass — empty inner (`<emu-xref></emu-xref>`) gets the resolved
+  // number/label injected as the <a> text; non-empty inner is used verbatim.
+  // (Two passes would re-match step 1's own output and double-wrap the <a>.)
+  return html.replace(
+    /<emu-xref([^>]*?)>([\s\S]*?)<\/emu-xref>/g,
     (full, attrs, inner) => {
       const m = attrs.match(/\bhref="#([^"]+)"/);
       if (!m) return full;
       const id = m[1];
-      const s = idToSection.get(id) ?? idToLabel.get(id);
-      if (!s) return inner;
-      return `<a href="${pathFor(s.slug)}#${id}">${inner}</a>`;
+      const s = idToSection.get(id);
+      const l = idToLabel.get(id);
+      const target = s ?? l;
+      if (!target) return inner || id;
+      const text = inner.trim() === "" ? (s ? s.number : l.text) : inner;
+      return `<emu-xref${attrs}><a href="${
+        pathFor(target.slug)
+      }#${id}">${text}</a></emu-xref>`;
     },
   );
-  return html;
 }
 
 // Build a map of nonterminal LHS → rendered production HTML by scanning every
