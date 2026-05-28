@@ -292,13 +292,18 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   display: inline-block;
 }
 .ecma-spec emu-figure::after {
-  content: "Figure " attr(data-num) ": " attr(caption);
+  content: attr(caption);
   display: block;
   margin-top: 0.6em;
   font-size: 0.875em;
   color: var(--ecma-text-body);
   opacity: 0.75;
   font-style: italic;
+}
+/* Prefix the number when build-chapters assigned one (data-num). A rare
+   id-less float has no number, so it falls back to the caption alone above. */
+.ecma-spec emu-figure[data-num]::after {
+  content: "Figure " attr(data-num) ": " attr(caption);
 }
 
 /* emu-table: like emu-figure, the caption= attribute is invisible by default.
@@ -308,7 +313,7 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   display: block;
 }
 .ecma-spec emu-table::before {
-  content: "Table " attr(data-num) ": " attr(caption);
+  content: attr(caption);
   display: block;
   margin-bottom: 0.5em;
   font-size: 0.875em;
@@ -316,6 +321,9 @@ main[data-pagefind-body] .ecma-spec :is(h1, h2, h3, h4, h5, h6) {
   opacity: 0.75;
   font-style: italic;
   text-align: center;
+}
+.ecma-spec emu-table[data-num]::before {
+  content: "Table " attr(data-num) ": " attr(caption);
 }
 
 /* Prose lists (outside emu-alg): Tailwind's preflight strips markers + indent;

@@ -546,11 +546,13 @@ const figureNum = new Map();
   for (const c of built) {
     let mm;
     while ((mm = re.exec(c.inner)) !== null) {
+      // Count every float (even id-less ones) so numbers stay in document order
+      // and later tables don't shift relative to ecmarkup.
+      const isTable = mm[1] === "table";
+      const n = isTable ? ++tN : ++fN;
       const idm = mm[2].match(/\bid="([^"]+)"/);
       if (!idm) continue;
       const id = idm[1];
-      const isTable = mm[1] === "table";
-      const n = isTable ? ++tN : ++fN;
       (isTable ? tableNum : figureNum).set(id, String(n));
       const entry = {
         text: `${isTable ? "Table" : "Figure"} ${n}`,
