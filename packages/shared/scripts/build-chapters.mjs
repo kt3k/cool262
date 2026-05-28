@@ -1022,11 +1022,22 @@ function tokenizeGrammarLine(line, isLhs) {
         i++;
         continue;
       }
-      // Free-standing `[…]` (no preceding NT) is an RHS-level constraint —
-      // `[+Foo]`/`[~Foo]` alternative guards, `[lookahead …]`,
-      // `[no LineTerminator here]`. tc39 wraps these in <emu-constraints>
-      // rather than the <emu-mods><emu-params> used for NT parameter suffixes.
-      out += `<emu-constraints>[${line.slice(i + 1, end)}]</emu-constraints>`;
+      // Free-standing `[…]` (no preceding NT) — tc39 splits these three ways:
+      //   `[lookahead …]`           → <emu-gann> (grammar annotation)
+      //   `[no LineTerminator here]` → <emu-gmod> (grammar modification)
+      //   `[+Foo]` / `[~Foo]` / etc. → <emu-constraints> (alternative guards)
+      // Annotations and modifications carry inner NTs/terminals so the
+      // contents get a recursive tokenize pass; constraints stay raw.
+      const content = line.slice(i + 1, end);
+      const tag = /^\s*lookahead\b/.test(content)
+        ? "emu-gann"
+        : /^\s*no\s+/.test(content)
+        ? "emu-gmod"
+        : "emu-constraints";
+      const inner = tag === "emu-constraints"
+        ? content
+        : tokenizeGrammarLine(content, false);
+      out += `<${tag}>[${inner}]</${tag}>`;
       i = end + 1;
       continue;
     }
