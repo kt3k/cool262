@@ -358,7 +358,12 @@ aside.sidebar {
   transition: width 0.2s ease-in-out;
 }
 /* Chapter list — Nextra's <ul class="x:grid x:gap-1 x:p-4">: uniform 16px
-   padding, items separated by a 4px grid gap rather than per-item margin. */
+   padding, items separated by a 4px grid gap rather than per-item margin.
+   The mask-image pair is Nextra's .nextra-mask: two linear gradients
+   composited (default add) so the visible region is opaque in the
+   middle and fades to transparent in the top + bottom 20px. Effect:
+   list rows visually fade into the header above and the footer below
+   instead of getting a hard scroll-edge cutoff. */
 aside.sidebar .sidebar-list {
   list-style: none;
   margin: 0;
@@ -367,6 +372,12 @@ aside.sidebar .sidebar-list {
   min-height: 0;
   display: grid;
   gap: 0.25rem;
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
 }
 aside.sidebar li {
   margin: 0;
@@ -412,10 +423,14 @@ aside.sidebar li.group-start {
 }
 /* Non-scrolling sidebar footer (theme toggle lives here). Matches the
    .nextra-sidebar-footer affordance Nextra uses — same top border,
-   no bg fill (the sidebar is transparent over the page bg). */
+   no bg fill (the sidebar is transparent over the page bg). The
+   horizontal margin (Nextra's x:mx-4) is what makes the border-top
+   render shorter than the full sidebar width: the element itself is
+   inset, so the border drawn on it inherits that narrower box. */
 aside.sidebar .sidebar-footer {
+  margin: 0 1rem;
+  padding: 1rem 0;
   border-top: 1px solid var(--rule);
-  padding: 0.6rem 0.75rem;
 }
 /* Sidebar footer row: theme toggle (grows) + collapse button (fixed). */
 aside.sidebar .sidebar-footer {
