@@ -102,7 +102,21 @@ export default function Page(
             target="_blank"
             rel="noreferrer"
           >
-            Question? Give us feedback →
+            Question? Give us feedback
+            {/* 45° external-link arrow, matches Nextra's TOC feedback icon. */}
+            <svg
+              class="toc-feedback-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7"></path>
+              <path d="M7 7h10v10"></path>
+            </svg>
           </a>
         </aside>
         <Footer />

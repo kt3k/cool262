@@ -13,7 +13,7 @@
   --chrome-bg: #fafafa;
   --accent: #2563eb;
   --sidebar-w: 280px;
-  --toc-w: 240px;
+  --toc-w: 256px; /* matches Nextra's x:w-64 */
   --header-h: 4rem; /* matches Nextra's --nextra-navbar-height: 64px */
   color-scheme: light;
 }
@@ -436,12 +436,12 @@ body.sidebar-collapsed {
 body.sidebar-collapsed aside.sidebar .sidebar-list {
   display: none;
 }
-/* Footer reflow: stack and center the two buttons so they don't overflow
-   the narrow rail (matches Nextra's x:flex-wrap x:justify-center +
-   x:gap-2 x:py-4). */
+/* Footer reflow: stack the two buttons vertically so they read as a column
+   in the narrow rail. (Nextra uses x:flex-wrap which wraps them vertically
+   incidentally; using flex-direction is more explicit and predictable.) */
 body.sidebar-collapsed aside.sidebar .sidebar-footer {
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 0;
 }
@@ -534,64 +534,92 @@ main {
   }
 }
 
+/* Right-rail TOC — port of nextra-theme-docs' <nav class="nextra-toc">:
+   sticky 3-row grid (heading / list / footer), borderless, 14px text. */
 aside.toc {
   grid-area: toc;
-  border-left: 1px solid var(--rule);
-  padding: 1.5rem 1rem;
   position: sticky;
   top: var(--header-h);
   align-self: start;
   max-height: calc(100vh - var(--header-h));
-  overflow-y: auto;
-  font-size: 0.85rem;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  font-size: 0.875rem; /* x:text-sm */
 }
+/* "On this page" heading — plain semibold label, no uppercase / muted /
+   spacing, matching Nextra's <p class="x:pt-6 x:px-4 x:font-semibold">. */
 aside.toc h2 {
-  font-size: 0.75rem;
+  margin: 0;
+  padding: 1.5rem 1rem 0;
+  font-size: inherit;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
 }
 aside.toc ol {
   list-style: none;
-  padding: 0;
+  padding: 1rem;
   margin: 0;
-  border-left: 1px solid var(--rule);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
 }
 aside.toc li {
-  margin: 0;
+  margin: 0.5rem 0; /* x:my-2 */
 }
-aside.toc li[data-level="2"] {
-  padding-inline-start: 0.75rem;
+/* Depth-based indent matches Nextra's x:ms-3 (12px) / x:ms-6 (24px) /
+   x:ms-9 (36px) on nested headings. Depth comes from _config.ts based
+   on how many <emu-clause> ancestors a section has. */
+aside.toc li[data-level="2"] a {
+  margin-inline-start: 0.75rem;
 }
-aside.toc li[data-level="3"] {
-  padding-inline-start: 1.75rem;
+aside.toc li[data-level="3"] a {
+  margin-inline-start: 1.5rem;
 }
-aside.toc li[data-level="4"] {
-  padding-inline-start: 2.75rem;
+aside.toc li[data-level="4"] a {
+  margin-inline-start: 2.25rem;
 }
-aside.toc li[data-level="5"] {
-  padding-inline-start: 3.75rem;
+aside.toc li[data-level="5"] a {
+  margin-inline-start: 3rem;
 }
 aside.toc a {
   display: block;
-  padding: 0.2em 0.5em;
   color: var(--muted);
   text-decoration: none;
   line-height: 1.35;
+  word-break: break-word;
+  transition: color 0.15s;
+}
+/* Top-level entries are semibold; nested ones are normal weight —
+   matches Nextra's per-depth class application. */
+aside.toc li[data-level="1"] > a {
+  font-weight: 600;
 }
 aside.toc a:hover {
-  color: var(--accent);
+  color: var(--fg);
 }
-/* Feedback link below the per-page TOC. Visually separated by a thin top
-   border + extra space so it reads as a distinct affordance, not another
-   table-of-contents entry. */
+/* Footer row under the TOC list: thin top border, x:py-4 x:mx-4 inset,
+   x:gap-2. Holds the "Question? Give us feedback" external link (and a
+   stub scroll-to-top button later if we want it). */
 aside.toc .toc-feedback {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 1rem;
+  padding: 1rem 0;
   border-top: 1px solid var(--rule);
-  font-size: 0.8rem;
+  color: var(--muted);
+  font-size: 0.75rem; /* x:text-xs */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+aside.toc .toc-feedback:hover {
+  color: var(--fg);
+}
+aside.toc .toc-feedback-arrow {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
 }
 
 /* Footer matches packages/shared/components/spec-layout.jsx: no background,
