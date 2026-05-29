@@ -12,3 +12,4 @@ dist/
 packages/*/content/
 packages/*/lib/spec/
 packages/*/public/img/
+lume-poc/_site/
