@@ -117,6 +117,18 @@ export default function Page(
               document.addEventListener("keydown",function(e){
                 if(e.key==="Escape")setMenu(false);
               });
+              // Sidebar collapse (desktop): footer chevron hides the sidebar,
+              // header chevron brings it back. Persist so navigating between
+              // pages remembers the user's choice.
+              var collapseBtn=document.getElementById("sidebar-collapse");
+              var expandBtn=document.getElementById("sidebar-expand");
+              function setCollapsed(c){
+                document.body.classList.toggle("sidebar-collapsed",c);
+                localStorage.setItem("sidebar",c?"collapsed":"open");
+              }
+              if(localStorage.getItem("sidebar")==="collapsed")setCollapsed(true);
+              collapseBtn.addEventListener("click",function(){setCollapsed(true);});
+              expandBtn.addEventListener("click",function(){setCollapsed(false);});
             `,
           }}
         />

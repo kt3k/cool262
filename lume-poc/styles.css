@@ -96,8 +96,9 @@ body {
   color: var(--fg);
 }
 .site-header .site-search {
+  position: relative; /* anchor the absolutely-positioned drawer */
   flex-grow: 1;
-  max-width: 24rem;
+  max-width: 22rem;
   margin: 0 1.5rem;
 }
 /* Theme toggle (sidebar footer): pill button with icon + current-mode
@@ -140,17 +141,136 @@ html.dark .theme-toggle .icon-sun,
 html.dark .theme-toggle .label-light {
   display: none;
 }
-/* Tone down Pagefind UI's defaults — they ship a chunky search box with
-   a tinted background. Strip that down to a single-line input that fits
-   inline in the header bar. */
+/* Pagefind UI overrides. Default styles are chunky and lay the results
+   drawer inline (which inflates the header). We tone the input down to a
+   Nextra-style rounded pill and absolutely-position the drawer below it. */
 .site-search .pagefind-ui__form {
-  --pagefind-ui-scale: 0.8;
+  position: static;
+  --pagefind-ui-scale: 1;
   --pagefind-ui-primary: var(--accent);
   --pagefind-ui-text: var(--fg);
-  --pagefind-ui-background: var(--bg);
-  --pagefind-ui-border: var(--rule);
-  --pagefind-ui-border-width: 1px;
-  --pagefind-ui-border-radius: 6px;
+  --pagefind-ui-background: transparent;
+  --pagefind-ui-border: transparent;
+  --pagefind-ui-border-width: 0;
+  --pagefind-ui-border-radius: 8px;
+  --pagefind-ui-font: inherit;
+}
+.site-search .pagefind-ui__search-input {
+  width: 100%;
+  height: 2rem;
+  padding: 0 2.5rem 0 0.8rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: rgba(127, 127, 127, 0.08);
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.85rem;
+  line-height: 2rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.site-search .pagefind-ui__search-input::placeholder {
+  color: var(--muted);
+}
+.site-search .pagefind-ui__search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg);
+}
+.site-search .pagefind-ui__search-clear {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.site-search .pagefind-ui__search-clear:hover {
+  color: var(--fg);
+  background: rgba(127, 127, 127, 0.15);
+}
+.site-search .pagefind-ui__drawer {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: min(28rem, 70vh);
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 0.4rem;
+  z-index: 30;
+}
+.site-search .pagefind-ui__drawer.pagefind-ui__hidden {
+  display: none;
+}
+.site-search .pagefind-ui__message {
+  padding: 0.5rem 0.7rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.site-search .pagefind-ui__results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-search .pagefind-ui__result {
+  padding: 0.6rem 0.7rem;
+  border-top: 1px solid var(--rule);
+}
+.site-search .pagefind-ui__result:first-child {
+  border-top: none;
+}
+.site-search .pagefind-ui__result-link {
+  display: block;
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+}
+.site-search .pagefind-ui__result-link:hover {
+  color: var(--accent);
+}
+.site-search .pagefind-ui__result-excerpt {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+.site-search .pagefind-ui__result-excerpt mark {
+  background: rgba(37, 99, 235, 0.18);
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 2px;
+}
+.site-search .pagefind-ui__result-nested {
+  margin-top: 0.4rem;
+  padding-inline-start: 0.8rem;
+  border-inline-start: 2px solid var(--rule);
+}
+.site-search .pagefind-ui__button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0 0;
+  padding: 0.45em 0.8em;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--fg);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.site-search .pagefind-ui__button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 aside.sidebar {
@@ -202,9 +322,57 @@ aside.sidebar .sidebar-footer {
   padding: 0.6rem 0.75rem;
   background: var(--chrome-bg);
 }
+/* Sidebar footer row: theme toggle (grows) + collapse button (fixed). */
+aside.sidebar .sidebar-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
 aside.sidebar .sidebar-footer .theme-toggle {
-  width: 100%;
+  flex: 1 1 auto;
   justify-content: flex-start;
+}
+.sidebar-collapse-btn,
+.sidebar-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+.sidebar-collapse-btn:hover,
+.sidebar-expand-btn:hover {
+  color: var(--fg);
+  background: var(--chrome-bg);
+  border-color: var(--accent);
+}
+/* Header expand button: only visible when the sidebar is collapsed. */
+.sidebar-expand-btn {
+  display: none;
+  margin-right: 0.6rem;
+}
+body.sidebar-collapsed .sidebar-expand-btn {
+  display: inline-flex;
+}
+/* Collapsed sidebar: zero the grid column so main expands to fill the gap. */
+body.sidebar-collapsed {
+  grid-template-columns: 0 1fr var(--toc-w);
+}
+body.sidebar-collapsed aside.sidebar {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (max-width: 1100px) {
+  body.sidebar-collapsed {
+    grid-template-columns: 0 1fr;
+  }
 }
 
 main {
