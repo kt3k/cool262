@@ -44,14 +44,6 @@ jobs:
         env:
           BASE_PATH: /ecma262/lume-poc
         run: deno task build && deno task pagefind
-      - name: Build Lume PoC 2
-        # Variant of lume-poc with a Nextra-style flex wrapper around
-        # sidebar/main/TOC (footer outside) — kept alongside for
-        # side-by-side comparison of sticky scroll behavior.
-        working-directory: lume-poc-2
-        env:
-          BASE_PATH: /ecma262/lume-poc-2
-        run: deno task build && deno task pagefind
       - name: Assemble combined dist/
         # Copies each site's out/ into dist/<id>/, plus lume-poc/_site/ into
         # dist/lume-poc/, and writes the landing page.

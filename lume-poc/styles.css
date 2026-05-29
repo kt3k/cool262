@@ -2,8 +2,10 @@
    wraps everything in <div class="ecma-spec">). */
 
 /* ── Page chrome (Lume PoC) ──────────────────────────────────────────────
-   Five-slot grid: sticky header, three columns (sidebar / main / TOC),
-   footer underneath. The TOC drops off below ~1100px; sidebar drops off
+   Body is a vertical flex stack of header / .layout-wrapper / footer.
+   The wrapper itself is a 3-column grid for sidebar / main / TOC; the
+   footer sits OUTSIDE it so sticky sidebar/TOC slide up out of view as
+   the footer scrolls in. TOC drops off below ~1100px; sidebar drops off
    below ~800px. Matches the affordance Nextra gives us today. */
 :root {
   --bg: #ffffff;
@@ -55,23 +57,30 @@ body {
     Arial, sans-serif;
   background: var(--bg);
   color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+/* Sidebar + main + TOC live in this flex wrapper; footer sits as a
+   sibling of the wrapper. Sticky elements inside cannot exceed the
+   wrapper's bottom edge — when the footer (outside) scrolls into view,
+   sidebar/TOC slide up rather than overlapping it. Mirrors Nextra's
+   <div class="x:mx-auto x:flex x:max-w-(--nextra-content-width)">. */
+.layout-wrapper {
   display: grid;
   grid-template-columns: var(--sidebar-w) 1fr var(--toc-w);
-  grid-template-rows: var(--header-h) 1fr auto;
-  grid-template-areas:
-    "header header header"
-    "sidebar main toc"
-    "footer footer footer";
-  min-height: 100vh;
+  flex: 1 1 auto;
+  min-height: 0;
+  transition: grid-template-columns 0.2s ease-in-out;
 }
 
 .site-header {
-  grid-area: header;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
-  background: var(--bg);
+  background: var(--chrome-bg);
+  border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
@@ -328,18 +337,15 @@ html.dark .site-search .pagefind-ui__search-input {
 }
 
 aside.sidebar {
-  grid-area: sidebar;
   border-right: 1px solid var(--rule);
   position: sticky;
   top: var(--header-h);
-  /* Let the grid stretch the sidebar to match the row cell (default
-     align-self) but cap it at viewport-minus-header so the inner list can
-     scroll. Critically, NOT giving an explicit `height` keeps the sidebar
-     within its grid cell — when the page scrolls into the footer, the
-     sidebar slides up along with the cell's bottom (Nextra parity).
-     Using an explicit `height` here makes the sidebar overflow the cell
-     and bleed over the footer instead. */
-  max-height: calc(100vh - var(--header-h));
+  /* Matches Nextra's x:sticky x:top-(--nextra-navbar-height)
+     x:h-[calc(100dvh-var(--nextra-navbar-height))]. Containing block is
+     this element's grid cell inside .layout-wrapper — the wrapper ends
+     above the footer, so the sticky element can't bleed past it. */
+  align-self: start;
+  height: calc(100vh - var(--header-h));
   background: var(--chrome-bg);
   /* Inner grid: the list takes whatever space is left (1fr) and scrolls on
      its own, the footer is `auto` and sits at the bottom. min-height: 0 on
@@ -431,10 +437,7 @@ aside.sidebar .sidebar-footer .theme-toggle {
 :root {
   --sidebar-w-narrow: 80px;
 }
-body {
-  transition: grid-template-columns 0.2s ease-in-out;
-}
-body.sidebar-collapsed {
+body.sidebar-collapsed .layout-wrapper {
   grid-template-columns: var(--sidebar-w-narrow) 1fr var(--toc-w);
 }
 /* Hide the scrollable chapter list — only the footer's icon-only buttons
@@ -483,13 +486,12 @@ body.sidebar-collapsed .sidebar-collapse-btn .collapse-arrow {
   transform: rotate(180deg);
 }
 @media (max-width: 1100px) {
-  body.sidebar-collapsed {
+  body.sidebar-collapsed .layout-wrapper {
     grid-template-columns: var(--sidebar-w-narrow) 1fr;
   }
 }
 
 main {
-  grid-area: main;
   padding: 1.5rem 2rem 4rem;
   min-width: 0;
 }
@@ -550,10 +552,10 @@ main {
    element rides the cell's bottom edge and slides up as the footer
    scrolls into view, instead of overflowing onto the footer. */
 aside.toc {
-  grid-area: toc;
   position: sticky;
   top: var(--header-h);
-  max-height: calc(100vh - var(--header-h));
+  align-self: start;
+  height: calc(100vh - var(--header-h));
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   font-size: 0.875rem; /* x:text-sm */
@@ -640,7 +642,6 @@ aside.toc .toc-feedback-arrow {
    (Nextra's gap). py-12 = 3rem top/bottom; safe-area insets pad the sides
    so it doesn't hug the screen edge on notched phones. */
 footer.site-footer {
-  grid-area: footer;
   padding: 3rem max(env(safe-area-inset-right), 1.5rem) 3rem
     max(env(safe-area-inset-left), 1.5rem);
   color: #4b5563;
@@ -705,24 +706,16 @@ body.menu-open .menu-backdrop {
 }
 
 @media (max-width: 1100px) {
-  body {
+  .layout-wrapper {
     grid-template-columns: var(--sidebar-w) 1fr;
-    grid-template-areas:
-      "header header"
-      "sidebar main"
-      "footer footer";
   }
   aside.toc {
     display: none;
   }
 }
 @media (max-width: 800px) {
-  body {
+  .layout-wrapper {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      "header"
-      "main"
-      "footer";
   }
   .menu-toggle {
     display: inline-flex;

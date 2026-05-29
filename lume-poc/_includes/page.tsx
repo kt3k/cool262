@@ -3,11 +3,13 @@ import Sidebar from "./sidebar.tsx";
 import Footer from "./footer.tsx";
 import PrevNext from "./prev-next.tsx";
 
-// Top-level layout: header / sidebar / main / TOC / footer, wired together by
-// the CSS grid in styles.css. The TOC's <ol> is empty here; a post-render
-// processor in _config.ts walks the document for <emu-clause id=…> and fills
-// it in. That way the layout stays static (Lume can serve it from a string)
-// while the per-page outline is still data-driven.
+// Top-level layout: <header>, then a single .layout-wrapper holding the
+// sidebar / main / TOC trio, then <footer> as a sibling of the wrapper.
+// The wrapper-then-footer split (rather than one body-level grid) is what
+// makes sticky sidebar/TOC slide up cleanly as the footer scrolls in,
+// instead of overflowing past the wrapper's bottom. The TOC's <ol> is
+// empty here; a post-render processor in _config.ts walks the document
+// for <emu-clause id=…> and fills it in.
 //
 // BASE_PATH lets the same build target both `localhost/` (empty prefix) and
 // `kt3k.github.io/ecma262/lume-poc/` (non-empty prefix). fallbackBase is the
@@ -72,53 +74,62 @@ export default function Page(
         }
         <a class="skip-nav" href="#content">Skip to content</a>
         <Header basePath={basePath} deployBase={deployBase} />
-        <Sidebar
-          basePath={basePath}
-          currentSlug={slug ?? ""}
-          fallbackBase={fallbackBase}
-        />
-        <main id="content">
-          {children}
-          <PrevNext
+        {
+          /* Sidebar + main + TOC live inside a single flex wrapper, footer
+            sits OUTSIDE it as a sibling. That way the sidebar's and TOC's
+            sticky containing block ends right above the footer, so they
+            slide up out of view as the footer scrolls in (Nextra parity —
+            see <div class="x:mx-auto x:flex x:max-w-(...)"> in their DOM). */
+        }
+        <div class="layout-wrapper">
+          <Sidebar
             basePath={basePath}
             currentSlug={slug ?? ""}
             fallbackBase={fallbackBase}
           />
-        </main>
-        <aside class="toc">
-          <h2>On this page</h2>
-          <ol></ol>
-          {
-            /* "Question? Give us feedback →" — Nextra's default link below
-              the on-this-page list. URL mirrors the format nextra-theme-docs
-              generates from docsRepositoryBase: /issues/new with a
-              pre-filled title + labels=feedback. */
-          }
-          <a
-            class="toc-feedback"
-            href={`https://github.com/kt3k/ecma262/issues/new?title=${
-              encodeURIComponent(`Feedback for "${title ?? "ECMA-262"}"`)
-            }&labels=feedback`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Question? Give us feedback
-            {/* 45° external-link arrow, matches Nextra's TOC feedback icon. */}
-            <svg
-              class="toc-feedback-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.7"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
+          <main id="content">
+            {children}
+            <PrevNext
+              basePath={basePath}
+              currentSlug={slug ?? ""}
+              fallbackBase={fallbackBase}
+            />
+          </main>
+          <aside class="toc">
+            <h2>On this page</h2>
+            <ol></ol>
+            {
+              /* "Question? Give us feedback →" — Nextra's default link below
+                the on-this-page list. URL mirrors the format nextra-theme-docs
+                generates from docsRepositoryBase: /issues/new with a
+                pre-filled title + labels=feedback. */
+            }
+            <a
+              class="toc-feedback"
+              href={`https://github.com/kt3k/ecma262/issues/new?title=${
+                encodeURIComponent(`Feedback for "${title ?? "ECMA-262"}"`)
+              }&labels=feedback`}
+              target="_blank"
+              rel="noreferrer"
             >
-              <path d="M7 17L17 7"></path>
-              <path d="M7 7h10v10"></path>
-            </svg>
-          </a>
-        </aside>
+              Question? Give us feedback
+              {/* 45° external-link arrow, matches Nextra's TOC feedback icon. */}
+              <svg
+                class="toc-feedback-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7"></path>
+                <path d="M7 7h10v10"></path>
+              </svg>
+            </a>
+          </aside>
+        </div>
         <Footer />
         {
           /* Backdrop that dims content while the mobile sidebar is open;
