@@ -17,13 +17,22 @@ export default function Sidebar(
   return (
     <aside id="sidebar" class="sidebar">
       <ol class="sidebar-list">
-        {chapters.map((c) => {
+        {chapters.map((c, i) => {
           const isCurrent = c.slug === currentSlug;
           const href = isCurrent
             ? `${basePath}/${c.slug}/`
             : `${fallbackBase}/${c.slug === "index" ? "" : c.slug}`;
+          // Draw a divider above each new group (annex / back-matter). The
+          // first item never gets one. Detection is positional so adding /
+          // reordering chapters in chapters.ts "just works".
+          const prevGroup = i > 0 ? chapters[i - 1].group : undefined;
+          const startsGroup = c.group !== undefined && c.group !== prevGroup;
+          const classes = [
+            isCurrent ? "current" : "",
+            startsGroup ? "group-start" : "",
+          ].filter(Boolean).join(" ");
           return (
-            <li class={isCurrent ? "current" : ""}>
+            <li class={classes}>
               <a href={href}>{c.title}</a>
             </li>
           );

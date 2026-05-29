@@ -363,6 +363,14 @@ aside.sidebar li.current > a {
   color: var(--accent);
   font-weight: 600;
 }
+/* Section break: thin top border + extra space above the first item of each
+   `group` (annex, back). Matches the implicit Annex / Bibliography break that
+   the Nextra sidebar conveys by virtue of the title prefixes alone. */
+aside.sidebar li.group-start {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--rule);
+}
 /* Non-scrolling sidebar footer (theme toggle lives here). Matches the
    .nextra-sidebar-footer affordance Nextra uses. */
 aside.sidebar .sidebar-footer {

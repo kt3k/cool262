@@ -7,6 +7,11 @@
 export interface Chapter {
   slug: string;
   title: string;
+  // Optional bucket for the sidebar renderer: missing = body chapter,
+  // "annex" = Annex A-F, "back" = Bibliography / Colophon. Used purely for
+  // a thin divider between groups; the list order itself is what the user
+  // reads.
+  group?: "annex" | "back";
 }
 
 const chapters: Chapter[] = [
@@ -76,6 +81,47 @@ const chapters: Chapter[] = [
   },
   { slug: "reflection", title: "28 Reflection" },
   { slug: "memory-model", title: "29 Memory Model" },
+  // Annexes + back-matter. `group: "annex"` lets the sidebar draw a thin
+  // divider before the first annex so the section break reads visually
+  // (Nextra's flat _meta.js relies on the long "Annex X (informative)"
+  // prefix to imply the break; here we surface it as chrome).
+  {
+    slug: "grammar-summary",
+    title: "Annex A (informative) Grammar Summary",
+    group: "annex",
+  },
+  {
+    slug: "additional-ecmascript-features-for-web-browsers",
+    title:
+      "Annex B (normative) Additional ECMAScript Features for Web Browsers",
+    group: "annex",
+  },
+  {
+    slug: "strict-mode-of-ecmascript",
+    title: "Annex C (informative) The Strict Mode of ECMAScript",
+    group: "annex",
+  },
+  {
+    slug: "host-layering-points",
+    title: "Annex D (informative) Host Layering Points",
+    group: "annex",
+  },
+  {
+    slug:
+      "corrections-and-clarifications-in-ecmascript-2015-with-possible-compatibility-impact",
+    title:
+      "Annex E (informative) Corrections and Clarifications in ECMAScript 2015 with Possible Compatibility Impact",
+    group: "annex",
+  },
+  {
+    slug:
+      "additions-and-changes-that-introduce-incompatibilities-with-prior-editions",
+    title:
+      "Annex F (informative) Additions and Changes That Introduce Incompatibilities with Prior Editions",
+    group: "annex",
+  },
+  { slug: "bibliography", title: "Bibliography", group: "back" },
+  { slug: "colophon", title: "Colophon", group: "back" },
 ];
 
 export default chapters;
