@@ -160,36 +160,44 @@ aside.toc a:hover {
   color: var(--accent);
 }
 
+/* Footer matches packages/shared/components/spec-layout.jsx: no background,
+   no border-top — just centred grey text. Outer flex centres the two
+   columns; each column is a top-aligned stack with 0.4rem between rows
+   (Nextra's gap). py-12 = 3rem top/bottom; safe-area insets pad the sides
+   so it doesn't hug the screen edge on notched phones. */
 footer.site-footer {
   grid-area: footer;
-  border-top: 1px solid var(--rule);
-  background: var(--chrome-bg);
-  padding: 2rem 1rem;
-  color: var(--muted);
-  font-size: 0.85rem;
+  padding: 3rem max(env(safe-area-inset-right), 1.5rem) 3rem
+    max(env(safe-area-inset-left), 1.5rem);
+  color: #4b5563;
+  font-size: 0.875rem;
 }
 footer.site-footer .footer-cols {
   display: flex;
   justify-content: center;
   gap: 4rem;
   flex-wrap: wrap;
+  width: 100%;
 }
-footer.site-footer .footer-cols > div {
+footer.site-footer .footer-col {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  align-items: flex-start;
+  gap: 0.4rem;
 }
 footer.site-footer a {
   color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(0, 0, 0, 0.25);
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 footer.site-footer a:hover {
-  text-decoration-color: currentColor;
+  text-decoration: underline;
 }
 footer.site-footer .copyright {
-  margin-top: 0.6rem;
+  margin-top: 0.5rem;
+  color: #6b7280;
+}
+footer.site-footer .copyright a {
+  text-decoration: underline;
 }
 
 @media (max-width: 1100px) {

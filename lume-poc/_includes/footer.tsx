@@ -1,20 +1,25 @@
-// Page footer: edition switch links + copyright. Currently the four
-// editions are still Nextra-rendered, so we link to their gh-pages paths
-// rather than to anything Lume-rendered; in a real migration this list
-// would grow a "Lume" column.
-export default function Footer({ fallbackBase }: { fallbackBase: string }) {
+import editions from "./editions.ts";
+
+// Page footer — two columns side-by-side: full edition list (left) and
+// About / Pipeline / copyright (right). Matches what
+// `packages/shared/components/spec-layout.jsx` renders today: no background,
+// no border, just centred grey text with `gap: 4rem` between columns and
+// `gap: 0.4rem` between rows inside each column. The deploy root
+// (`/ecma262/`) is used for the cross-edition links since they currently
+// only exist on the Nextra-rendered sites.
+const deployBase = "/ecma262";
+
+export default function Footer() {
   return (
     <footer class="site-footer">
       <div class="footer-cols">
-        <div>
-          <a href={`${fallbackBase}/`}>Draft</a>
-          <a href="/ecma262/es2026/">ECMA-262, 2026 edition</a>
-          <a href="/ecma262/es2025/">ECMA-262, 2025 edition</a>
-          <a href="/ecma262/es2024/">ECMA-262, 2024 edition</a>
+        <div class="footer-col">
+          {editions.map((e) => <a href={`${deployBase}/${e.id}/`}>{e.title}
+          </a>)}
         </div>
-        <div>
-          <a href="/ecma262/about/">About</a>
-          <a href="/ecma262/pipeline/">How it's built</a>
+        <div class="footer-col">
+          <a href={`${deployBase}/about/`}>About</a>
+          <a href={`${deployBase}/pipeline/`}>How it's built</a>
           <span class="copyright">
             {new Date().getFullYear()} ©{" "}
             <a

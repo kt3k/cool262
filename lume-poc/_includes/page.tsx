@@ -42,7 +42,7 @@ export default function Page(
           <h2>On this page</h2>
           <ol></ol>
         </aside>
-        <Footer fallbackBase={fallbackBase} />
+        <Footer />
       </body>
     </html>
   );
