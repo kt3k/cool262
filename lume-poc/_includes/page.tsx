@@ -12,9 +12,12 @@ import PrevNext from "./prev-next.tsx";
 // BASE_PATH lets the same build target both `localhost/` (empty prefix) and
 // `kt3k.github.io/ecma262/lume-poc/` (non-empty prefix). fallbackBase is the
 // gh-pages path to the still-Nextra-rendered chapters so the sidebar links
-// don't die for chapters that haven't been ported to Lume yet.
+// don't die for chapters that haven't been ported to Lume yet. deployBase is
+// the parent of the per-edition sites (es2024/, es2025/, …) the
+// VersionSwitcher dropdown points at.
 const basePath = Deno.env.get("BASE_PATH") ?? "";
 const fallbackBase = "/ecma262/draft";
+const deployBase = "/ecma262";
 
 export default function Page(
   { children, title, slug }: {
@@ -68,7 +71,7 @@ export default function Page(
             Hidden visually; revealed on focus by the .skip-nav CSS. */
         }
         <a class="skip-nav" href="#content">Skip to content</a>
-        <Header basePath={basePath} />
+        <Header basePath={basePath} deployBase={deployBase} />
         <Sidebar
           basePath={basePath}
           currentSlug={slug ?? ""}
@@ -129,6 +132,38 @@ export default function Page(
               if(localStorage.getItem("sidebar")==="collapsed")setCollapsed(true);
               collapseBtn.addEventListener("click",function(){setCollapsed(true);});
               expandBtn.addEventListener("click",function(){setCollapsed(false);});
+              // Version switcher dropdown: trigger toggles the menu, outside
+              // click + Escape close it. Mirrors the React component in
+              // packages/shared/components/version-switcher.jsx.
+              var vsRoot=document.getElementById("version-switcher");
+              var vsTrigger=document.getElementById("version-switcher-trigger");
+              var vsMenu=document.getElementById("version-switcher-menu");
+              function setVsOpen(open){
+                vsMenu.classList.toggle("ecma-vs-hidden",!open);
+                vsTrigger.setAttribute("aria-expanded",open?"true":"false");
+              }
+              vsTrigger.addEventListener("click",function(e){
+                e.stopPropagation();
+                setVsOpen(vsMenu.classList.contains("ecma-vs-hidden"));
+              });
+              document.addEventListener("mousedown",function(e){
+                if(!vsRoot.contains(e.target))setVsOpen(false);
+              });
+              document.addEventListener("keydown",function(e){
+                if(e.key==="Escape")setVsOpen(false);
+              });
+              // Cmd/Ctrl+K focuses the Pagefind search input. We retry briefly
+              // because Pagefind UI mounts asynchronously after script load.
+              document.addEventListener("keydown",function(e){
+                if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){
+                  var input=document.querySelector("#search input");
+                  if(input){e.preventDefault();input.focus();input.select&&input.select();}
+                }
+              });
+              // Show the right kbd hint for the current platform.
+              if(/Mac|iPhone|iPad/.test(navigator.platform)){
+                document.body.classList.add("is-mac");
+              }
             `,
           }}
         />

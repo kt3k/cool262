@@ -77,29 +77,69 @@ body {
   top: 0;
   z-index: 10;
 }
+/* Title cluster: bold main title + dotted-underline status badge link +
+   VersionSwitcher chevron, all on one baseline. Mirrors the navbar logo in
+   packages/shared/components/spec-layout.jsx so the visual hierarchy is
+   identical to the Nextra deploys. */
+.site-header .site-title-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
 .site-header .site-title {
   text-decoration: none;
   color: inherit;
-  font-size: 0.95rem;
 }
-.site-header .site-title .qual {
-  color: var(--muted);
-  font-weight: normal;
+.site-header .qual-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
 }
-.site-header .site-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  margin-left: 1rem;
-  font-size: 0.85rem;
-}
-.site-header .site-nav a:hover {
-  color: var(--fg);
+.site-header .qual-link:hover {
+  text-decoration-style: solid;
 }
 .site-header .site-search {
   position: relative; /* anchor the absolutely-positioned drawer */
   flex-grow: 1;
   max-width: 22rem;
   margin: 0 1.5rem;
+}
+/* Keyboard-shortcut hint, pinned inside the right edge of the search pill.
+   Pagefind's input lives in the same .site-search box; padding on the input
+   (added below in the pagefind overrides) keeps typed text from overlapping
+   this badge. */
+.site-header .search-kbd {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  height: 1.3rem;
+  padding: 0 0.4rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: var(--bg);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  pointer-events: none;
+  z-index: 5;
+}
+.site-header .search-kbd .search-kbd-mac {
+  display: none;
+}
+body.is-mac .site-header .search-kbd .search-kbd-mac {
+  display: inline;
+}
+body.is-mac .site-header .search-kbd .search-kbd-other {
+  display: none;
 }
 /* Theme toggle (sidebar footer): pill button with icon + current-mode
    label, matching Nextra's `.nextra-sidebar-footer` button affordance.
@@ -158,7 +198,10 @@ html.dark .theme-toggle .label-light {
 .site-search .pagefind-ui__search-input {
   width: 100%;
   height: 2rem;
-  padding: 0 2.5rem 0 0.8rem;
+  /* Right padding reserves room for either the static kbd hint (idle) or the
+     Pagefind clear-button (typing). The clear button is positioned by
+     Pagefind to inset 0.4rem and is ~1.4rem wide; the kbd is ~3rem. */
+  padding: 0 4rem 0 0.8rem;
   border: 1px solid var(--rule);
   border-radius: 8px;
   background: rgba(127, 127, 127, 0.08);
@@ -167,6 +210,11 @@ html.dark .theme-toggle .label-light {
   font-size: 0.85rem;
   line-height: 2rem;
   transition: background 0.15s, border-color 0.15s;
+}
+/* Hide the kbd badge once the user starts typing — the Pagefind clear button
+   takes that space, and the hint is no longer informative. */
+.site-search:focus-within .search-kbd {
+  display: none;
 }
 .site-search .pagefind-ui__search-input::placeholder {
   color: var(--muted);
@@ -1132,7 +1180,10 @@ main[data-pagefind-body] :is(h1, h2, h3, h4, h5, h6),
 main[data-pagefind-body] :is(b, strong) {
   color: var(--ecma-text-strong);
 }
-/* ── Version switcher dropdown (navbar) — see app/version-switcher.jsx ─────── */
+/* ── Version switcher dropdown (navbar) — port of
+   packages/shared/components/version-switcher.jsx. Uses the PoC's own theme
+   tokens (--rule / --bg / --chrome-bg / --accent / --muted / --fg) so it
+   tracks light/dark via html.dark like everything else in this file. */
 .ecma-vs {
   position: relative;
   display: inline-flex;
@@ -1141,27 +1192,21 @@ main[data-pagefind-body] :is(b, strong) {
 .ecma-vs-trigger {
   cursor: pointer;
   background: transparent;
-  border: 1px solid var(--x-color-gray-300);
+  border: 1px solid var(--rule);
   border-radius: 6px;
-  color: inherit;
-  padding: 0.25em;
+  color: var(--muted);
+  padding: 0.2em;
   line-height: 0;
-  opacity: 0.7;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
 .ecma-vs-trigger:hover {
-  opacity: 1;
-  background: var(--x-color-gray-100);
+  color: var(--fg);
+  background: var(--chrome-bg);
+  border-color: var(--accent);
 }
-.dark .ecma-vs-trigger {
-  border-color: var(--x-color-gray-700);
-}
-.dark .ecma-vs-trigger:hover {
-  background: var(--x-color-gray-800);
-}
-
 .ecma-vs-menu {
   position: absolute;
   top: 100%;
@@ -1171,14 +1216,13 @@ main[data-pagefind-body] :is(b, strong) {
   z-index: 50;
   min-width: max-content;
   list-style: none;
-  background: var(--x-color-gray-50);
-  border: 1px solid var(--x-color-gray-200);
+  background: var(--bg);
+  border: 1px solid var(--rule);
   border-radius: 8px;
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
 }
-.dark .ecma-vs-menu {
-  background: var(--x-color-gray-900);
-  border-color: var(--x-color-gray-700);
+.ecma-vs-hidden {
+  display: none;
 }
 .ecma-vs-item {
   display: block;
@@ -1186,16 +1230,14 @@ main[data-pagefind-body] :is(b, strong) {
   border-radius: 6px;
   white-space: nowrap;
   text-decoration: none;
-  font-size: 0.9rem;
-  color: var(--ecma-text-body);
+  font-size: 0.85rem;
+  color: var(--fg);
 }
 .ecma-vs-item:hover {
-  background: var(--x-color-gray-200);
-}
-.dark .ecma-vs-item:hover {
-  background: var(--x-color-gray-800);
+  background: var(--chrome-bg);
+  color: var(--accent);
 }
 .ecma-vs-current {
   font-weight: 600;
-  color: var(--x-color-primary-600);
+  color: var(--accent);
 }
