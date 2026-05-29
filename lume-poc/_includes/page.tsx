@@ -43,24 +43,21 @@ export default function Page(
         />
         <link rel="stylesheet" href={`${basePath}/styles.css`} />
         {
-          /* Pagefind UI: tiny CSS + JS bundle loaded from CDN. The actual
-            search index sits under `${basePath}/pagefind/` and gets generated
-            after the Lume build by `deno task pagefind` / CI. Without the
-            index the input still mounts but searches return nothing. */
+          /* Pagefind UI: CSS + UMD JS bundle sit next to the search index
+            under `${basePath}/pagefind/`. The `pagefind` CLI generates
+            both at build time, so no CDN dependency. Without the index
+            (e.g. before running `deno task pagefind` locally) the input
+            won't mount; that's intentional — better than a broken CDN. */
         }
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1/css/ui.css"
+          href={`${basePath}/pagefind/pagefind-ui.css`}
         />
-        <script
-          defer
-          src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1/dist/ui.js"
-        >
-        </script>
+        <script defer src={`${basePath}/pagefind/pagefind-ui.js`}></script>
         <script
           dangerouslySetInnerHTML={{
             __html:
-              `window.addEventListener("DOMContentLoaded",()=>{new PagefindUI({element:"#search",bundlePath:"${basePath}/pagefind/",showSubResults:true});});`,
+              `window.addEventListener("DOMContentLoaded",function(){if(typeof PagefindUI!=="undefined"){new PagefindUI({element:"#search",bundlePath:"${basePath}/pagefind/",showSubResults:true});}});`,
           }}
         />
       </head>

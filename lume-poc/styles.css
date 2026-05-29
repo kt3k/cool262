@@ -161,9 +161,11 @@ aside.sidebar {
   align-self: start;
   height: calc(100vh - var(--header-h));
   background: var(--chrome-bg);
-  /* Flex column: list scrolls on its own; footer stays pinned at the bottom. */
-  display: flex;
-  flex-direction: column;
+  /* Inner grid: the list takes whatever space is left (1fr) and scrolls on
+     its own, the footer is `auto` and sits at the bottom. min-height: 0 on
+     the list lets it shrink small enough to keep the footer in view. */
+  display: grid;
+  grid-template-rows: 1fr auto;
   min-height: 0;
 }
 aside.sidebar .sidebar-list {
@@ -171,7 +173,6 @@ aside.sidebar .sidebar-list {
   margin: 0;
   padding: 1rem 0.75rem;
   overflow-y: auto;
-  flex: 1 1 auto;
   min-height: 0;
 }
 aside.sidebar li {
@@ -197,9 +198,13 @@ aside.sidebar li.current > a {
 /* Non-scrolling sidebar footer (theme toggle lives here). Matches the
    .nextra-sidebar-footer affordance Nextra uses. */
 aside.sidebar .sidebar-footer {
-  flex: 0 0 auto;
   border-top: 1px solid var(--rule);
-  padding: 0.5rem 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--chrome-bg);
+}
+aside.sidebar .sidebar-footer .theme-toggle {
+  width: 100%;
+  justify-content: flex-start;
 }
 
 main {

@@ -35,15 +35,6 @@ export default function Header({ basePath }: { basePath: string }) {
         <b>ECMA-262</b> <span class="qual">lume-poc</span>
       </a>
       <div id="search" class="site-search"></div>
-      <nav class="site-nav">
-        <a
-          href="https://github.com/kt3k/ecma262"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub
-        </a>
-      </nav>
     </header>
   );
 }
