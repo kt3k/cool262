@@ -28,6 +28,18 @@ export default function Page(
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title ?? "ECMA-262"}</title>
+        {
+          /* Set the theme class before any styles apply so returning visitors
+            don't see a light-mode flash. Reads localStorage with a
+            prefers-color-scheme fallback. The matching click handler is
+            wired below after the body mounts. */
+        }
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `(function(){var p=localStorage.getItem("theme");var d=p==="dark"||(p===null&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark");})();`,
+          }}
+        />
         <link rel="stylesheet" href={`${basePath}/styles.css`} />
         {
           /* Pagefind UI: tiny CSS + JS bundle loaded from CDN. The actual
@@ -70,6 +82,17 @@ export default function Page(
           <ol></ol>
         </aside>
         <Footer />
+        {
+          /* Theme toggle click handler: flips the .dark class on <html> and
+            persists the choice. Sits at the end of <body> so #theme-toggle
+            exists when the listener attaches. */
+        }
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `document.getElementById("theme-toggle").addEventListener("click",function(){var d=document.documentElement.classList.toggle("dark");localStorage.setItem("theme",d?"dark":"light");});`,
+          }}
+        />
       </body>
     </html>
   );

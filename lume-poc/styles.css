@@ -15,6 +15,16 @@
   --sidebar-w: 280px;
   --toc-w: 240px;
   --header-h: 3rem;
+  color-scheme: light;
+}
+html.dark {
+  --bg: #0f1117;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --rule: #2a2e37;
+  --chrome-bg: #161922;
+  --accent: #60a5fa;
+  color-scheme: dark;
 }
 
 /* Skip-to-content: visually hidden until a keyboard user tabs into it,
@@ -89,6 +99,39 @@ body {
   flex-grow: 1;
   max-width: 24rem;
   margin: 0 1.5rem;
+}
+/* Theme toggle: square icon button. Show the icon for the OTHER mode (i.e.
+   the one a click would switch to), matching the affordance Nextra uses. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.6rem;
+  padding: 0;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.theme-toggle:hover {
+  color: var(--fg);
+  background: var(--chrome-bg);
+}
+.theme-toggle .icon-sun {
+  display: none;
+}
+.theme-toggle .icon-moon {
+  display: block;
+}
+html.dark .theme-toggle .icon-sun {
+  display: block;
+}
+html.dark .theme-toggle .icon-moon {
+  display: none;
 }
 /* Tone down Pagefind UI's defaults — they ship a chunky search box with
    a tinted background. Strip that down to a single-line input that fits
