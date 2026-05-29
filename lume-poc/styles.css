@@ -335,6 +335,9 @@ aside.sidebar {
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 0;
+  /* Width changes smoothly when toggling between full and narrow. The grid
+     column track on body animates the same way (see body transition below). */
+  transition: width 0.2s ease-in-out;
 }
 aside.sidebar .sidebar-list {
   list-style: none;
@@ -388,8 +391,7 @@ aside.sidebar .sidebar-footer .theme-toggle {
   flex: 1 1 auto;
   justify-content: flex-start;
 }
-.sidebar-collapse-btn,
-.sidebar-expand-btn {
+.sidebar-collapse-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -403,31 +405,57 @@ aside.sidebar .sidebar-footer .theme-toggle {
   cursor: pointer;
   flex: 0 0 auto;
 }
-.sidebar-collapse-btn:hover,
-.sidebar-expand-btn:hover {
+.sidebar-collapse-btn:hover {
   color: var(--fg);
   background: var(--chrome-bg);
   border-color: var(--accent);
 }
-/* Header expand button: only visible when the sidebar is collapsed. */
-.sidebar-expand-btn {
-  display: none;
-  margin-right: 0.6rem;
+/* Collapsed sidebar: narrow rail (~60px) instead of disappearing — matches
+   nextra-theme-docs, which toggles between x:w-64 (256px) and x:w-20 (80px).
+   Body grid track + sidebar both transition for a smooth slide. */
+:root {
+  --sidebar-w-narrow: 60px;
 }
-body.sidebar-collapsed .sidebar-expand-btn {
-  display: inline-flex;
+body {
+  transition: grid-template-columns 0.2s ease-in-out;
 }
-/* Collapsed sidebar: zero the grid column so main expands to fill the gap. */
 body.sidebar-collapsed {
-  grid-template-columns: 0 1fr var(--toc-w);
+  grid-template-columns: var(--sidebar-w-narrow) 1fr var(--toc-w);
 }
-body.sidebar-collapsed aside.sidebar {
-  visibility: hidden;
-  pointer-events: none;
+/* Hide the scrollable chapter list — only the footer's icon-only buttons
+   remain visible while collapsed. */
+body.sidebar-collapsed aside.sidebar .sidebar-list {
+  display: none;
+}
+/* Footer reflow: stack and center the two buttons so they don't overflow
+   the narrow rail (matches Nextra's x:flex-wrap x:justify-center). */
+body.sidebar-collapsed aside.sidebar .sidebar-footer {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0;
+}
+/* Theme toggle "lite" mode: drop the text label so just the sun/moon icon
+   remains, sized to fit the narrow rail. Matches ThemeSwitch's `lite` prop
+   in nextra-theme-docs. */
+body.sidebar-collapsed aside.sidebar .theme-toggle {
+  flex: 0 0 auto;
+  width: 2rem;
+  padding: 0;
+  justify-content: center;
+}
+body.sidebar-collapsed aside.sidebar .theme-toggle .theme-toggle-label {
+  display: none;
+}
+/* Flip just the arrow path of the collapse-button SVG (not the whole icon —
+   the surrounding "panel" path stays put, matching Nextra). */
+body.sidebar-collapsed .sidebar-collapse-btn .collapse-arrow {
+  transform-origin: 35% 50%;
+  transform: rotate(180deg);
 }
 @media (max-width: 1100px) {
   body.sidebar-collapsed {
-    grid-template-columns: 0 1fr;
+    grid-template-columns: var(--sidebar-w-narrow) 1fr;
   }
 }
 

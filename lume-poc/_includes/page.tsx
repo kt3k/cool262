@@ -136,18 +136,24 @@ export default function Page(
               document.addEventListener("keydown",function(e){
                 if(e.key==="Escape")setMenu(false);
               });
-              // Sidebar collapse (desktop): footer chevron hides the sidebar,
-              // header chevron brings it back. Persist so navigating between
-              // pages remembers the user's choice.
+              // Sidebar collapse (desktop): single button in the sidebar
+              // footer toggles between full (256px) and narrow (60px). When
+              // narrow the menu list is hidden and the footer reflows so
+              // just the icon-only theme + toggle buttons remain — matches
+              // nextra-theme-docs' sidebar.js (x:w-64 ↔ x:w-20 + flex-wrap).
+              // The choice is persisted so navigating between pages remembers
+              // the user's state.
               var collapseBtn=document.getElementById("sidebar-collapse");
-              var expandBtn=document.getElementById("sidebar-expand");
               function setCollapsed(c){
                 document.body.classList.toggle("sidebar-collapsed",c);
+                collapseBtn.setAttribute("aria-expanded",c?"false":"true");
+                collapseBtn.setAttribute("title",c?"Expand sidebar":"Collapse sidebar");
                 localStorage.setItem("sidebar",c?"collapsed":"open");
               }
               if(localStorage.getItem("sidebar")==="collapsed")setCollapsed(true);
-              collapseBtn.addEventListener("click",function(){setCollapsed(true);});
-              expandBtn.addEventListener("click",function(){setCollapsed(false);});
+              collapseBtn.addEventListener("click",function(){
+                setCollapsed(!document.body.classList.contains("sidebar-collapsed"));
+              });
               // Version switcher dropdown: trigger toggles the menu, outside
               // click + Escape close it. Mirrors the React component in
               // packages/shared/components/version-switcher.jsx.

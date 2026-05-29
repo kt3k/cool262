@@ -86,17 +86,19 @@ export default function Sidebar(
           </span>
         </button>
         {
-          /* Sidebar collapse button — same row as the theme toggle (matches
-            Nextra's two-button .nextra-sidebar-footer row). Click flips
-            body.sidebar-collapsed; an expand button in the header brings it
-            back. Click handler is in page.tsx alongside the theme toggle. */
+          /* Sidebar collapse / expand toggle — same button for both states,
+            matching Nextra's .nextra-sidebar-footer button. The arrow part
+            of the SVG (.collapse-arrow) is rotated 180° via CSS when
+            body.sidebar-collapsed, so the same icon reads as either
+            "shrink" (open) or "grow" (closed). Click handler in page.tsx
+            flips body.sidebar-collapsed. */
         }
         <button
           id="sidebar-collapse"
           class="sidebar-collapse-btn"
           type="button"
-          aria-label="Collapse sidebar"
           aria-controls="sidebar"
+          aria-expanded="true"
           title="Collapse sidebar"
         >
           <svg
@@ -106,7 +108,10 @@ export default function Sidebar(
             fill="currentColor"
             aria-hidden="true"
           >
-            <path d="M11.823 8.177L9.427 10.573A.25.25 0 019 10.396V5.604a.25.25 0 01.427-.177l2.396 2.396a.25.25 0 010 .354z">
+            <path
+              class="collapse-arrow"
+              d="M11.823 8.177L9.427 10.573A.25.25 0 019 10.396V5.604a.25.25 0 01.427-.177l2.396 2.396a.25.25 0 010 .354z"
+            >
             </path>
             <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H5.5v-13H1.75zM7 1.5v13h7.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H7z">
             </path>

@@ -42,31 +42,6 @@ export default function Header(
           <path d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
-      {
-        /* Desktop-only expand button. Hidden while the sidebar is open;
-          body.sidebar-collapsed (toggled from the sidebar footer button)
-          flips it on so the user can bring the sidebar back. */
-      }
-      <button
-        id="sidebar-expand"
-        class="sidebar-expand-btn"
-        type="button"
-        aria-label="Show sidebar"
-        title="Show sidebar"
-      >
-        <svg
-          viewBox="0 0 16 16"
-          width="14"
-          height="14"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path d="M4.177 7.823l2.396-2.396A.25.25 0 017 5.604v4.792a.25.25 0 01-.427.177L4.177 8.177a.25.25 0 010-.354z">
-          </path>
-          <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25H5.5v-13H1.75zM7 1.5v13h7.25a.25.25 0 00.25-.25V1.75a.25.25 0 00-.25-.25H7z">
-          </path>
-        </svg>
-      </button>
       <span class="site-title-group">
         <a class="site-title" href={`${basePath}/`}>
           <b>{titleMain}</b>
