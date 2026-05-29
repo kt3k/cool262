@@ -1,6 +1,224 @@
 /* Styles for spec content rendered via lib/spec/<chapter>.jsx (Sec component
    wraps everything in <div class="ecma-spec">). */
 
+/* ── Page chrome (Lume PoC) ──────────────────────────────────────────────
+   Five-slot grid: sticky header, three columns (sidebar / main / TOC),
+   footer underneath. The TOC drops off below ~1100px; sidebar drops off
+   below ~800px. Matches the affordance Nextra gives us today. */
+:root {
+  --bg: #ffffff;
+  --fg: #111827;
+  --muted: #6b7280;
+  --rule: #e5e7eb;
+  --chrome-bg: #fafafa;
+  --accent: #2563eb;
+  --sidebar-w: 280px;
+  --toc-w: 240px;
+  --header-h: 3rem;
+}
+
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr var(--toc-w);
+  grid-template-rows: var(--header-h) 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "sidebar main toc"
+    "footer footer footer";
+  min-height: 100vh;
+}
+
+.site-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.site-header .site-title {
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.95rem;
+}
+.site-header .site-title .qual {
+  color: var(--muted);
+  font-weight: normal;
+}
+.site-header .site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.85rem;
+}
+.site-header .site-nav a:hover {
+  color: var(--fg);
+}
+
+aside.sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid var(--rule);
+  padding: 1rem 0.75rem 2rem;
+  overflow-y: auto;
+  position: sticky;
+  top: var(--header-h);
+  align-self: start;
+  max-height: calc(100vh - var(--header-h));
+  background: var(--chrome-bg);
+}
+aside.sidebar ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+aside.sidebar li {
+  margin: 0.05rem 0;
+}
+aside.sidebar a {
+  display: block;
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  color: #444;
+  text-decoration: none;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+aside.sidebar a:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--fg);
+}
+aside.sidebar li.current > a {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+main {
+  grid-area: main;
+  padding: 1.5rem 2rem 4rem;
+  min-width: 0;
+}
+
+aside.toc {
+  grid-area: toc;
+  border-left: 1px solid var(--rule);
+  padding: 1.5rem 1rem;
+  position: sticky;
+  top: var(--header-h);
+  align-self: start;
+  max-height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+  font-size: 0.85rem;
+}
+aside.toc h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+aside.toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 1px solid var(--rule);
+}
+aside.toc li {
+  margin: 0;
+}
+aside.toc li[data-level="2"] {
+  padding-inline-start: 0.75rem;
+}
+aside.toc li[data-level="3"] {
+  padding-inline-start: 1.75rem;
+}
+aside.toc li[data-level="4"] {
+  padding-inline-start: 2.75rem;
+}
+aside.toc li[data-level="5"] {
+  padding-inline-start: 3.75rem;
+}
+aside.toc a {
+  display: block;
+  padding: 0.2em 0.5em;
+  color: var(--muted);
+  text-decoration: none;
+  line-height: 1.35;
+}
+aside.toc a:hover {
+  color: var(--accent);
+}
+
+footer.site-footer {
+  grid-area: footer;
+  border-top: 1px solid var(--rule);
+  background: var(--chrome-bg);
+  padding: 2rem 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+footer.site-footer .footer-cols {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+footer.site-footer .footer-cols > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+footer.site-footer a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  text-underline-offset: 3px;
+}
+footer.site-footer a:hover {
+  text-decoration-color: currentColor;
+}
+footer.site-footer .copyright {
+  margin-top: 0.6rem;
+}
+
+@media (max-width: 1100px) {
+  body {
+    grid-template-columns: var(--sidebar-w) 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar main"
+      "footer footer";
+  }
+  aside.toc {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+  }
+  aside.sidebar {
+    display: none;
+  }
+}
+
+/* ── End of page chrome ──────────────────────────────────────────────── */
+
 /* Nextra's per-page breadcrumb only contains a single item — the current
    page's display label from _meta.js (e.g. "1. Scope") — which duplicates
    the in-page H1. Hide it. */
