@@ -79,8 +79,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
-  background: var(--chrome-bg);
-  border-top: 1px solid var(--rule);
+  background: var(--bg);
   border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
@@ -636,14 +635,17 @@ aside.toc .toc-feedback-arrow {
   flex-shrink: 0;
 }
 
-/* Footer matches packages/shared/components/spec-layout.jsx: no background,
-   no border-top — just centred grey text. Outer flex centres the two
-   columns; each column is a top-aligned stack with 0.4rem between rows
-   (Nextra's gap). py-12 = 3rem top/bottom; safe-area insets pad the sides
-   so it doesn't hug the screen edge on notched phones. */
+/* Footer matches packages/shared/components/spec-layout.jsx: two centred
+   columns of grey text. Outer flex centres the columns; each column is a
+   top-aligned stack with 0.4rem between rows (Nextra's gap). py-12 = 3rem
+   top/bottom; safe-area insets pad the sides so it doesn't hug the screen
+   edge on notched phones. Tinted chrome (--chrome-bg + border-top) lifts
+   it off the article so the page bottom has a clear visual boundary. */
 footer.site-footer {
   padding: 3rem max(env(safe-area-inset-right), 1.5rem) 3rem
     max(env(safe-area-inset-left), 1.5rem);
+  background: var(--chrome-bg);
+  border-top: 1px solid var(--rule);
   color: #4b5563;
   font-size: 0.875rem;
 }
