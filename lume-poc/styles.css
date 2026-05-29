@@ -538,6 +538,15 @@ aside.toc a {
 aside.toc a:hover {
   color: var(--accent);
 }
+/* Feedback link below the per-page TOC. Visually separated by a thin top
+   border + extra space so it reads as a distinct affordance, not another
+   table-of-contents entry. */
+aside.toc .toc-feedback {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 0.8rem;
+}
 
 /* Footer matches packages/shared/components/spec-layout.jsx: no background,
    no border-top — just centred grey text. Outer flex centres the two

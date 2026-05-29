@@ -88,6 +88,22 @@ export default function Page(
         <aside class="toc">
           <h2>On this page</h2>
           <ol></ol>
+          {
+            /* "Question? Give us feedback →" — Nextra's default link below
+              the on-this-page list. URL mirrors the format nextra-theme-docs
+              generates from docsRepositoryBase: /issues/new with a
+              pre-filled title + labels=feedback. */
+          }
+          <a
+            class="toc-feedback"
+            href={`https://github.com/kt3k/ecma262/issues/new?title=${
+              encodeURIComponent(`Feedback for "${title ?? "ECMA-262"}"`)
+            }&labels=feedback`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Question? Give us feedback →
+          </a>
         </aside>
         <Footer />
         {
