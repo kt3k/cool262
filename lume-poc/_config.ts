@@ -19,6 +19,7 @@ site.ignore("README.md");
 
 // Static assets that ship as-is into _site/.
 site.copy("styles.css");
+site.copy("search.js");
 
 // Build the per-page right-rail TOC after rendering. Lume parses each .html
 // page's content into a Document on demand (`page.document`); we walk the

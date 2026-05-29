@@ -64,16 +64,29 @@ export default function Header(
           : null}
         <VersionSwitcher basePath={basePath} deployBase={deployBase} />
       </span>
-      <div id="search" class="site-search">
+      <div id="search" class="site-search" data-base={basePath}>
         {
-          /* Keyboard-shortcut hint inside the search input. Pagefind UI mounts
-            its <input> on top of this; CSS pins the kbd to the right edge so
-            it sits inside the rounded pill without overlapping typed text. */
+          /* Custom search built on Pagefind core (search.js) — mirrors the
+            shape of Nextra's <Search>. The <input> is our own (not mounted
+            by PagefindUI); the kbd hint pins to the right edge of the
+            input via CSS, hidden while the input is focused. The empty
+            .search-panel below is where search.js writes the results
+            dropdown when the user types. */
         }
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Search documentation…"
+          autocomplete="off"
+          spellcheck={false}
+          aria-label="Search documentation"
+        />
         <kbd class="search-kbd" aria-hidden="true">
           <span class="search-kbd-mac">⌘ K</span>
           <span class="search-kbd-other">Ctrl K</span>
         </kbd>
+        <div class="search-panel" role="listbox" aria-label="Search results">
+        </div>
       </div>
     </header>
   );
