@@ -15,7 +15,7 @@ export default function Sidebar(
   },
 ) {
   return (
-    <aside class="sidebar">
+    <aside id="sidebar" class="sidebar">
       <ol>
         {chapters.map((c) => {
           const isCurrent = c.slug === currentSlug;
