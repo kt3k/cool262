@@ -108,6 +108,71 @@ DOM:
 | `.sidebar-footer` bg | `var(--chrome-bg)`         | (削除)                                              |
 | モバイル overlay bg  | (sidebar から継承)         | `var(--bg)` を明示 (sidebar が透明になった分の補填) |
 
+## 追加調査: footer 罫線の幅と「すりガラス」の正体
+
+サイドバーと TOC の両方で見つけた、Nextra の細かい仕掛け二つ。
+
+### 1. footer 罫線が full-width じゃなく内側だけに描画される
+
+DOM:
+
+```html
+<div class="nextra-sidebar-footer x:border-t nextra-border
+            x:flex x:items-center x:gap-2 x:py-4 x:mx-4 x:mt-auto">
+```
+
+TOC の feedback footer も同じ:
+
+```html
+<div class="x:grid x:gap-2 x:py-4 x:mx-4 x:border-t nextra-border">
+```
+
+仕組み: `x:mx-4` (= `margin-inline: 16px`) で **要素自体が左右 16px
+インセット**。`x:border-t` (1px) は要素の輪郭に沿うので、自動的に内側だけの幅に
+なる。padding ではなく margin で外側を縮めているのが鍵。
+
+lume-poc 側の修正:
+
+- `.sidebar-footer`: `padding: 0.6rem 0.75rem` →
+  `margin: 0 1rem; padding: 1rem 0`
+- `.toc-feedback`: もともと `margin: 0 1rem; padding: 1rem 0` 済みだったので
+  既に Nextra と一致
+
+### 2. sidebar / TOC のスクロール端「すりガラス」フェード
+
+Nextra のリストには `nextra-mask` というクラスが付与されている:
+
+- サイドバー:
+  `<div class="x:p-4 x:overflow-y-auto nextra-scrollbar nextra-mask x:grow">`
+- TOC: `<ul class="x:p-4 nextra-scrollbar ... nextra-mask">`
+
+CSS 本体:
+
+```css
+.nextra-mask {
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
+}
+```
+
+`backdrop-filter` でも半透明レイヤでもない。**CSS mask-image** で
+リスト要素自体を上下端だけ透明にしている。2 つの linear-gradient を 重ねて
+`mask-composite: add` で合成すると、
+
+- 上端 0–20px: フェードイン
+- 中央: 完全に opaque
+- 下端 0–20px: フェードアウト
+
+という mask になり、スクロールするリストの最上行 / 最下行が header と footer
+直前で背景色に「溶け込む」ように見える。ユーザーが「すりガラス」
+と認識していたのは、リスト最下行が footer 直前で透明に変わる現象。
+
+lume-poc 側の修正:
+
+- `aside.sidebar .sidebar-list` と `aside.toc ol` の両方に同じ二重
+  グラデーション `mask-image` (+ `-webkit-mask-image` の重複指定) を追加
+
 ## トレードオフと未対応
 
 - **`primary-*` トークンの inline 化**: lume-poc は Nextra の

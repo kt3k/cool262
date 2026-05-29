@@ -609,6 +609,15 @@ aside.toc ol {
   margin: 0;
   overflow-y: auto;
   overscroll-behavior-y: contain;
+  /* Same .nextra-mask two-gradient fade the chapter list uses: rows
+     dissolve into the heading above and the feedback link below
+     instead of getting a hard scroll-edge cutoff. */
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent, #000 20px, transparent 100%),
+    linear-gradient(to top, transparent, #000 20px, transparent 100%);
 }
 aside.toc li {
   margin: 0.5rem 0; /* x:my-2 */
