@@ -64,6 +64,23 @@ body {
 .site-header .site-nav a:hover {
   color: var(--fg);
 }
+.site-header .site-search {
+  flex-grow: 1;
+  max-width: 24rem;
+  margin: 0 1.5rem;
+}
+/* Tone down Pagefind UI's defaults — they ship a chunky search box with
+   a tinted background. Strip that down to a single-line input that fits
+   inline in the header bar. */
+.site-search .pagefind-ui__form {
+  --pagefind-ui-scale: 0.8;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--fg);
+  --pagefind-ui-background: var(--bg);
+  --pagefind-ui-border: var(--rule);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 6px;
+}
 
 aside.sidebar {
   grid-area: sidebar;

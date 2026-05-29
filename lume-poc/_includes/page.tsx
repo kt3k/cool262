@@ -29,6 +29,27 @@ export default function Page(
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title ?? "ECMA-262"}</title>
         <link rel="stylesheet" href={`${basePath}/styles.css`} />
+        {
+          /* Pagefind UI: tiny CSS + JS bundle loaded from CDN. The actual
+            search index sits under `${basePath}/pagefind/` and gets generated
+            after the Lume build by `deno task pagefind` / CI. Without the
+            index the input still mounts but searches return nothing. */
+        }
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1/css/ui.css"
+        />
+        <script
+          defer
+          src="https://cdn.jsdelivr.net/npm/@pagefind/default-ui@1/dist/ui.js"
+        >
+        </script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `window.addEventListener("DOMContentLoaded",()=>{new PagefindUI({element:"#search",bundlePath:"${basePath}/pagefind/",showSubResults:true});});`,
+          }}
+        />
       </head>
       <body>
         <Header basePath={basePath} />
