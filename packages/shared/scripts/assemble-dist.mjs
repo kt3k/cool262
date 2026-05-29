@@ -34,6 +34,14 @@ for (const edition of editions) {
   fs.cpSync(out, path.join(distDir, edition.id), { recursive: true });
 }
 
+// Optional: include the Lume PoC if it's been built. CI builds it explicitly;
+// locally it's skipped unless you ran `deno task build` in lume-poc/.
+const lumeOut = path.join(root, "lume-poc", "_site");
+if (fs.existsSync(lumeOut)) {
+  fs.cpSync(lumeOut, path.join(distDir, "lume-poc"), { recursive: true });
+  console.log("[assemble-dist] included lume-poc/_site -> dist/lume-poc/");
+}
+
 const escape = (s) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 

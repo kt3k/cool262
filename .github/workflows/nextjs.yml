@@ -31,8 +31,22 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build all sites
         run: pnpm build:all
+      - name: Setup Deno
+        # Needed only for the Lume PoC build below.
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Build Lume PoC
+        # Outputs to lume-poc/_site/; gets folded into dist/lume-poc/ by
+        # assemble-dist.mjs. BASE_PATH lets the layout's stylesheet href
+        # resolve under the gh-pages prefix.
+        working-directory: lume-poc
+        env:
+          BASE_PATH: /ecma262/lume-poc
+        run: deno task build
       - name: Assemble combined dist/
-        # Copies each site's out/ into dist/<id>/ and writes the landing page.
+        # Copies each site's out/ into dist/<id>/, plus lume-poc/_site/ into
+        # dist/lume-poc/, and writes the landing page.
         run: pnpm assemble
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

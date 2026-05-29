@@ -14,6 +14,9 @@ const site = lume({
 site.use(jsx());
 site.use(mdx());
 
+// README.md is dev documentation, not a page to ship.
+site.ignore("README.md");
+
 // Static assets that ship as-is into _site/.
 site.copy("styles.css");
 
