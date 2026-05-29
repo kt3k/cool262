@@ -332,8 +332,14 @@ aside.sidebar {
   border-right: 1px solid var(--rule);
   position: sticky;
   top: var(--header-h);
-  align-self: start;
-  height: calc(100vh - var(--header-h));
+  /* Let the grid stretch the sidebar to match the row cell (default
+     align-self) but cap it at viewport-minus-header so the inner list can
+     scroll. Critically, NOT giving an explicit `height` keeps the sidebar
+     within its grid cell — when the page scrolls into the footer, the
+     sidebar slides up along with the cell's bottom (Nextra parity).
+     Using an explicit `height` here makes the sidebar overflow the cell
+     and bleed over the footer instead. */
+  max-height: calc(100vh - var(--header-h));
   background: var(--chrome-bg);
   /* Inner grid: the list takes whatever space is left (1fr) and scrolls on
      its own, the footer is `auto` and sits at the bottom. min-height: 0 on
@@ -538,12 +544,15 @@ main {
 }
 
 /* Right-rail TOC — port of nextra-theme-docs' <nav class="nextra-toc">:
-   sticky 3-row grid (heading / list / footer), borderless, 14px text. */
+   sticky 3-row grid (heading / list / footer), borderless, 14px text.
+   Same trick as the sidebar: let the row stretch this to its cell
+   (default align-self) and cap with max-height. That way the sticky
+   element rides the cell's bottom edge and slides up as the footer
+   scrolls into view, instead of overflowing onto the footer. */
 aside.toc {
   grid-area: toc;
   position: sticky;
   top: var(--header-h);
-  align-self: start;
   max-height: calc(100vh - var(--header-h));
   display: grid;
   grid-template-rows: min-content 1fr min-content;
