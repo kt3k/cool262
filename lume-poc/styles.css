@@ -437,55 +437,53 @@ main {
   min-width: 0;
 }
 
-/* Prev / next chapter pagination: two link cards at the bottom of the
-   article, separated by an HR-like top border. Empty slot (no prev or
-   no next) leaves an invisible <span> on the side that didn't fire so
-   the surviving card stays right-aligned via justify-content: space-between. */
+/* Prev / next chapter pagination: plain text + chevron icon, with a thin
+   top-border separator above. Matches what nextra-theme-docs renders — no
+   card chrome, no "Previous"/"Next" label. The next link sits right-aligned
+   via margin-inline-start: auto so it works whether prev exists or not. */
 .prev-next {
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 1rem;
+  align-items: center;
   margin-top: 4rem;
-  padding-top: 1.5rem;
+  margin-bottom: 2rem;
+  padding-top: 2rem;
   border-top: 1px solid var(--rule);
 }
 .prev-next-link {
-  display: flex;
-  flex-direction: column;
-  flex: 0 1 18rem;
-  padding: 0.9em 1.1em;
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  max-width: 50%;
+  padding: 0.5rem 0;
+  color: var(--muted);
   text-decoration: none;
-  transition: border-color 0.15s, background 0.15s;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: color 0.15s;
+  word-break: break-word;
 }
 .prev-next-link:hover {
-  border-color: var(--accent);
-  background: var(--chrome-bg);
+  color: var(--fg);
+}
+.prev-next-link.prev-link {
+  padding-inline-end: 1rem;
 }
 .prev-next-link.next-link {
-  align-items: flex-end;
-  text-align: right;
+  margin-inline-start: auto;
+  text-align: end;
+  padding-inline-start: 1rem;
 }
-.prev-next-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
+.prev-next-arrow {
+  flex: 0 0 auto;
 }
-.prev-next-link.next-link .prev-next-label::after {
-  content: " →";
+.prev-next-arrow.flip {
+  transform: rotate(180deg);
 }
-.prev-next-link.prev-link .prev-next-label::before {
-  content: "← ";
-}
-.prev-next-title {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-top: 0.25rem;
-  color: var(--accent);
+@media (min-width: 768px) {
+  .prev-next-link {
+    font-size: 1.125rem;
+  }
 }
 
 aside.toc {

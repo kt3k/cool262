@@ -1,7 +1,11 @@
 import chapters from "./chapters.ts";
 
-// "Previous chapter" / "Next chapter" link cards rendered at the bottom of
-// each spec page. Mirrors the pagination Nextra adds at the end of <article>.
+// "Previous chapter" / "Next chapter" links rendered at the bottom of each
+// spec page. Visual match for what nextra-theme-docs renders: a thin
+// top-border separator above, then each link is plain text with a chevron
+// — no card, no "Previous"/"Next" label, the chapter title carries the
+// meaning. Next link sits right-aligned via margin-start: auto.
+//
 // Lookup is by slug position in the chapters array; for chapters that aren't
 // Lume-rendered yet the link falls back to the gh-pages /draft/ build.
 export default function PrevNext(
@@ -23,24 +27,51 @@ export default function PrevNext(
       ? `${basePath}/${slug}/`
       : `${fallbackBase}/${slug === "index" ? "" : slug}`;
 
+  // Chevron-right SVG; the prev variant gets `class="flip"` so CSS rotates
+  // it 180° (matches Nextra's `x:ltr:rotate-180` on the prev arrow).
+  const Chevron = ({ flip }: { flip?: boolean }) => (
+    <svg
+      class={flip ? "prev-next-arrow flip" : "prev-next-arrow"}
+      viewBox="0 0 24 24"
+      width="18"
+      height="18"
+      stroke="currentColor"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9 5l7 7-7 7"></path>
+    </svg>
+  );
+
   return (
     <nav class="prev-next" aria-label="Chapter pagination">
       {prev
         ? (
-          <a class="prev-next-link prev-link" href={hrefFor(prev.slug)}>
-            <span class="prev-next-label">Previous</span>
+          <a
+            class="prev-next-link prev-link"
+            href={hrefFor(prev.slug)}
+            title={prev.title}
+          >
+            <Chevron flip />
             <span class="prev-next-title">{prev.title}</span>
           </a>
         )
-        : <span></span>}
+        : null}
       {next
         ? (
-          <a class="prev-next-link next-link" href={hrefFor(next.slug)}>
-            <span class="prev-next-label">Next</span>
+          <a
+            class="prev-next-link next-link"
+            href={hrefFor(next.slug)}
+            title={next.title}
+          >
             <span class="prev-next-title">{next.title}</span>
+            <Chevron />
           </a>
         )
-        : <span></span>}
+        : null}
     </nav>
   );
 }
