@@ -143,15 +143,16 @@ body.is-mac .site-header .search-kbd .search-kbd-mac {
 body.is-mac .site-header .search-kbd .search-kbd-other {
   display: none;
 }
-/* Theme toggle (sidebar footer): pill button with icon + current-mode
-   label, matching Nextra's `.nextra-sidebar-footer` button affordance.
-   Click flips html.dark and persists the choice (see page.tsx scripts). */
+/* Theme toggle (sidebar footer): borderless icon + label button. Matches
+   Nextra's ThemeSwitch (Select.Trigger) chrome — transparent background,
+   hover fills with a translucent gray, no visible border. Click flips
+   html.dark and persists the choice (see page.tsx scripts). */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--bg);
-  border: 1px solid var(--rule);
+  background: transparent;
+  border: none;
   border-radius: 6px;
   height: 2rem;
   padding: 0 0.6rem;
@@ -159,11 +160,10 @@ body.is-mac .site-header .search-kbd .search-kbd-other {
   font: inherit;
   font-size: 0.8rem;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background 0.15s;
 }
 .theme-toggle:hover {
-  background: var(--chrome-bg);
-  border-color: var(--accent);
+  background: rgba(127, 127, 127, 0.15);
 }
 /* Show current-mode label/icon (Nextra convention: button reads "Light"
    while the page is light, "Dark" while it's dark). */
@@ -437,13 +437,16 @@ body.sidebar-collapsed aside.sidebar .sidebar-list {
   display: none;
 }
 /* Footer reflow: stack the two buttons vertically so they read as a column
-   in the narrow rail. (Nextra uses x:flex-wrap which wraps them vertically
-   incidentally; using flex-direction is more explicit and predictable.) */
+   in the narrow rail, anchored to the bottom of the sidebar (Nextra's
+   x:sticky x:bottom-0 affordance). margin-top: auto is the belt-and-braces
+   anchor in case the sidebar's `1fr auto` grid track collapses when the
+   list is display:none. */
 body.sidebar-collapsed aside.sidebar .sidebar-footer {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 0;
+  margin-top: auto;
 }
 /* Both footer buttons share the same lite-mode chrome while collapsed:
    borderless, square, hover bg-fill — matches Nextra's collapse Button
