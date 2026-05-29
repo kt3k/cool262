@@ -34,12 +34,16 @@ for (const edition of editions) {
   fs.cpSync(out, path.join(distDir, edition.id), { recursive: true });
 }
 
-// Optional: include the Lume PoC if it's been built. CI builds it explicitly;
-// locally it's skipped unless you ran `deno task build` in lume-poc/.
-const lumeOut = path.join(root, "lume-poc", "_site");
-if (fs.existsSync(lumeOut)) {
-  fs.cpSync(lumeOut, path.join(distDir, "lume-poc"), { recursive: true });
-  console.log("[assemble-dist] included lume-poc/_site -> dist/lume-poc/");
+// Optional: include the Lume PoCs if they've been built. CI builds them
+// explicitly; locally they're skipped unless you ran `deno task build` in
+// the respective directory. lume-poc-2 is a structural variant of lume-poc
+// kept alongside for side-by-side comparison (see lume-poc-2/README.md).
+for (const id of ["lume-poc", "lume-poc-2"]) {
+  const out = path.join(root, id, "_site");
+  if (fs.existsSync(out)) {
+    fs.cpSync(out, path.join(distDir, id), { recursive: true });
+    console.log(`[assemble-dist] included ${id}/_site -> dist/${id}/`);
+  }
 }
 
 const escape = (s) =>

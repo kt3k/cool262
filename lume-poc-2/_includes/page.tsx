@@ -1,0 +1,218 @@
+import Header from "./header.tsx";
+import Sidebar from "./sidebar.tsx";
+import Footer from "./footer.tsx";
+import PrevNext from "./prev-next.tsx";
+
+// Top-level layout: header / sidebar / main / TOC / footer, wired together by
+// the CSS grid in styles.css. The TOC's <ol> is empty here; a post-render
+// processor in _config.ts walks the document for <emu-clause id=…> and fills
+// it in. That way the layout stays static (Lume can serve it from a string)
+// while the per-page outline is still data-driven.
+//
+// BASE_PATH lets the same build target both `localhost/` (empty prefix) and
+// `kt3k.github.io/ecma262/lume-poc-2/` (non-empty prefix). fallbackBase is the
+// gh-pages path to the still-Nextra-rendered chapters so the sidebar links
+// don't die for chapters that haven't been ported to Lume yet. deployBase is
+// the parent of the per-edition sites (es2024/, es2025/, …) the
+// VersionSwitcher dropdown points at.
+const basePath = Deno.env.get("BASE_PATH") ?? "";
+const fallbackBase = "/ecma262/draft";
+const deployBase = "/ecma262";
+
+export default function Page(
+  { children, title, slug }: {
+    children: unknown;
+    title?: string;
+    slug?: string;
+  },
+) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title ?? "ECMA-262"}</title>
+        {
+          /* Set the theme class before any styles apply so returning visitors
+            don't see a light-mode flash. Reads localStorage with a
+            prefers-color-scheme fallback. The matching click handler is
+            wired below after the body mounts. */
+        }
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `(function(){var p=localStorage.getItem("theme");var d=p==="dark"||(p===null&&matchMedia("(prefers-color-scheme:dark)").matches);if(d)document.documentElement.classList.add("dark");})();`,
+          }}
+        />
+        <link rel="stylesheet" href={`${basePath}/styles.css`} />
+        {
+          /* Pagefind UI: CSS + UMD JS bundle sit next to the search index
+            under `${basePath}/pagefind/`. The `pagefind` CLI generates
+            both at build time, so no CDN dependency. Without the index
+            (e.g. before running `deno task pagefind` locally) the input
+            won't mount; that's intentional — better than a broken CDN. */
+        }
+        <link
+          rel="stylesheet"
+          href={`${basePath}/pagefind/pagefind-ui.css`}
+        />
+        <script defer src={`${basePath}/pagefind/pagefind-ui.js`}></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              `window.addEventListener("DOMContentLoaded",function(){if(typeof PagefindUI!=="undefined"){new PagefindUI({element:"#search",bundlePath:"${basePath}/pagefind/",showSubResults:true});}});`,
+          }}
+        />
+      </head>
+      <body>
+        {
+          /* a11y: keyboard users can jump past the header + sidebar to land
+            on the article without tabbing through every nav link first.
+            Hidden visually; revealed on focus by the .skip-nav CSS. */
+        }
+        <a class="skip-nav" href="#content">Skip to content</a>
+        <Header basePath={basePath} deployBase={deployBase} />
+        {
+          /* Sidebar + main + TOC live inside a single flex wrapper, footer
+            sits OUTSIDE it as a sibling. That way the sidebar's and TOC's
+            sticky containing block ends right above the footer, so they
+            slide up out of view as the footer scrolls in (Nextra parity —
+            see <div class="x:mx-auto x:flex x:max-w-(...)"> in their DOM). */
+        }
+        <div class="layout-wrapper">
+          <Sidebar
+            basePath={basePath}
+            currentSlug={slug ?? ""}
+            fallbackBase={fallbackBase}
+          />
+          <main id="content">
+            {children}
+            <PrevNext
+              basePath={basePath}
+              currentSlug={slug ?? ""}
+              fallbackBase={fallbackBase}
+            />
+          </main>
+          <aside class="toc">
+            <h2>On this page</h2>
+            <ol></ol>
+            {
+              /* "Question? Give us feedback →" — Nextra's default link below
+                the on-this-page list. URL mirrors the format nextra-theme-docs
+                generates from docsRepositoryBase: /issues/new with a
+                pre-filled title + labels=feedback. */
+            }
+            <a
+              class="toc-feedback"
+              href={`https://github.com/kt3k/ecma262/issues/new?title=${
+                encodeURIComponent(`Feedback for "${title ?? "ECMA-262"}"`)
+              }&labels=feedback`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Question? Give us feedback
+              {/* 45° external-link arrow, matches Nextra's TOC feedback icon. */}
+              <svg
+                class="toc-feedback-arrow"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17L17 7"></path>
+                <path d="M7 7h10v10"></path>
+              </svg>
+            </a>
+          </aside>
+        </div>
+        <Footer />
+        {
+          /* Backdrop that dims content while the mobile sidebar is open;
+            clicking it closes the menu. Hidden by default (CSS); revealed
+            when body has .menu-open. */
+        }
+        <div id="menu-backdrop" class="menu-backdrop"></div>
+        {
+          /* Theme toggle + hamburger menu click handlers. Sit at the end of
+            <body> so the target elements exist when listeners attach. */
+        }
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.getElementById("theme-toggle").addEventListener("click",function(){
+                var d=document.documentElement.classList.toggle("dark");
+                localStorage.setItem("theme",d?"dark":"light");
+              });
+              var menuBtn=document.getElementById("menu-toggle");
+              var backdrop=document.getElementById("menu-backdrop");
+              function setMenu(open){
+                document.body.classList.toggle("menu-open",open);
+                menuBtn.setAttribute("aria-expanded",open?"true":"false");
+              }
+              menuBtn.addEventListener("click",function(){
+                setMenu(!document.body.classList.contains("menu-open"));
+              });
+              backdrop.addEventListener("click",function(){setMenu(false);});
+              document.addEventListener("keydown",function(e){
+                if(e.key==="Escape")setMenu(false);
+              });
+              // Sidebar collapse (desktop): single button in the sidebar
+              // footer toggles between full (256px) and narrow (60px). When
+              // narrow the menu list is hidden and the footer reflows so
+              // just the icon-only theme + toggle buttons remain — matches
+              // nextra-theme-docs' sidebar.js (x:w-64 ↔ x:w-20 + flex-wrap).
+              // The choice is persisted so navigating between pages remembers
+              // the user's state.
+              var collapseBtn=document.getElementById("sidebar-collapse");
+              function setCollapsed(c){
+                document.body.classList.toggle("sidebar-collapsed",c);
+                collapseBtn.setAttribute("aria-expanded",c?"false":"true");
+                collapseBtn.setAttribute("title",c?"Expand sidebar":"Collapse sidebar");
+                localStorage.setItem("sidebar",c?"collapsed":"open");
+              }
+              if(localStorage.getItem("sidebar")==="collapsed")setCollapsed(true);
+              collapseBtn.addEventListener("click",function(){
+                setCollapsed(!document.body.classList.contains("sidebar-collapsed"));
+              });
+              // Version switcher dropdown: trigger toggles the menu, outside
+              // click + Escape close it. Mirrors the React component in
+              // packages/shared/components/version-switcher.jsx.
+              var vsRoot=document.getElementById("version-switcher");
+              var vsTrigger=document.getElementById("version-switcher-trigger");
+              var vsMenu=document.getElementById("version-switcher-menu");
+              function setVsOpen(open){
+                vsMenu.classList.toggle("ecma-vs-hidden",!open);
+                vsTrigger.setAttribute("aria-expanded",open?"true":"false");
+              }
+              vsTrigger.addEventListener("click",function(e){
+                e.stopPropagation();
+                setVsOpen(vsMenu.classList.contains("ecma-vs-hidden"));
+              });
+              document.addEventListener("mousedown",function(e){
+                if(!vsRoot.contains(e.target))setVsOpen(false);
+              });
+              document.addEventListener("keydown",function(e){
+                if(e.key==="Escape")setVsOpen(false);
+              });
+              // Cmd/Ctrl+K focuses the Pagefind search input. We retry briefly
+              // because Pagefind UI mounts asynchronously after script load.
+              document.addEventListener("keydown",function(e){
+                if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==="k"){
+                  var input=document.querySelector("#search input");
+                  if(input){e.preventDefault();input.focus();input.select&&input.select();}
+                }
+              });
+              // Show the right kbd hint for the current platform.
+              if(/Mac|iPhone|iPad/.test(navigator.platform)){
+                document.body.classList.add("is-mac");
+              }
+            `,
+          }}
+        />
+      </body>
+    </html>
+  );
+}
