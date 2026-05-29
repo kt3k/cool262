@@ -17,6 +17,27 @@
   --header-h: 3rem;
 }
 
+/* Skip-to-content: visually hidden until a keyboard user tabs into it,
+   at which point it snaps to the top-left as a proper button. */
+.skip-nav {
+  position: fixed;
+  top: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 100;
+  padding: 0.5em 0.9em;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transform: translateY(-200%);
+  transition: transform 0.15s;
+}
+.skip-nav:focus {
+  transform: translateY(0);
+  outline: 2px solid #fff;
+  outline-offset: -3px;
+}
+
 body {
   margin: 0;
   font-family:

@@ -52,13 +52,19 @@ export default function Page(
         />
       </head>
       <body>
+        {
+          /* a11y: keyboard users can jump past the header + sidebar to land
+            on the article without tabbing through every nav link first.
+            Hidden visually; revealed on focus by the .skip-nav CSS. */
+        }
+        <a class="skip-nav" href="#content">Skip to content</a>
         <Header basePath={basePath} />
         <Sidebar
           basePath={basePath}
           currentSlug={slug ?? ""}
           fallbackBase={fallbackBase}
         />
-        <main>{children}</main>
+        <main id="content">{children}</main>
         <aside class="toc">
           <h2>On this page</h2>
           <ol></ol>
