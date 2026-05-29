@@ -878,10 +878,26 @@ emu-annex {
 .ecma-spec emu-table + * {
   margin-top: calc(2em * var(--ecma-rhythm, 1));
 }
-/* Paragraphs nested inside notes / lists / quotes aren't direct grid children,
-   so they keep their own block spacing (the old blanket p-margin is gone).
-   Sized to match Nextra's mdx-components/index.js: <p> gets
-   not-first:mt-[1.25em] + leading-7 (line-height: 1.75rem). */
+/* Paragraphs inside the spec: the * + * grid rule above only fires for
+   direct grid children of <emu-clause>, but in practice spec <p>s sit
+   inside a Sec-wrapper <div> so they never match — they'd otherwise
+   collapse to the browser default 1em (cramped). Match Nextra's
+   mdx-components/index.js, which applies `not-first:mt-[1.25em]
+   leading-7` to every <p> regardless of container. Reset margin to 0
+   so the rhythm comes only from the explicit `+ 1.25em` between
+   adjacent paragraphs (no double-margin from browser defaults). */
+.ecma-spec p {
+  margin-block: 0;
+  line-height: 1.75rem;
+}
+.ecma-spec p:not(:first-child) {
+  margin-top: 1.25em;
+}
+/* Paragraphs nested inside notes / lists / quotes get the same 1.25em
+   rhythm but also need a bottom margin so they don't run into the
+   container's own padding/border (Nextra applies it via margin-block
+   on the <p> itself). Specificity wins over the .ecma-spec p rule
+   above. */
 .ecma-spec :is(emu-note, li, blockquote) > p {
   margin-block: 1.25em;
   line-height: 1.75rem;
