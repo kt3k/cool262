@@ -83,6 +83,12 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.25rem;
+  /* Pin the header to --header-h (4rem / 64px = Nextra's
+     --nextra-navbar-height). Without this the header collapses to its
+     tallest child — about 33px for the search input — and the sticky
+     top: var(--header-h) we use on the sidebar/TOC ends up further
+     down than the visible header bottom. */
+  min-height: var(--header-h);
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
   position: sticky;
@@ -307,6 +313,10 @@ html.dark .site-search .search-input {
   border-radius: 2px;
 }
 .search-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1.5rem 1.25rem;
   text-align: center;
   font-size: 0.875rem;
@@ -314,6 +324,17 @@ html.dark .site-search .search-input {
 }
 .search-error {
   color: #ef4444;
+}
+/* Tabler loader-2 (3/4 arc) spinner used in the search status row.
+   currentColor inherits the surrounding .search-status muted tone. */
+.search-spinner {
+  flex-shrink: 0;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 aside.sidebar {
