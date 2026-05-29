@@ -527,8 +527,15 @@ body.sidebar-collapsed .sidebar-collapse-btn .collapse-arrow {
 }
 
 main {
-  padding: 1.5rem 2rem 4rem;
+  /* Match Nextra's article: x:pt-4 x:pb-8 x:px-4 x:md:px-12 — 16px top,
+     32px bottom, 16px sides on mobile, 48px sides on md+. */
+  padding: 1rem 1rem 2rem;
   min-width: 0;
+}
+@media (min-width: 768px) {
+  main {
+    padding-inline: 3rem;
+  }
 }
 
 /* Prev / next chapter pagination: plain text + chevron icon, with a thin
@@ -872,9 +879,37 @@ emu-annex {
   margin-top: calc(2em * var(--ecma-rhythm, 1));
 }
 /* Paragraphs nested inside notes / lists / quotes aren't direct grid children,
-   so they keep their own block spacing (the old blanket p-margin is gone). */
+   so they keep their own block spacing (the old blanket p-margin is gone).
+   Sized to match Nextra's mdx-components/index.js: <p> gets
+   not-first:mt-[1.25em] + leading-7 (line-height: 1.75rem). */
 .ecma-spec :is(emu-note, li, blockquote) > p {
-  margin-block: 0.75em;
+  margin-block: 1.25em;
+  line-height: 1.75rem;
+}
+
+/* List + blockquote dimensions — port of Nextra's mdx-components/index.js:
+   ul gets list-disc + ms-[1.5em]; ol gets list-decimal + ms-6 (= 1.5rem);
+   li gets my-[.5em]; nested ul/ol get my-[.75em]; blockquote gets
+   ps-[1.5em] + border-s-2. lume-poc previously inherited browser
+   defaults (~40px indent, 0 li margin) so list rhythm drifted from
+   Nextra's. */
+.ecma-spec ul {
+  padding-inline-start: 1.5em;
+  list-style: disc;
+}
+.ecma-spec ol {
+  padding-inline-start: 1.5rem; /* ms-6 = 24px */
+  list-style: decimal;
+}
+.ecma-spec li {
+  margin: 0.5em 0;
+}
+.ecma-spec :is(ul, ol) :is(ul, ol) {
+  margin: 0.75em 0;
+}
+.ecma-spec blockquote {
+  padding-inline-start: 1.5em;
+  border-inline-start: 2px solid var(--rule);
 }
 
 .ecma-spec emu-alg {
@@ -908,6 +943,10 @@ main[data-pagefind-body] :is(h1, h2, h3, h4) {
 .ecma-spec emu-intro > h1,
 .ecma-spec emu-annex > h1 {
   font-size: 2.1em;
+  /* Nextra's heading.js puts mt-2 (= 0.5rem) on every <h1>; nested h1s
+     get overridden below by their own larger margin-top, so this only
+     ends up applying to the page-top L1 heading — matches Nextra. */
+  margin-top: 0.5rem;
   margin-bottom: 0.4em;
 }
 .ecma-spec emu-clause emu-clause > h1,
