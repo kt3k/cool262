@@ -1,6 +1,7 @@
 import Header from "./header.tsx";
 import Sidebar from "./sidebar.tsx";
 import Footer from "./footer.tsx";
+import PrevNext from "./prev-next.tsx";
 
 // Top-level layout: header / sidebar / main / TOC / footer, wired together by
 // the CSS grid in styles.css. The TOC's <ol> is empty here; a post-render
@@ -76,7 +77,14 @@ export default function Page(
           currentSlug={slug ?? ""}
           fallbackBase={fallbackBase}
         />
-        <main id="content">{children}</main>
+        <main id="content">
+          {children}
+          <PrevNext
+            basePath={basePath}
+            currentSlug={slug ?? ""}
+            fallbackBase={fallbackBase}
+          />
+        </main>
         <aside class="toc">
           <h2>On this page</h2>
           <ol></ol>

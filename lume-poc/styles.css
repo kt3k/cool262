@@ -190,6 +190,57 @@ main {
   min-width: 0;
 }
 
+/* Prev / next chapter pagination: two link cards at the bottom of the
+   article, separated by an HR-like top border. Empty slot (no prev or
+   no next) leaves an invisible <span> on the side that didn't fire so
+   the surviving card stays right-aligned via justify-content: space-between. */
+.prev-next {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.prev-next-link {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 18rem;
+  padding: 0.9em 1.1em;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.prev-next-link:hover {
+  border-color: var(--accent);
+  background: var(--chrome-bg);
+}
+.prev-next-link.next-link {
+  align-items: flex-end;
+  text-align: right;
+}
+.prev-next-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.prev-next-link.next-link .prev-next-label::after {
+  content: " →";
+}
+.prev-next-link.prev-link .prev-next-label::before {
+  content: "← ";
+}
+.prev-next-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  color: var(--accent);
+}
+
 aside.toc {
   grid-area: toc;
   border-left: 1px solid var(--rule);
