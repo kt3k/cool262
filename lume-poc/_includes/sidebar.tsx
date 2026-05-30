@@ -16,6 +16,28 @@ export default function Sidebar(
 ) {
   return (
     <aside id="sidebar" class="sidebar">
+      {
+        /* In-sidebar search — visible only ≤767px (CSS) so it stands in
+          for the navbar search that's hidden at mobile widths. Mirrors
+          Nextra's MobileNav structure, which renders themeConfig.search
+          wrapped in <div class="x:px-4 x:pt-4"> as the first child of
+          <aside class="nextra-mobile-nav"> (nextra-theme-docs/dist/
+          components/sidebar.js:400). search.js wires up every
+          .site-search instance independently so the navbar copy and
+          this one don't fight over state. */
+      }
+      <div class="site-search sidebar-search" data-base={basePath}>
+        <input
+          type="search"
+          class="search-input"
+          placeholder="Search documentation…"
+          autocomplete="off"
+          spellcheck={false}
+          aria-label="Search documentation"
+        />
+        <div class="search-panel" role="listbox" aria-label="Search results">
+        </div>
+      </div>
       <ol class="sidebar-list">
         {chapters.map((c, i) => {
           const isCurrent = c.slug === currentSlug;

@@ -9,18 +9,17 @@
 // We render those grouped by page (one section header per page, then
 // each sub_result as a clickable card) with keyboard navigation and a
 // backdrop-blur dropdown panel.
+//
+// Two .site-search instances live in the DOM at once: one in the navbar
+// (hidden ≤767px via CSS) and one at the top of the off-canvas sidebar
+// (hidden ≥768px). Each gets its own state; the pagefind module itself
+// is loaded once and shared. Mirrors Nextra's pattern of rendering
+// `themeConfig.search` in both the navbar and the mobile MobileNav
+// (sidebar.js:400) and letting CSS pick the visible one.
 
-const root = document.getElementById("search");
-const basePath = root.dataset.base ?? "";
-const input = root.querySelector(".search-input");
-const panel = root.querySelector(".search-panel");
-
-// Lazy-load pagefind on first interaction so the bundle isn't pulled
-// in until the user actually opens the search. import() returns the
-// pagefind.js module object; options() configures bundlePath (where
-// the index lives) and baseUrl (prefix added to result URLs).
+// Lazy-load pagefind once on first interaction from any instance.
 let pagefindPromise = null;
-function loadPagefind() {
+function loadPagefind(basePath) {
   if (pagefindPromise) return pagefindPromise;
   pagefindPromise = (async () => {
     const pf = await import(`${basePath}/pagefind/pagefind.js`);
@@ -33,54 +32,81 @@ function loadPagefind() {
   return pagefindPromise;
 }
 
-let activeIdx = -1;
-let lastQuery = "";
+const instances = [];
 
-function setOpen(open) {
-  panel.classList.toggle("open", open);
-}
+function setupInstance(root) {
+  const input = root.querySelector(".search-input");
+  const panel = root.querySelector(".search-panel");
+  if (!input || !panel) return;
+  const basePath = root.dataset.base ?? "";
 
-async function doSearch(q) {
-  lastQuery = q;
-  if (!q.trim()) {
-    panel.innerHTML = "";
-    setOpen(false);
-    return;
+  // Per-instance state: results-list cursor (-1 = none) and the most
+  // recent query, used to discard stale fetches.
+  let activeIdx = -1;
+  let lastQuery = "";
+
+  function setOpen(open) {
+    panel.classList.toggle("open", open);
   }
-  setOpen(true);
-  // tabler loader-2 (3/4 arc) — CSS spins it via @keyframes spin.
-  panel.innerHTML = `<div class="search-status">
-    <svg class="search-spinner" viewBox="0 0 24 24" width="18" height="18"
-      fill="none" stroke="currentColor" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M12 3a9 9 0 1 0 9 9"></path>
-    </svg>
-    <span>Searching…</span>
-  </div>`;
-  let pf;
-  try {
-    pf = await loadPagefind();
-  } catch (_err) {
-    panel.innerHTML =
-      `<div class="search-status search-error">Failed to load search index</div>`;
-    return;
+
+  async function doSearch(q) {
+    lastQuery = q;
+    if (!q.trim()) {
+      panel.innerHTML = "";
+      setOpen(false);
+      return;
+    }
+    setOpen(true);
+    // tabler loader-2 (3/4 arc) — CSS spins it via @keyframes spin.
+    panel.innerHTML = `<div class="search-status">
+      <svg class="search-spinner" viewBox="0 0 24 24" width="18" height="18"
+        fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 3a9 9 0 1 0 9 9"></path>
+      </svg>
+      <span>Searching…</span>
+    </div>`;
+    let pf;
+    try {
+      pf = await loadPagefind(basePath);
+    } catch (_err) {
+      panel.innerHTML =
+        `<div class="search-status search-error">Failed to load search index</div>`;
+      return;
+    }
+    const res = await pf.debouncedSearch(q);
+    // debouncedSearch returns null if a newer search superseded this one.
+    if (res === null) return;
+    // Also bail if the user has typed more characters since we kicked off.
+    if (q !== lastQuery) return;
+    const data = await Promise.all(
+      res.results.slice(0, 8).map((r) => r.data()),
+    );
+    if (!data.length) {
+      panel.innerHTML = `<div class="search-status">No results for &ldquo;${
+        escapeHtml(q)
+      }&rdquo;</div>`;
+      return;
+    }
+    panel.innerHTML = renderResults(data);
+    activeIdx = -1;
   }
-  const res = await pf.debouncedSearch(q);
-  // debouncedSearch returns null if a newer search superseded this one.
-  if (res === null) return;
-  // Also bail if the user has typed more characters since we kicked off.
-  if (q !== lastQuery) return;
-  const data = await Promise.all(
-    res.results.slice(0, 8).map((r) => r.data()),
-  );
-  if (!data.length) {
-    panel.innerHTML = `<div class="search-status">No results for &ldquo;${
-      escapeHtml(q)
-    }&rdquo;</div>`;
-    return;
-  }
-  panel.innerHTML = renderResults(data);
-  activeIdx = -1;
+
+  input.addEventListener("input", (e) => doSearch(e.target.value));
+  input.addEventListener("focus", () => {
+    if (input.value.trim() && panel.innerHTML) setOpen(true);
+  });
+
+  instances.push({
+    root,
+    input,
+    panel,
+    setOpen,
+    getActiveIdx: () => activeIdx,
+    setActiveIdx: (i) => {
+      activeIdx = i;
+    },
+  });
 }
 
 function renderResults(data) {
@@ -116,68 +142,81 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
-input.addEventListener("input", (e) => doSearch(e.target.value));
+// A search instance is "visible" when its layout box is laid out
+// (offsetParent ≠ null). We use this to pick the right input for
+// Cmd/Ctrl+K — the navbar one on desktop, the sidebar one on mobile.
+function visibleInstance() {
+  return instances.find((i) => i.input.offsetParent !== null);
+}
 
-// Re-open on focus if there are stale results to show.
-input.addEventListener("focus", () => {
-  if (input.value.trim() && panel.innerHTML) setOpen(true);
-});
+function openInstance() {
+  return instances.find((i) => i.panel.classList.contains("open"));
+}
+
+document.querySelectorAll(".site-search").forEach(setupInstance);
 
 document.addEventListener("keydown", (e) => {
-  // Cmd/Ctrl+K from anywhere focuses the search input — matches
-  // Nextra's global shortcut. Avoid hijacking the shortcut if the user
-  // is typing in another text field.
-  if (
-    (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k" &&
-    !["INPUT", "SELECT", "BUTTON", "TEXTAREA"].includes(
-      document.activeElement?.tagName,
-    )
-  ) {
-    e.preventDefault();
-    input.focus();
-    input.select();
+  // Cmd/Ctrl+K from anywhere focuses the first visible search input —
+  // matches Nextra's global shortcut. Avoid hijacking if the user is
+  // already typing in another text field — unless that field is one of
+  // our own search inputs (then just re-select to clear).
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    const focused = document.activeElement;
+    const focusedInst = instances.find((i) => i.input === focused);
+    if (focusedInst) {
+      e.preventDefault();
+      focusedInst.input.select();
+      return;
+    }
+    if (
+      !["INPUT", "SELECT", "BUTTON", "TEXTAREA"].includes(focused?.tagName)
+    ) {
+      e.preventDefault();
+      const inst = visibleInstance();
+      if (inst) {
+        inst.input.focus();
+        inst.input.select();
+      }
+      return;
+    }
+  }
+
+  const inst = openInstance();
+  if (!inst) return;
+
+  if (e.key === "Escape") {
+    inst.setOpen(false);
+    inst.input.blur();
     return;
   }
-  // Cmd/Ctrl+K also works when the search input itself has focus
-  // (Nextra parity).
-  if (
-    (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k" &&
-    document.activeElement === input
-  ) {
-    e.preventDefault();
-    input.select();
-    return;
-  }
-  if (e.key === "Escape" && panel.classList.contains("open")) {
-    setOpen(false);
-    input.blur();
-    return;
-  }
-  if (!panel.classList.contains("open")) return;
-  const items = panel.querySelectorAll(".search-result");
+  const items = inst.panel.querySelectorAll(".search-result");
   if (!items.length) return;
   if (e.key === "ArrowDown") {
     e.preventDefault();
-    activeIdx = (activeIdx + 1) % items.length;
-    setActive(items);
+    const next = (inst.getActiveIdx() + 1) % items.length;
+    inst.setActiveIdx(next);
+    setActive(items, next);
   } else if (e.key === "ArrowUp") {
     e.preventDefault();
-    activeIdx = (activeIdx - 1 + items.length) % items.length;
-    setActive(items);
-  } else if (e.key === "Enter" && activeIdx >= 0) {
+    const prev = (inst.getActiveIdx() - 1 + items.length) % items.length;
+    inst.setActiveIdx(prev);
+    setActive(items, prev);
+  } else if (e.key === "Enter" && inst.getActiveIdx() >= 0) {
     e.preventDefault();
-    items[activeIdx].click();
+    items[inst.getActiveIdx()].click();
   }
 });
 
-function setActive(items) {
+function setActive(items, activeIdx) {
   items.forEach((item, i) => {
     item.classList.toggle("active", i === activeIdx);
     if (i === activeIdx) item.scrollIntoView({ block: "nearest" });
   });
 }
 
-// Click outside the search box closes the panel.
+// Click outside ANY .site-search closes every open panel.
 document.addEventListener("mousedown", (e) => {
-  if (!e.target.closest("#search")) setOpen(false);
+  if (!e.target.closest(".site-search")) {
+    instances.forEach((inst) => inst.setOpen(false));
+  }
 });

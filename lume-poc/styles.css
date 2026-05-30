@@ -387,15 +387,57 @@ aside.sidebar {
      whitespace alone. */
   align-self: start;
   height: calc(100vh - var(--header-h));
-  /* Inner grid: the list takes whatever space is left (1fr) and scrolls on
-     its own, the footer is `auto` and sits at the bottom. min-height: 0 on
-     the list lets it shrink small enough to keep the footer in view. */
+  /* Inner grid (3 rows):
+       1: mobile-only .sidebar-search (auto; collapses to 0 on desktop
+          where the element is display:none)
+       2: .sidebar-list (1fr, scrolls)
+       3: .sidebar-footer (auto, pinned to bottom)
+     Explicit grid-row on each child locks the order regardless of how
+     many rows are populated. */
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   min-height: 0;
   /* Width changes smoothly when toggling between full and narrow. The grid
      column track on body animates the same way (see body transition below). */
   transition: width 0.2s ease-in-out;
+}
+aside.sidebar > .sidebar-search {
+  grid-row: 1;
+  /* In-sidebar search box — hidden on desktop (the navbar copy is
+     visible there) and shown only ≤767px to stand in for the navbar
+     search that's hidden at mobile widths. Mirrors Nextra's MobileNav,
+     which wraps themeConfig.search in <div class="x:px-4 x:pt-4"> as
+     the first child of <aside class="nextra-mobile-nav">. */
+  display: none;
+  padding: 1rem 1rem 0;
+}
+@media (max-width: 767px) {
+  aside.sidebar > .sidebar-search {
+    display: block;
+  }
+}
+/* The base .site-search has no explicit width / position — only the
+   navbar copy gets width: 16rem (see .site-header .site-search). Pin
+   the search input to fill the sidebar column and drop the kbd-hint
+   padding (no Cmd/K badge here on mobile). */
+.sidebar-search .search-input {
+  padding-right: 0.75rem;
+}
+/* In-sidebar dropdown sits inline below the input (taking layout space
+   inside the search row, pushing the chapter list down) instead of
+   absolute-positioning over the chapter list — Nextra's MobileNav uses
+   the same vertical stack. */
+.sidebar-search .search-panel {
+  position: static;
+  width: 100%;
+  margin-top: 0.625rem;
+  max-height: 50vh;
+}
+aside.sidebar > .sidebar-list {
+  grid-row: 2;
+}
+aside.sidebar > .sidebar-footer {
+  grid-row: 3;
 }
 /* Chapter list — Nextra's <ul class="x:grid x:gap-1 x:p-4">: uniform 16px
    padding, items separated by a 4px grid gap rather than per-item margin.
