@@ -82,12 +82,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1.25rem;
+  padding-inline: max(env(safe-area-inset-left), 1.5rem)
+    max(env(safe-area-inset-right), 1.5rem);
   /* Pin the header to --header-h (4rem / 64px = Nextra's
      --nextra-navbar-height). Without this the header collapses to its
      tallest child — about 33px for the search input — and the sticky
      top: var(--header-h) we use on the sidebar/TOC ends up further
-     down than the visible header bottom. */
+     down than the visible header bottom. Horizontal padding mirrors
+     Nextra's navbar inner container (x:pl-[max(env(safe-area-inset-left),1.5rem)])
+     so notched devices don't tuck the title under the cutout. */
   min-height: var(--header-h);
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
