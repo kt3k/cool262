@@ -87,24 +87,32 @@ body {
 }
 
 .site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: max(env(safe-area-inset-left), 1.5rem)
-    max(env(safe-area-inset-right), 1.5rem);
-  /* Pin the header to --header-h (4rem / 64px = Nextra's
-     --nextra-navbar-height). Without this the header collapses to its
-     tallest child — about 33px for the search input — and the sticky
-     top: var(--header-h) we use on the sidebar/TOC ends up further
-     down than the visible header bottom. Horizontal padding mirrors
-     Nextra's navbar inner container (x:pl-[max(env(safe-area-inset-left),1.5rem)])
-     so notched devices don't tuck the title under the cutout. */
-  min-height: var(--header-h);
+  /* Outer bar: full-width sticky background + border, matching Nextra's
+     <nav class="nextra-navbar x:sticky x:top-0 x:z-30 x:w-full">. The flex
+     row + padding live on .site-header-inner below so the bar can span
+     the viewport while its contents stay within --content-max-w. */
   background: var(--bg);
   border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
   z-index: 10;
+}
+.site-header-inner {
+  /* Inner row: matches Nextra's navbar inner container
+     <div class="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center
+                 x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[...]">.
+     min-height pins the bar to --header-h (4rem / 64px = Nextra's
+     --nextra-navbar-height); without it the row collapses to its
+     tallest child (~33px search input) and the sticky offsets we use
+     on the sidebar/TOC end up below the visible header bottom. */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-h);
+  max-width: var(--content-max-w);
+  margin-inline: auto;
+  padding-inline: max(env(safe-area-inset-left), 1.5rem)
+    max(env(safe-area-inset-right), 1.5rem);
 }
 /* Title cluster: bold main title + dotted-underline status badge link +
    VersionSwitcher chevron, all on one baseline. Mirrors the navbar logo in
