@@ -87,27 +87,42 @@ body {
 }
 
 .site-header {
-  /* Outer bar: full-width sticky background + border, matching Nextra's
-     <nav class="nextra-navbar x:sticky x:top-0 x:z-30 x:w-full">. The flex
-     row + padding live on .site-header-inner below so the bar can span
-     the viewport while its contents stay within --content-max-w. */
-  background: var(--bg);
-  border-bottom: 1px solid var(--rule);
+  /* Outer bar: sticky positioning only — bg + border live on the absolute
+     .site-header-blur child so the underlying layer can blur content that
+     scrolls below. Matches Nextra's
+     <header class="nextra-navbar x:sticky x:top-0 x:z-30 x:w-full x:bg-transparent">. */
   position: sticky;
   top: 0;
   z-index: 10;
 }
+.site-header-blur {
+  /* Translucent frosted-glass background, matches Nextra's
+     <div class="nextra-navbar-blur x:absolute x:-z-1 x:size-full
+                 nextra-border x:border-b
+                 x:backdrop-blur-md x:bg-nextra-bg/70">. */
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(var(--bg-rgb) / 0.7);
+  border-bottom: 1px solid var(--rule);
+  -webkit-backdrop-filter: blur(12px); /* x:backdrop-blur-md */
+  backdrop-filter: blur(12px);
+}
 .site-header-inner {
   /* Inner row: matches Nextra's navbar inner container
-     <div class="x:mx-auto x:flex x:max-w-(--nextra-content-width) x:items-center
+     <nav class="x:mx-auto x:flex x:max-w-(--nextra-content-width)
+                 x:items-center x:gap-4 x:justify-end
                  x:pl-[max(env(safe-area-inset-left),1.5rem)] x:pr-[...]">.
-     min-height pins the bar to --header-h (4rem / 64px = Nextra's
+     The row is justify-end + gap-4; .site-title-group below has
+     margin-inline-end:auto (Nextra's me-auto on the logo) which absorbs
+     the available space and pushes search/theme to the far right.
+     min-height pins the bar to --header-h (4rem / 64px =
      --nextra-navbar-height); without it the row collapses to its
-     tallest child (~33px search input) and the sticky offsets we use
-     on the sidebar/TOC end up below the visible header bottom. */
+     tallest child (~33px search input). */
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 1rem;
   min-height: var(--header-h);
   max-width: var(--content-max-w);
   margin-inline: auto;
@@ -119,9 +134,14 @@ body {
    packages/shared/components/spec-layout.jsx so the visual hierarchy is
    identical to the Nextra deploys. */
 .site-header .site-title-group {
+  /* margin-inline-end: auto mirrors Nextra's logo wrapper class
+     (x:flex x:items-center x:me-auto); combined with the parent's
+     justify-end it pulls the title cluster to the left and pushes the
+     remaining items (search, theme) to the right edge. */
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
+  margin-inline-end: auto;
   white-space: nowrap;
   font-size: 0.95rem;
 }
@@ -142,7 +162,6 @@ body {
   position: relative; /* anchor the absolutely-positioned drawer */
   flex: 0 0 auto;
   width: 16rem; /* matches Nextra's x:md:w-64 (256px) */
-  margin-inline-start: auto;
 }
 /* Keyboard-shortcut hint, pinned inside the right edge of the search pill.
    Pagefind's input lives in the same .site-search box; padding on the input
@@ -748,7 +767,9 @@ footer.site-footer .copyright a {
   text-decoration: underline;
 }
 
-/* Hamburger button: hidden on desktop, visible on mobile (<= 800px). */
+/* Hamburger button: hidden on desktop, visible on mobile (<= 800px).
+   Inter-item spacing comes from .site-header-inner's gap: 1rem, so no
+   per-element margin is needed here. */
 .menu-toggle {
   display: none;
   align-items: center;
@@ -758,7 +779,6 @@ footer.site-footer .copyright a {
   border-radius: 4px;
   width: 2rem;
   height: 2rem;
-  margin-right: 0.6rem;
   padding: 0;
   color: var(--muted);
   cursor: pointer;

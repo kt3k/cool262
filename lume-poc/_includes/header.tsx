@@ -17,14 +17,23 @@ export default function Header(
   return (
     <header class="site-header">
       {
-        /* Inner wrapper caps the row at --content-max-w (1440px) and
-          centres it, matching Nextra's <nav class="nextra-navbar"> with an
-          inner <div class="x:mx-auto x:flex x:max-w-(--nextra-content-width)">.
-          Above 1440px viewports the title/search line up with the
-          sidebar/main edges below; the outer .site-header keeps the
-          sticky bg + border-bottom spanning the full width. */
+        /* Translucent backdrop layer — matches Nextra's
+          <div class="nextra-navbar-blur x:absolute x:-z-1 x:size-full
+                      nextra-border x:border-b
+                      x:backdrop-blur-md x:bg-nextra-bg/70">.
+          Carrying the bg + border-bottom on a separate absolute element
+          lets the outer <header> stay transparent so the blur can sample
+          content scrolling underneath. */
       }
-      <div class="site-header-inner">
+      <div class="site-header-blur" aria-hidden="true"></div>
+      {
+        /* Inner row caps content at --content-max-w (1440px) and centres
+          it — Nextra's <nav class="x:mx-auto x:flex x:max-w-(--nextra-content-width)
+          x:items-center x:gap-4 x:justify-end">. Children align right by
+          default; .site-title-group has margin-inline-end:auto (Nextra's
+          me-auto) which pushes the search/theme cluster to the far right. */
+      }
+      <nav class="site-header-inner">
         {
           /* Hamburger sits to the left of the title and is only visible at
             mobile widths (CSS). Click flips body.menu-open which slides the
@@ -97,7 +106,7 @@ export default function Header(
           <div class="search-panel" role="listbox" aria-label="Search results">
           </div>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }
