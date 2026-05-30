@@ -806,12 +806,19 @@ body.menu-open .menu-backdrop {
     display: none;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 767px) {
+  /* Mobile breakpoint matches Nextra's md (768px). Below 768px the
+     navbar hides the inline search (Nextra's x:max-md:hidden on the
+     search element) and shows the hamburger (Nextra's x:md:hidden on
+     the Button); the sidebar becomes an off-canvas overlay. */
   .layout-wrapper {
     grid-template-columns: 1fr;
   }
   .menu-toggle {
     display: inline-flex;
+  }
+  .site-header .site-search {
+    display: none;
   }
   /* Sidebar becomes an off-canvas overlay. Hidden via translateX; slides in
      when body.menu-open is set. Needs an explicit bg here since the

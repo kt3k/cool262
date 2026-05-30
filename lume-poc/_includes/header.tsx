@@ -34,32 +34,6 @@ export default function Header(
           me-auto) which pushes the search/theme cluster to the far right. */
       }
       <nav class="site-header-inner">
-        {
-          /* Hamburger sits to the left of the title and is only visible at
-            mobile widths (CSS). Click flips body.menu-open which slides the
-            sidebar in as an overlay. */
-        }
-        <button
-          id="menu-toggle"
-          class="menu-toggle"
-          type="button"
-          aria-label="Open navigation menu"
-          aria-controls="sidebar"
-          aria-expanded="false"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="20"
-            height="20"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            aria-hidden="true"
-          >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
         <span class="site-title-group">
           <a class="site-title" href={`${basePath}/`}>
             <b>{titleMain}</b>
@@ -106,6 +80,34 @@ export default function Header(
           <div class="search-panel" role="listbox" aria-label="Search results">
           </div>
         </div>
+        {
+          /* Hamburger sits at the right edge of the row (after the search
+            cluster) on mobile only — matches Nextra's
+            <Button class="nextra-hamburger x:md:hidden"> rendered as the
+            last child of ClientNavbar. Click flips body.menu-open which
+            slides the sidebar in as an overlay. */
+        }
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-controls="sidebar"
+          aria-expanded="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
       </nav>
     </header>
   );
