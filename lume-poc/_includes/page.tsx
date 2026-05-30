@@ -78,7 +78,16 @@ export default function Page(
             currentSlug={slug ?? ""}
             fallbackBase={fallbackBase}
           />
-          <main id="content">
+          {
+            /* data-pagefind-body marks the indexable region for Pagefind
+              (sidebar/header are ignored). Same attribute unlocks the
+              ecma-spec.css spec-typography block (font-size: 1.0625rem,
+              line-height: 1.65, --ecma-measure: 45rem, heading
+              tracking) — without it the body falls back to the browser
+              default 16px and the prose feels cramped vs the Nextra
+              build, which sets the attribute via its layout. */
+          }
+          <main id="content" data-pagefind-body="true">
             {children}
             <PrevNext
               basePath={basePath}
