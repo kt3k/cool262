@@ -95,6 +95,13 @@ export default function Header(
           aria-controls="sidebar"
           aria-expanded="false"
         >
+          {
+            /* Three-piece SVG (top <g>, middle <path>, bottom <g>) mirrors
+              Nextra's MenuIcon (nextra/dist/client/icons/menu.js). The
+              wrapping <g>s are the rotation anchors used by the
+              hamburger ↔ X morph defined in styles.css under
+              .menu-toggle svg / body.menu-open .menu-toggle svg. */
+          }
           <svg
             viewBox="0 0 24 24"
             width="24"
@@ -105,7 +112,13 @@ export default function Header(
             stroke-linecap="round"
             aria-hidden="true"
           >
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
+            <g>
+              <path d="M4 6h16"></path>
+            </g>
+            <path d="M4 12h16"></path>
+            <g>
+              <path d="M4 18h16"></path>
+            </g>
           </svg>
         </button>
       </nav>

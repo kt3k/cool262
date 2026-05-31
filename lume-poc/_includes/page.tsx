@@ -145,7 +145,20 @@ export default function Page(
               var menuBtn=document.getElementById("menu-toggle");
               function setMenu(open){
                 document.body.classList.toggle("menu-open",open);
+                // Also toggle on <html> so the @media (max-width:767px)
+                // overflow-hidden rule (styles.css) can lock background
+                // scrolling — matches Nextra's
+                // document.documentElement.classList.toggle("x:max-md:overflow-hidden", hasMenu)
+                // in nextra-theme-docs/dist/stores/menu.js:10.
+                document.documentElement.classList.toggle("menu-open",open);
                 menuBtn.setAttribute("aria-expanded",open?"true":"false");
+                if(open){
+                  // Scroll the current chapter into view inside the
+                  // newly-opened sidebar (Nextra parity: sidebar.js:365-374
+                  // does the same via scroll-into-view-if-needed).
+                  var cur=document.querySelector("#sidebar .sidebar-list li.current");
+                  if(cur)cur.scrollIntoView({block:"center",inline:"center"});
+                }
               }
               menuBtn.addEventListener("click",function(){
                 setMenu(!document.body.classList.contains("menu-open"));

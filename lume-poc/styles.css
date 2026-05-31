@@ -834,6 +834,57 @@ footer.site-footer .copyright a {
 body.menu-open .menu-toggle {
   background: rgba(127, 127, 127, 0.2); /* x:bg-gray-400/20 */
 }
+/* Hamburger ⇄ X morph — mirrors Nextra's .nextra-hamburger svg block at
+   nextra-theme-docs/dist/style.css:3070-3108. The SVG is three pieces:
+   wrapping <g>s for the top and bottom lines (so each line has its
+   own rotation anchor), and a bare <path> for the middle line that
+   simply fades out. When .menu-open is on body, the top <g> rotates
+   45° + its path slides down 6 units, the bottom rotates -45° + slides
+   up 6 units, so both meet at the centre to draw the X.
+   transform-box: fill-box pins transform-origin to each <g>'s own
+   bounding box (otherwise it would default to the SVG view-box on
+   modern browsers and the rotation centre would be wrong). */
+.menu-toggle svg {
+  --hamb-anim: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.menu-toggle svg > g {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: var(--hamb-anim);
+}
+.menu-toggle svg > path {
+  opacity: 1;
+  transition:
+    var(--hamb-anim) 0.15s,
+    opacity 0.15s ease 0.15s;
+}
+body.menu-open .menu-toggle svg > path {
+  opacity: 0;
+  transition:
+    var(--hamb-anim),
+    opacity 0s ease 0.15s;
+}
+body.menu-open .menu-toggle svg > g {
+  transition: var(--hamb-anim) 0.15s;
+}
+body.menu-open .menu-toggle svg > g:nth-of-type(1) {
+  transform: rotate(45deg);
+}
+body.menu-open .menu-toggle svg > g:nth-of-type(1) > path {
+  transform: translate3d(0, 6px, 0);
+}
+body.menu-open .menu-toggle svg > g:nth-of-type(2) {
+  transform: rotate(-45deg);
+}
+body.menu-open .menu-toggle svg > g:nth-of-type(2) > path {
+  transform: translate3d(0, -6px, 0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-toggle svg > g,
+  .menu-toggle svg > path {
+    transition-property: none !important;
+  }
+}
 
 @media (max-width: 1100px) {
   .layout-wrapper {
@@ -876,9 +927,25 @@ body.menu-open .menu-toggle {
     z-index: 20;
     transform: translate3d(0, -100%, 0);
     background: var(--bg);
+    /* x:overscroll-contain — stops scrolls inside the mobile nav from
+       chaining out to the (now scroll-locked) body, and disables iOS
+       pull-to-refresh on the panel. */
+    overscroll-behavior: contain;
+    /* x:[contain:layout_style] — CSS containment isolates the panel's
+       layout/paint costs so opening/closing doesn't reflow the page
+       behind it. */
+    contain: layout style;
   }
   body.menu-open aside.sidebar {
     transform: translate3d(0, 0, 0);
+  }
+  /* Lock background scrolling on <html> while the menu is open —
+     matches Nextra's `documentElement.classList.toggle("x:max-md:overflow-hidden", hasMenu)`
+     pattern (stores/menu.js:10). Without this, the page underneath
+     keeps responding to swipes even though it's invisible behind the
+     fullscreen panel. */
+  html.menu-open {
+    overflow: hidden;
   }
   /* Desktop-only sidebar collapse rail doesn't apply at fullscreen widths.
      Nextra's mobile-nav footer just renders theme + locale switchers
