@@ -132,12 +132,6 @@ export default function Page(
         </div>
         <Footer />
         {
-          /* Backdrop that dims content while the mobile sidebar is open;
-            clicking it closes the menu. Hidden by default (CSS); revealed
-            when body has .menu-open. */
-        }
-        <div id="menu-backdrop" class="menu-backdrop"></div>
-        {
           /* Theme toggle + hamburger menu click handlers. Sit at the end of
             <body> so the target elements exist when listeners attach. */
         }
@@ -149,7 +143,6 @@ export default function Page(
                 localStorage.setItem("theme",d?"dark":"light");
               });
               var menuBtn=document.getElementById("menu-toggle");
-              var backdrop=document.getElementById("menu-backdrop");
               function setMenu(open){
                 document.body.classList.toggle("menu-open",open);
                 menuBtn.setAttribute("aria-expanded",open?"true":"false");
@@ -157,7 +150,6 @@ export default function Page(
               menuBtn.addEventListener("click",function(){
                 setMenu(!document.body.classList.contains("menu-open"));
               });
-              backdrop.addEventListener("click",function(){setMenu(false);});
               document.addEventListener("keydown",function(e){
                 if(e.key==="Escape")setMenu(false);
               });

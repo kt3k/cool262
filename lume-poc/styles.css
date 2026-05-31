@@ -90,10 +90,12 @@ body {
   /* Outer bar: sticky positioning only — bg + border live on the absolute
      .site-header-blur child so the underlying layer can blur content that
      scrolls below. Matches Nextra's
-     <header class="nextra-navbar x:sticky x:top-0 x:z-30 x:w-full x:bg-transparent">. */
+     <header class="nextra-navbar x:sticky x:top-0 x:z-30 x:w-full x:bg-transparent">.
+     z-index 30 = Nextra's x:z-30; sits above the mobile nav panel
+     (z-20) so the navbar stays visible while the menu is open. */
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 30;
 }
 .site-header-blur {
   /* Translucent frosted-glass background, matches Nextra's
@@ -809,35 +811,28 @@ footer.site-footer .copyright a {
   text-decoration: underline;
 }
 
-/* Hamburger button: hidden on desktop, visible on mobile (<= 800px).
-   Inter-item spacing comes from .site-header-inner's gap: 1rem, so no
-   per-element margin is needed here. */
+/* Hamburger button: hidden on desktop, visible on mobile (≤767px).
+   Borderless icon-only button, matching Nextra's
+   <Button class="nextra-hamburger x:md:hidden"> — default variant is
+   just "x:transition x:cursor-pointer" (button.js:34), with the icon
+   itself supplying the visual. Background fades in only while the
+   menu is open (Nextra's `active && "x:bg-gray-400/20"` at
+   navbar/index.client.js:229). Inter-item spacing comes from
+   .site-header-inner's gap: 1rem. */
 .menu-toggle {
   display: none;
   align-items: center;
   justify-content: center;
   background: transparent;
-  border: 1px solid var(--rule);
+  border: none;
   border-radius: 4px;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  color: var(--muted);
-  cursor: pointer;
-}
-.menu-toggle:hover {
+  padding: 0.25rem;
   color: var(--fg);
+  cursor: pointer;
+  transition: background 0.15s;
 }
-/* Backdrop dims content + intercepts taps while the mobile menu is open. */
-.menu-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 20;
-}
-body.menu-open .menu-backdrop {
-  display: block;
+body.menu-open .menu-toggle {
+  background: rgba(127, 127, 127, 0.2); /* x:bg-gray-400/20 */
 }
 
 @media (max-width: 1100px) {
@@ -852,7 +847,7 @@ body.menu-open .menu-backdrop {
   /* Mobile breakpoint matches Nextra's md (768px). Below 768px the
      navbar hides the inline search (Nextra's x:max-md:hidden on the
      search element) and shows the hamburger (Nextra's x:md:hidden on
-     the Button); the sidebar becomes an off-canvas overlay. */
+     the Button); the sidebar becomes a fullscreen overlay. */
   .layout-wrapper {
     grid-template-columns: 1fr;
   }
@@ -862,26 +857,34 @@ body.menu-open .menu-backdrop {
   .site-header .site-search {
     display: none;
   }
-  /* Sidebar becomes an off-canvas overlay. Hidden via translateX; slides in
-     when body.menu-open is set. Needs an explicit bg here since the
-     desktop sidebar is transparent — the overlay would otherwise show
-     the page content through it. */
+  /* Fullscreen mobile nav — matches Nextra's
+     <aside class="nextra-mobile-nav x:fixed x:inset-0
+                   x:pt-(--nextra-navbar-height) x:z-20 x:bg-nextra-bg
+                   x:[transform:translate3d(0,-100%,0)] (or 0,0,0)">.
+     Inset:0 covers the entire viewport; padding-top reserves space so
+     the navbar (z-30) stays visible above. Transform toggles between
+     fully-off (translateY -100%) and on (translateY 0); NO transition
+     so the panel snaps in/out — same as Nextra (no x:transition*
+     utility on the class string). */
   aside.sidebar {
-    display: block;
+    display: grid;
     position: fixed;
-    top: var(--header-h);
-    left: 0;
-    width: min(85vw, 320px);
-    height: calc(100vh - var(--header-h));
-    z-index: 25;
-    transform: translateX(-100%);
-    transition: transform 0.18s ease-out;
+    inset: 0;
+    padding-top: var(--header-h);
+    width: auto;
+    height: auto;
+    z-index: 20;
+    transform: translate3d(0, -100%, 0);
     background: var(--bg);
-    border-right: 1px solid var(--rule);
-    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
   }
   body.menu-open aside.sidebar {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
+  }
+  /* Desktop-only sidebar collapse rail doesn't apply at fullscreen widths.
+     Nextra's mobile-nav footer just renders theme + locale switchers
+     (sidebar.js:417), no collapse button. */
+  .sidebar-collapse-btn {
+    display: none;
   }
 }
 
